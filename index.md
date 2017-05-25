@@ -2,11 +2,20 @@
 layout: cover
 title: "Draft NIST SP 1500-102 CDF Specification for Cast Vote Records"
 description: "Work in progress for SP 1500-102"
-<link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
-<script src="https://pages.nist.gov/nist-header-footer/js/jquery-1.9.0.min.js" type="text/javascript" defer="defer"></script>
-<script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
 ---
+
+<section class="home home-title" markdown="1">
+
+# Cast Vote Records Home
+
 This is a placeholder for the NIST SP 1500-10X specification for an interoperable common data format for cast vote records created by voting devices such as ballot scanners and consumed by devices such as election management systems, tabulators, and audit devices.
+
+</section>
+
+<section class="home home-about" markdown="1">
+<div class="section-container" markdown="1">
+<div class="section-content" markdown="1">
+
 
 ## Background: Geopolitical Geography
 
@@ -39,9 +48,11 @@ Governmental-based geography refers to entities that (1) run elections and (2) a
 
 Nearly all states have counties, although some use different words to describe them, e.g., parishes for Louisiana and boroughs for Alaska.   Townships occur in 20 states and adhere to county boundaries.   In the six New England states, townships run the election process and there is no county government, thus election results are reported directly to the state. Municipalities (cities, towns, or villages) in Michigan, Minnesota, and Wisconsin also run their elections, but report their information to the county, which then reports to the state.  Other civil divisions include boroughs as used in Connecticut, New Jersey, Pennsylvania, and other states; New York City's boroughs are treated as counties.
 
-<center><img src="Figures/Governmental-based-geographies.png"></center>
+<div class="text-center" markdown="1">
+<img src="Figures/Governmental-based-geographies.png"/>
 
-<center>Figure 1: Governmental-based Geographies</center><br>
+**Figure 1: Governmental-based Geographies**
+</div>
 
 
 Governmental-based geographies are associated with offices that are elected jurisdiction-wide (such as for Governor, County Clerk, Supervisor, Treasurer, Assessor, Highway Commissioner, etc.) and thus do not require different ballot style areas within the geography for those offices, i.e., all voters in the jurisdiction vote for the office.  
@@ -51,9 +62,12 @@ Governmental-based geographies do not cross the lines of the precincts that comp
 
 Political-based geographies are those that tend to be population-based and therefore may change with each U.S. Census every 10 years in a process known as re-districting.  Political-based geographies are generally known as electoral districts, where people are elected to an office that has jurisdiction within a specific geography, e.g., a U.S. Congressional district.
 
-<center><img src="Figures/Political-based-geographies.png"></center>
+<div class="text-center" markdown="1">
+	<img src="Figures/Political-based-geographies.png"/>
+**Figure 2: Political-based Geographies**
+</div>
 
-<center>Figure 2: Political-based Geographies</center><br>
+
 
 Figure 2 shows the most common political-based geographies as they interrelate with the governmental-based geographies.  Political-based geographies can be categorized as follows:
 
@@ -77,27 +91,33 @@ Administrative-based geographies are called thus because their boundaries are de
 2. Taxing districts, e.g., fire, water, sewer, transit, school, police, hospital, utilities; and
 3. Special districts, i.e., unique areas brought together for a referendum.
 
-<center><img src="Figures/Administrative-based-geographies.png"></center>
-
-<center>Figure 3: Administrative-based Geographies</center><br>
+<div class="text-center" markdown="1">
+<img src="Figures/Administrative-based-geographies.png"/>
+**Figure 3: Administrative-based Geographies**
+</div>
 
 ## Linking the Geopolitical Geographies Together
 
 As an example of administrative-based geographies and their relationship to political-based and governmental-based geographies, Figure 4 shows the wards and precincts that make up the city of Cambridge, MA, and Figure 5 shows how the wards and precincts in the city compose the U.S. Congressional electoral districts [7].  The wards are implemented as collections of precincts.  In general, it is preferred that electoral districts are composed of whole precincts.
 
-<center><img src="Figures/2013_WardsPrecincts-v2.png"></center>
+<div class="text-center" markdown="1">
+	<img src="Figures/2013_WardsPrecincts-v2.png"/>
 
-<center>Figure 4: Ward and Precincts in Cambridge, MA.</center><br>
+	**Figure 4: Ward and Precincts in Cambridge, MA.**
 
-<center><img src="Figures/2014_CongressDistricts-v2.png"></center>
+	<br><br>
 
-<center>Figure 5: Districts Overlaying Wards and Precincts in Cambridge, MA.</center><br>
+	<img src="Figures/2014_CongressDistricts-v2.png"/>
+
+	**Figure 5: Districts Overlaying Wards and Precincts in Cambridge, MA.**
+</div>
 
 In many states, the boundaries of electoral districts may crisscross the precinct boundaries, creating one or more split precincts, with a distinct ballot style per split precinct.  Depending on the number of districts and how often they cross the precinct boundaries, the resultant number of ballot styles created may grow substantially beyond the number of whole precincts.  It is possible sometimes that, despite best efforts, very low numbers of voters or even just one voter will require a district ballot style.
 
-<center><img src="Figures/Split-Precinct.png"></center>
-
-<center>Figure 6: Overlapping Non-hierarchical Electoral Districts</center><br>
+<div class="text-center" markdown="1">
+<img src="Figures/Split-Precinct.png"/>
+**Figure 6: Overlapping Non-hierarchical Electoral Districts**
+</div>
 
 As an example, Figure 6 shows two electoral districts that overlay a series of precincts.  Every time a precinct is not wholly contained within either of the districts, the precinct is split into however many pieces are necessary.  Figure 6 shows that a number of the precincts are split in different ways, e.g., Precinct 6 is split into two pieces.
 
@@ -119,6 +139,11 @@ GpUnits can be linked hierarchically when modeling jurisdictional geographies.  
 
 District GpUnits need to be linked to the precinct and/or split precinct GpUnits that compose them. The precincts and split precincts thus link the jurisdictional and district GpUnits together, as shown below in Figure 7 (and described in greater detail in section 5.2).  The wards are the children of the combined precincts, and so forth on up to the state.  The precincts and split precincts are also the children of the districts that they compose.  
 
-<center><img src="Figures/Containment.png"></center>
+<div class="text-center" markdown="1">
+<img src="Figures/Containment.png"/>
+**Figure 7 - GpUnit Structural Hierarchies**
+</div>
 
-<center>Figure 7 - GpUnit Structural Hierarchies</center><br>
+</div>
+</div>
+</section>s

@@ -1,10 +1,11 @@
-
 # Site settings
 title: SP 1500-102 CDF for Cast Vote Records
 description: "Initial draft of NIST Special Publication: SP 1500-102 Common Data Format Specification for Cast Vote Records"
 baseurl: "/CastVoteRecords" # the subpath of your site, e.g. /blog
 url: "https://pages.nist.gov/" # the base hostname & protocol for your site
-theme: jekyll-theme-minimal
+
+# Build settings
+markdown: kramdown
 
 exclude:
 - ".ruby-version"
@@ -26,4 +27,3 @@ org_name: usnistgov
 repo_name: CastVoteRecords
 
 host: 0.0.0.0
-Contact GitHub API Training Shop Blog About
