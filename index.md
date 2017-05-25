@@ -63,7 +63,7 @@ Governmental-based geographies do not cross the lines of the precincts that comp
 Political-based geographies are those that tend to be population-based and therefore may change with each U.S. Census every 10 years in a process known as re-districting.  Political-based geographies are generally known as electoral districts, where people are elected to an office that has jurisdiction within a specific geography, e.g., a U.S. Congressional district.
 
 <div class="text-center" markdown="1">
-	<img src="Figures/Political-based-geographies.png"/>
+<img src="Figures/Political-based-geographies.png"/>
 
 **Figure 2: Political-based Geographies**
 </div>
