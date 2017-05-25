@@ -1,8 +1,10 @@
 ---
-layout: post
-title:  Background - Geopolitical Geography
-date:   2017-05-03 12:39:49 -0400
-categories: jekyll update
+layout: cover
+title: "Draft NIST SP 1500-102 CDF Specification for Cast Vote Records"
+description: "Work in progress for SP 1500-102"
+<link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
+<script src="https://pages.nist.gov/nist-header-footer/js/jquery-1.9.0.min.js" type="text/javascript" defer="defer"></script>
+<script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
 ---
 This is a placeholder for the NIST SP 1500-10X specification for an interoperable common data format for cast vote records created by voting devices such as ballot scanners and consumed by devices such as election management systems, tabulators, and audit devices.
 
