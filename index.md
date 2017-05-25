@@ -102,17 +102,17 @@ Administrative-based geographies are called thus because their boundaries are de
 
 As an example of administrative-based geographies and their relationship to political-based and governmental-based geographies, Figure 4 shows the wards and precincts that make up the city of Cambridge, MA, and Figure 5 shows how the wards and precincts in the city compose the U.S. Congressional electoral districts [7].  The wards are implemented as collections of precincts.  In general, it is preferred that electoral districts are composed of whole precincts.
 
+
 <div class="text-center" markdown="1">
-	<img src="Figures/2013_WardsPrecincts-v2.png"/>
+<img src="Figures/2013_WardsPrecincts-v2.png"/>
 
-	**Figure 4: Ward and Precincts in Cambridge, MA.**
-
+**Figure 4: Ward and Precincts in Cambridge, MA.**
 </div>
 
 <div class="text-center" markdown="1">
-	<img src="Figures/2014_CongressDistricts-v2.png"/>
+<img src="Figures/2014_CongressDistricts-v2.png"/>
 
-	**Figure 5: Districts Overlaying Wards and Precincts in Cambridge, MA.**
+**Figure 5: Districts Overlaying Wards and Precincts in Cambridge, MA.**
 </div>
 
 In many states, the boundaries of electoral districts may crisscross the precinct boundaries, creating one or more split precincts, with a distinct ballot style per split precinct.  Depending on the number of districts and how often they cross the precinct boundaries, the resultant number of ballot styles created may grow substantially beyond the number of whole precincts.  It is possible sometimes that, despite best efforts, very low numbers of voters or even just one voter will require a district ballot style.
