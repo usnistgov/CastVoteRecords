@@ -64,6 +64,7 @@ Political-based geographies are those that tend to be population-based and there
 
 <div class="text-center" markdown="1">
 	<img src="Figures/Political-based-geographies.png"/>
+
 **Figure 2: Political-based Geographies**
 </div>
 
@@ -93,6 +94,7 @@ Administrative-based geographies are called thus because their boundaries are de
 
 <div class="text-center" markdown="1">
 <img src="Figures/Administrative-based-geographies.png"/>
+
 **Figure 3: Administrative-based Geographies**
 </div>
 
@@ -100,13 +102,14 @@ Administrative-based geographies are called thus because their boundaries are de
 
 As an example of administrative-based geographies and their relationship to political-based and governmental-based geographies, Figure 4 shows the wards and precincts that make up the city of Cambridge, MA, and Figure 5 shows how the wards and precincts in the city compose the U.S. Congressional electoral districts [7].  The wards are implemented as collections of precincts.  In general, it is preferred that electoral districts are composed of whole precincts.
 
-<div class="text-center" markdown="1">
+<
 	<img src="Figures/2013_WardsPrecincts-v2.png"/>
 
 	**Figure 4: Ward and Precincts in Cambridge, MA.**
 
-	<br><br>
+</div>
 
+<div class="text-center" markdown="1">
 	<img src="Figures/2014_CongressDistricts-v2.png"/>
 
 	**Figure 5: Districts Overlaying Wards and Precincts in Cambridge, MA.**
@@ -116,6 +119,7 @@ In many states, the boundaries of electoral districts may crisscross the precinc
 
 <div class="text-center" markdown="1">
 <img src="Figures/Split-Precinct.png"/>
+
 **Figure 6: Overlapping Non-hierarchical Electoral Districts**
 </div>
 
@@ -141,6 +145,7 @@ District GpUnits need to be linked to the precinct and/or split precinct GpUnits
 
 <div class="text-center" markdown="1">
 <img src="Figures/Containment.png"/>
+
 **Figure 7 - GpUnit Structural Hierarchies**
 </div>
 
