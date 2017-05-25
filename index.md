@@ -49,7 +49,7 @@ Governmental-based geography refers to entities that (1) run elections and (2) a
 Nearly all states have counties, although some use different words to describe them, e.g., parishes for Louisiana and boroughs for Alaska.   Townships occur in 20 states and adhere to county boundaries.   In the six New England states, townships run the election process and there is no county government, thus election results are reported directly to the state. Municipalities (cities, towns, or villages) in Michigan, Minnesota, and Wisconsin also run their elections, but report their information to the county, which then reports to the state.  Other civil divisions include boroughs as used in Connecticut, New Jersey, Pennsylvania, and other states; New York City's boroughs are treated as counties.
 
 <div class="text-center" markdown="1">
-<img src="Figures/Governmental-based-geographies.png"/>
+<img src="Figures/Governmental-based-geographies.png" height="400"/>
 
 **Figure 1: Governmental-based Geographies**
 </div>
@@ -63,7 +63,7 @@ Governmental-based geographies do not cross the lines of the precincts that comp
 Political-based geographies are those that tend to be population-based and therefore may change with each U.S. Census every 10 years in a process known as re-districting.  Political-based geographies are generally known as electoral districts, where people are elected to an office that has jurisdiction within a specific geography, e.g., a U.S. Congressional district.
 
 <div class="text-center" markdown="1">
-<img src="Figures/Political-based-geographies.png"/>
+<img src="Figures/Political-based-geographies.png" height="450"/>
 
 **Figure 2: Political-based Geographies**
 </div>
@@ -93,7 +93,7 @@ Administrative-based geographies are called thus because their boundaries are de
 3. Special districts, i.e., unique areas brought together for a referendum.
 
 <div class="text-center" markdown="1">
-<img src="Figures/Administrative-based-geographies.png"/>
+<img src="Figures/Administrative-based-geographies.png" height="500"/>
 
 **Figure 3: Administrative-based Geographies**
 </div>
@@ -104,13 +104,13 @@ As an example of administrative-based geographies and their relationship to poli
 
 
 <div class="text-center" markdown="1">
-<img src="Figures/2013_WardsPrecincts-v2.png"/>
+<img src="Figures/2013_WardsPrecincts-v2.png" height="500"/>
 
 **Figure 4: Ward and Precincts in Cambridge, MA.**
 </div>
 
 <div class="text-center" markdown="1">
-<img src="Figures/2014_CongressDistricts-v2.png"/>
+<img src="Figures/2014_CongressDistricts-v2.png" height="500"/>
 
 **Figure 5: Districts Overlaying Wards and Precincts in Cambridge, MA.**
 </div>
@@ -118,7 +118,7 @@ As an example of administrative-based geographies and their relationship to poli
 In many states, the boundaries of electoral districts may crisscross the precinct boundaries, creating one or more split precincts, with a distinct ballot style per split precinct.  Depending on the number of districts and how often they cross the precinct boundaries, the resultant number of ballot styles created may grow substantially beyond the number of whole precincts.  It is possible sometimes that, despite best efforts, very low numbers of voters or even just one voter will require a district ballot style.
 
 <div class="text-center" markdown="1">
-<img src="Figures/Split-Precinct.png"/>
+<img src="Figures/Split-Precinct.png" height="450"/>
 
 **Figure 6: Overlapping Non-hierarchical Electoral Districts**
 </div>
@@ -144,7 +144,7 @@ GpUnits can be linked hierarchically when modeling jurisdictional geographies.  
 District GpUnits need to be linked to the precinct and/or split precinct GpUnits that compose them. The precincts and split precincts thus link the jurisdictional and district GpUnits together, as shown below in Figure 7 (and described in greater detail in section 5.2).  The wards are the children of the combined precincts, and so forth on up to the state.  The precincts and split precincts are also the children of the districts that they compose.  
 
 <div class="text-center" markdown="1">
-<img src="Figures/Containment.png"/>
+<img src="Figures/Containment.png" height="400"/>
 
 **Figure 7 - GpUnit Structural Hierarchies**
 </div>
