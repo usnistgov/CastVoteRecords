@@ -26,4 +26,10 @@ exclude:
 org_name: usnistgov
 repo_name: CastVoteRecords
 
+# Navigation
+# List links that should appear in the site sidebar here
+navigation:
+- text: Home
+  url: /CastVoteRecords/
+
 host: 0.0.0.0
