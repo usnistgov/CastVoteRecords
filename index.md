@@ -102,7 +102,7 @@ Administrative-based geographies are called thus because their boundaries are de
 
 As an example of administrative-based geographies and their relationship to political-based and governmental-based geographies, Figure 4 shows the wards and precincts that make up the city of Cambridge, MA, and Figure 5 shows how the wards and precincts in the city compose the U.S. Congressional electoral districts [7].  The wards are implemented as collections of precincts.  In general, it is preferred that electoral districts are composed of whole precincts.
 
-<
+<div class="text-center" markdown="1">
 	<img src="Figures/2013_WardsPrecincts-v2.png"/>
 
 	**Figure 4: Ward and Precincts in Cambridge, MA.**
