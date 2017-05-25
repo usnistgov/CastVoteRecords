@@ -1,14 +1,10 @@
-title: Minimal theme
-description: Minimal is a theme for GitHub Pages.
-show_downloads: true
-google_analytics:
-theme: jekyll-theme-minimal
 
 # Site settings
 title: SP 1500-102 CDF for Cast Vote Records
 description: "Initial draft of NIST Special Publication: SP 1500-102 Common Data Format Specification for Cast Vote Records"
-baseurl: "/1500-102" # the subpath of your site, e.g. /blog
+baseurl: "/CastVoteRecords" # the subpath of your site, e.g. /blog
 url: "https://pages.nist.gov/" # the base hostname & protocol for your site
+theme: jekyll-theme-minimal
 
 exclude:
 - ".ruby-version"
