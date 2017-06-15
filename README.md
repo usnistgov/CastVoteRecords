@@ -1,4 +1,4 @@
-# Voting - Voter Records Interchange (VRI) CDF Specification
+# Voting - Cast Vote Records(CVR) CDF Specification
 
 This directory holds cast vote record (CVR) specification common data format and related information and files that are being created by NIST and collaborators.  
 
