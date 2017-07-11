@@ -1,14 +1,14 @@
 ---
 layout: cover
-title: "Draft NIST SP 1500-102 CDF Specification for Cast Vote Records"
-description: "Work in progress for SP 1500-102"
+title: "Draft NIST SP 1500-xxx CDF Specification for Cast Vote Records"
+description: "Work in progress for SP 1500-xxx”
 ---
 
 <section class="home home-title" markdown="1">
 
 # Cast Vote Records Home
 
-This document is a placeholder for the NIST SP 1500-102 specification for an interoperable common data format for cast vote records created by voting devices such as ballot scanners and consumed by devices such as election management systems, tabulators, and audit devices.
+This document is a placeholder for the NIST SP 1500-xxx specification for an interoperable common data format for cast vote records created by voting devices such as ballot scanners and consumed by devices such as election management systems, tabulators, and audit devices.
 
 </section>
 
