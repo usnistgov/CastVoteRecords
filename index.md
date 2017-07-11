@@ -8,7 +8,7 @@ description: "Work in progress for SP 1500-102"
 
 # Cast Vote Records Home
 
-This is a placeholder for the NIST SP 1500-10X specification for an interoperable common data format for cast vote records created by voting devices such as ballot scanners and consumed by devices such as election management systems, tabulators, and audit devices.
+This document is a placeholder for the NIST SP 1500-102 specification for an interoperable common data format for cast vote records created by voting devices such as ballot scanners and consumed by devices such as election management systems, tabulators, and audit devices.
 
 </section>
 
