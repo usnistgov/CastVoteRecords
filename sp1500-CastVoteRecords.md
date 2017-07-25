@@ -1,1 +1,0 @@
-This is a placeholder for the NIST SP 1500-10X specification for an interoperable common data format for cast vote records created by voting devices such as ballot scanners and consumed by devices such as election management systems, tabulators, and audit devices.
