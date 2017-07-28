@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="NIST_V0_cast_vote_records.xsd" version="0.0" xmlns="NIST_V0_cast_vote_records.xsd" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!-- ========== Imports ========== -->
+  <xsd:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.w3.org/2000/09/xmldsig#"/>
+  <!-- ========== Roots ========== -->
+  <xsd:element name="CastVoteRecordReport" type="CastVoteRecordReport"/>
+  <!-- ========== Enumerations ========== -->
+  <xsd:simpleType name="BallotSelectionStatus">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="adjudicated"/>
+      <xsd:enumeration value="generated-rules"/>
+      <xsd:enumeration value="invalidated-rules"/>
+      <xsd:enumeration value="needs-adjudication"/>
+      <xsd:enumeration value="overvoted"/>
+      <xsd:enumeration value="undervoted"/>
+      <xsd:enumeration value="other"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="BallotStatus">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="adjudicated"/>
+      <xsd:enumeration value="counted"/>
+      <xsd:enumeration value="invalid"/>
+      <xsd:enumeration value="needs-adjudication"/>
+      <xsd:enumeration value="unreadable"/>
+      <xsd:enumeration value="other"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="CVRComponentStatus">
+    <xsd:restriction base="xsd:string">
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="CastVoteRecordVersion">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="1.0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="ContestStatus">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="adjudicated"/>
+      <xsd:enumeration value="invalidated-rules"/>
+      <xsd:enumeration value="overvoted"/>
+      <xsd:enumeration value="undervoted"/>
+      <xsd:enumeration value="other"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="HashType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="md6"/>
+      <xsd:enumeration value="sha-512"/>
+      <xsd:enumeration value="other"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="IdentifierType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="fips"/>
+      <xsd:enumeration value="local-level"/>
+      <xsd:enumeration value="national-level"/>
+      <xsd:enumeration value="ocd-id"/>
+      <xsd:enumeration value="state-level"/>
+      <xsd:enumeration value="other"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="ReportType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="adjudicated"/>
+      <xsd:enumeration value="aggregated"/>
+      <xsd:enumeration value="originating-device-export"/>
+      <xsd:enumeration value="rcv-round"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="ReportingUnitType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="combined-precinct"/>
+      <xsd:enumeration value="polling-place"/>
+      <xsd:enumeration value="precinct"/>
+      <xsd:enumeration value="split-precinct"/>
+      <xsd:enumeration value="vote-center"/>
+      <xsd:enumeration value="other"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="VoteMarkStatus">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="adjudicated-countable"/>
+      <xsd:enumeration value="adjudicated-invalidated"/>
+      <xsd:enumeration value="generated-countable-rules"/>
+      <xsd:enumeration value="invalidated-rules"/>
+      <xsd:enumeration value="invalidated-marginal-mark"/>
+      <xsd:enumeration value="voter-countable"/>
+      <xsd:enumeration value="other"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="VoteVariation">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="approval"/>
+      <xsd:enumeration value="borda"/>
+      <xsd:enumeration value="cumulative"/>
+      <xsd:enumeration value="majority"/>
+      <xsd:enumeration value="n-of-m"/>
+      <xsd:enumeration value="one-of-m"/>
+      <xsd:enumeration value="plurality"/>
+      <xsd:enumeration value="proportional"/>
+      <xsd:enumeration value="range"/>
+      <xsd:enumeration value="rcv"/>
+      <xsd:enumeration value="super-majority"/>
+      <xsd:enumeration value="other"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- ========== Classes ========== -->
+  <xsd:complexType name="Annotation">
+    <xsd:sequence>
+      <xsd:element name="Message" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="Name" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="PreviousStatus" type="CVRComponentStatus" minOccurs="0"/>
+      <xsd:element name="TimeStamp" type="xsd:dateTime" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="BallotMeasureContest">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Class/element for type of contest involving ballot measures (i.e.,referenda). Inherits attributes from the Contest class/element; includes other attributes for including text from the ballot measure if available.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="Contest">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="BallotMeasureSelection">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Class/element that is a type of ballot selection specific to ballot measures, e.g., "yes", "no".
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="BallotSelection">
+        <xsd:sequence>
+          <xsd:element name="Selection" type="InternationalizedText"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="BallotSelection" abstract="true">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Class/element that serves as a selection for a contest, so that counts can be reported and associated with device types and voting classes. Can be for a ballot measure, candCodeate, overvote, write-in, etc.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:attribute name="ObjectId" type="xsd:ID" use="required"/>
+  </xsd:complexType>
+  <xsd:complexType name="BallotSelectionVote">
+    <xsd:sequence>
+      <xsd:element name="Annotation" type="Annotation" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="BallotSelectionId" type="xsd:IDREF" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            This will most typically have a multiplicity of 1, but can be multiple for  contests that allow selecting multiple choices.
+            
+            The order of this association can be used to determine candidate preference for appropriate voting variations.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="OtherStatus" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Position" type="xsd:integer" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            The ordinal position of the selection within the ballot.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Status" type="BallotSelectionStatus" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="TotalNumberVotes" type="xsd:integer" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            For cumulative or range voting variations, this attribute represents the total number of votes indicated across all marks.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="VoteMark" type="VoteMark" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Candidate">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Class/element for describing information about a candidate in a contest.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Code" type="Code" minOccurs="0"/>
+      <xsd:element name="Name" type="InternationalizedText" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Candidate's name as listed on the ballot.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="PartyId" type="xsd:IDREF" minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute name="ObjectId" type="xsd:ID" use="required"/>
+  </xsd:complexType>
+  <xsd:complexType name="CandidateContest">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Class/element for type of contest involving one or more candCodeates. Inherits attributes from the Contest class/element; includes other attributes to indicate number of candCodeates that are elected to the office (usually 1) and the number of votes that a voter can cast in the contest (usually 1) so as to support the n-of-m vote variation.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="Contest">
+        <xsd:sequence>
+          <xsd:element name="NumberElected" type="xsd:integer" minOccurs="0"/>
+          <xsd:element name="PrimaryPartyId" type="xsd:IDREF" minOccurs="0"/>
+          <xsd:element name="VotesAllowed" type="xsd:integer" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="CandidateSelection">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Class/element that is a type of ballot selection specific to selecting a candCodeate in a contest for an office.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="BallotSelection">
+        <xsd:sequence>
+          <xsd:element name="CandidateIds" type="xsd:IDREFS" minOccurs="0"/>
+          <xsd:element name="IsWriteIn" type="xsd:boolean" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="CastVoteRecord">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Class/element representing the results of a ballot, or of a sheet out of a multi-sheet ballot.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Annotation" type="Annotation" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="BallotIdentifier" type="xsd:string" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            An identifier for the ballot that this CVR represents.
+            If provided, this number must be the same on all CastVoteRecords that represent individual sheets from the same multi-sheet ballot.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="BallotImage" type="ImageData" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            An ordered list of ballot sheet images for this CastVoteRecord.
+            Two-sided ballots are to be represented in front to back order.
+            Two-sided ballot images may be specified as individual image scans, or as a multi-page PDF.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="BallotStatus" type="BallotStatus" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="BallotStyleId" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="BatchId" type="xsd:string" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            The identifier for the batch that includes this CVR
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="BatchSequenceNumber" type="xsd:integer" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            The sequence number of the corresponding paper ballot within a batch
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="ContestVote" type="ContestVote" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="ElectionId" type="xsd:IDREF" minOccurs="0"/>
+      <xsd:element name="Identifier" type="xsd:string" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            An optional, unique identifier for this CastVoteRecord as listed on the ballot or ballot page.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="NumWriteIns" type="xsd:integer" minOccurs="0"/>
+      <xsd:element name="OriginatingDevice" type="ReportingDevice" minOccurs="0"/>
+      <xsd:element name="OtherBallotStatus" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Party" type="Party" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="SequenceNumber" type="xsd:string" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            The sequence number for this CVR.
+            
+            This represents the ordinal number that this CastVoteRecord was processed in by the tabulating device.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="SheetNumber" type="xsd:integer" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Indicates the sheet number of the multi-sheet ballot being represented.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="SmallestVotingUnitId" type="xsd:IDREF" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            The smallest piece of geography associated with a voter's ballot or cast vote record at the smallest or lowest level (typically a precinct or split-precinct).
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CastVoteRecordReport">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        The root class/element; attributes pertain to the status and format of the report and when generated.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="CastVoteRecord" type="CastVoteRecord" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="Election" type="Election" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="GeneratedDate" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Identifies the time that the election report was generated.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="GpUnit" type="GpUnit" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="Notes" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="OtherReportType" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="ReportGeneratingDeviceIds" type="xsd:IDREFS"/>
+      <xsd:element name="ReportType" type="ReportType" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element minOccurs="0" ref="ds:Signature">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Placeholder for an optional digital signature, using the W3C digital signature standard.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Version" type="CastVoteRecordVersion"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Code">
+    <xsd:sequence>
+      <xsd:element name="label" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="OtherType" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Type" type="IdentifierType"/>
+      <xsd:element name="Value" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Contest" abstract="true">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Abstract class /element for a contest. Classes/elements for specific types of contests inherit the attributes and define their own.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Abbreviation" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="BallotSelection" type="BallotSelection" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="Code" type="Code" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="Name" type="xsd:string" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Title or name of the contest, e.g., "Governor" or "Question on Legalization of Gambling".
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="OtherVoteVariation" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="VoteVariation" type="VoteVariation" minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute name="ObjectId" type="xsd:ID" use="required"/>
+  </xsd:complexType>
+  <xsd:complexType name="ContestVote">
+    <xsd:sequence>
+      <xsd:element name="Annotation" type="Annotation" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="BallotSelectionVote" type="BallotSelectionVote" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="ContestId" type="xsd:IDREF"/>
+      <xsd:element name="OtherStatus" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Overvotes" type="xsd:integer" minOccurs="0"/>
+      <xsd:element name="Selections" type="xsd:integer" minOccurs="0"/>
+      <xsd:element name="Status" type="ContestStatus" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="Undervotes" type="xsd:integer" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Election">
+    <xsd:sequence>
+      <xsd:element name="Candidate" type="Candidate" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="Code" type="Code" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="Contest" type="Contest" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="ElectionScopeId" type="xsd:IDREF" minOccurs="0"/>
+      <xsd:element name="Name" type="xsd:string" minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute name="ObjectId" type="xsd:ID" use="required"/>
+  </xsd:complexType>
+  <xsd:complexType name="File">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:base64Binary">
+        <xsd:attribute name="fileName" type="xsd:string"/>
+        <xsd:attribute name="mimeType" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="GpUnit">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Class/element for describing a geo-politically bounded area of geography such as a city, district, or jurisdiction, or a precinct or split-precinct, or specific vote-capture device, for the purpose of associating contest vote counts and ballot counts (and other information) with the reporting unit. Reporting units can link to each other to form a hierarchicallly-oriented model of a state's (or a county's, etc.) jurisdictions, districts, and precincts.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Code" type="Code" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="Name" type="xsd:string" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Name of the reporting unit.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="OtherType" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="ReportingDeviceIds" type="xsd:IDREFS" minOccurs="0"/>
+      <xsd:element name="Type" type="ReportingUnitType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Type of reporting unit, e.g., state, jurisdiction, district, etc.
+            
+            This field is a key into the NIST maintained registry of GpUnit types.
+            The key specifies the geo-political category of the locality, the type of locality, and optionally a sub-type.
+            
+            If an 'Other' type or subtype is specified, then it will be defined via the OtherType value.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="ObjectId" type="xsd:ID" use="required"/>
+  </xsd:complexType>
+  <xsd:complexType name="Hash">
+    <xsd:sequence>
+      <xsd:element name="OtherType" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Type" type="HashType"/>
+      <xsd:element name="Value" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Image">
+    <xsd:complexContent>
+      <xsd:extension base="File">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ImageData">
+    <xsd:sequence>
+      <xsd:element name="Hash" type="Hash" minOccurs="0"/>
+      <xsd:element name="Image" type="Image" minOccurs="0"/>
+      <xsd:element name="Location" type="xsd:anyURI" minOccurs="0"/>
+      <xsd:element minOccurs="0" ref="ds:Signature">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Either a signature for the embedded image, or a detached signature for the image available at the specified location.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="InternationalizedText">
+    <xsd:sequence>
+      <xsd:element name="label" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Text" type="LanguageString" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="LanguageString">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="language" type="xsd:language" use="required"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="MarkMetric">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        MarkMetric represents some generic measurement of a mark.
+        The type of the metric being used is determined by the 'Type' attribute of a MarkMetric instance.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Type" type="xsd:string">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            The specific type of metric being used to determine quality.
+            The supplied type must be specific enough that the attached value can be accurately verified later.
+            
+            For example, 'Dominion Mark Density' may be a sufficiently specific type.
+            However, if different machines determine the metric using a different algorithm, then it would be necessary to be more specific: 'Dominion ImageCast Precinct Mark Density'
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Value" type="xsd:string">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            The string value of the metric specified by Type
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Party">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Class/element for describing information about a political party.  Can also be a type of ballot selection for tracking a count of straight party selections.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Abbreviation" type="xsd:string" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Short name for the party, e.g., "DEM".
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Code" type="Code" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="Name" type="InternationalizedText" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Official full name of the party, e.g., "Republican".
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="ObjectId" type="xsd:ID" use="required"/>
+  </xsd:complexType>
+  <xsd:complexType name="PartyContest">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Class/element used to treat straight party selection as a type of contest.  Used so as to keep a count of straight party selections.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="Contest">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="PartySelection">
+    <xsd:complexContent>
+      <xsd:extension base="BallotSelection">
+        <xsd:sequence>
+          <xsd:element name="PartyIds" type="xsd:IDREFS"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ReportingDevice">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Class/element describing a specific vote-capture device.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="GpUnit">
+        <xsd:sequence>
+          <xsd:element name="Application" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="Manufacturer" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="Model" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="Notes" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element name="SerialNumber" type="xsd:string" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">
+                Device's serial number of other unique identifier.
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="RetentionContest">
+    <xsd:complexContent>
+      <xsd:extension base="BallotMeasureContest">
+        <xsd:sequence>
+          <xsd:element name="CandidateId" type="xsd:IDREF"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="Status">
+  </xsd:complexType>
+  <xsd:complexType name="VoteMark">
+    <xsd:sequence>
+      <xsd:element name="Annotation" type="Annotation" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="MarkMetric" type="MarkMetric" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="NumberVotes" type="xsd:integer" minOccurs="0"/>
+      <xsd:element name="OtherStatus" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Position" type="xsd:integer" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            The ordinal position of the mark within the ballot selection.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Rank" type="xsd:integer" minOccurs="0"/>
+      <xsd:element name="Status" type="VoteMarkStatus" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="WriteInBallotSelectionVote">
+    <xsd:complexContent>
+      <xsd:extension base="BallotSelectionVote">
+        <xsd:sequence>
+          <xsd:element name="Image" type="ImageData" minOccurs="0"/>
+          <xsd:element name="Text" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="s">
+  </xsd:complexType>
+</xsd:schema>
