@@ -1525,7 +1525,7 @@
     <xsd:complexContent>
       <xsd:extension base="ContestSelectionLink">
         <xsd:sequence>
-          <xsd:element name="Image" type="ImageData" minOccurs="0">
+          <xsd:element name="WriteInImage" type="ImageData" minOccurs="0">
             <xsd:annotation>
               <xsd:documentation xml:lang="en">
                 Used for an image of the write-in, typically made by a scanner when scanning a paper ballot.
