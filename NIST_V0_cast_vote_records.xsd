@@ -563,7 +563,7 @@
   <xsd:complexType name="BallotMeasureSelection">
     <xsd:annotation>
       <xsd:documentation xml:lang="en">
-        BallotMeasureSelection is a subclass of BallotSelection and is used for ballot measures.  The voter's selected response to the ballot selection (e.g., "yes" or "no") may be in English or other languages as utilized on the voter's ballot.
+        BallotMeasureSelection is a subclass of ContestSelection and is used for ballot measures.  The voter's selected response to the ballot selection (e.g., "yes" or "no") may be in English or other languages as utilized on the voter's ballot.
       </xsd:documentation>
     </xsd:annotation>
     <xsd:complexContent>
@@ -770,7 +770,7 @@
   <xsd:complexType name="CandidateSelection">
     <xsd:annotation>
       <xsd:documentation xml:lang="en">
-        CandidateSelection is a subclass of BallotSelection and is used for candidates, including for write-in candidates.
+        CandidateSelection is a subclass of ContestSelection and is used for candidates, including for write-in candidates.
       </xsd:documentation>
     </xsd:annotation>
     <xsd:complexContent>
@@ -910,7 +910,7 @@
       <xsd:documentation xml:lang="en">
         Contest represents a contest on the ballot. CastVoteRecordReport initially includes an instance of Contest for each contest on the ballot.  Other classes can subsequently reference the instances as necessary to link together items on the cast vote record, such as a contest, its voted ballot selection(s), and the mark(s) associated with the selection(s).
         
-        BallotSelection has three subclasses, each used for a specific type of ballot selection:   These subclasses inherit Contest's attributes.
+        ContestSelection has three subclasses, each used for a specific type of ballot selection:   These subclasses inherit Contest's attributes.
         
         1. PartyContest - used for straight party contests, 
         2. BallotMeasureContest - used for contests, and 
@@ -1035,9 +1035,9 @@
   <xsd:complexType name="ContestSelection" abstract="true">
     <xsd:annotation>
       <xsd:documentation xml:lang="en">
-        BallotSelection represents a ballot selection in a contest.  Contest can include an instance of BallotSelection for each ballot selection in the contest.  Typically there will be ballot selections included only for those contests their ballot selections that were voted, i.e., that contain a mark.
+        ContestSelection represents a ballot selection in a contest.  Contest can include an instance of ContestSelection for each ballot selection in the contest.  Typically there will be ballot selections included only for those contests their ballot selections that were voted, i.e., that contain a mark.
         
-        BallotSelection has three subclasses, each used for a specific type of ballot selection:
+        ContestSelection has three subclasses, each used for a specific type of ballot selection:
          
         1. PartySelection - used for straight party selections, 
         2. BallotMeasureSelection - used for ballot measures, and 
@@ -1051,9 +1051,9 @@
   <xsd:complexType name="ContestSelectionLink">
     <xsd:annotation>
       <xsd:documentation xml:lang="en">
-        BallotSelectionVote is used to link those ballot selections that contain a mark to information about the mark, such as whether the mark constitutes a countable vote, or whether the mark is determined to be marginal, etc.  ContestVote includes an instance of BallotSelectionVote when a mark for the selection is present, and BallotSelectionVote then includes VoteMark for each mark present.  To tie the mark to the specific ballot selection, BallotSelectionVote links to instances of BallotSelection that have previously been included by Contest.
+        BallotSelectionVote is used to link those ballot selections that contain a mark to information about the mark, such as whether the mark constitutes a countable vote, or whether the mark is determined to be marginal, etc.  ContestVote includes an instance of BallotSelectionVote when a mark for the selection is present, and BallotSelectionVote then includes VoteMark for each mark present.  To tie the mark to the specific ballot selection, BallotSelectionVote links to instances of ContestSelection that have previously been included by Contest.
         
-        Since multiple marks per ballot selection are possible for some voting methods, BallotSelectionVote can include multiple instances of VoteMark, one per mark.  BallotSelectionVote can also be used for the purpose of including, in the CVR, all ballot selections in the contest regardless of whether marks are present.  In this case, BallotSelectionVote would not include VoteMark if no mark is present but would link to the appropriate instance of BallotSelection.
+        Since multiple marks per ballot selection are possible for some voting methods, BallotSelectionVote can include multiple instances of VoteMark, one per mark.  BallotSelectionVote can also be used for the purpose of including, in the CVR, all ballot selections in the contest regardless of whether marks are present.  In this case, BallotSelectionVote would not include VoteMark if no mark is present but would link to the appropriate instance of ContestSelection.
         
         BallotSelectionVote has one subtype, WriteInBallotSelectionBVote, whose attributes are used to include information about the write-in including the text of the write-in or an image of the write-in, whichever may be present.
       </xsd:documentation>
@@ -1091,6 +1091,13 @@
         <xsd:annotation>
           <xsd:documentation xml:lang="en">
             Used to include the ordinal position of the ballot selection as is appeared on the ballot.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Rank" type="xsd:integer" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            For the RCV voting variation, the rank chosen by the voter, used when a ranking gets assigned to the contest selection.
           </xsd:documentation>
         </xsd:annotation>
       </xsd:element>
@@ -1348,7 +1355,7 @@
       <xsd:element name="Rank" type="xsd:integer" minOccurs="0">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">
-            For the RCV voting variation, the rank chosen by the voter.
+            For the RCV voting variation, the rank chosen by the voter, used when a ranking gets assigned to a mark.
           </xsd:documentation>
         </xsd:annotation>
       </xsd:element>
@@ -1429,7 +1436,7 @@
   <xsd:complexType name="PartySelection">
     <xsd:annotation>
       <xsd:documentation xml:lang="en">
-        PartySelection is a subclass of BallotSelection and is used typically for a ballot selection in a straight-party contest.
+        PartySelection is a subclass of ContestSelection and is used typically for a ballot selection in a straight-party contest.
       </xsd:documentation>
     </xsd:annotation>
     <xsd:complexContent>
@@ -1525,17 +1532,17 @@
     <xsd:complexContent>
       <xsd:extension base="ContestSelectionLink">
         <xsd:sequence>
-          <xsd:element name="WriteInImage" type="ImageData" minOccurs="0">
-            <xsd:annotation>
-              <xsd:documentation xml:lang="en">
-                Used for an image of the write-in, typically made by a scanner when scanning a paper ballot.
-              </xsd:documentation>
-            </xsd:annotation>
-          </xsd:element>
           <xsd:element name="Text" type="xsd:string" minOccurs="0">
             <xsd:annotation>
               <xsd:documentation xml:lang="en">
                 Used for the text of the write-in, typically present when the CVR has been created by  electronic ballot marking equipment.
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="WriteInImage" type="ImageData" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">
+                Used for an image of the write-in, typically made by a scanner when scanning a paper ballot.
               </xsd:documentation>
             </xsd:annotation>
           </xsd:element>
