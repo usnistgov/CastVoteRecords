@@ -5,34 +5,20 @@
   <!-- ========== Roots ========== -->
   <xsd:element name="CastVoteRecordReport" type="CastVoteRecordReport"/>
   <!-- ========== Enumerations ========== -->
-  <xsd:simpleType name="BallotStatus">
+  <xsd:simpleType name="AllocationType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="yes"/>
+      <xsd:enumeration value="no"/>
+      <xsd:enumeration value="unknown"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="CVRStatus">
     <xsd:annotation>
       <xsd:documentation xml:lang="en">
         Used in CastVoteRecord.Status to identify the status of the CVR.
       </xsd:documentation>
     </xsd:annotation>
     <xsd:restriction base="xsd:string">
-      <xsd:enumeration value="adjudicated">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            To indicate that the CVR has been adjudicated.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:enumeration>
-      <xsd:enumeration value="counted">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            To indicate that the CVR has been counted.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:enumeration>
-      <xsd:enumeration value="invalid">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            To indicate that the associated ballot is invalid (not a ballot).
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:enumeration>
       <xsd:enumeration value="needs-adjudication">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">
@@ -47,22 +33,31 @@
           </xsd:documentation>
         </xsd:annotation>
       </xsd:enumeration>
-      <xsd:enumeration value="unreadable">
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="CVRType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="original">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">
-            To indicate that the ballot was not entirely readable by the scanner.
+            As scanned, no contest rules applied.
           </xsd:documentation>
         </xsd:annotation>
       </xsd:enumeration>
-    </xsd:restriction>
-  </xsd:simpleType>
-  <xsd:simpleType name="CVRComponentStatus">
-    <xsd:annotation>
-      <xsd:documentation xml:lang="en">
-        Used in Annotation.PreviousStatus to identify the previous status of the item being annotated.  Values for CVRComponentStatus come from the BallotSelectionStatus, BallotStatus, ContestStatus, and VoteMarkStatus enumerations.
-      </xsd:documentation>
-    </xsd:annotation>
-    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="modified">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            After contest rules applied.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="interpreted">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Has been adjudicated.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
     </xsd:restriction>
   </xsd:simpleType>
   <xsd:simpleType name="CastVoteRecordVersion">
@@ -72,7 +67,7 @@
       </xsd:documentation>
     </xsd:annotation>
     <xsd:restriction base="xsd:string">
-      <xsd:enumeration value="1.0"/>
+      <xsd:enumeration value="1.0.0"/>
     </xsd:restriction>
   </xsd:simpleType>
   <xsd:simpleType name="ContestSelectionStatus">
@@ -82,13 +77,6 @@
       </xsd:documentation>
     </xsd:annotation>
     <xsd:restriction base="xsd:string">
-      <xsd:enumeration value="adjudicated">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            To indicate that the ballot selection was adjudicated.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:enumeration>
       <xsd:enumeration value="generated-rules">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">
@@ -117,20 +105,6 @@
           </xsd:documentation>
         </xsd:annotation>
       </xsd:enumeration>
-      <xsd:enumeration value="overvoted">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            To indicate that the ballot selection was overvoted.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:enumeration>
-      <xsd:enumeration value="undervoted">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            To indicate that the ballot selection was undervoted.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:enumeration>
     </xsd:restriction>
   </xsd:simpleType>
   <xsd:simpleType name="ContestStatus">
@@ -140,13 +114,6 @@
       </xsd:documentation>
     </xsd:annotation>
     <xsd:restriction base="xsd:string">
-      <xsd:enumeration value="adjudicated">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            To indicate that the contest has been adjudicated.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:enumeration>
       <xsd:enumeration value="invalidated-rules">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">
@@ -265,28 +232,21 @@
       </xsd:enumeration>
     </xsd:restriction>
   </xsd:simpleType>
-  <xsd:simpleType name="MarkStatus">
+  <xsd:simpleType name="IndicationStatus">
     <xsd:annotation>
       <xsd:documentation xml:lang="en">
         Used in VoteMark.Status to identify the status of a vote mark.
       </xsd:documentation>
     </xsd:annotation>
     <xsd:restriction base="xsd:string">
-      <xsd:enumeration value="adjudicated-countable">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            To indicate that the vote mark was adjudicated and is countable, i.e., can be subsequently counted.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:enumeration>
-      <xsd:enumeration value="adjudicated-invalidated">
+      <xsd:enumeration value="adjudicated">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">
             To indicate that the vote mark was invalidated because of adjudication and is not countable.
           </xsd:documentation>
         </xsd:annotation>
       </xsd:enumeration>
-      <xsd:enumeration value="generated-countable-rules">
+      <xsd:enumeration value="generated-rules">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">
             To indicate that the vote mark was generated by the generating device per contest rules and is countable.
@@ -300,24 +260,10 @@
           </xsd:documentation>
         </xsd:annotation>
       </xsd:enumeration>
-      <xsd:enumeration value="invalidated-marginal-mark">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            To indicate that the vote mark contains a marginal mark by the voter and is not countable.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:enumeration>
       <xsd:enumeration value="other">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">
             Used in conjunction with VoteMark.OtherStatus when no other value in this enumeration applies.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:enumeration>
-      <xsd:enumeration value="voter-countable">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            To indicate that the vote mark was made by the voter and is recognized as valid and is countable.
           </xsd:documentation>
         </xsd:annotation>
       </xsd:enumeration>
@@ -533,13 +479,6 @@
           </xsd:documentation>
         </xsd:annotation>
       </xsd:element>
-      <xsd:element name="PreviousStatus" type="CVRComponentStatus" minOccurs="0">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            The status of the item being annotated prior to the recording of this annotation.  The values come from the BallotSelectionStatus, BallotStatus, ContestStatus, or VoteMark enumerations.  If the previous status was specified in a class's other status attribute, e.g., ContestVote.OtherContestStatus, PreviousStatus would contain this other status.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
       <xsd:element name="TimeStamp" type="xsd:dateTime" minOccurs="0">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">
@@ -581,19 +520,7 @@
     </xsd:complexContent>
   </xsd:complexType>
   <xsd:complexType name="CVR">
-    <xsd:annotation>
-      <xsd:documentation xml:lang="en">
-        CVR constitutes a cast vote record, generated by a scanner or other vote capture device, containing indications of the contests and ballot selections chosen by the voter, as well as other information for auditing and annotation purposes. CastVoteRecordReport includes multiple instances of CVR as applicable.  Each sheet of a multi-page paper ballot is represented by an individual CVR, e.g., if all sheets of a 5-sheet ballot are scanned, 5 CVRs will be generated.
-      </xsd:documentation>
-    </xsd:annotation>
     <xsd:sequence>
-      <xsd:element name="Annotation" type="Annotation" minOccurs="0" maxOccurs="unbounded">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            Used to include an annotation associated with the CVR as a whole.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
       <xsd:element name="BallotAuditId" type="xsd:string" minOccurs="0">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">
@@ -615,13 +542,6 @@
           </xsd:documentation>
         </xsd:annotation>
       </xsd:element>
-      <xsd:element name="BallotStatus" type="BallotStatus" minOccurs="0" maxOccurs="unbounded">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            The status of the CVR, e.g., adjudicated, counted, etc.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
       <xsd:element name="BallotStyleId" type="xsd:string" minOccurs="0">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">
@@ -629,50 +549,17 @@
           </xsd:documentation>
         </xsd:annotation>
       </xsd:element>
-      <xsd:element name="BatchId" type="xsd:string" minOccurs="0">
+      <xsd:element name="CVRSnapshot" type="CVRSnapshot" maxOccurs="unbounded"/>
+      <xsd:element name="ElectionId" type="xsd:IDREF"/>
+      <xsd:element name="GpUnitId" type="xsd:IDREF" minOccurs="0">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">
-            The identifier for the batch that includes this CVR.
+            Identifies the smallest unit of geography associated with the corresponding ballot, typically a precinct or split-precinct.
           </xsd:documentation>
         </xsd:annotation>
       </xsd:element>
-      <xsd:element name="BatchSequenceNumber" type="xsd:integer" minOccurs="0">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            The sequence number of the corresponding paper ballot within a batch.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="ContestLink" type="ContestLink" minOccurs="0" maxOccurs="unbounded">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            Identifies the contests in the CVR.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="ElectionId" type="xsd:IDREF" minOccurs="0"/>
-      <xsd:element name="NumWriteIns" type="xsd:integer" minOccurs="0">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            The total number of write-ins in all contests of the CVR.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="OriginatingDevice" type="ReportingDevice" minOccurs="0">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            Identifies the device used to generate the CVR.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="OtherBallotStatus" type="xsd:string" minOccurs="0">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            When BallotStatus is 'other', contains the ballot status.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="Party" type="Party" minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="OriginatingDevice" type="ReportingDevice" minOccurs="0"/>
+      <xsd:element name="PartyIds" type="xsd:IDREFS" minOccurs="0">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">
             Identifies the party associated with a CVR, typically for partisan primaries.
@@ -693,14 +580,218 @@
           </xsd:documentation>
         </xsd:annotation>
       </xsd:element>
-      <xsd:element name="SmallestVotingUnitId" type="xsd:IDREF" minOccurs="0">
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CVRContest">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        ContestVote class is included by CVR for each contest on the ballot that was voted, that is, whose ballot selections contain marks that may constitute a vote.  ContestVote includes BallotSelectionVote for each ballot selection in the contest containing a mark.
+        
+        CVR can also include ContestVote for every contest on the ballot regardless of whether any of the ballot selections contain a mark, for cases where the CVR must include all contests that appeared on the ballot.
+        
+        ContestVote attributes are for including summary information about the contest.  Overvotes plus Undervotes plus TotalVotes must equal the number of votes allowable in the contest, e.g., in a "chose 3 of 5" contest in which the voter chooses only 2, then Overvotes = 0, Undervotes = 1, and TotalVotes = 2, which adds up to the number of votes allowable = 3.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ContestId" type="xsd:IDREF">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">
-            Identifies the smallest unit of geography associated with the corresponding ballot, typically a precinct or split-precinct.
+            Used to link to an instance of Contest specific to the contest at hand, for the purpose of specifying information about the contest such as its contest identifier.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="CVRContestSelection" type="CVRContestSelection" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Used to include information about a ballot selection in the contest, including the associated vote marks(s).
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="OtherStatus" type="xsd:string" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Used when Status is 'other' to include a user-defined status.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Overvotes" type="xsd:integer" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            The number of votes lost due to overvoting.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Selections" type="xsd:integer" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Used to indicate the number of possible ballot selections in the contest.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Status" type="ContestStatus" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            The status of the contest, e.g., overvoted, undervoted, from the ContestStatus enumeration.  If no values apply, use 'other' and include a user-defined status in OtherStatus.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Undervotes" type="xsd:integer" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            The number of votes lost due to undervoting.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="WriteIns" type="xsd:integer" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            The total number of write-ins in the contest.
           </xsd:documentation>
         </xsd:annotation>
       </xsd:element>
     </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CVRContestSelection">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        BallotSelectionVote is used to link those ballot selections that contain a mark to information about the mark, such as whether the mark constitutes a countable vote, or whether the mark is determined to be marginal, etc.  ContestVote includes an instance of BallotSelectionVote when a mark for the selection is present, and BallotSelectionVote then includes VoteMark for each mark present.  To tie the mark to the specific ballot selection, BallotSelectionVote links to instances of ContestSelection that have previously been included by Contest.
+        
+        Since multiple marks per ballot selection are possible for some voting methods, BallotSelectionVote can include multiple instances of VoteMark, one per mark.  BallotSelectionVote can also be used for the purpose of including, in the CVR, all ballot selections in the contest regardless of whether marks are present.  In this case, BallotSelectionVote would not include VoteMark if no mark is present but would link to the appropriate instance of ContestSelection.
+        
+        BallotSelectionVote has one subtype, WriteInBallotSelectionBVote, whose attributes are used to include information about the write-in including the text of the write-in or an image of the write-in, whichever may be present.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ContestSelectionId" type="xsd:IDREF" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Used to link to an instance of a ballot selection that was previously included by Contest.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="OtherStatus" type="xsd:string" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Used when Status is 'other' to include a user-defined status.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Position" type="xsd:integer" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Used to include the ordinal position of the ballot selection as is appeared on the ballot.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Rank" type="xsd:integer" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            For the RCV voting variation, the rank chosen by the voter, used when a ranking gets assigned to the contest selection.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="SelectionIndication" type="SelectionIndication" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Used to include further information about the mark associated with the ballot selection.  Depending on the voting method, multiple marks per selection may be possible.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Status" type="ContestSelectionStatus" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Contains the status of the ballot selection, e.g., 'marked-voter' for marked by the voter, using values from the BallotSelectionStatus enumeration.  If no values apply, use 'other' and include a user-defined status in OtherStatus.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="TotalNumberVotes" type="xsd:integer" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            For cumulative or range voting variations, contains the total number of votes indicated across all marks.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CVRSnapshot">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        CVR constitutes a cast vote record, generated by a scanner or other vote capture device, containing indications of the contests and ballot selections chosen by the voter, as well as other information for auditing and annotation purposes. CastVoteRecordReport includes multiple instances of CVR as applicable.  Each sheet of a multi-page paper ballot is represented by an individual CVR, e.g., if all sheets of a 5-sheet ballot are scanned, 5 CVRs will be generated.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Annotation" type="Annotation" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Used to include an annotation associated with the CVR as a whole.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="BatchId" type="xsd:string" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            The identifier for the batch that includes this CVR.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="BatchSequenceNumber" type="xsd:integer" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            The sequence number of the corresponding paper ballot within a batch.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="CVRContest" type="CVRContest" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Identifies the contests in the CVR.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="IsCurrent" type="xsd:boolean"/>
+      <xsd:element name="OtherStatus" type="xsd:string" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            When BallotStatus is 'other', contains the ballot status.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Status" type="CVRStatus" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            The status of the CVR, e.g., adjudicated, counted, etc.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Type" type="CVRType"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CVRWriteIn">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        WriteInBallotSelectionVote is a subclass of BallotSelectionVote and is used when the ballot selection is  a write-in. It inherits attributes from BallotSelectionVote and has additional attributes for the image or text of the write-in.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="CVRContestSelection">
+        <xsd:sequence>
+          <xsd:element name="Text" type="xsd:string" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">
+                Used for the text of the write-in, typically present when the CVR has been created by  electronic ballot marking equipment.
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="WriteInImage" type="ImageData" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">
+                Used for an image of the write-in, typically made by a scanner when scanning a paper ballot.
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
   </xsd:complexType>
   <xsd:complexType name="Candidate">
     <xsd:annotation>
@@ -709,7 +800,7 @@
       </xsd:documentation>
     </xsd:annotation>
     <xsd:sequence>
-      <xsd:element name="Code" type="Code" minOccurs="0">
+      <xsd:element name="Code" type="Code" minOccurs="0" maxOccurs="unbounded">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">
             A code or identifier associated with the candidate.
@@ -810,7 +901,7 @@
           </xsd:documentation>
         </xsd:annotation>
       </xsd:element>
-      <xsd:element name="Election" type="Election" minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="Election" type="Election" maxOccurs="unbounded">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">
             Used to include the election associated with the CVRs.
@@ -824,7 +915,7 @@
           </xsd:documentation>
         </xsd:annotation>
       </xsd:element>
-      <xsd:element name="GpUnit" type="GpUnit" minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="GpUnit" type="GpUnit" maxOccurs="unbounded">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">
             Used to include the political geography, i.e., location, for where the cast vote record report was generated and for linking cast vote records to their corresponding precinct or split (or otherwise smallest unit).
@@ -845,6 +936,7 @@
           </xsd:documentation>
         </xsd:annotation>
       </xsd:element>
+      <xsd:element name="Party" type="Party" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="ReportGeneratingDeviceIds" type="xsd:IDREFS">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">
@@ -912,8 +1004,8 @@
         
         ContestSelection has three subclasses, each used for a specific type of ballot selection:   These subclasses inherit Contest's attributes.
         
-        1. PartyContest - used for straight party contests, 
-        2. BallotMeasureContest - used for contests, and 
+        1. PartyContest - used for straight party contests,
+        2. BallotMeasureContest - used for contests, and
         3. CandidateContest - used for candidate contests.
       </xsd:documentation>
     </xsd:annotation>
@@ -932,7 +1024,7 @@
           </xsd:documentation>
         </xsd:annotation>
       </xsd:element>
-      <xsd:element name="ContestSelection" type="ContestSelection" minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="ContestSelection" type="ContestSelection" maxOccurs="unbounded">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">
             Identifies the ballot selections in the contest.
@@ -963,159 +1055,24 @@
     </xsd:sequence>
     <xsd:attribute name="ObjectId" type="xsd:ID" use="required"/>
   </xsd:complexType>
-  <xsd:complexType name="ContestLink">
-    <xsd:annotation>
-      <xsd:documentation xml:lang="en">
-        ContestVote class is included by CVR for each contest on the ballot that was voted, that is, whose ballot selections contain marks that may constitute a vote.  ContestVote includes BallotSelectionVote for each ballot selection in the contest containing a mark.
-        
-        CVR can also include ContestVote for every contest on the ballot regardless of whether any of the ballot selections contain a mark, for cases where the CVR must include all contests that appeared on the ballot.
-        
-        ContestVote attributes are for including summary information about the contest.  Overvotes plus Undervotes plus TotalVotes must equal the number of votes allowable in the contest, e.g., in a "chose 3 of 5" contest in which the voter chooses only 2, then Overvotes = 0, Undervotes = 1, and TotalVotes = 2, which adds up to the number of votes allowable = 3.
-      </xsd:documentation>
-    </xsd:annotation>
-    <xsd:sequence>
-      <xsd:element name="Annotation" type="Annotation" minOccurs="0" maxOccurs="unbounded">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            Used to include an annotation(s) for adjudicating aspects of the contest.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="ContestId" type="xsd:IDREF">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            Used to link to an instance of Contest specific to the contest at hand, for the purpose of specifying information about the contest such as its contest identifier.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="ContestSelectionLink" type="ContestSelectionLink" minOccurs="0" maxOccurs="unbounded">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            Used to include information about a ballot selection in the contest, including the associated vote marks(s).
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="OtherStatus" type="xsd:string" minOccurs="0">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            Used when Status is 'other' to include a user-defined status.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="Overvotes" type="xsd:integer" minOccurs="0">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            The number of votes lost due to overvoting.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="Selections" type="xsd:integer" minOccurs="0">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            Used to indicate the number of possible ballot selections in the contest.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="Status" type="ContestStatus" minOccurs="0" maxOccurs="unbounded">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            The status of the contest, e.g., overvoted, undervoted, from the ContestStatus enumeration.  If no values apply, use 'other' and include a user-defined status in OtherStatus.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="Undervotes" type="xsd:integer" minOccurs="0">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            The number of votes lost due to undervoting.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-    </xsd:sequence>
-  </xsd:complexType>
-  <xsd:complexType name="ContestSelection" abstract="true">
+  <xsd:complexType name="ContestSelection">
     <xsd:annotation>
       <xsd:documentation xml:lang="en">
         ContestSelection represents a ballot selection in a contest.  Contest can include an instance of ContestSelection for each ballot selection in the contest.  Typically there will be ballot selections included only for those contests their ballot selections that were voted, i.e., that contain a mark.
         
         ContestSelection has three subclasses, each used for a specific type of ballot selection:
-         
-        1. PartySelection - used for straight party selections, 
-        2. BallotMeasureSelection - used for ballot measures, and 
+        
+        1. PartySelection - used for straight party selections,
+        2. BallotMeasureSelection - used for ballot measures, and
         3. CandidateSelection - used for candidate selections.
         
         Instances of BallotSelectionVote subsequently link to the ballot selections as needed so as to tie together the contest, the ballot selection, and the mark(s) made for the ballot selection.
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:attribute name="ObjectId" type="xsd:ID" use="required"/>
-  </xsd:complexType>
-  <xsd:complexType name="ContestSelectionLink">
-    <xsd:annotation>
-      <xsd:documentation xml:lang="en">
-        BallotSelectionVote is used to link those ballot selections that contain a mark to information about the mark, such as whether the mark constitutes a countable vote, or whether the mark is determined to be marginal, etc.  ContestVote includes an instance of BallotSelectionVote when a mark for the selection is present, and BallotSelectionVote then includes VoteMark for each mark present.  To tie the mark to the specific ballot selection, BallotSelectionVote links to instances of ContestSelection that have previously been included by Contest.
-        
-        Since multiple marks per ballot selection are possible for some voting methods, BallotSelectionVote can include multiple instances of VoteMark, one per mark.  BallotSelectionVote can also be used for the purpose of including, in the CVR, all ballot selections in the contest regardless of whether marks are present.  In this case, BallotSelectionVote would not include VoteMark if no mark is present but would link to the appropriate instance of ContestSelection.
-        
-        BallotSelectionVote has one subtype, WriteInBallotSelectionBVote, whose attributes are used to include information about the write-in including the text of the write-in or an image of the write-in, whichever may be present.
-      </xsd:documentation>
-    </xsd:annotation>
     <xsd:sequence>
-      <xsd:element name="Annotation" type="Annotation" minOccurs="0" maxOccurs="unbounded">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            Used to include an annotation(s) for adjudicating aspects of the ballot selection.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="ContestSelectionId" type="xsd:IDREF" minOccurs="0">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            Used to link to an instance of a ballot selection that was previously included by Contest.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="Mark" type="Mark" minOccurs="0" maxOccurs="unbounded">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            Used to include further information about the mark associated with the ballot selection.  Depending on the voting method, multiple marks per selection may be possible.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="OtherStatus" type="xsd:string" minOccurs="0">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            Used when Status is 'other' to include a user-defined status.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="Position" type="xsd:integer" minOccurs="0">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            Used to include the ordinal position of the ballot selection as is appeared on the ballot.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="Rank" type="xsd:integer" minOccurs="0">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            For the RCV voting variation, the rank chosen by the voter, used when a ranking gets assigned to the contest selection.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="Status" type="ContestSelectionStatus" minOccurs="0" maxOccurs="unbounded">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            Contains the status of the ballot selection, e.g., 'marked-voter' for marked by the voter, using values from the BallotSelectionStatus enumeration.  If no values apply, use 'other' and include a user-defined status in OtherStatus.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="TotalNumberVotes" type="xsd:integer" minOccurs="0">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            For cumulative or range voting variations, contains the total number of votes indicated across all marks.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
+      <xsd:element name="Code" type="Code" minOccurs="0" maxOccurs="unbounded"/>
     </xsd:sequence>
+    <xsd:attribute name="ObjectId" type="xsd:ID" use="required"/>
   </xsd:complexType>
   <xsd:complexType name="Election">
     <xsd:annotation>
@@ -1138,14 +1095,14 @@
           </xsd:documentation>
         </xsd:annotation>
       </xsd:element>
-      <xsd:element name="Contest" type="Contest" minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="Contest" type="Contest" maxOccurs="unbounded">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">
             Used for establishing a collection of contest definitions that will be referenced by the CVRs.
           </xsd:documentation>
         </xsd:annotation>
       </xsd:element>
-      <xsd:element name="ElectionScopeId" type="xsd:IDREF" minOccurs="0">
+      <xsd:element name="ElectionScopeId" type="xsd:IDREF">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">
             Used to identify the election scope, i.e., the political geography corresponding to the election.
@@ -1311,62 +1268,22 @@
   <xsd:complexType name="Mark">
     <xsd:annotation>
       <xsd:documentation xml:lang="en">
-        BallotSelectionVote includes VoteMark to specify a voter's mark in a ballot selection. and thus, a potential vote  The number of potential VoteMarks that should be included by BallotSelectionVote is, for paper ballots, the same as the number of ovals next to a particular choice.  There will be usually 1 instance of VoteMark for plurality voting, but there could be multiple instances for RCV, approval, cumulative, or other vote variations in which a voter can select multiple candidates.
-        
-        VoteMark contains additional information about the mark to specify whether the mark is countable, as well as information needed for certain voting methods.  It includes MarkMetric for assigning a quality metric to the mark, and also includes Annotation.
+        An indication that represents a mark on paper made by a voter.
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:sequence>
-      <xsd:element name="Annotation" type="Annotation" minOccurs="0" maxOccurs="unbounded">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            Used to include an annotation(s) for adjudicating aspects of the mark.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="MarkMetric" type="MarkMetric" minOccurs="0" maxOccurs="unbounded">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            Included to assign a quality metric to the mark.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="NumberVotes" type="xsd:integer" minOccurs="0">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            The number of votes represented by the mark, usually 1 but may be more depending on the voting method.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="OtherStatus" type="xsd:string" minOccurs="0">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            Used when  Status is 'other' to include a user-defined status.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="Position" type="xsd:integer" minOccurs="0">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            The ordinal position of the mark within the ballot selection.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="Rank" type="xsd:integer" minOccurs="0">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            For the RCV voting variation, the rank chosen by the voter, used when a ranking gets assigned to a mark.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="Status" type="MarkStatus" minOccurs="0" maxOccurs="unbounded">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">
-            Status of the mark, e.g., "marked-voter" for marked by the voter, from the VoteMarkStatus enumeration.  If no values apply, use 'other' and include a user-defined status in OtherStatus.
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-    </xsd:sequence>
+    <xsd:complexContent>
+      <xsd:extension base="SelectionIndication">
+        <xsd:sequence>
+          <xsd:element name="MarkMetric" type="MarkMetric" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">
+                Included to assign a quality metric to the mark.
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
   </xsd:complexType>
   <xsd:complexType name="MarkMetric">
     <xsd:annotation>
@@ -1459,47 +1376,44 @@
         ReportingDevice is a subclass of GpUnit and is used to specify a voting device.   CastVoteRecordReport refers to this class as "ReportGeneratingDevice" and uses it to specify the device that generated the CVR report.  CVR refers to it as "OriginatingDevice" to specify the device that generated the CVRs.
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexContent>
-      <xsd:extension base="GpUnit">
-        <xsd:sequence>
-          <xsd:element name="Application" type="xsd:string" minOccurs="0">
-            <xsd:annotation>
-              <xsd:documentation xml:lang="en">
-                The application associated with the reporting device.
-              </xsd:documentation>
-            </xsd:annotation>
-          </xsd:element>
-          <xsd:element name="Manufacturer" type="xsd:string" minOccurs="0">
-            <xsd:annotation>
-              <xsd:documentation xml:lang="en">
-                Manufacturer of the reporting device.
-              </xsd:documentation>
-            </xsd:annotation>
-          </xsd:element>
-          <xsd:element name="Model" type="xsd:string" minOccurs="0">
-            <xsd:annotation>
-              <xsd:documentation xml:lang="en">
-                Manufacturer's model of the reporting device.
-              </xsd:documentation>
-            </xsd:annotation>
-          </xsd:element>
-          <xsd:element name="Notes" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
-            <xsd:annotation>
-              <xsd:documentation xml:lang="en">
-                Additional explanatory notes as applicable.
-              </xsd:documentation>
-            </xsd:annotation>
-          </xsd:element>
-          <xsd:element name="SerialNumber" type="xsd:string" minOccurs="0">
-            <xsd:annotation>
-              <xsd:documentation xml:lang="en">
-                Serial number or other identification that can uniquely identify the reporting device.
-              </xsd:documentation>
-            </xsd:annotation>
-          </xsd:element>
-        </xsd:sequence>
-      </xsd:extension>
-    </xsd:complexContent>
+    <xsd:sequence>
+      <xsd:element name="Application" type="xsd:string" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            The application associated with the reporting device.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Manufacturer" type="xsd:string" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Manufacturer of the reporting device.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Model" type="xsd:string" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Manufacturer's model of the reporting device.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Notes" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Additional explanatory notes as applicable.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="SerialNumber" type="xsd:string" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Serial number or other identification that can uniquely identify the reporting device.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="ObjectId" type="xsd:ID" use="required"/>
   </xsd:complexType>
   <xsd:complexType name="RetentionContest">
     <xsd:annotation>
@@ -1521,33 +1435,59 @@
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
-  <xsd:complexType name="Status">
-  </xsd:complexType>
-  <xsd:complexType name="WriteIn">
+  <xsd:complexType name="SelectionIndication">
     <xsd:annotation>
       <xsd:documentation xml:lang="en">
-        WriteInBallotSelectionVote is a subclass of BallotSelectionVote and is used when the ballot selection is  a write-in. It inherits attributes from BallotSelectionVote and has additional attributes for the image or text of the write-in.
+        BallotSelectionVote includes VoteMark to specify a voter's mark in a ballot selection. and thus, a potential vote  The number of potential VoteMarks that should be included by BallotSelectionVote is, for paper ballots, the same as the number of ovals next to a particular choice.  There will be usually 1 instance of VoteMark for plurality voting, but there could be multiple instances for RCV, approval, cumulative, or other vote variations in which a voter can select multiple candidates.
+        
+        VoteMark contains additional information about the mark to specify whether the mark is countable, as well as information needed for certain voting methods.  It includes MarkMetric for assigning a quality metric to the mark, and also includes Annotation.
       </xsd:documentation>
     </xsd:annotation>
-    <xsd:complexContent>
-      <xsd:extension base="ContestSelectionLink">
-        <xsd:sequence>
-          <xsd:element name="Text" type="xsd:string" minOccurs="0">
-            <xsd:annotation>
-              <xsd:documentation xml:lang="en">
-                Used for the text of the write-in, typically present when the CVR has been created by  electronic ballot marking equipment.
-              </xsd:documentation>
-            </xsd:annotation>
-          </xsd:element>
-          <xsd:element name="WriteInImage" type="ImageData" minOccurs="0">
-            <xsd:annotation>
-              <xsd:documentation xml:lang="en">
-                Used for an image of the write-in, typically made by a scanner when scanning a paper ballot.
-              </xsd:documentation>
-            </xsd:annotation>
-          </xsd:element>
-        </xsd:sequence>
-      </xsd:extension>
-    </xsd:complexContent>
+    <xsd:sequence>
+      <xsd:element name="IsAllocable" type="AllocationType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Whether this indication should be allocated to the contest option's accumulator.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="NumberVotes" type="xsd:integer">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            The number of votes represented by the mark, usually 1 but may be more depending on the voting method.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="OtherStatus" type="xsd:string" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Used when  Status is 'other' to include a user-defined status.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Position" type="xsd:integer" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            The ordinal position of the mark within the ballot selection.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Rank" type="xsd:integer" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            For the RCV voting variation, the rank chosen by the voter, used when a ranking gets assigned to a mark.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Status" type="IndicationStatus" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Status of the mark, e.g., "marked-voter" for marked by the voter, from the VoteMarkStatus enumeration.  If no values apply, use 'other' and include a user-defined status in OtherStatus.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Status">
   </xsd:complexType>
 </xsd:schema>
