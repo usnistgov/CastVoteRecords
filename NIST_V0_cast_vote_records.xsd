@@ -946,8 +946,6 @@ GpUnit has one subclass, ReportingDevice, used to identify a specific device by 
       </xsd:element>
     </xsd:sequence>
   </xsd:complexType>
-  <xsd:complexType name="Language">
-  </xsd:complexType>
   <xsd:complexType name="Mark">
     <xsd:annotation>
       <xsd:documentation xml:lang="en">An indication that represents a mark on paper made by a voter.</xsd:documentation>
@@ -1116,7 +1114,5 @@ VoteMark contains additional information about the mark to specify whether the m
         </xsd:annotation>
       </xsd:element>
     </xsd:sequence>
-  </xsd:complexType>
-  <xsd:complexType name="Status">
   </xsd:complexType>
 </xsd:schema>
