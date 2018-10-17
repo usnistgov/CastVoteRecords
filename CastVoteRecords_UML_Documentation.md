@@ -222,7 +222,7 @@ Attribute | Multiplicity | Type | Attribute Description
 
 ![Image of Candidate](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_557229_5346.png)
 
-Candidate identifies a candidate in a contest on the voter's ballot. Election includes instances of Candidate for each candidate in a contest; typically only those candidates who received votes would be included.
+Candidate identifies a candidate in a contest on the voter's ballot. [Election](#_17_0_2_4_f71035d_1426101822599_430942_2209) includes instances of Candidate for each candidate in a contest; typically only those candidates who received votes would be included.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
@@ -234,7 +234,7 @@ Attribute | Multiplicity | Type | Attribute Description
 
 ![Image of CandidateContest](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_347543_5358.png)
 
-CandidateContest is a subclass of Contest and is used to Identify the type of contest as involving one or more candidates. It inherits attributes from Contest.
+CandidateContest is a subclass of [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) and is used to identify the type of contest as involving one or more candidates. It inherits attributes from [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400).
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
@@ -286,7 +286,7 @@ Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
 `Label`|0..1|`string`|A label associated with the code, used as needed.
 `OtherType`|0..1|`string`|If Type is 'other', the type of code.
-`Type`|1|`IdentifierType`|Used to indicate the type of code, from the IdentifierType enumeration.
+`Type`|1|`IdentifierType`|Used to indicate the type of code, from the [IdentifierType](#_17_0_2_4_f71035d_1425061188508_163854_2613) enumeration.
 `Value`|1|`string`|The value of the code, i.e., the identifier.
 
 ### <a name="_17_0_2_4_78e0236_1389366251994_876831_2400"></a>*The **Contest** Class*
@@ -308,7 +308,18 @@ Attribute | Multiplicity | Type | Attribute Description
 
 ![Image of ContestSelection](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_125024_5356.png)
 
-ContestSelection represents a ballot selection in a contest. Contest can include an instance of ContestSelection for each ballot selection in the contest. Typically there will be ballot selections included only for those contests their ballot selections that were voted, i.e., that contain a mark. ContestSelection has three subclasses, each used for a specific type of ballot selection: 1. PartySelection - used for straight party selections, 2. BallotMeasureSelection - used for ballot measures, and 3. CandidateSelection - used for candidate selections. Instances of BallotSelectionVote subsequently link to the ballot selections as needed so as to tie together the contest, the ballot selection, and the mark(s) made for the ballot selection.
+ContestSelection represents a contest selection in a contest. [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) can include an instance of ContestSelection for each contest selection in the contest or, as desired, all contest selections.
+
+ContestSelection has three subclasses, each used for a specific type of contest selection:
+
+• [BallotMeasureSelection](#_17_0_2_4_78e0236_1389372163799_981952_2926) \- used for ballot measures,
+• [CandidateSelection](#_17_0_2_4_d420315_1392145640524_831493_2562) \- used for candidate selections, and
+• [PartySelection](#_17_0_2_4_f71035d_1426519980658_594892_2511) \- used for straight party selections.
+
+Instances of [CVRContestSelection](#_18_0_5_43401a7_1474452890357_299022_4292) subsequently link to the contest selections as needed so as to tie together the contest, the contest selection, and the mark(s) made for the contest selection.
+
+ContestSelection contains one attribute, [Code](#_18_5_3_43701b0_1534269642876_463463_5873), that can be used to identify the contest selection and thereby eliminate the need to identify it using the subclasses.
+
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
@@ -407,7 +418,7 @@ Attribute | Multiplicity | Type | Attribute Description
 
 ![Image of Election](CastVoteRecords_UML_Documentation_files/_17_0_2_4_f71035d_1426101822601_995748_2210.png)
 
-Election defines instances of the Contest and Candidate classes so that they can be later referenced in cast vote record classes. Election includes an instance of Contest for each contest in the election and includes an instance of Candidate for each candidate. This is done to utilize file sizes more efficiently; otherwise each cast vote record would need to define these instances separately and much duplication would occur.
+Election defines instances of the [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) and [Candidate](#_17_0_2_4_78e0236_1389366272694_544359_2440) classes so that they can be later referenced in CVR classes. Election includes an instance of [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) for each contest in the election and includes an instance of [Candidate](#_17_0_2_4_78e0236_1389366272694_544359_2440) for each candidate. This is done to utilize file sizes more efficiently; otherwise each CVR would need to define these instances separately and much duplication would occur.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
@@ -421,7 +432,7 @@ Attribute | Multiplicity | Type | Attribute Description
 
 ![Image of File](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1485284639742_53322_4561.png)
 
-File is used to hold the contents of a file and/or identify a file created by the scanning device. The file generally would contain an image of the scanned ballot or an image of a write-in entered by a voter onto the scanned ballot.
+Used to hold the contents of a file or identify a file created by the scanning device. The file generally would contain an image of the scanned ballot or an image of a write-in entered by a voter onto the scanned ballot. SubClass [Image](#_18_0_2_6340208_1485284639720_737438_4549) is used if the file contains an image.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
@@ -433,7 +444,13 @@ Attribute | Multiplicity | Type | Attribute Description
 
 ![Image of GpUnit](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1390579885871_183088_2445.png)
 
-GpUnit is used for identifying a geographical unit for various purposes, including a) the reporting unit of the report generation device, e.g., a precinct location of a scanner that generates the collection of CVRs, b) the geographical scope of the election, or c) the unit of geography associated with an individual CVR. CastVoteRecordReport includes instances of GpUnit as needed. Election references GpUnit as ElectionScope, for the geographical scope of the election. CastVoteRecord references GpUnit as SmallestVotingUnit, to link a CVR to the smallest political subdivision that the CVR "belongs" to. GpUnit has one subclass, ReportingDevice, used to identify a specific device by its manufacturer, model, a serial number. CastVoteRecord references ReportingDevice to link a CVR to the device that generated it. Election references ReportingDevice to link to the device that was used to generate the cast vote record report.
+Used for identifying a geographical unit for various purposes, including:
+
+• the reporting unit of the report generation device, e.g., a precinct location of a scanner that generates the collection of CVRs,
+• the geographical scope of the election, or the unit of geography associated with an individual CVR.
+
+[CastVoteRecordReport](#_17_0_2_4_78e0236_1389366195564_913164_2300) includes instances of GpUnit as needed. [Election](#_17_0_2_4_f71035d_1426101822599_430942_2209) references GpUnit as [ElectionScope](#_18_2_43401a7_1450723692857_875635_4654), for the geographical scope of the election. [CVR](#_18_0_2_6340208_1532543460307_914551_4600) references GpUnit to link a CVR to the smallest political subdivision that the CVR "belongs" to.
+
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
@@ -441,7 +458,7 @@ Attribute | Multiplicity | Type | Attribute Description
 `Name`|0..1|`String`|Name of the geographical unit.
 `OtherType`|0..1|`String`|Used when Type is 'other' to include a user-defined type.
 `ReportingDevice`|0..*|`ReportingDevice`|The collection of cast vote records associated with the reporting unit and the reporting device.
-`Type`|1|`ReportingUnitType`|Contains the type of geographical unit, e.g., precinct, split-precinct, vote center, using values from the ReportingUnitType enumeration. If no values apply, use 'other' and include a user-defined type in OtherType.
+`Type`|1|`ReportingUnitType`|Contains the type of geographical unit, e.g., precinct, split-precinct, vote center, using values from the [ReportingUnitType](#_17_0_2_4_f71035d_1431607637366_785815_2242) enumeration. If no values apply, use 'other' and include a user-defined type in [OtherType](#_17_0_2_4_f71035d_1426007519161_685921_2510).
 
 ### <a name="_18_0_2_6340208_1485894593826_736413_4615"></a>*The **Hash** Class*
 
@@ -468,7 +485,11 @@ Attribute | Multiplicity | Type | Attribute Description
 
 ![Image of ImageData](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1485894533656_423599_4589.png)
 
-Used for an image file, contains information about the file.
+ImageData is used to specify an image file such as for a write-in or the entire ballot. It works with several other classes, as follows:
+
+• [File](#_18_0_2_6340208_1485284639717_497586_4548) with SubClass [Image](#_18_0_2_6340208_1485284639720_737438_4549) – to contain either a filename for an external file or the file contents, and
+• Hash – to contain cryptographic hash function data for the file.
+
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
@@ -502,7 +523,7 @@ Attribute | Multiplicity | Type | Attribute Description
 
 ![Image of Party](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_989674_5350.png)
 
-Party is used for describing information about a political party associated with the voter's ballot. CVR includes instances of Party as needed, e.g., for a CVR corresponding to a ballot in a partisan primary, and CandidateContest references Party as needed to link a candidate to their political party.
+Party is used for describing information about a political party associated with the voter's ballot. [CVR](#_18_0_2_6340208_1532543460307_914551_4600) includes instances of Party as needed, e.g., for a [CVR](#_18_0_2_6340208_1532543460307_914551_4600) corresponding to a ballot in a partisan primary, and [CandidateContest](#_17_0_2_4_78e0236_1389366970084_183781_2806) references Party as needed to link a candidate to their political party.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
@@ -514,7 +535,7 @@ Attribute | Multiplicity | Type | Attribute Description
 
 ![Image of PartyContest](CastVoteRecords_UML_Documentation_files/_17_0_2_4_d420315_1393514218978_361648_3145.png)
 
-PartyContest is a subclass of Contest and is used to Identify the type of contest as involving a straight party selection. It inherits attributes from Contest.
+PartyContest is a subclass of [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) and is used to identify the type of contest as involving a straight party selection. It inherits attributes from [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400).
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
@@ -527,13 +548,13 @@ PartySelection is a subclass of ContestSelection and is used typically for a bal
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-`Party`|1..*|`Party`|The party associated with the ballot selection.
+`Party`|1..*|`Party`|The party associated with the contest selection.
 
 ### <a name="_17_0_2_4_78e0236_1389798013459_389380_4178"></a>*The **ReportingDevice** Class*
 
 ![Image of ReportingDevice](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_371820_5343.png)
 
-ReportingDevice is a subclass of GpUnit and is used to specify a voting device. CastVoteRecordReport refers to this class as "ReportGeneratingDevice" and uses it to specify the device that generated the CVR report. CVR refers to it as "OriginatingDevice" to specify the device that generated the CVRs.
+ReportingDevice is used to specify a voting device as the “political geography” at hand. [CastVoteRecordReport](#_17_0_2_4_78e0236_1389366195564_913164_2300) refers to it as [ReportGeneratingDevice](#_18_0_5_43401a7_1484155960667_232191_4295) and uses it to specify the device that generated the CVR report. [CVR](#_18_0_2_6340208_1532543460307_914551_4600) refers to it as [OriginatingDevice](#_18_5_3_43701b0_1533931125455_124502_5709) to specify the device that generated the CVRs.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
@@ -547,7 +568,7 @@ Attribute | Multiplicity | Type | Attribute Description
 
 ![Image of RetentionContest](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1425646217525_713812_4555.png)
 
-RetentionContest is a subclass of BallotMeasureContest and is used to Identify the type of contest as involving a retention, such as for a judicial retention. While it is similar to BallotMeasureContest, it contains a link to Candidate that BallotMeasureContest does not. RetentionContest inherits attributes from Contest.
+RetentionContest is a subclass of [BallotMeasureContest](#_17_0_2_4_78e0236_1389366932057_929676_2783) and is used to identify the type of contest as involving a retention, such as for a judicial retention. While it is similar to [BallotMeasureContest](#_17_0_2_4_78e0236_1389366932057_929676_2783), it contains a link to [Candidate](#_17_0_2_4_78e0236_1389366272694_544359_2440) that [BallotMeasureContest](#_17_0_2_4_78e0236_1389366932057_929676_2783) does not. RetentionContest inherits attributes from [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400).
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
