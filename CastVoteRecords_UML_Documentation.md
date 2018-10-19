@@ -204,7 +204,7 @@ Attribute | Multiplicity | Type | Attribute Description
 
 ![Image of BallotMeasureContest](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_80297_5351.png)
 
-BallotMeasureContest is a subclass of Contest and is used to Identify the type of contest as involving one or more candidates. It inherits attributes from Contest.
+BallotMeasureContest is a subclass of [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) and is used to Identify the type of contest as involving one or more candidates. It inherits attributes from [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400).
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
@@ -213,7 +213,7 @@ Attribute | Multiplicity | Type | Attribute Description
 
 ![Image of BallotMeasureSelection](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_930954_5339.png)
 
-BallotMeasureSelection is a subclass of ContestSelection and is used for ballot measures. The voter's selected response to the ballot selection (e.g., "yes" or "no") may be in English or other languages as utilized on the voter's ballot.
+BallotMeasureSelection is a subclass of [ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906) and is used for ballot measures. The voter's selected response to the ballot selection (e.g., "yes" or "no") may be in English or other languages as utilized on the voter's ballot.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
@@ -247,11 +247,11 @@ Attribute | Multiplicity | Type | Attribute Description
 
 ![Image of CandidateSelection](CastVoteRecords_UML_Documentation_files/_17_0_2_4_d420315_1392145640527_433768_2563.png)
 
-CandidateSelection is a subclass of ContestSelection and is used for candidates, including for write-in candidates.
+CandidateSelection is a subclass of [ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906) and is used for candidates, including for write-in candidates.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-`Candidate`|0..*|`Candidate`|The candidate associated with the ballot selection. For contests involving a ticket of multiple candidates, an ordered list of candidates as they appeared on the ballot would be created.
+`Candidate`|0..*|`Candidate`|The candidate associated with the contest selection. For contests involving a ticket of multiple candidates, an ordered list of candidates as they appeared on the ballot would be created.
 `IsWriteIn`|0..1|`boolean`|A flag to indicate if the candidate selection is associated with a write-in.
 
 ### <a name="_17_0_2_4_78e0236_1389366195564_913164_2300"></a>*The **CastVoteRecordReport** Class*
@@ -260,7 +260,7 @@ Attribute | Multiplicity | Type | Attribute Description
 
 The root class/element; attributes pertain to the status and format of the report and when generated.
 
-CastVoteRecordReport includes multiple instances of [CVR](#_18_0_2_6340208_1532543460307_914551_4600), one per [CVR](#_18_0_2_6340208_1532543460307_914551_4600) or sheet of a multi-page cast vote record. CastVoteRecordReport also includes multiple instances of Contest, typically only for those contests that were voted so as to reduce file size. The Contest instances are later referenced by other classes to link them to contest selections that were voted and the mark(s) made.
+CastVoteRecordReport includes multiple instances of [CVR](#_18_0_2_6340208_1532543460307_914551_4600), one per [CVR](#_18_0_2_6340208_1532543460307_914551_4600) or sheet of a multi-page cast vote record. CastVoteRecordReport also includes multiple instances of [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400), typically only for those contests that were voted so as to reduce file size. The [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) instances are later referenced by other classes to link them to contest options that were voted and the indication(s)/mark(s) made.
 
 
 Attribute | Multiplicity | Type | Attribute Description
@@ -270,11 +270,11 @@ Attribute | Multiplicity | Type | Attribute Description
 `GeneratedDate`|1|`dateTime`|Identifies the time that the election report was generated.
 `GpUnit`|1..*|`GpUnit`|Used to include the political geography, i.e., location, for where the cast vote record report was generated and for linking cast vote records to their corresponding precinct or split (or otherwise smallest unit).
 `Notes`|0..1|`String`|Notes that can be added as appropriate, presumably by an adjudicator.
-`OtherReportType`|0..1|`String`|If ReportType is 'other', this contains the report type.
+`OtherReportType`|0..1|`String`|If [ReportType](#_18_0_5_43401a7_1483727759336_770912_4370) is 'other', this contains the report type.
 `Party`|0..*|`Party`|
 `ReportGeneratingDevice`|1..*|`ReportingDevice`|Identifies the device used to generate the CVR report.
 `ReportingDevice`|1..*|`ReportingDevice`|
-`ReportType`|0..*|`ReportType`|The type of report, using the ReportType enumeration.
+`ReportType`|0..*|`ReportType`|The type of report, using the [ReportType](#_18_0_5_43401a7_1483727563257_179426_4343) enumeration.
 `Version`|1|`CastVoteRecordVersion`|The version of the CVR specification being used (1.0).
 
 ### <a name="_17_0_2_4_f71035d_1430405712653_451634_2410"></a>*The **Code** Class*
