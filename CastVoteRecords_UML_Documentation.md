@@ -309,13 +309,13 @@ Attribute | Multiplicity | Type | Attribute Description
 
 ![Image of ContestSelection](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_125024_5356.png)
 
-ContestSelection represents a contest selection in a contest. [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) can include an instance of ContestSelection for each contest selection in the contest or, as desired, all contest selections.
+ContestSelection represents a contest selection in a contest.  [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) can include an instance of ContestSelection for each contest selection in the contest or, as desired, all contest selections.  
 
 ContestSelection has three subclasses, each used for a specific type of contest selection:
 
-• [BallotMeasureSelection](#_17_0_2_4_78e0236_1389372163799_981952_2926) \- used for ballot measures,
-• [CandidateSelection](#_17_0_2_4_d420315_1392145640524_831493_2562) \- used for candidate selections, and
-• [PartySelection](#_17_0_2_4_f71035d_1426519980658_594892_2511) \- used for straight party selections.
+ *  [BallotMeasureSelection](#_17_0_2_4_78e0236_1389372163799_981952_2926) \- used for ballot measures,
+ *  [CandidateSelection](#_17_0_2_4_d420315_1392145640524_831493_2562) \- used for candidate selections, and
+ *  [PartySelection](#_17_0_2_4_f71035d_1426519980658_594892_2511) \- used for straight party selections.
 
 Instances of [CVRContestSelection](#_18_0_5_43401a7_1474452890357_299022_4292) subsequently link to the contest selections as needed so as to tie together the contest, the contest selection, and the mark(s) made for the contest selection.
 
@@ -449,10 +449,10 @@ Attribute | Multiplicity | Type | Attribute Description
 
 Used for identifying a geographical unit for various purposes, including:
 
-• the reporting unit of the report generation device, e.g., a precinct location of a scanner that generates the collection of CVRs,
-• the geographical scope of the election, or the unit of geography associated with an individual CVR.
+ *  the reporting unit of the report generation device, e.g., a precinct location of a scanner that generates the collection of CVRs,
+ *  the geographical scope of the election, or the unit of geography associated with an individual CVR.
 
-[CastVoteRecordReport](#_17_0_2_4_78e0236_1389366195564_913164_2300) includes instances of GpUnit as needed. [Election](#_17_0_2_4_f71035d_1426101822599_430942_2209) references GpUnit as [ElectionScope](#_18_2_43401a7_1450723692857_875635_4654), for the geographical scope of the election. [CVR](#_18_0_2_6340208_1532543460307_914551_4600) references GpUnit to link a CVR to the smallest political subdivision that the CVR "belongs" to.
+[CastVoteRecordReport](#_17_0_2_4_78e0236_1389366195564_913164_2300) includes instances of GpUnit as needed. [Election](#_17_0_2_4_f71035d_1426101822599_430942_2209) references GpUnit as [ElectionScope](#_18_2_43401a7_1450723692857_875635_4654), for the geographical scope of the election.  [CVR](#_18_0_2_6340208_1532543460307_914551_4600) references GpUnit to link a CVR to the smallest political subdivision that the CVR "belongs" to.
 
 
 Attribute | Multiplicity | Type | Attribute Description
@@ -488,10 +488,10 @@ Attribute | Multiplicity | Type | Attribute Description
 
 ![Image of ImageData](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1485894533656_423599_4589.png)
 
-ImageData is used to specify an image file such as for a write-in or the entire ballot. It works with several other classes, as follows:
+ImageData is used to specify an image file such as for a write-in or the entire ballot.  It works with several other classes, as follows:
 
-• [File](#_18_0_2_6340208_1485284639717_497586_4548) with SubClass [Image](#_18_0_2_6340208_1485284639720_737438_4549) – to contain either a filename for an external file or the file contents, and
-• Hash – to contain cryptographic hash function data for the file.
+ *  [File](#_18_0_2_6340208_1485284639717_497586_4548) with SubClass [Image](#_18_0_2_6340208_1485284639720_737438_4549) – to contain either a filename for an external file or the file contents, and
+ *  [Hash](#_18_0_2_6340208_1485894593826_736413_4615) – to contain cryptographic hash function data for the file.
 
 
 Attribute | Multiplicity | Type | Attribute Description
