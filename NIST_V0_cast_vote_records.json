@@ -607,6 +607,7 @@
         "GeneratedDate",
         "GpUnit",
         "ReportGeneratingDeviceIds",
+        "ReportingDevice",
         "Version"
       ],
       "additionalProperties": false,
@@ -670,6 +671,13 @@
             "$ref": "#/definitions/CVR.ReportType"
           },
           "minItems": 0,
+          "type": "array"
+        },
+        "ReportingDevice": {
+          "items": {
+            "$ref": "#/definitions/CVR.ReportingDevice"
+          },
+          "minItems": 1,
           "type": "array"
         },
         "Version": {
@@ -1001,21 +1009,6 @@
         "other"
       ],
       "type": "string"
-    },
-    "CVR.Language": {
-      "required": [
-        "@type"
-      ],
-      "additionalProperties": false,
-      "properties": {
-        "@type": {
-          "enum": [
-            "CVR.Language"
-          ],
-          "type": "string"
-        }
-      },
-      "type": "object"
     },
     "CVR.Mark": {
       "required": [
@@ -1373,21 +1366,6 @@
           },
           "minItems": 0,
           "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "CVR.Status": {
-      "required": [
-        "@type"
-      ],
-      "additionalProperties": false,
-      "properties": {
-        "@type": {
-          "enum": [
-            "CVR.Status"
-          ],
-          "type": "string"
         }
       },
       "type": "object"
