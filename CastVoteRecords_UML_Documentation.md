@@ -206,9 +206,6 @@ Attribute | Multiplicity | Type | Attribute Description
 
 BallotMeasureContest is a subclass of [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) and is used to Identify the type of contest as involving one or more candidates. It inherits attributes from [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400).
 
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-
 ### <a name="_17_0_2_4_78e0236_1389372163799_981952_2926"></a>*The **BallotMeasureSelection** Class*
 
 ![Image of BallotMeasureSelection](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_930954_5339.png)
@@ -481,9 +478,6 @@ Attribute | Multiplicity | Type | Attribute Description
 
 Used by [File](#_18_0_2_6340208_1485284639717_497586_4548) for a file containing an image, e.g., an image of a write-in on a paper ballot.
 
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-
 ### <a name="_18_0_2_6340208_1485894533655_402033_4588"></a>*The **ImageData** Class*
 
 ![Image of ImageData](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1485894533656_423599_4589.png)
@@ -540,9 +534,6 @@ Attribute | Multiplicity | Type | Attribute Description
 ![Image of PartyContest](CastVoteRecords_UML_Documentation_files/_17_0_2_4_d420315_1393514218978_361648_3145.png)
 
 PartyContest is a subclass of [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) and is used to identify the type of contest as involving a straight party selection. It inherits attributes from [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400).
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
 
 ### <a name="_17_0_2_4_f71035d_1426519980658_594892_2511"></a>*The **PartySelection** Class*
 
