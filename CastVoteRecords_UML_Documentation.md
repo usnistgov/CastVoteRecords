@@ -291,7 +291,13 @@ Attribute | Multiplicity | Type | Attribute Description
 
 ![Image of Contest](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_293750_5341.png)
 
-Contest represents a contest on the ballot. CastVoteRecordReport initially includes an instance of Contest for each contest on the ballot. Other classes can subsequently reference the instances as necessary to link together items on the cast vote record, such as a contest, its voted ballot selection(s), and the mark(s) associated with the selection(s). ContestSelection has three subclasses, each used for a specific type of ballot selection: These subclasses inherit Contest's attributes. 1. PartyContest - used for straight party contests, 2. BallotMeasureContest - used for contests, and 3. CandidateContest - used for candidate contests.
+Contest represents a contest on the ballot. CastVoteRecordReport initially includes an instance of Contest for each contest on the ballot.  Other classes can subsequently reference the instances as necessary to link together items on the cast vote record, such as a contest, its voted ballot selection(s), and the mark(s) associated with the selection(s).
+
+ContestSelection has three subclasses, each used for a specific type of ballot selection:   These subclasses inherit Contest's attributes.
+
+ *  PartyContest - used for straight party contests,
+ *  BallotMeasureContest - used for contests, and
+ *  CandidateContest - used for candidate contests.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
