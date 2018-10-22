@@ -268,9 +268,9 @@ Attribute | Multiplicity | Type | Attribute Description
 `GpUnit`|1..*|`GpUnit`|Used to include the political geography, i.e., location, for where the cast vote record report was generated and for linking cast vote records to their corresponding precinct or split (or otherwise smallest unit).
 `Notes`|0..1|`String`|Notes that can be added as appropriate, presumably by an adjudicator.
 `OtherReportType`|0..1|`String`|If [ReportType](#_18_0_5_43401a7_1483727759336_770912_4370) is 'other', this contains the report type.
-`Party`|0..*|`Party`|
+`Party`|0..*|`Party`|The party associated with the ballot sheet for a partisan primary.
 `ReportGeneratingDevice`|1..*|`ReportingDevice`|Identifies the device used to generate the CVR report.
-`ReportingDevice`|1..*|`ReportingDevice`|
+`ReportingDevice`|1..*|`ReportingDevice`|The device creating the report. The reporting device need not necessarily be the creating device, i.e., for an aggregated report, the reporting device could be an EMS used to aggregate and tabulate cast vote records.
 `ReportType`|0..*|`ReportType`|The type of report, using the [ReportType](#_18_0_5_43401a7_1483727563257_179426_4343) enumeration.
 `Version`|1|`CastVoteRecordVersion`|The version of the CVR specification being used (1.0).
 
@@ -496,8 +496,8 @@ ImageData is used to specify an image file such as for a write-in or the entire 
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-`Hash`|0..1|`Hash`|
-`Image`|0..1|`Image`|
+`Hash`|0..1|`Hash`|A hash value for the image data, used for verification comparisons against subsequent copies of the image.
+`Image`|0..1|`Image`|The image of an individual ballot sheet created by the scanner, could possibly include both sides of a two-sided ballot sheet depending on the scanner's configuration.
 `Location`|0..1|`anyURI`|A pointer to the location of the image file.
 `Signature`|0..1|`Signature`|Either a signature for the embedded image, or a detached signature for the image available at the specified location.
 
