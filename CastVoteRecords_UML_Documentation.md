@@ -52,9 +52,9 @@
 
 Name | Value
 ---- | -----
-`yes`|To allocate votes to the contest option's accumulator.
 `no`|To not allocate votes to the contest option's accumulator.
 `unknown`|When the decision to allocate votes is unknown, such as when the adjudication is needed.
+`yes`|To allocate votes to the contest option's accumulator.
 
 ### <a name="_18_0_2_6340208_1488984734564_983877_4662"></a>*The **CastVoteRecordVersion** Enumeration*
 
@@ -101,9 +101,9 @@ Name | Value
 
 Name | Value
 ---- | -----
-`original`|As scanned, no contest rules applied.
-`modified`|After contest rules applied.
 `interpreted`|Has been adjudicated.
+`modified`|After contest rules applied.
+`original`|As scanned, no contest rules applied.
 
 ### <a name="_18_0_2_6340208_1485894679180_11599_4655"></a>*The **HashType** Enumeration*
 
@@ -176,7 +176,6 @@ Name | Value
 `cumulative`|To indicate cumulative voting.
 `majority`|To indicate majority voting.
 `n-of-m`|To indicate the N of M voting method.
-`one-of-m`|To indicate the 1 of M voting method.
 `other`|Used in conjunction with Contest::OtherVoteVariation when no other value in this enumeration applies.
 `plurality`|To indicate plurality voting.
 `proportional`|To indicate proportional voting.
@@ -398,7 +397,7 @@ Attribute | Multiplicity | Type | Attribute Description
 `Rank`|0..1|`Integer`|For the RCV voting variation, the rank chosen by the voter, for when a contest selection can represent a ranking.
 `SelectionIndication`|0..*|`SelectionIndication`|Used to include further information about the indication/mark associated with the contest selection. Depending on the voting method, multiple indications/marks per selection may be possible.
 `Status`|0..*|`ContestSelectionStatus`|Contains the status of the contest selection, e.g., 'needs-adjudication' for a contest requiring adjudication, using values from the [ContestSelectionStatus](#_18_0_5_43401a7_1475850153090_186243_4311) enumeration. If no values apply, use 'other' and include a user-defined status in [OtherStatus](#_18_0_5_43401a7_1475855963037_920235_4384).
-`TotalNumberVotes`|0..1|`Integer`|For cumulative or range voting variations, contains the total number of votes across all indications/marks.
+`TotalNumberVotes`|1|`Integer`|For cumulative or range voting variations, contains the total number of votes across all indications/marks.
 
 ### <a name="_17_0_2_4_78e0236_1389366224561_797289_2360"></a>*The **CVRSnapshot** Class*
 

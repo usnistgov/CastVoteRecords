@@ -162,6 +162,12 @@
         "BallotStyleId": {
           "type": "string"
         },
+        "BallotStyleUnitId": {
+          "type": "string",
+          "refTypes": [
+            "CVR.GpUnit"
+          ]
+        },
         "CVRSnapshot": {
           "items": {
             "$ref": "#/definitions/CVR.CVRSnapshot"
@@ -169,22 +175,16 @@
           "minItems": 1,
           "type": "array"
         },
+        "CreatingDeviceId": {
+          "type": "string",
+          "refTypes": [
+            "CVR.ReportingDevice"
+          ]
+        },
         "ElectionId": {
           "type": "string",
           "refTypes": [
             "CVR.Election"
-          ]
-        },
-        "GpUnitId": {
-          "type": "string",
-          "refTypes": [
-            "CVR.GpUnit"
-          ]
-        },
-        "OriginatingDeviceId": {
-          "type": "string",
-          "refTypes": [
-            "CVR.ReportingDevice"
           ]
         },
         "PartyIds": {
@@ -269,7 +269,8 @@
     },
     "CVR.CVRContestSelection": {
       "required": [
-        "@type"
+        "@type",
+        "TotalNumberVotes"
       ],
       "additionalProperties": false,
       "properties": {
@@ -394,7 +395,8 @@
     },
     "CVR.CVRWriteIn": {
       "required": [
-        "@type"
+        "@type",
+        "TotalNumberVotes"
       ],
       "additionalProperties": false,
       "properties": {
@@ -1014,6 +1016,7 @@
       "required": [
         "@type",
         "IsAllocable",
+        "MarkMetricValue",
         "NumberVotes"
       ],
       "additionalProperties": false,
@@ -1027,11 +1030,14 @@
         "IsAllocable": {
           "$ref": "#/definitions/CVR.AllocationType"
         },
-        "MarkMetric": {
+        "IsGenerated": {
+          "type": "boolean"
+        },
+        "MarkMetricValue": {
           "items": {
-            "$ref": "#/definitions/CVR.MarkMetric"
+            "type": "string"
           },
-          "minItems": 0,
+          "minItems": 1,
           "type": "array"
         },
         "NumberVotes": {
@@ -1052,29 +1058,6 @@
           },
           "minItems": 0,
           "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "CVR.MarkMetric": {
-      "required": [
-        "@type",
-        "Type",
-        "Value"
-      ],
-      "additionalProperties": false,
-      "properties": {
-        "@type": {
-          "enum": [
-            "CVR.MarkMetric"
-          ],
-          "type": "string"
-        },
-        "Type": {
-          "type": "string"
-        },
-        "Value": {
-          "type": "string"
         }
       },
       "type": "object"
@@ -1239,6 +1222,9 @@
         "Manufacturer": {
           "type": "string"
         },
+        "MarkMetricType": {
+          "type": "string"
+        },
         "Model": {
           "type": "string"
         },
@@ -1377,7 +1363,6 @@
         "cumulative",
         "majority",
         "n-of-m",
-        "one-of-m",
         "other",
         "plurality",
         "proportional",
