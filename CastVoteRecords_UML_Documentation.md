@@ -37,7 +37,6 @@
     - *The **[Image](#_18_0_2_6340208_1485284639720_737438_4549)** Class*
     - *The **[ImageData](#_18_0_2_6340208_1485894533655_402033_4588)** Class*
     - *The **[Mark](#_18_0_2_6340208_1532537360373_372867_4552)** Class*
-    - *The **[MarkMetric](#_18_0_2_6340208_1488984835132_736302_4685)** Class*
     - *The **[Party](#_17_0_2_4_78e0236_1389366278128_412819_2460)** Class*
     - *The **[PartyContest](#_17_0_2_4_d420315_1393514218965_55008_3144)** Class*
     - *The **[PartySelection](#_17_0_2_4_f71035d_1426519980658_594892_2511)** Class*
@@ -341,13 +340,22 @@ Attribute | Multiplicity | Type | Attribute Description
 `BallotImage`|0..*|`ImageData`|An image of the ballot sheet created by the scanning device.
 `BallotNumber`|0..1|`String`|A unique identifier for the ballot (or sheet of a multi-sheet ballot) that this CVR represents, used if ballots are pre-marked with unique identifiers. If provided, this number would be the same on all CVRs that represent individual sheets from the same multi-sheet ballot. This identifier is not the same as one that may be impressed on the corresponding ballot as it is scanned or otherwise associated with the corresponding ballot; see the Identifier attribute.
 `BallotStyleId`|0..1|`String`|An identifier of the ballot style associated with the corresponding ballot.
+`BallotStyleUnit`|0..1|`GpUnit`|Identifies the smallest unit of geography associated with the corresponding ballot, typically a precinct or split-precinct.
+`CreatingDevice`|0..1|`ReportingDevice`|Identifies the device that created the CVR.
 `CVRSnapshot`|1..*|`CVRSnapshot`|Identifies the repeatable portion of the CVR that links to contest selections and related information.
 `Election`|1|`Election`|Used to identify an election with which the CVR is associated.
-`GpUnit`|0..1|`GpUnit`|Identifies the smallest unit of geography associated with the corresponding ballot, typically a precinct or split-precinct.
-`OriginatingDevice`|0..1|`ReportingDevice`|Identifies the device that created the CVR.
 `Party`|0..*|`Party`|Identifies the party associated with a CVR, typically for partisan primaries.
 `SequenceNumber`|0..1|`String`|The sequence number for this CVR. This represents the ordinal number that this CVR was processed by the tabulating device.
 `SheetNumber`|0..1|`Integer`|A unique number for the ballot (or sheet of a multi-sheet ballot) that this CVR represents, used if ballots are pre-marked with unique numbers. If provided, this number would be the same on all CVRs that represent individual sheets from the same multi-sheet ballot. This number is not the same as one that may be impressed on the corresponding ballot as it is scanned or otherwise associated with the corresponding ballot; see the [BallotAuditId](#_18_0_2_6340208_1469207550920_513772_4736) attribute.
+
+
+#### Business Rules
+
+There must be exactly one original CVR.:
+
+```OCL2.0
+self.CVRSnapshot->select(s | s.Type = CVRType::original)->size() = 1
+```
 
 ### <a name="_18_0_2_6340208_1469203058990_306165_4565"></a>*The **CVRContest** Class*
 
@@ -506,22 +514,12 @@ Attribute | Multiplicity | Type | Attribute Description
 ![Image of Mark](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1532537360377_773015_4553.png)
 
 An indication that represents a mark made by a voter on a paper ballot.
-It includes [MarkMetric](#_18_0_2_6340208_1488984835132_736302_4685) for assigning a quality metric to the mark.
+It includes MarkMetric for assigning a quality metric to the mark.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-`MarkMetric`|0..*|`MarkMetric`|Included to assign a quality metric to the mark.
-
-### <a name="_18_0_2_6340208_1488984835132_736302_4685"></a>*The **MarkMetric** Class*
-
-![Image of MarkMetric](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1488984835135_885126_4686.png)
-
-[Mark](#_18_0_2_6340208_1532537360373_372867_4552) includes MarkMetric to specify some generic measurement of a voter's mark on a paper ballot. The measurement will be typically assigned by a scanner, such as for mark density or quality, and would be used by the scanner to indicate whether the mark is marginal.
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-`Type`|1|`String`|The type of metric being used to determine quality. The type must be specific enough that the attached value can be accurately verified later, e.g., 'Acme Mark Density' may be a sufficiently specific type.
-`Value`|1|`String`|The value of the mark metric, represented as a string.
+`IsGenerated`|1|`String`|
+`MarkMetricValue`|1..*|`String`|The value of the mark metric, represented as a string.
 
 ### <a name="_17_0_2_4_78e0236_1389366278128_412819_2460"></a>*The **Party** Class*
 
@@ -555,12 +553,13 @@ Attribute | Multiplicity | Type | Attribute Description
 
 ![Image of ReportingDevice](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_371820_5343.png)
 
-ReportingDevice is used to specify a voting device as the “political geography” at hand. [CastVoteRecordReport](#_17_0_2_4_78e0236_1389366195564_913164_2300) refers to it as [ReportGeneratingDevice](#_18_0_5_43401a7_1484155960667_232191_4295) and uses it to specify the device that generated the CVR report. [CVR](#_18_0_2_6340208_1532543460307_914551_4600) refers to it as [OriginatingDevice](#_18_5_3_43701b0_1533931125455_124502_5709) to specify the device that generated the CVRs.
+ReportingDevice is used to specify a voting device as the “political geography” at hand. [CastVoteRecordReport](#_17_0_2_4_78e0236_1389366195564_913164_2300) refers to it as [ReportGeneratingDevice](#_18_0_5_43401a7_1484155960667_232191_4295) and uses it to specify the device that generated the CVR report. [CVR](#_18_0_2_6340208_1532543460307_914551_4600) refers to it as [CreatingDevice](#_18_5_3_43701b0_1533931125455_124502_5709) to specify the device that generated the CVRs.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
 `Application`|0..1|`String`|The application associated with the reporting device.
 `Manufacturer`|0..1|`String`|Manufacturer of the reporting device.
+`MarkMetricType`|0..1|`String`|The type of metric being used to determine quality. The type must be specific enough that the attached value can be accurately verified later, e.g., 'Acme Mark Density' may be a sufficiently specific type.
 `Model`|0..1|`String`|Manufacturer's model of the reporting device.
 `Notes`|0..*|`String`|Additional explanatory notes as applicable.
 `SerialNumber`|0..1|`String`|Serial number or other identification that can uniquely identify the reporting device.
@@ -591,4 +590,14 @@ Attribute | Multiplicity | Type | Attribute Description
 `Position`|0..1|`Integer`|The ordinal position of the indication within the contest option.
 `Rank`|0..1|`Integer`|For the RCV voting variation, the rank chosen by the voter, for when a indication can represent a ranking.
 `Status`|0..*|`IndicationStatus`|Status of the mark, e.g., "generated-rules" for generated by the machine, from the [IndicationStatus](#_18_0_2_6340208_1485894157707_572874_4551) enumeration. If no values apply, use 'other' and include a user-defined status in OtherStatus.
+
+# NIST V1.0 - CastVoteRecords
+
+- Table of Contents
+  - Enumerations
+  - Classes
+
+## Enumerations
+
+## Classes
 
