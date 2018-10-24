@@ -518,7 +518,7 @@ It includes MarkMetric for assigning a quality metric to the mark.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-`IsGenerated`|1|`String`|
+`IsGenerated`|0..1|`boolean`|Whether the mark was made by a ballot marking device.
 `MarkMetricValue`|1..*|`String`|The value of the mark metric, represented as a string.
 
 ### <a name="_17_0_2_4_78e0236_1389366278128_412819_2460"></a>*The **Party** Class*

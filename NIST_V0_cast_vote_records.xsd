@@ -1007,7 +1007,11 @@ Hash – to contain cryptographic hash function data for the file.</xsd:document
     <xsd:complexContent>
       <xsd:extension base="SelectionIndication">
         <xsd:sequence>
-          <xsd:element name="IsGenerated" type="xsd:string"/>
+          <xsd:element name="IsGenerated" type="xsd:boolean" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Whether the mark was made by a ballot marking device.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
           <xsd:element name="MarkMetricValue" type="xsd:string" maxOccurs="unbounded">
             <xsd:annotation>
               <xsd:documentation xml:lang="en">The value of the mark metric, represented as a string.</xsd:documentation>
