@@ -2,7 +2,6 @@
 
 - Table of Contents
   - Enumerations
-    - *The **[AllocationTargetType](#_19_0_43701b0_1541095618426_226471_5000)** Enumeration*
     - *The **[AllocationType](#_18_5_3_43701b0_1533322047899_321573_5682)** Enumeration*
     - *The **[CastVoteRecordVersion](#_18_0_2_6340208_1488984734564_983877_4662)** Enumeration*
     - *The **[ContestSelectionStatus](#_18_0_5_43401a7_1475850153090_186243_4311)** Enumeration*
@@ -11,6 +10,7 @@
     - *The **[CVRType](#_18_0_2_6340208_1532543997676_592413_4694)** Enumeration*
     - *The **[HashType](#_18_0_2_6340208_1485894679180_11599_4655)** Enumeration*
     - *The **[IdentifierType](#_17_0_2_4_f71035d_1425061188508_163854_2613)** Enumeration*
+    - *The **[IndicationType](#_19_0_43701b0_1541430872294_37549_5007)** Enumeration*
     - *The **[PositionStatus](#_18_0_2_6340208_1485894157707_572874_4551)** Enumeration*
     - *The **[ReportingUnitType](#_17_0_2_4_f71035d_1431607637366_785815_2242)** Enumeration*
     - *The **[ReportType](#_18_0_5_43401a7_1483727563257_179426_4343)** Enumeration*
@@ -46,16 +46,6 @@
     - *The **[RetentionContest](#_18_0_2_6340208_1425646217522_163181_4554)** Class*
 
 ## Enumerations
-
-### <a name="_19_0_43701b0_1541095618426_226471_5000"></a>*The **AllocationTargetType** Enumeration*
-
-![Image of AllocationTargetType](CastVoteRecords_UML_Documentation_files/_19_0_43701b0_1541095618449_344029_5004.png)
-
-Name | Value
----- | -----
-`contest-option`|For when the votes should go to the counter of the selected contest option.
-`overvote`|For when the votes should go to the overvote counter.
-`write-in`|For when the votes should go to the write-in counter.
 
 ### <a name="_18_5_3_43701b0_1533322047899_321573_5682"></a>*The **AllocationType** Enumeration*
 
@@ -139,6 +129,16 @@ Name | Value
 `ocd-id`|To indicate that the identifier is from the OCD-ID scheme.
 `other`|Used in conjunction with Code::OtherType when no other value in this enumeration applies.
 `state-level`|To indicate that the identifier is from a state-level scheme, i.e., unique to a particular state.
+
+### <a name="_19_0_43701b0_1541430872294_37549_5007"></a>*The **IndicationType** Enumeration*
+
+![Image of IndicationType](CastVoteRecords_UML_Documentation_files/_19_0_43701b0_1541430872330_109394_5014.png)
+
+Name | Value
+---- | -----
+`no`|For no indication at the selection.
+`unknown`|When the existence of an indication is unknown, such as before analysis of the contest option position is performed.
+`yes`|For an indication at the selection.
 
 ### <a name="_18_0_2_6340208_1485894157707_572874_4551"></a>*The **PositionStatus** Enumeration*
 
@@ -409,24 +409,23 @@ Attribute | Multiplicity | Type | Attribute Description
 `Position`|0..1|`Integer`|Used to include the ordinal position of the contest option as it appeared on the ballot.
 `Rank`|0..1|`Integer`|For the RCV voting variation, the rank chosen by the voter, for when a contest selection can represent a ranking.
 `Status`|0..*|`ContestSelectionStatus`|Contains the status of the contest selection, e.g., 'needs-adjudication' for a contest requiring adjudication, using values from the [ContestSelectionStatus](#_18_0_5_43401a7_1475850153090_186243_4311) enumeration. If no values apply, use 'other' and include a user-defined status in [OtherStatus](#_18_0_5_43401a7_1475855963037_920235_4384).
-`TotalNumberVotes`|1|`Integer`|For cumulative or range voting variations, contains the total number of votes across all indications/marks.
+`TotalNumberVotes`|0..1|`Integer`|For cumulative or range voting variations, contains the total number of votes across all indications/marks.
 
 ### <a name="_18_0_2_6340208_1485892992407_492157_4635"></a>*The **CVRContestSelectionPosition** Class*
 
 ![Image of CVRContestSelectionPosition](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1485892992418_910967_4658.png)
 
-[CVRContestSelection](#_18_0_5_43401a7_1474452890357_299022_4292) includes SelectionIndication to specify a voter's indication/mark in a contest option, and thus, a potential vote. The number of potential SelectionIndications that should be included by CVRContestSelection is, for paper ballots, the same as the number of ovals next to a particular option. There will be usually 1 instance of [CVRContestSelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635) for plurality voting, but there could be multiple instances for RCV, approval, cumulative, or other vote variations in which a voter can select multiple options per candidate.
+[CVRContestSelection](#_18_0_5_43401a7_1474452890357_299022_4292) includes CVRContestSelectionPosition to specify a voter's indication/mark in a contest option, and thus, a potential vote. The number of potential CVRContestSelectionPositions that should be included by CVRContestSelection is, for paper ballots, the same as the number of ovals next to a particular option. There will be usually 1 instance of [CVRContestSelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635) for plurality voting, but there could be multiple instances for RCV, approval, cumulative, or other vote variations in which a voter can select multiple options per candidate.
 
 [CVRContestSelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635) contains additional information about the mark to specify whether the mark is countable, as well as information needed for certain voting methods.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-`{CVRWriteIn}`|0..1|`CVRWriteIn`|
-`{Mark}`|0..1|`Mark`|
-`AllocationTarget`|0..1|`AllocationTargetType`|Target counter that will receive the [NumberVotes](#_18_0_2_6340208_1485892992408_339917_4637).
 `Code`|0..*|`Code`|Code used to identify the contest selection position.
-`HasIndication`|1|`boolean`|Set to true when a contest option position is indicated.
+`CVRWriteIn`|0..1|`CVRWriteIn`|
+`HasIndication`|1|`IndicationType`|Set to true when a contest option position is indicated.
 `IsAllocable`|0..1|`AllocationType`|Whether this indication should be allocated to the contest option's accumulator.
+`Mark`|0..1|`Mark`|
 `NumberVotes`|1|`Integer`|The number of votes represented by the indication, usually 1 but may be more depending on the voting method.
 `OtherStatus`|0..1|`String`|Used when [Status](#_18_0_2_6340208_1485892992408_985925_4639) is 'other' to include a user-defined status.
 `Position`|0..1|`Integer`|The ordinal position of the indication within the contest option.
@@ -549,7 +548,6 @@ It includes MarkMetric for assigning a quality metric to the mark.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-`{CVRContestSelectionPosition}`||`CVRContestSelectionPosition`|
 `IsGenerated`|0..1|`boolean`|Whether the mark was made by a ballot marking device.
 `MarkMetricValue`|1..*|`String`|The value of the mark metric, represented as a string.
 
