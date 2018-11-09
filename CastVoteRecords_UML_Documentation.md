@@ -595,10 +595,10 @@ Attribute | Multiplicity | Type | Attribute Description
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
 `Code`|0..*|`Code`|Code used to identify the contest selection position.
-`CVRWriteIn`|0..1|`CVRWriteIn`|
+`CVRWriteIn`|0..1|`CVRWriteIn`|Used to store information regarding a write-in vote.
 `HasIndication`|1|`IndicationType`|Whether the contest option position contains an indication (e.g. a Mark).
 `IsAllocable`|0..1|`AllocationType`|Whether this indication should be allocated to the contest option's accumulator.
-`Mark`|0..1|`Mark`|
+`Mark`|0..1|`Mark`|Used to store evidence regarding the existence of a Mark.
 `NumberVotes`|1|`Integer`|The number of votes represented by the position, usually 1 but may be more depending on the voting method.
 `OtherStatus`|0..1|`String`|Used when [Status](#_18_0_2_6340208_1485892992408_985925_4639) is 'other' to include a user-defined status.
 `Position`|0..1|`Integer`|The ordinal position of the selection position within the contest option.
