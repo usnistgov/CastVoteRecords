@@ -51,6 +51,8 @@
 
 ![Image of AllocationType](CastVoteRecords_UML_Documentation_files/_18_5_3_43701b0_1533322047923_796623_5683.png)
 
+Used in [SelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635)::[IsAllocable](#_18_0_2_6340208_1532546142492_921207_4764) to indicate whether the [SelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635)::[NumberVotes](#_18_0_2_6340208_1485892992408_339917_4637) should be allocated to the underlying contest option counter.
+
 Name | Value
 ---- | -----
 `no`|To not allocate votes to the contest option's accumulator.
@@ -61,6 +63,8 @@ Name | Value
 
 ![Image of CastVoteRecordVersion](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1488984734567_410041_4663.png)
 
+To identify the version of the CVR specification being used, i.e., version 1.0.0. This will need to be updated for different version of the specification.
+
 Name | Value
 ---- | -----
 `1.0.0`|Fixed value for the version of this specification.
@@ -68,6 +72,8 @@ Name | Value
 ### <a name="_18_0_5_43401a7_1475850153090_186243_4311"></a>*The **ContestSelectionStatus** Enumeration*
 
 ![Image of ContestSelectionStatus](CastVoteRecords_UML_Documentation_files/_18_0_5_43401a7_1475850153092_221720_4312.png)
+
+Used in [CVRContestSelection](#_18_0_5_43401a7_1474452890357_299022_4292)::[Status](#_18_0_5_43401a7_1475850275266_189599_4334) to identify the status of a contest selection in the CVR.
 
 Name | Value
 ---- | -----
@@ -80,6 +86,8 @@ Name | Value
 
 ![Image of ContestStatus](CastVoteRecords_UML_Documentation_files/_18_0_5_43401a7_1475850124799_533420_4292.png)
 
+Used in [CVRContest](#_18_0_2_6340208_1469203058990_306165_4565)::[Status](#_18_0_5_43401a7_1475850227700_908488_4330) to identify the status of a contest in which contest selection(s) were made.
+
 Name | Value
 ---- | -----
 `invalidated-rules`|To indicate that the contest has been invalidated by the generating device because of contest rules.
@@ -91,6 +99,8 @@ Name | Value
 
 ![Image of CVRStatus](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1472159006313_115999_4629.png)
 
+Used in [CVRSnapshot](#_17_0_2_4_78e0236_1389366224561_797289_2360)::[Status](#_18_0_2_6340208_1472158928951_402259_4603) to identify the status of the CVR.
+
 Name | Value
 ---- | -----
 `needs-adjudication`|To indicate that the CVR needs to be adjudicated.
@@ -99,6 +109,8 @@ Name | Value
 ### <a name="_18_0_2_6340208_1532543997676_592413_4694"></a>*The **CVRType** Enumeration*
 
 ![Image of CVRType](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1532543997679_592668_4695.png)
+
+Used in [CVRSnapshot](#_17_0_2_4_78e0236_1389366224561_797289_2360)::[Type](#_18_0_2_6340208_1532543968111_779654_4689) to identify what the CVR represents.
 
 Name | Value
 ---- | -----
@@ -110,6 +122,8 @@ Name | Value
 
 ![Image of HashType](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1485894679181_566848_4656.png)
 
+Used in [Hash](#_18_0_2_6340208_1485894593826_736413_4615)::[Type](#_18_0_2_6340208_1485894641846_811323_4646) to indicate the type of hash being used for an image file.
+
 Name | Value
 ---- | -----
 `md6`|To indicate that the MD6 message digest algorithm is being used.
@@ -120,6 +134,8 @@ Name | Value
 ### <a name="_17_0_2_4_f71035d_1425061188508_163854_2613"></a>*The **IdentifierType** Enumeration*
 
 ![Image of IdentifierType](CastVoteRecords_UML_Documentation_files/_17_0_2_4_f71035d_1425061188510_56434_2614.png)
+
+Used in [Code](#_17_0_2_4_f71035d_1430405712653_451634_2410)::[Type](#_17_0_2_4_f71035d_1430405763078_743585_2433) to indicate the type of code/identifier being used.
 
 Name | Value
 ---- | -----
@@ -134,6 +150,8 @@ Name | Value
 
 ![Image of IndicationType](CastVoteRecords_UML_Documentation_files/_19_0_43701b0_1541430872330_109394_5014.png)
 
+Used in [SelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635)::[HasIndication](#_19_0_43701b0_1541095481007_618279_4996) to specify whether an indication (e.g. a Mark) exists.
+
 Name | Value
 ---- | -----
 `no`|For no indication at the selection.
@@ -143,6 +161,8 @@ Name | Value
 ### <a name="_18_0_2_6340208_1485894157707_572874_4551"></a>*The **PositionStatus** Enumeration*
 
 ![Image of PositionStatus](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1485894157711_931606_4552.png)
+
+Used in [SelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635)::[Status](#_18_0_2_6340208_1485892992408_985925_4639) to identify the status of a vote mark.
 
 Name | Value
 ---- | -----
@@ -154,6 +174,8 @@ Name | Value
 ### <a name="_17_0_2_4_f71035d_1431607637366_785815_2242"></a>*The **ReportingUnitType** Enumeration*
 
 ![Image of ReportingUnitType](CastVoteRecords_UML_Documentation_files/_17_0_2_4_f71035d_1431607637380_196295_2243.png)
+
+Used in [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380)::[Type](#_17_0_2_4_78e0236_1389713376966_77071_2393) to indicate a type of political geography.
 
 Name | Value
 ---- | -----
@@ -168,6 +190,8 @@ Name | Value
 
 ![Image of ReportType](CastVoteRecords_UML_Documentation_files/_18_0_5_43401a7_1483727563261_758233_4344.png)
 
+Used in [CastVoteRecordReport](#_17_0_2_4_78e0236_1389366195564_913164_2300)::[ReportType](#_18_0_5_43401a7_1483727759336_770912_4370) to indicate the type of the CVR report.
+
 Name | Value
 ---- | -----
 `adjudicated`|To indicate that the report contains adjudications.
@@ -179,6 +203,8 @@ Name | Value
 ### <a name="_18_0_5_43401a7_1483727021192_184103_4291"></a>*The **VoteVariation** Enumeration*
 
 ![Image of VoteVariation](CastVoteRecords_UML_Documentation_files/_18_0_5_43401a7_1483727021198_32472_4292.png)
+
+Used in [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400)::[VoteVariation](#_18_0_5_43401a7_1483727343854_246701_4334) to indicate the vote variation (vote method) used to tabulate the contest.
 
 Name | Value
 ---- | -----
