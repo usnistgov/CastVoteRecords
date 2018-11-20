@@ -1145,7 +1145,7 @@ Hash – to contain cryptographic hash function data for the file.</xsd:document
           <xsd:documentation xml:lang="en">Whether this indication should be allocated to the contest option's accumulator.</xsd:documentation>
         </xsd:annotation>
       </xsd:element>
-      <xsd:element name="MarkMetricValue" type="xsd:string" maxOccurs="unbounded">
+      <xsd:element name="MarkMetricValue" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">The value of the mark metric, represented as a string.</xsd:documentation>
         </xsd:annotation>

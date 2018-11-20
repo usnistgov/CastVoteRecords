@@ -652,7 +652,7 @@ Attribute | Multiplicity | Type | Attribute Description
 <a name="_19_0_43701b0_1541096285019_709577_5079"></a>`CVRWriteIn`|0..1|`CVRWriteIn`|Used to store information regarding a write-in vote.
 <a name="_19_0_43701b0_1541095481007_618279_4996"></a>`HasIndication`|1|`IndicationStatus`|Whether the contest option position contains an indication (e.g. a Mark).
 <a name="_18_0_2_6340208_1532546142492_921207_4764"></a>`IsAllocable`|0..1|`AllocationStatus`|Whether this indication should be allocated to the contest option's accumulator.
-<a name="_18_0_2_6340208_1488984862414_760136_4710"></a>`MarkMetricValue`|1..*|`String`|The value of the mark metric, represented as a string.
+<a name="_18_0_2_6340208_1488984862414_760136_4710"></a>`MarkMetricValue`|0..*|`String`|The value of the mark metric, represented as a string.
 <a name="_18_0_2_6340208_1485892992408_339917_4637"></a>`NumberVotes`|1|`Integer`|The number of votes represented by the position, usually 1 but may be more depending on the voting method.
 <a name="_18_0_2_6340208_1485892992408_385738_4640"></a>`OtherStatus`|0..1|`String`|Used when [Status](#_18_0_2_6340208_1485892992408_985925_4639) is 'other' to include a user-defined status.
 <a name="_18_0_2_6340208_1485892992408_897036_4641"></a>`Position`|0..1|`Integer`|The ordinal position of the selection position within the contest option.
