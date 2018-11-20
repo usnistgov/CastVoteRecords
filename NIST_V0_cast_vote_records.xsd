@@ -96,11 +96,6 @@
           <xsd:documentation xml:lang="en">To indicate that the contest selection was flagged by the generating device for adjudication.</xsd:documentation>
         </xsd:annotation>
       </xsd:enumeration>
-      <xsd:enumeration value="not-indicated">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">For a CVRContestSelection with no SelectionPosition, i.e. to specify the position contains no marks or other indications.</xsd:documentation>
-        </xsd:annotation>
-      </xsd:enumeration>
       <xsd:enumeration value="other">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">Used in conjunction with CVRContestSelection::OtherStatus when no other value in this enumeration applies.</xsd:documentation>
@@ -556,14 +551,14 @@
           <xsd:documentation xml:lang="en">Used to link to an instance of a contest selection that was previously included by Contest.</xsd:documentation>
         </xsd:annotation>
       </xsd:element>
+      <xsd:element name="OptionPosition" type="xsd:integer" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Used to include the ordinal position of the contest option as it appeared on the ballot.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
       <xsd:element name="OtherStatus" type="xsd:string" minOccurs="0">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">Used when Status is 'other' to include a user-defined status.</xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
-      <xsd:element name="Position" type="xsd:integer" minOccurs="0">
-        <xsd:annotation>
-          <xsd:documentation xml:lang="en">Used to include the ordinal position of the contest option as it appeared on the ballot.</xsd:documentation>
         </xsd:annotation>
       </xsd:element>
       <xsd:element name="Rank" type="xsd:integer" minOccurs="0">
@@ -571,7 +566,7 @@
           <xsd:documentation xml:lang="en">For the RCV voting variation, the rank chosen by the voter, for when a contest selection can represent a ranking.</xsd:documentation>
         </xsd:annotation>
       </xsd:element>
-      <xsd:element name="SelectionPosition" type="SelectionPosition" minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="SelectionPosition" type="SelectionPosition" maxOccurs="unbounded">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">Used to include further information about the indication/mark associated with the contest selection.  Depending on the voting method, multiple indications/marks per selection may be possible.</xsd:documentation>
         </xsd:annotation>

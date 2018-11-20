@@ -79,7 +79,6 @@ Name | Value
 `generated-rules`|To indicate that the contest selection was generated per contest rules.
 `invalidated-rules`|To indicate that the contest selection was invalidated by the generating device because of contest rules.
 `needs-adjudication`|To indicate that the contest selection was flagged by the generating device for adjudication.
-`not-indicated`|For a CVRContestSelection with no SelectionPosition, i.e. to specify the position contains no marks or other indications.
 `other`|Used in conjunction with CVRContestSelection::OtherStatus when no other value in this enumeration applies.
 
 ### <a name="_18_0_5_43401a7_1475850124791_123384_4291"></a>*The **ContestStatus** Enumeration*
@@ -474,10 +473,10 @@ Since multiple indications per contest option are possible for some voting metho
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
 <a name="_18_0_2_6340208_1469203113749_298974_4591"></a>`ContestSelection`|0..1|`ContestSelection`|Used to link to an instance of a contest selection that was previously included by [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400).
+<a name="_18_0_5_43401a7_1484322103253_625422_4289"></a>`OptionPosition`|0..1|`Integer`|Used to include the ordinal position of the contest option as it appeared on the ballot.
 <a name="_18_0_5_43401a7_1475855963037_920235_4384"></a>`OtherStatus`|0..1|`String`|Used when [Status](#_18_0_5_43401a7_1475850275266_189599_4334) is 'other' to include a user-defined status.
-<a name="_18_0_5_43401a7_1484322103253_625422_4289"></a>`Position`|0..1|`Integer`|Used to include the ordinal position of the contest option as it appeared on the ballot.
 <a name="_18_0_5_43401a7_1525884900274_453930_4291"></a>`Rank`|0..1|`Integer`|For the RCV voting variation, the rank chosen by the voter, for when a contest selection can represent a ranking.
-<a name="_18_0_2_6340208_1485892992410_316802_4653"></a>`SelectionPosition`|0..*|`SelectionPosition`|Used to include further information about the indication/mark associated with the contest selection. Depending on the voting method, multiple indications/marks per selection may be possible.
+<a name="_18_0_2_6340208_1485892992410_316802_4653"></a>`SelectionPosition`|1..*|`SelectionPosition`|Used to include further information about the indication/mark associated with the contest selection. Depending on the voting method, multiple indications/marks per selection may be possible.
 <a name="_18_0_5_43401a7_1475850275266_189599_4334"></a>`Status`|0..*|`ContestSelectionStatus`|Contains the status of the contest selection, e.g., 'needs-adjudication' for a contest requiring adjudication, using values from the [ContestSelectionStatus](#_18_0_5_43401a7_1475850153090_186243_4311) enumeration. If no values apply, use 'other' and include a user-defined status in [OtherStatus](#_18_0_5_43401a7_1475855963037_920235_4384).
 <a name="_18_0_2_6340208_1488988324514_948852_4757"></a>`TotalNumberVotes`|0..1|`Integer`|Contains the total number of votes across all indications/marks.
 
