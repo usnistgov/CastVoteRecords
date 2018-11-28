@@ -1253,6 +1253,9 @@
         "IsAllocable": {
           "$ref": "#/definitions/CVR.AllocationStatus"
         },
+        "IsGenerated": {
+          "type": "boolean"
+        },
         "MarkMetricValue": {
           "items": {
             "type": "string"
