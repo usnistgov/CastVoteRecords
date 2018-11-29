@@ -2,7 +2,7 @@
   "$ref": "#/definitions/CVR.CastVoteRecordReport",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "definitions": {
-    "CVR.AllocationType": {
+    "CVR.AllocationStatus": {
       "enum": [
         "no",
         "unknown",
@@ -136,6 +136,7 @@
       "required": [
         "@type",
         "CVRSnapshot",
+        "CurrentSnapshotId",
         "ElectionId"
       ],
       "additionalProperties": false,
@@ -181,6 +182,12 @@
             "CVR.ReportingDevice"
           ]
         },
+        "CurrentSnapshotId": {
+          "type": "string",
+          "refTypes": [
+            "CVR.CVRSnapshot"
+          ]
+        },
         "ElectionId": {
           "type": "string",
           "refTypes": [
@@ -221,14 +228,7 @@
         },
         "CVRContestSelection": {
           "items": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/CVR.CVRContestSelection"
-              },
-              {
-                "$ref": "#/definitions/CVR.CVRWriteIn"
-              }
-            ]
+            "$ref": "#/definitions/CVR.CVRContestSelection"
           },
           "minItems": 0,
           "type": "array"
@@ -270,7 +270,7 @@
     "CVR.CVRContestSelection": {
       "required": [
         "@type",
-        "TotalNumberVotes"
+        "SelectionPosition"
       ],
       "additionalProperties": false,
       "properties": {
@@ -289,27 +289,20 @@
             "CVR.CandidateSelection"
           ]
         },
+        "OptionPosition": {
+          "type": "integer"
+        },
         "OtherStatus": {
           "type": "string"
-        },
-        "Position": {
-          "type": "integer"
         },
         "Rank": {
           "type": "integer"
         },
-        "SelectionIndication": {
+        "SelectionPosition": {
           "items": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/CVR.SelectionIndication"
-              },
-              {
-                "$ref": "#/definitions/CVR.Mark"
-              }
-            ]
+            "$ref": "#/definitions/CVR.SelectionPosition"
           },
-          "minItems": 0,
+          "minItems": 1,
           "type": "array"
         },
         "Status": {
@@ -327,12 +320,15 @@
     },
     "CVR.CVRSnapshot": {
       "required": [
+        "@id",
         "@type",
-        "IsCurrent",
         "Type"
       ],
       "additionalProperties": false,
       "properties": {
+        "@id": {
+          "type": "string"
+        },
         "@type": {
           "enum": [
             "CVR.CVRSnapshot"
@@ -358,9 +354,6 @@
           },
           "minItems": 0,
           "type": "array"
-        },
-        "IsCurrent": {
-          "type": "boolean"
         },
         "OtherStatus": {
           "type": "string"
@@ -395,8 +388,7 @@
     },
     "CVR.CVRWriteIn": {
       "required": [
-        "@type",
-        "TotalNumberVotes"
+        "@type"
       ],
       "additionalProperties": false,
       "properties": {
@@ -406,50 +398,8 @@
           ],
           "type": "string"
         },
-        "ContestSelectionId": {
-          "type": "string",
-          "refTypes": [
-            "CVR.ContestSelection",
-            "CVR.PartySelection",
-            "CVR.BallotMeasureSelection",
-            "CVR.CandidateSelection"
-          ]
-        },
-        "OtherStatus": {
-          "type": "string"
-        },
-        "Position": {
-          "type": "integer"
-        },
-        "Rank": {
-          "type": "integer"
-        },
-        "SelectionIndication": {
-          "items": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/CVR.SelectionIndication"
-              },
-              {
-                "$ref": "#/definitions/CVR.Mark"
-              }
-            ]
-          },
-          "minItems": 0,
-          "type": "array"
-        },
-        "Status": {
-          "items": {
-            "$ref": "#/definitions/CVR.ContestSelectionStatus"
-          },
-          "minItems": 0,
-          "type": "array"
-        },
         "Text": {
           "type": "string"
-        },
-        "TotalNumberVotes": {
-          "type": "integer"
         },
         "WriteInImage": {
           "$ref": "#/definitions/CVR.ImageData"
@@ -761,6 +711,7 @@
     "CVR.ContestStatus": {
       "enum": [
         "invalidated-rules",
+        "not-indicated",
         "other",
         "overvoted",
         "undervoted"
@@ -996,71 +947,17 @@
         "Location": {
           "type": "string",
           "format": "uri"
-        },
-        "Signature": {
-          "$ref": "#/definitions/Xmldsig.Signature"
         }
       },
       "type": "object"
     },
     "CVR.IndicationStatus": {
       "enum": [
-        "adjudicated",
-        "generated-rules",
-        "invalidated-rules",
-        "other"
+        "no",
+        "unknown",
+        "yes"
       ],
       "type": "string"
-    },
-    "CVR.Mark": {
-      "required": [
-        "@type",
-        "IsAllocable",
-        "MarkMetricValue",
-        "NumberVotes"
-      ],
-      "additionalProperties": false,
-      "properties": {
-        "@type": {
-          "enum": [
-            "CVR.Mark"
-          ],
-          "type": "string"
-        },
-        "IsAllocable": {
-          "$ref": "#/definitions/CVR.AllocationType"
-        },
-        "IsGenerated": {
-          "type": "boolean"
-        },
-        "MarkMetricValue": {
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1,
-          "type": "array"
-        },
-        "NumberVotes": {
-          "type": "integer"
-        },
-        "OtherStatus": {
-          "type": "string"
-        },
-        "Position": {
-          "type": "integer"
-        },
-        "Rank": {
-          "type": "integer"
-        },
-        "Status": {
-          "items": {
-            "$ref": "#/definitions/CVR.IndicationStatus"
-          },
-          "minItems": 0,
-          "type": "array"
-        }
-      },
-      "type": "object"
     },
     "CVR.Party": {
       "required": [
@@ -1190,6 +1087,15 @@
       },
       "type": "object"
     },
+    "CVR.PositionStatus": {
+      "enum": [
+        "adjudicated",
+        "generated-rules",
+        "invalidated-rules",
+        "other"
+      ],
+      "type": "string"
+    },
     "CVR.ReportType": {
       "enum": [
         "adjudicated",
@@ -1317,22 +1223,45 @@
       },
       "type": "object"
     },
-    "CVR.SelectionIndication": {
+    "CVR.SelectionPosition": {
       "required": [
         "@type",
-        "IsAllocable",
+        "HasIndication",
         "NumberVotes"
       ],
       "additionalProperties": false,
       "properties": {
         "@type": {
           "enum": [
-            "CVR.SelectionIndication"
+            "CVR.SelectionPosition"
           ],
           "type": "string"
         },
+        "CVRWriteIn": {
+          "$ref": "#/definitions/CVR.CVRWriteIn"
+        },
+        "Code": {
+          "items": {
+            "$ref": "#/definitions/CVR.Code"
+          },
+          "minItems": 0,
+          "type": "array"
+        },
+        "HasIndication": {
+          "$ref": "#/definitions/CVR.IndicationStatus"
+        },
         "IsAllocable": {
-          "$ref": "#/definitions/CVR.AllocationType"
+          "$ref": "#/definitions/CVR.AllocationStatus"
+        },
+        "IsGenerated": {
+          "type": "boolean"
+        },
+        "MarkMetricValue": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 0,
+          "type": "array"
         },
         "NumberVotes": {
           "type": "integer"
@@ -1348,7 +1277,7 @@
         },
         "Status": {
           "items": {
-            "$ref": "#/definitions/CVR.IndicationStatus"
+            "$ref": "#/definitions/CVR.PositionStatus"
           },
           "minItems": 0,
           "type": "array"
@@ -1371,21 +1300,6 @@
         "super-majority"
       ],
       "type": "string"
-    },
-    "Xmldsig.Signature": {
-      "required": [
-        "@type"
-      ],
-      "additionalProperties": false,
-      "properties": {
-        "@type": {
-          "enum": [
-            "Xmldsig.Signature"
-          ],
-          "type": "string"
-        }
-      },
-      "type": "object"
     }
   }
 }
