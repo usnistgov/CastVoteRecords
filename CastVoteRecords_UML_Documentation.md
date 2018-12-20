@@ -62,7 +62,7 @@ Name | Value
 
 ![Image of CastVoteRecordVersion](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1488984734567_410041_4663.png)
 
-To identify the version of the CVR specification being used, i.e., version 1.0.0. This will need to be updated for different version of the specification.
+To identify the version of the CVR specification being used, i.e., version 1.0.0. This will need to be updated for different versions of the specification.
 
 Name | Value
 ---- | -----
@@ -110,7 +110,7 @@ Name | Value
 
 ![Image of CVRType](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1532543997679_592668_4695.png)
 
-Used in [CVRSnapshot](#_17_0_2_4_78e0236_1389366224561_797289_2360)::[Type](#_18_0_2_6340208_1532543968111_779654_4689) to identify what the CVR represents.
+Used in [CVRSnapshot](#_17_0_2_4_78e0236_1389366224561_797289_2360)::[Type](#_18_0_2_6340208_1532543968111_779654_4689) to indicate the type of snapshot.
 
 Name | Value
 ---- | -----
@@ -162,7 +162,7 @@ Name | Value
 
 ![Image of PositionStatus](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1485894157711_931606_4552.png)
 
-Used in [SelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635)::[Status](#_18_0_2_6340208_1485892992408_985925_4639) to identify the status of a vote mark.
+Used in [SelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635)::[Status](#_18_0_2_6340208_1485892992408_985925_4639) to identify the status of a selection indication.
 
 Name | Value
 ---- | -----
@@ -295,7 +295,7 @@ Attribute | Multiplicity | Type | Attribute Description
 
 ![Image of Contest](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_293750_5341.png)
 
-[BallotMeasureContest](#_17_0_2_4_78e0236_1389366932057_929676_2783)[Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) represents a contest on the ballot. [CastVoteRecordReport](#_17_0_2_4_78e0236_1389366195564_913164_2300) initially includes an instance of [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) for each contest on the ballot.  Other classes can subsequently reference the instances as necessary to link together items on the cast vote record, such as a contest, its voted ballot selection(s), and the mark(s) associated with the selection(s).
+[Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) represents a contest on the ballot. [CastVoteRecordReport](#_17_0_2_4_78e0236_1389366195564_913164_2300) initially includes an instance of [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) for each contest on the ballot.  Other classes can subsequently reference the instances as necessary to link together items on the cast vote record, such as a contest, its voted ballot selection(s), and the mark(s) associated with the selection(s).
 
 [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) has three subclasses, each used for a specific type of contest:   These subclasses inherit Contest's attributes.
 
@@ -414,7 +414,8 @@ Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
 <a name="_18_0_2_6340208_1469207550920_513772_4736"></a>`BallotAuditId`|0..1|`String`|A unique identifier for this CVR, used to link the CVR with the corresponding audit record, e.g., a paper ballot. This identifier may be impressed on the corresponding audit record as it is scanned, or otherwise associated with the corresponding ballot.
 <a name="_18_0_2_6340208_1477335811070_110072_4695"></a>`BallotImage`|0..*|`ImageData`|An image of the ballot sheet created by the scanning device.
-<a name="_18_0_2_6340208_1485889604690_46103_4553"></a>`BallotNumber`|0..1|`String`|A unique identifier for the ballot (or sheet of a multi-sheet ballot) that this CVR represents, used if ballots are pre-marked with unique identifiers. If provided, this number would be the same on all CVRs that represent individual sheets from the same multi-sheet ballot. This identifier is not the same as one that may be impressed on the corresponding ballot as it is scanned or otherwise associated with the corresponding ballot; see the Identifier attribute.
+<a name="_18_0_2_6340208_1485889604690_46103_4553"></a>`BallotNumber`|0..1|`String`|A unique identifier for the ballot (or sheet of a multi-sheet ballot) that this CVR represents, used if ballots are pre-marked with unique identifiers. If provided, this number would be the same on all CVRs that represent individual sheets from the same multi-sheet ballot. This identifier is not the same as one that may be impressed on the corresponding ballot as it is scanned or otherwise associated with the corresponding ballot; see the [BallotAuditId](#_18_0_2_6340208_1469207550920_513772_4736) attribute.
+
 <a name="_18_0_2_6340208_1477336326894_57154_4725"></a>`BallotStyleId`|0..1|`String`|An identifier of the ballot style associated with the corresponding ballot.
 <a name="_18_0_2_6340208_1491322891923_301659_4571"></a>`BallotStyleUnit`|0..1|`GpUnit`|Identifies the smallest unit of geography associated with the corresponding ballot, typically a precinct or split-precinct.
 <a name="_18_5_3_43701b0_1533931125455_124502_5709"></a>`CreatingDevice`|0..1|`ReportingDevice`|Identifies the device that created the CVR.
@@ -424,15 +425,6 @@ Attribute | Multiplicity | Type | Attribute Description
 <a name="_17_0_2_4_f71035d_1426788475880_621446_2579"></a>`Party`|0..*|`Party`|Identifies the party associated with a CVR, typically for partisan primaries.
 <a name="_18_0_2_6340208_1485285067563_572486_4624"></a>`SequenceNumber`|0..1|`String`|The sequence number for this CVR. This represents the ordinal number that this CVR was processed by the tabulating device.
 <a name="_18_0_2_6340208_1485889507713_842254_4548"></a>`SheetNumber`|0..1|`Integer`|A unique number for the ballot (or sheet of a multi-sheet ballot) that this CVR represents, used if ballots are pre-marked with unique numbers. If provided, this number would be the same on all CVRs that represent individual sheets from the same multi-sheet ballot. This number is not the same as one that may be impressed on the corresponding ballot as it is scanned or otherwise associated with the corresponding ballot; see the [BallotAuditId](#_18_0_2_6340208_1469207550920_513772_4736) attribute.
-
-
-#### Business Rules
-
-There must be exactly one original CVR.:
-
-```OCL2.0
-self.CVRSnapshot->select(s | s.Type = CVRType::original)->size() = 1
-```
 
 
 
@@ -640,7 +632,9 @@ Attribute | Multiplicity | Type | Attribute Description
 
 ![Image of SelectionPosition](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1485892992418_910967_4658.png)
 
-[CVRContestSelection](#_18_0_5_43401a7_1474452890357_299022_4292) includes [SelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635) to specify a voter's indication/mark in a contest option, and thus, a potential vote. The number of potential SelectionPositions that should be included by [CVRContestSelection](#_18_0_5_43401a7_1474452890357_299022_4292) is, for paper ballots, the same as the number of ovals next to a particular option. There will be usually 1 instance of [SelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635) for plurality voting, but there could be multiple instances for RCV, approval, cumulative, or other vote variations in which a voter can select multiple options per candidate.
+[CVRContestSelection](#_18_0_5_43401a7_1474452890357_299022_4292) includes [SelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635) to specify a voter's indication/mark in a contest option, and thus, a potential vote. The number of potential SelectionPositions that should be included by [CVRContestSelection](#_18_0_5_43401a7_1474452890357_299022_4292) is the same as the number of ovals next to a particular option. There will be usually 1 instance of [SelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635) for plurality voting, but there could be multiple instances for RCV, approval, cumulative, or other vote variations in which a voter can select multiple options per candidate.
+
+[MarkMetricValue](#_18_0_2_6340208_1488984862414_760136_4710) specifies the measurement of a mark on a paper ballot. The measurement is assigned by the scanner for measurements of mark density or quality and would be used by the scanner to indicate whether the mark is a valid voter mark representing a vote or is marginal.
 
 [SelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635) contains additional information about the mark to specify whether the indication/mark is allocable, as well as information needed for certain voting methods.
 
@@ -652,7 +646,7 @@ Attribute | Multiplicity | Type | Attribute Description
 <a name="_19_0_43701b0_1541096285019_709577_5079"></a>`CVRWriteIn`|0..1|`CVRWriteIn`|Used to store information regarding a write-in vote.
 <a name="_19_0_43701b0_1541095481007_618279_4996"></a>`HasIndication`|1|`IndicationStatus`|Whether the contest option position contains an indication (e.g. a Mark).
 <a name="_18_0_2_6340208_1532546142492_921207_4764"></a>`IsAllocable`|0..1|`AllocationStatus`|Whether this indication should be allocated to the contest option's accumulator.
-<a name="_19_0_43701b0_1543438269888_294947_5070"></a>`IsGenerated`|0..1|`boolean`|Whether or not the indication was generated, rather than made by the voter.
+<a name="_19_0_43701b0_1543438269888_294947_5070"></a>`IsGenerated`|0..1|`boolean`|Whether or not the indication was generated, rather than directly made by the voter.
 <a name="_18_0_2_6340208_1488984862414_760136_4710"></a>`MarkMetricValue`|0..*|`String`|The value of the mark metric, represented as a string.
 <a name="_18_0_2_6340208_1485892992408_339917_4637"></a>`NumberVotes`|1|`Integer`|The number of votes represented by the position, usually 1 but may be more depending on the voting method.
 <a name="_18_0_2_6340208_1485892992408_385738_4640"></a>`OtherStatus`|0..1|`String`|Used when [Status](#_18_0_2_6340208_1485892992408_985925_4639) is 'other' to include a user-defined status.
@@ -661,14 +655,4 @@ Attribute | Multiplicity | Type | Attribute Description
 <a name="_18_0_2_6340208_1485892992408_985925_4639"></a>`Status`|0..*|`PositionStatus`|Status of the position, e.g., "generated-rules" for generated by the machine, from the [PositionStatus](#_18_0_2_6340208_1485894157707_572874_4551) enumeration. If no values apply, use 'other' and include a user-defined status in OtherStatus.
 
 
-
-# NIST V1.0 - CastVoteRecords
-
-- Table of Contents
-  - Enumerations
-  - Classes
-
-## Enumerations
-
-## Classes
 
