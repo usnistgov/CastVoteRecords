@@ -414,17 +414,19 @@ Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
 <a name="_18_0_2_6340208_1469207550920_513772_4736"></a>`BallotAuditId`|0..1|`String`|A unique identifier for this CVR, used to link the CVR with the corresponding audit record, e.g., a paper ballot. This identifier may be impressed on the corresponding audit record as it is scanned, or otherwise associated with the corresponding ballot.
 <a name="_18_0_2_6340208_1477335811070_110072_4695"></a>`BallotImage`|0..*|`ImageData`|An image of the ballot sheet created by the scanning device.
-<a name="_18_0_2_6340208_1485889604690_46103_4553"></a>`BallotNumber`|0..1|`String`|A unique identifier for the ballot (or sheet of a multi-sheet ballot) that this CVR represents, used if ballots are pre-marked with unique identifiers. If provided, this number would be the same on all CVRs that represent individual sheets from the same multi-sheet ballot. This identifier is not the same as one that may be impressed on the corresponding ballot as it is scanned or otherwise associated with the corresponding ballot; see the [BallotAuditId](#_18_0_2_6340208_1469207550920_513772_4736) attribute.
+<a name="_18_0_2_6340208_1485889604690_46103_4553"></a>`BallotPrePrintedId`|0..1|`String`|A unique identifier for the ballot (or sheet of a multi-sheet ballot) that this CVR represents, used if ballots are pre-marked with unique identifiers. If provided, this number would be the same on all CVRs that represent individual sheets from the same multi-sheet ballot. This identifier is not the same as one that may be impressed on the corresponding ballot as it is scanned or otherwise associated with the corresponding ballot; see the [BallotAuditId](#_18_0_2_6340208_1469207550920_513772_4736) attribute.
 
+<a name="_18_0_2_6340208_1485889507713_842254_4548"></a>`BallotSheetId`|0..1|`String`|A unique number for the ballot (or sheet of a multi-sheet ballot) that this CVR represents, used if ballots are pre-marked with unique numbers. If provided, this number would be the same on all CVRs that represent individual sheets from the same multi-sheet ballot. This number is not the same as one that may be impressed on the corresponding ballot as it is scanned or otherwise associated with the corresponding ballot; see the [BallotAuditId](#_18_0_2_6340208_1469207550920_513772_4736) attribute.
 <a name="_18_0_2_6340208_1477336326894_57154_4725"></a>`BallotStyleId`|0..1|`String`|An identifier of the ballot style associated with the corresponding ballot.
 <a name="_18_0_2_6340208_1491322891923_301659_4571"></a>`BallotStyleUnit`|0..1|`GpUnit`|Identifies the smallest unit of geography associated with the corresponding ballot, typically a precinct or split-precinct.
+<a name="_18_0_2_6340208_1485284914250_330502_4620"></a>`BatchId`|0..1|`String`|The identifier for the batch that includes this CVR.
+<a name="_18_0_2_6340208_1491322213394_604125_4555"></a>`BatchSequenceId`|0..1|`Integer`|The sequence number of the corresponding paper ballot within a batch.
 <a name="_18_5_3_43701b0_1533931125455_124502_5709"></a>`CreatingDevice`|0..1|`ReportingDevice`|Identifies the device that created the CVR.
 <a name="_19_0_43701b0_1541096043878_35148_5034"></a>`CurrentSnapshot`|1|`CVRSnapshot`|Identifies the snapshot that is currently tabulatable.
 <a name="_18_0_2_6340208_1532543700707_228349_4655"></a>`CVRSnapshot`|1..*|`CVRSnapshot`|Identifies the repeatable portion of the CVR that links to contest selections and related information.
 <a name="_18_0_2_6340208_1489002073957_902699_4732"></a>`Election`|1|`Election`|Used to identify an election with which the CVR is associated.
 <a name="_17_0_2_4_f71035d_1426788475880_621446_2579"></a>`Party`|0..*|`Party`|Identifies the party associated with a CVR, typically for partisan primaries.
-<a name="_18_0_2_6340208_1485285067563_572486_4624"></a>`SequenceNumber`|0..1|`String`|The sequence number for this CVR. This represents the ordinal number that this CVR was processed by the tabulating device.
-<a name="_18_0_2_6340208_1485889507713_842254_4548"></a>`SheetNumber`|0..1|`Integer`|A unique number for the ballot (or sheet of a multi-sheet ballot) that this CVR represents, used if ballots are pre-marked with unique numbers. If provided, this number would be the same on all CVRs that represent individual sheets from the same multi-sheet ballot. This number is not the same as one that may be impressed on the corresponding ballot as it is scanned or otherwise associated with the corresponding ballot; see the [BallotAuditId](#_18_0_2_6340208_1469207550920_513772_4736) attribute.
+<a name="_18_0_2_6340208_1485285067563_572486_4624"></a>`UniqueId`|0..1|`String`|The sequence number for this CVR. This represents the ordinal number that this CVR was processed by the tabulating device.
 
 
 
@@ -483,8 +485,6 @@ Attribute | Multiplicity | Type | Attribute Description
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
 <a name="_18_0_5_43401a7_1475856929390_368624_4454"></a>`Annotation`|0..*|`Annotation`|Used to include an annotation associated with the CVR snapshot.
-<a name="_18_0_2_6340208_1485284914250_330502_4620"></a>`BatchId`|0..1|`String`|The identifier for the batch that includes this CVR.
-<a name="_18_0_2_6340208_1491322213394_604125_4555"></a>`BatchSequenceNumber`|0..1|`Integer`|The sequence number of the corresponding paper ballot within a batch.
 <a name="_18_0_2_6340208_1469203129639_870971_4633"></a>`CVRContest`|0..*|`CVRContest`|Identifies the contests in the CVR.
 <a name="_18_0_5_43401a7_1475856170152_824205_4392"></a>`OtherStatus`|0..1|`String`|When [Status](#_18_0_2_6340208_1472158928951_402259_4603) is 'other', contains the ballot status.
 <a name="_18_0_2_6340208_1472158928951_402259_4603"></a>`Status`|0..*|`CVRStatus`|The status of the CVR.
@@ -620,6 +620,7 @@ Attribute | Multiplicity | Type | Attribute Description
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
 <a name="_18_0_5_43401a7_1484156729348_915950_4329"></a>`Application`|0..1|`String`|The application associated with the reporting device.
+<a name="_19_0_43701b0_1545400619649_205122_5079"></a>`Code`|0..*|`Code`|A code associated with the reporting device.
 <a name="_17_0_2_4_f71035d_1401286171326_648907_2273"></a>`Manufacturer`|0..1|`String`|Manufacturer of the reporting device.
 <a name="_18_0_2_6340208_1488984847640_305895_4706"></a>`MarkMetricType`|0..1|`String`|The type of metric being used to determine quality. The type must be specific enough that the attached value can be accurately verified later, e.g., 'Acme Mark Density' may be a sufficiently specific type.
 <a name="_17_0_2_4_f71035d_1401286117587_806540_2269"></a>`Model`|0..1|`String`|Manufacturer's model of the reporting device.
