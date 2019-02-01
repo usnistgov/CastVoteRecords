@@ -1,4 +1,4 @@
-<CastVoteRecordReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="NIST_V0_cast_vote_records.xsd">
+<CastVoteRecordReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="NIST_V0_cast_vote_records.xsd" xsi:schemaLocation="NIST_V0_cast_vote_records.xsd file:///C:/Users/john/Documents/GitHub/CastVoteRecords/NIST_V0_cast_vote_records.xsd">
 	<!-- 5.1 Examples -->
 	<CVR>
 		<BallotImage>
@@ -21,7 +21,7 @@
 			<Type>original</Type>
 		</CVRSnapshot>
 		<ElectionId>_EL7</ElectionId>
-		<SequenceNumber>1</SequenceNumber>
+		<UniqueId>1</UniqueId>
 	</CVR>
 	<CVR>
 		<BallotImage>
@@ -44,7 +44,7 @@
 			<Type>original</Type>
 		</CVRSnapshot>
 		<ElectionId>_EL7</ElectionId>
-		<SequenceNumber>2</SequenceNumber>
+		<UniqueId>2</UniqueId>
 	</CVR>
 	<CVR>
 		<CurrentSnapshotId>cvr-003</CurrentSnapshotId>
@@ -72,7 +72,7 @@
 			<Type>interpreted</Type>
 		</CVRSnapshot>
 		<ElectionId>_EL7</ElectionId>
-		<SequenceNumber>1</SequenceNumber>
+		<UniqueId>1</UniqueId>
 	</CVR>
 	<CVR>
 		<CurrentSnapshotId>cvr-004</CurrentSnapshotId>
@@ -103,7 +103,7 @@
 			<Type>interpreted</Type>
 		</CVRSnapshot>
 		<ElectionId>_EL7</ElectionId>
-		<SequenceNumber>2</SequenceNumber>
+		<UniqueId>2</UniqueId>
 	</CVR>
 	<!-- 5.3 Example -->
 	<CVR>
@@ -142,7 +142,7 @@
 			<Type>original</Type>
 		</CVRSnapshot>
 		<ElectionId>_EL7</ElectionId>
-		<SequenceNumber>61</SequenceNumber>
+		<UniqueId>61</UniqueId>
 	</CVR>
 	<!-- 5.4 Example -->
 	<CVR>
@@ -192,7 +192,7 @@
 			<Type>original</Type>
 		</CVRSnapshot>
 		<ElectionId>_EL7</ElectionId>
-		<SequenceNumber>57</SequenceNumber>
+		<UniqueId>57</UniqueId>
 	</CVR>
 	<Election ObjectId="_EL7">
 		<Candidate ObjectId="_C1CN1">
