@@ -157,7 +157,10 @@
           "minItems": 0,
           "type": "array"
         },
-        "BallotNumber": {
+        "BallotPrePrintedId": {
+          "type": "string"
+        },
+        "BallotSheetId": {
           "type": "string"
         },
         "BallotStyleId": {
@@ -168,6 +171,12 @@
           "refTypes": [
             "CVR.GpUnit"
           ]
+        },
+        "BatchId": {
+          "type": "string"
+        },
+        "BatchSequenceId": {
+          "type": "integer"
         },
         "CVRSnapshot": {
           "items": {
@@ -204,11 +213,8 @@
           "minItems": 0,
           "type": "array"
         },
-        "SequenceNumber": {
+        "UniqueId": {
           "type": "string"
-        },
-        "SheetNumber": {
-          "type": "integer"
         }
       },
       "type": "object"
@@ -341,12 +347,6 @@
           },
           "minItems": 0,
           "type": "array"
-        },
-        "BatchId": {
-          "type": "string"
-        },
-        "BatchSequenceNumber": {
-          "type": "integer"
         },
         "CVRContest": {
           "items": {
@@ -1124,6 +1124,13 @@
         },
         "Application": {
           "type": "string"
+        },
+        "Code": {
+          "items": {
+            "$ref": "#/definitions/CVR.Code"
+          },
+          "minItems": 0,
+          "type": "array"
         },
         "Manufacturer": {
           "type": "string"
