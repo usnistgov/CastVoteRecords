@@ -138,9 +138,9 @@
 			<cdf:CVRContest>
 				<cdf:ContestId>_25CA2</cdf:ContestId>
 				<cdf:Undervotes>1</cdf:Undervotes>
-			</cdf:CVRContest>
-			<cdf:OtherStatus>cast</cdf:OtherStatus>
+			</cdf:CVRContest>			
 			<cdf:Status>other</cdf:Status>
+			<cdf:OtherStatus>cast</cdf:OtherStatus>
 			<cdf:Type>original</cdf:Type>
 		</cdf:CVRSnapshot>
 		<cdf:ElectionId>_AK2014General</cdf:ElectionId>
