@@ -91,9 +91,9 @@ Name | Value
 ---- | -----
 `invalidated-rules`|To indicate that the contest has been invalidated by the generating device because of contest rules.
 `not-indicated`|For a CVRContest with no SelectionPosition, i.e. to specify the position contains no marks or other indications.
-`other`|Used in conjunction with CVRContest::OtherStatus when no other value in this enumeration applies.
 `overvoted`|To indicate that the contest was overvoted.
 `undervoted`|To indicate that the contest was undervoted.
+`other`|Used in conjunction with CVRContest::OtherStatus when no other value in this enumeration applies.
 
 ### <a name="_18_0_2_6340208_1472159006307_546162_4628"></a>*The **CVRStatus** Enumeration*
 
@@ -127,9 +127,9 @@ Used in [Hash](#_18_0_2_6340208_1485894593826_736413_4615)::[Type](#_18_0_2_6340
 Name | Value
 ---- | -----
 `md6`|To indicate that the MD6 message digest algorithm is being used.
-`other`|Used in conjunction with Hash::OtherType when no other value in this enumeration applies.
 `sha-256`|To indicate that the SHA 256-bit signature is being used.
 `sha-512`|To indicate that the SHA 512-bit (32-byte) signature is being used.
+`other`|Used in conjunction with Hash::OtherType when no other value in this enumeration applies.
 
 ### <a name="_17_0_2_4_f71035d_1425061188508_163854_2613"></a>*The **IdentifierType** Enumeration*
 
@@ -143,8 +143,8 @@ Name | Value
 `local-level`|To indicate that the identifier is from a local-level scheme, i.e., unique to a county or city.
 `national-level`|To indicate that the identifier is from a national-level scheme other than FIPS or OCD-ID.
 `ocd-id`|To indicate that the identifier is from the OCD-ID scheme.
-`other`|Used in conjunction with Code::OtherType when no other value in this enumeration applies.
 `state-level`|To indicate that the identifier is from a state-level scheme, i.e., unique to a particular state.
+`other`|Used in conjunction with Code::OtherType when no other value in this enumeration applies.
 
 ### <a name="_19_0_43701b0_1541430872294_37549_5007"></a>*The **IndicationStatus** Enumeration*
 
@@ -181,11 +181,11 @@ Used in [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380)::[Type](#_17_0_2_4
 Name | Value
 ---- | -----
 `combined-precinct`|To indicate a combined precinct.
-`other`|Used in conjunction with GpUnit::OtherType when no other value in this enumeration applies.
 `polling-place`|To indicate a polling place.
 `precinct`|To indicate a precinct.
 `split-precinct`|To indicate a split-precinct.
 `vote-center`|To indicate a vote-center.
+`other`|Used in conjunction with GpUnit::OtherType when no other value in this enumeration applies.
 
 ### <a name="_18_0_5_43401a7_1483727563257_179426_4343"></a>*The **ReportType** Enumeration*
 
@@ -198,8 +198,8 @@ Name | Value
 `adjudicated`|To indicate that the report contains adjudications.
 `aggregated`|To indicate that the report is an aggregation of device reports.
 `originating-device-export`|To indicate that the report is an export from a device such as a scanner.
-`other`|Used in conjunction with CastVoteRecordReport::OtherReportType when no other value in this enumeration applies.
 `rcv-round`|To indicate that the report is the result of a ranked choice voting round.
+`other`|Used in conjunction with CastVoteRecordReport::OtherReportType when no other value in this enumeration applies.
 
 ### <a name="_18_0_5_43401a7_1483727021192_184103_4291"></a>*The **VoteVariation** Enumeration*
 
@@ -214,12 +214,12 @@ Name | Value
 `cumulative`|To indicate cumulative voting.
 `majority`|To indicate majority voting.
 `n-of-m`|To indicate the N of M voting method.
-`other`|Used in conjunction with Contest::OtherVoteVariation when no other value in this enumeration applies.
 `plurality`|To indicate plurality voting.
 `proportional`|To indicate proportional voting.
 `range`|To indicate range voting.
 `rcv`|To indicate Ranked Choice Voting (RCV).
 `super-majority`|To indicate the super majority voting method.
+`other`|Used in conjunction with Contest::OtherVoteVariation when no other value in this enumeration applies.
 
 ## Classes
 
@@ -237,6 +237,23 @@ Attribute | Multiplicity | Type | Attribute Description
 <a name="_18_0_5_43401a7_1475856758084_638015_4437"></a>`TimeStamp`|0..1|`dateTime`|The date and time of the annotation.
 
 
+### <a name="_17_0_2_4_78e0236_1389366932057_929676_2783"></a>*The **BallotMeasureContest** Class*
+
+![Image of BallotMeasureContest](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_80297_5351.png)
+
+[BallotMeasureContest](#_17_0_2_4_78e0236_1389366932057_929676_2783) is a subclass of [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) and is used to identify the type of contest as involving one or more ballot measures. It inherits attributes from [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400).
+
+
+### <a name="_17_0_2_4_78e0236_1389372163799_981952_2926"></a>*The **BallotMeasureSelection** Class*
+
+![Image of BallotMeasureSelection](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_930954_5339.png)
+
+[BallotMeasureSelection](#_17_0_2_4_78e0236_1389372163799_981952_2926) is a subclass of [ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906) and is used for ballot measures. The voter's selected response to the contest selection (e.g., "yes" or "no") may be in English or other languages as utilized on the voter's ballot.
+
+Attribute | Multiplicity | Type | Attribute Description
+--------- | ------------ | ---- | ---------------------
+<a name="_17_0_2_4_78e0236_1389710917151_765889_2176"></a>`Selection`|1|`String`|The voter's selection, i.e., 'yes' or 'no', in English or in other languages as utilized on the voter's ballot.
+
 
 ### <a name="_17_0_2_4_78e0236_1389366272694_544359_2440"></a>*The **Candidate** Class*
 
@@ -250,6 +267,30 @@ Attribute | Multiplicity | Type | Attribute Description
 <a name="_17_0_2_4_78e0236_1389710816659_20227_2170"></a>`Name`|0..1|`String`|Candidate's name as listed on the ballot.
 <a name="_17_0_2_4_78e0236_1389366597377_433664_2698"></a>`Party`|0..1|`Party`|The party associated with the candidate.
 
+
+### <a name="_17_0_2_4_78e0236_1389366970084_183781_2806"></a>*The **CandidateContest** Class*
+
+![Image of CandidateContest](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_347543_5358.png)
+
+[CandidateContest](#_17_0_2_4_78e0236_1389366970084_183781_2806) is a subclass of [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) and is used to identify the type of contest as involving one or more candidates. It inherits attributes from [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400).
+
+Attribute | Multiplicity | Type | Attribute Description
+--------- | ------------ | ---- | ---------------------
+<a name="_18_0_2_6340208_1472160807984_726708_4721"></a>`NumberElected`|0..1|`Integer`|The number of candidates to be elected in the contest.
+<a name="_17_0_2_4_78e0236_1389735000217_728769_4016"></a>`PrimaryParty`|0..1|`Party`|The party associated with the contest, if a partisan primary.
+<a name="_18_0_2_6340208_1472160823529_29923_4725"></a>`VotesAllowed`|0..1|`Integer`|The number of votes allowed in the contest, e.g., 3 for a 'choose 3 of 5 candidates' contest.
+
+
+### <a name="_17_0_2_4_d420315_1392145640524_831493_2562"></a>*The **CandidateSelection** Class*
+
+![Image of CandidateSelection](CastVoteRecords_UML_Documentation_files/_17_0_2_4_d420315_1392145640527_433768_2563.png)
+
+[CandidateSelection](#_17_0_2_4_d420315_1392145640524_831493_2562) is a subclass of [ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906) and is used for candidates, including for write-in candidates.
+
+Attribute | Multiplicity | Type | Attribute Description
+--------- | ------------ | ---- | ---------------------
+<a name="_17_0_2_4_d420315_1392145686219_781480_2594"></a>`Candidate`|0..*|`Candidate`|The candidate associated with the contest selection. For contests involving a ticket of multiple candidates, an ordered list of candidates as they appeared on the ballot would be created.
+<a name="_18_0_2_6340208_1477060857505_890997_4554"></a>`IsWriteIn`|0..1|`boolean`|A flag to indicate if the candidate selection is associated with a write-in.
 
 
 ### <a name="_17_0_2_4_78e0236_1389366195564_913164_2300"></a>*The **CastVoteRecordReport** Class*
@@ -276,7 +317,6 @@ Attribute | Multiplicity | Type | Attribute Description
 <a name="_18_0_2_6340208_1488984515169_690457_4657"></a>`Version`|1|`CastVoteRecordVersion`|The version of the CVR specification being used (1.0).
 
 
-
 ### <a name="_17_0_2_4_f71035d_1430405712653_451634_2410"></a>*The **Code** Class*
 
 ![Image of Code](CastVoteRecords_UML_Documentation_files/_17_0_2_4_f71035d_1430405712661_66241_2411.png)
@@ -289,7 +329,6 @@ Attribute | Multiplicity | Type | Attribute Description
 <a name="_17_0_2_4_f71035d_1430405732252_109247_2429"></a>`OtherType`|0..1|`string`|If [Type](#_17_0_2_4_f71035d_1430405763078_743585_2433) is 'other', the type of code.
 <a name="_17_0_2_4_f71035d_1430405763078_743585_2433"></a>`Type`|1|`IdentifierType`|Used to indicate the type of code, from the [IdentifierType](#_17_0_2_4_f71035d_1425061188508_163854_2613) enumeration.
 <a name="_17_0_2_4_f71035d_1430405785820_123111_2437"></a>`Value`|1|`string`|The value of the code, i.e., the identifier.
-
 
 
 ### <a name="_17_0_2_4_78e0236_1389366251994_876831_2400"></a>*The **Contest** Class*
@@ -314,37 +353,6 @@ Attribute | Multiplicity | Type | Attribute Description
 <a name="_18_0_5_43401a7_1483727343854_246701_4334"></a>`VoteVariation`|0..1|`VoteVariation`|The vote variation for this contest, from the [VoteVariation](#_18_0_5_43401a7_1483727021192_184103_4291) enumeration.
 
 
-#### <a name="_17_0_2_4_78e0236_1389366932057_929676_2783"></a>*The **BallotMeasureContest** Class*
-
-![Image of BallotMeasureContest](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_80297_5351.png)
-
-[BallotMeasureContest](#_17_0_2_4_78e0236_1389366932057_929676_2783) is a subclass of [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) and is used to identify the type of contest as involving one or more ballot measures. It inherits attributes from [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400).
-
-
-
-#### <a name="_17_0_2_4_78e0236_1389366970084_183781_2806"></a>*The **CandidateContest** Class*
-
-![Image of CandidateContest](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_347543_5358.png)
-
-[CandidateContest](#_17_0_2_4_78e0236_1389366970084_183781_2806) is a subclass of [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) and is used to identify the type of contest as involving one or more candidates. It inherits attributes from [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400).
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_18_0_2_6340208_1472160807984_726708_4721"></a>`NumberElected`|0..1|`Integer`|The number of candidates to be elected in the contest.
-<a name="_17_0_2_4_78e0236_1389735000217_728769_4016"></a>`PrimaryParty`|0..1|`Party`|The party associated with the contest, if a partisan primary.
-<a name="_18_0_2_6340208_1472160823529_29923_4725"></a>`VotesAllowed`|0..1|`Integer`|The number of votes allowed in the contest, e.g., 3 for a 'choose 3 of 5 candidates' contest.
-
-
-
-#### <a name="_17_0_2_4_d420315_1393514218965_55008_3144"></a>*The **PartyContest** Class*
-
-![Image of PartyContest](CastVoteRecords_UML_Documentation_files/_17_0_2_4_d420315_1393514218978_361648_3145.png)
-
-[PartyContest](#_17_0_2_4_d420315_1393514218965_55008_3144) is a subclass of [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) and is used to identify the type of contest as involving a straight party selection. It inherits attributes from [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400).
-
-
-
-
 ### <a name="_17_0_2_4_78e0236_1389372124445_11077_2906"></a>*The **ContestSelection** Class*
 
 ![Image of ContestSelection](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_125024_5356.png)
@@ -365,44 +373,6 @@ Instances of [CVRContestSelection](#_18_0_5_43401a7_1474452890357_299022_4292) s
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
 <a name="_18_5_3_43701b0_1534269642876_463463_5873"></a>`Code`|0..*|`Code`|Code used to identify the contest selection.
-
-
-#### <a name="_17_0_2_4_78e0236_1389372163799_981952_2926"></a>*The **BallotMeasureSelection** Class*
-
-![Image of BallotMeasureSelection](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_930954_5339.png)
-
-[BallotMeasureSelection](#_17_0_2_4_78e0236_1389372163799_981952_2926) is a subclass of [ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906) and is used for ballot measures. The voter's selected response to the contest selection (e.g., "yes" or "no") may be in English or other languages as utilized on the voter's ballot.
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_78e0236_1389710917151_765889_2176"></a>`Selection`|1|`String`|The voter's selection, i.e., 'yes' or 'no', in English or in other languages as utilized on the voter's ballot.
-
-
-
-#### <a name="_17_0_2_4_d420315_1392145640524_831493_2562"></a>*The **CandidateSelection** Class*
-
-![Image of CandidateSelection](CastVoteRecords_UML_Documentation_files/_17_0_2_4_d420315_1392145640527_433768_2563.png)
-
-[CandidateSelection](#_17_0_2_4_d420315_1392145640524_831493_2562) is a subclass of [ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906) and is used for candidates, including for write-in candidates.
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_d420315_1392145686219_781480_2594"></a>`Candidate`|0..*|`Candidate`|The candidate associated with the contest selection. For contests involving a ticket of multiple candidates, an ordered list of candidates as they appeared on the ballot would be created.
-<a name="_18_0_2_6340208_1477060857505_890997_4554"></a>`IsWriteIn`|0..1|`boolean`|A flag to indicate if the candidate selection is associated with a write-in.
-
-
-
-#### <a name="_17_0_2_4_f71035d_1426519980658_594892_2511"></a>*The **PartySelection** Class*
-
-![Image of PartySelection](CastVoteRecords_UML_Documentation_files/_17_0_2_4_f71035d_1426519980661_572615_2512.png)
-
-[PartySelection](#_17_0_2_4_f71035d_1426519980658_594892_2511) is a subclass of [ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906) and is used typically for a contest selection in a straight-party contest.
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_f71035d_1426520590194_384550_2564"></a>`Party`|1..*|`Party`|The party associated with the contest selection.
-
-
 
 
 ### <a name="_18_0_2_6340208_1532543460307_914551_4600"></a>*The **CVR** Class*
@@ -430,7 +400,6 @@ Attribute | Multiplicity | Type | Attribute Description
 <a name="_18_0_2_6340208_1485285067563_572486_4624"></a>`UniqueId`|0..1|`String`|The sequence number for this CVR. This represents the ordinal number that this CVR was processed by the tabulating device.
 
 
-
 ### <a name="_18_0_2_6340208_1469203058990_306165_4565"></a>*The **CVRContest** Class*
 
 ![Image of CVRContest](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1469203058998_13088_4566.png)
@@ -455,7 +424,6 @@ Attribute | Multiplicity | Type | Attribute Description
 <a name="_18_5_3_43701b0_1534266820963_828170_5833"></a>`WriteIns`|0..1|`Integer`|The total number of write-ins in the contest.
 
 
-
 ### <a name="_18_0_5_43401a7_1474452890357_299022_4292"></a>*The **CVRContestSelection** Class*
 
 ![Image of CVRContestSelection](CastVoteRecords_UML_Documentation_files/_18_0_5_43401a7_1474452890365_842519_4293.png)
@@ -476,7 +444,6 @@ Attribute | Multiplicity | Type | Attribute Description
 <a name="_18_0_2_6340208_1488988324514_948852_4757"></a>`TotalNumberVotes`|0..1|`Integer`|For cumulative or range and other similar voting variations, contains the total number of votes across all indications/marks.
 
 
-
 ### <a name="_17_0_2_4_78e0236_1389366224561_797289_2360"></a>*The **CVRSnapshot** Class*
 
 ![Image of CVRSnapshot](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389799207465_976765_6435.png)
@@ -494,7 +461,6 @@ Attribute | Multiplicity | Type | Attribute Description
 <a name="_18_0_2_6340208_1532543968111_779654_4689"></a>`Type`|1|`CVRType`|The type of the snapshot, e.g., original.
 
 
-
 ### <a name="_18_0_2_6340208_1485892911278_166697_4594"></a>*The **CVRWriteIn** Class*
 
 ![Image of CVRWriteIn](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1485892911283_45277_4605.png)
@@ -505,7 +471,6 @@ Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
 <a name="_18_0_2_6340208_1485892911278_481541_4596"></a>`Text`|0..1|`String`|Used for the text of the write-in, typically present when the CVR has been created by electronic ballot marking equipment.
 <a name="_18_0_2_6340208_1485892911278_517000_4595"></a>`WriteInImage`|0..1|`ImageData`|Used for an image of the write-in, typically made by a scanner when scanning a paper ballot.
-
 
 
 ### <a name="_17_0_2_4_f71035d_1426101822599_430942_2209"></a>*The **Election** Class*
@@ -523,7 +488,6 @@ Attribute | Multiplicity | Type | Attribute Description
 <a name="_17_0_2_4_f71035d_1426101865703_367602_2232"></a>`Name`|0..1|`String`|A text string identifying the election.
 
 
-
 ### <a name="_18_0_2_6340208_1485284639717_497586_4548"></a>*The **File** Class*
 
 ![Image of File](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1485284639742_53322_4561.png)
@@ -535,15 +499,6 @@ Attribute | Multiplicity | Type | Attribute Description
 <a name="_18_0_2_6340208_1485284639723_485833_4550"></a>`Data`|1|`base64Binary`|Contains the base64 binary contents of the file.
 <a name="_18_0_2_6340208_1485284639724_125436_4551"></a>`FileName`|0..1|`string`|Contains the name of the file or an identifier of the file.
 <a name="_18_0_2_6340208_1485284639724_875893_4552"></a>`MimeType`|0..1|`string`|The mime type of the file, e.g., image/jpeg.
-
-
-#### <a name="_18_0_2_6340208_1485284639720_737438_4549"></a>*The **Image** Class*
-
-![Image of Image](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1485284639744_493211_4562.png)
-
-Used by [File](#_18_0_2_6340208_1485284639717_497586_4548) for a file containing an image, e.g., an image of a write-in on a paper ballot.
-
-
 
 
 ### <a name="_17_0_2_4_78e0236_1389366233346_42391_2380"></a>*The **GpUnit** Class*
@@ -566,7 +521,6 @@ Attribute | Multiplicity | Type | Attribute Description
 <a name="_17_0_2_4_78e0236_1389713376966_77071_2393"></a>`Type`|1|`ReportingUnitType`|Contains the type of geographical unit, e.g., precinct, split-precinct, vote center, using values from the [ReportingUnitType](#_17_0_2_4_f71035d_1431607637366_785815_2242) enumeration. If no values apply, use 'other' and include a user-defined type in [OtherType](#_17_0_2_4_f71035d_1426007519161_685921_2510).
 
 
-
 ### <a name="_18_0_2_6340208_1485894593826_736413_4615"></a>*The **Hash** Class*
 
 ![Image of Hash](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1485894619632_889587_4622.png)
@@ -579,6 +533,12 @@ Attribute | Multiplicity | Type | Attribute Description
 <a name="_18_0_2_6340208_1485894641846_811323_4646"></a>`Type`|1|`HashType`|The type of the hash, from the [HashType](#_18_0_2_6340208_1485894679180_11599_4655) enumeration.
 <a name="_18_0_2_6340208_1485894623486_698989_4642"></a>`Value`|1|`string`|The hash value, encoded as a string.
 
+
+### <a name="_18_0_2_6340208_1485284639720_737438_4549"></a>*The **Image** Class*
+
+![Image of Image](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1485284639744_493211_4562.png)
+
+Used by [File](#_18_0_2_6340208_1485284639717_497586_4548) for a file containing an image, e.g., an image of a write-in on a paper ballot.
 
 
 ### <a name="_18_0_2_6340208_1485894533655_402033_4588"></a>*The **ImageData** Class*
@@ -598,7 +558,6 @@ Attribute | Multiplicity | Type | Attribute Description
 <a name="_18_0_2_6340208_1485894593835_110320_4618"></a>`Location`|0..1|`anyURI`|A pointer to the location of the image file.
 
 
-
 ### <a name="_17_0_2_4_78e0236_1389366278128_412819_2460"></a>*The **Party** Class*
 
 ![Image of Party](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_989674_5350.png)
@@ -611,6 +570,23 @@ Attribute | Multiplicity | Type | Attribute Description
 <a name="_17_0_2_4_f71035d_1430412372015_749476_2263"></a>`Code`|0..*|`Code`|A code associated with the party.
 <a name="_17_0_2_4_78e0236_1389710882517_230322_2174"></a>`Name`|0..1|`String`|Official full name of the party, e.g., "Republican".
 
+
+### <a name="_17_0_2_4_d420315_1393514218965_55008_3144"></a>*The **PartyContest** Class*
+
+![Image of PartyContest](CastVoteRecords_UML_Documentation_files/_17_0_2_4_d420315_1393514218978_361648_3145.png)
+
+[PartyContest](#_17_0_2_4_d420315_1393514218965_55008_3144) is a subclass of [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) and is used to identify the type of contest as involving a straight party selection. It inherits attributes from [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400).
+
+
+### <a name="_17_0_2_4_f71035d_1426519980658_594892_2511"></a>*The **PartySelection** Class*
+
+![Image of PartySelection](CastVoteRecords_UML_Documentation_files/_17_0_2_4_f71035d_1426519980661_572615_2512.png)
+
+[PartySelection](#_17_0_2_4_f71035d_1426519980658_594892_2511) is a subclass of [ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906) and is used typically for a contest selection in a straight-party contest.
+
+Attribute | Multiplicity | Type | Attribute Description
+--------- | ------------ | ---- | ---------------------
+<a name="_17_0_2_4_f71035d_1426520590194_384550_2564"></a>`Party`|1..*|`Party`|The party associated with the contest selection.
 
 
 ### <a name="_17_0_2_4_78e0236_1389798013459_389380_4178"></a>*The **ReportingDevice** Class*
@@ -629,6 +605,16 @@ Attribute | Multiplicity | Type | Attribute Description
 <a name="_18_0_5_43401a7_1484156092074_357957_4321"></a>`Notes`|0..*|`String`|Additional explanatory notes as applicable.
 <a name="_17_0_2_4_d420315_1393446014406_394266_2688"></a>`SerialNumber`|0..1|`String`|Serial number or other identification that can uniquely identify the reporting device.
 
+
+### <a name="_18_0_2_6340208_1425646217522_163181_4554"></a>*The **RetentionContest** Class*
+
+![Image of RetentionContest](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1425646217525_713812_4555.png)
+
+[RetentionContest](#_18_0_2_6340208_1425646217522_163181_4554) is a subclass of [BallotMeasureContest](#_17_0_2_4_78e0236_1389366932057_929676_2783) and is used to identify the type of contest as involving a retention, such as for a judicial retention. While it is similar to [BallotMeasureContest](#_17_0_2_4_78e0236_1389366932057_929676_2783), it contains a link to [Candidate](#_17_0_2_4_78e0236_1389366272694_544359_2440) that [BallotMeasureContest](#_17_0_2_4_78e0236_1389366932057_929676_2783) does not. [RetentionContest](#_18_0_2_6340208_1425646217522_163181_4554) inherits attributes from [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400).
+
+Attribute | Multiplicity | Type | Attribute Description
+--------- | ------------ | ---- | ---------------------
+<a name="_18_0_2_6340208_1425646466278_708197_4616"></a>`Candidate`||`Candidate`|Identifies the candidate in the retention contest.
 
 
 ### <a name="_18_0_2_6340208_1485892992407_492157_4635"></a>*The **SelectionPosition** Class*
@@ -656,6 +642,5 @@ Attribute | Multiplicity | Type | Attribute Description
 <a name="_18_0_2_6340208_1485892992408_897036_4641"></a>`Position`|0..1|`Integer`|The ordinal position of the selection position within the contest option.
 <a name="_18_0_2_6340208_1485892992407_101557_4636"></a>`Rank`|0..1|`Integer`|For the RCV voting variation, the rank chosen by the voter, for when a position can represent a ranking.
 <a name="_18_0_2_6340208_1485892992408_985925_4639"></a>`Status`|0..*|`PositionStatus`|Status of the position, e.g., "generated-rules" for generated by the machine, from the [PositionStatus](#_18_0_2_6340208_1485894157707_572874_4551) enumeration. If no values apply, use 'other' and include a user-defined status in OtherStatus.
-
 
 
