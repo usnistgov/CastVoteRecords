@@ -238,7 +238,7 @@
 	<GpUnit ObjectId="_GP1">
 		<Type>precinct</Type>
 	</GpUnit>
-	<ReportGeneratingDeviceIds>_EL7</ReportGeneratingDeviceIds>
+	<ReportGeneratingDeviceIds>_RD1</ReportGeneratingDeviceIds>
 	<ReportingDevice ObjectId="_RD1">
 		<SerialNumber>1038495</SerialNumber>
 	</ReportingDevice>

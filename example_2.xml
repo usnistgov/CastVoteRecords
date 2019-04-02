@@ -37,7 +37,7 @@
 			<cdf:CVRContest>
 				<cdf:ContestId>_5TS</cdf:ContestId>
 				<cdf:CVRContestSelection>
-					<cdf:ContestSelectionId>_1ECP</cdf:ContestSelectionId>
+					<cdf:ContestSelectionId>_CS1ECP</cdf:ContestSelectionId>
 					<cdf:OptionPosition>1</cdf:OptionPosition>
 					<cdf:SelectionPosition>
 						<cdf:HasIndication>yes</cdf:HasIndication>
@@ -47,7 +47,7 @@
 					<cdf:TotalNumberVotes>0</cdf:TotalNumberVotes>
 				</cdf:CVRContestSelection>
 				<cdf:CVRContestSelection>
-					<cdf:ContestSelectionId>_1EJM</cdf:ContestSelectionId>
+					<cdf:ContestSelectionId>_CS1EJM</cdf:ContestSelectionId>
 					<cdf:OptionPosition>2</cdf:OptionPosition>
 					<cdf:SelectionPosition>
 						<cdf:HasIndication>yes</cdf:HasIndication>
@@ -152,7 +152,7 @@
 			<cdf:CVRContest>
 				<cdf:ContestId>_6RC</cdf:ContestId>
 				<cdf:CVRContestSelection>
-					<cdf:ContestSelectionId>_1FMZ</cdf:ContestSelectionId>
+					<cdf:ContestSelectionId>_CS1FMZ</cdf:ContestSelectionId>
 					<cdf:OptionPosition>1</cdf:OptionPosition>
 					<cdf:SelectionPosition>
 						<cdf:HasIndication>yes</cdf:HasIndication>
@@ -174,7 +174,7 @@
 			<cdf:CVRContest>
 				<cdf:ContestId>_6RC</cdf:ContestId>
 				<cdf:CVRContestSelection>
-					<cdf:ContestSelectionId>_1FMZ</cdf:ContestSelectionId>
+					<cdf:ContestSelectionId>_CS1FMZ</cdf:ContestSelectionId>
 					<cdf:OptionPosition>1</cdf:OptionPosition>
 					<cdf:SelectionPosition>
 						<cdf:HasIndication>no</cdf:HasIndication>
