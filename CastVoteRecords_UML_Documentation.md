@@ -33,6 +33,7 @@
     - *The **[CVRWriteIn](#_18_0_2_6340208_1485892911278_166697_4594)** Class*
     - *The **[Election](#_17_0_2_4_f71035d_1426101822599_430942_2209)** Class*
     - *The **[File](#_18_0_2_6340208_1485284639717_497586_4548)** Class*
+    - *The **[FractionalNumber](#_19_0_43701b0_1556049559972_974781_5102)** Class*
     - *The **[GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380)** Class*
     - *The **[Hash](#_18_0_2_6340208_1485894593826_736413_4615)** Class*
     - *The **[Image](#_18_0_2_6340208_1485284639720_737438_4549)** Class*
@@ -440,6 +441,7 @@ Attribute | Multiplicity | Type | Attribute Description
 <a name="_18_0_5_43401a7_1525884900274_453930_4291"></a>`Rank`|0..1|`Integer`|For the RCV voting variation, the rank chosen by the voter, for when a contest selection can represent a ranking.
 <a name="_18_0_2_6340208_1485892992410_316802_4653"></a>`SelectionPosition`|1..*|`SelectionPosition`|Used to include further information about the indication/mark associated with the contest selection. Depending on the voting method, multiple indications/marks per selection may be possible.
 <a name="_18_0_5_43401a7_1475850275266_189599_4334"></a>`Status`|0..*|`ContestSelectionStatus`|Contains the status of the contest selection, e.g., 'needs-adjudication' for a contest requiring adjudication, using values from the [ContestSelectionStatus](#_18_0_5_43401a7_1475850153090_186243_4311) enumeration. If no values apply, use 'other' and include a user-defined status in [OtherStatus](#_18_0_5_43401a7_1475855963037_920235_4384).
+<a name="_19_0_43701b0_1556050052423_495068_5158"></a>`TotalFractionalVotes`|0..1|`FractionalNumber`|For cumulative or range and other similar voting variations, contains the total proper fractional number of votes across all indications/marks.
 <a name="_18_0_2_6340208_1488988324514_948852_4757"></a>`TotalNumberVotes`|0..1|`Integer`|For cumulative or range and other similar voting variations, contains the total number of votes across all indications/marks.
 
 
@@ -498,6 +500,17 @@ Attribute | Multiplicity | Type | Attribute Description
 <a name="_18_0_2_6340208_1485284639723_485833_4550"></a>`Data`|1|`base64Binary`|Contains the base64 binary contents of the file.
 <a name="_18_0_2_6340208_1485284639724_125436_4551"></a>`FileName`|0..1|`string`|Contains the name of the file or an identifier of the file.
 <a name="_18_0_2_6340208_1485284639724_875893_4552"></a>`MimeType`|0..1|`string`|The mime type of the file, e.g., image/jpeg.
+
+
+### <a name="_19_0_43701b0_1556049559972_974781_5102"></a>*The **FractionalNumber** Class*
+
+![Image of FractionalNumber](CastVoteRecords_UML_Documentation_files/_19_0_43701b0_1556049559993_299889_5103.png)
+
+A proper fractional value, represented using fractional or decimal notation.
+
+Attribute | Multiplicity | Type | Attribute Description
+--------- | ------------ | ---- | ---------------------
+<a name="_19_0_43701b0_1556049825598_445953_5155"></a>`pattern`||`String`|Pattern describing the allowed values for a [FractionalNumber](#_19_0_43701b0_1556049559972_974781_5102).
 
 
 ### <a name="_17_0_2_4_78e0236_1389366233346_42391_2380"></a>*The **GpUnit** Class*
@@ -632,6 +645,7 @@ Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
 <a name="_19_0_43701b0_1541096140220_743803_5066"></a>`Code`|0..*|`Code`|Code used to identify the contest selection position.
 <a name="_19_0_43701b0_1541096285019_709577_5079"></a>`CVRWriteIn`|0..1|`CVRWriteIn`|Used to store information regarding a write-in vote.
+<a name="_19_0_43701b0_1556130739145_967916_5093"></a>`FractionalVotes`|0..1|`FractionalNumber`|The proper fractional number of votes represented by the position.
 <a name="_19_0_43701b0_1541095481007_618279_4996"></a>`HasIndication`|1|`IndicationStatus`|Whether there is a selection indication present.
 <a name="_18_0_2_6340208_1532546142492_921207_4764"></a>`IsAllocable`|0..1|`AllocationStatus`|Whether this indication should be allocated to the contest option's accumulator.
 <a name="_19_0_43701b0_1543438269888_294947_5070"></a>`IsGenerated`|0..1|`boolean`|Whether or not the indication was generated, rather than directly made by the voter.

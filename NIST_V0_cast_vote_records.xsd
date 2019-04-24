@@ -2,6 +2,19 @@
 <xsd:schema elementFormDefault="qualified" targetNamespace="NIST_V0_cast_vote_records.xsd" version="0.0" xmlns="NIST_V0_cast_vote_records.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <!-- ========== Roots ========== -->
   <xsd:element name="CastVoteRecordReport" type="CastVoteRecordReport"/>
+  <!-- ========== Primitives ========== -->
+  <xsd:simpleType name="FractionalNumber">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A proper fractional value, represented using fractional or decimal notation.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="([0-9]+/[1-9]+[0-9]*)|(\.[0-9]+)">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Pattern describing the allowed values for a FractionalNumber.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:pattern>
+    </xsd:restriction>
+  </xsd:simpleType>
   <!-- ========== Enumerations ========== -->
   <xsd:simpleType name="AllocationStatus">
     <xsd:annotation>
@@ -586,6 +599,11 @@
           <xsd:documentation xml:lang="en">Used when Status is 'other' to include a user-defined status.</xsd:documentation>
         </xsd:annotation>
       </xsd:element>
+      <xsd:element name="TotalFractionalVotes" type="FractionalNumber" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">For cumulative or range and other similar voting variations, contains the total proper fractional number of votes across all indications/marks.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
       <xsd:element name="TotalNumberVotes" type="xsd:integer" minOccurs="0">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">For cumulative or range and other similar voting variations, contains the total number of votes across all indications/marks.</xsd:documentation>
@@ -1141,6 +1159,11 @@ Hash – to contain cryptographic hash function data for the file.</xsd:document
       <xsd:element name="CVRWriteIn" type="CVRWriteIn" minOccurs="0">
         <xsd:annotation>
           <xsd:documentation xml:lang="en">Used to store information regarding a write-in vote.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="FractionalVotes" type="FractionalNumber" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The proper fractional number of votes represented by the position.</xsd:documentation>
         </xsd:annotation>
       </xsd:element>
       <xsd:element name="HasIndication" type="IndicationStatus">
