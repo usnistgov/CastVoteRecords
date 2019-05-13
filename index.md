@@ -14,11 +14,10 @@ Ian Piper
 
 John Wack
 
-This publication is available free of charge from:\
+This publication is available free of charge from:  
 http://dx.doi.org/10.6028/NIST.SP.1500-103
 
-![](media/image1.emf){width="2.109722222222222in"
-height="1.0305555555555554in"}
+![](media/image1.emf)
 
 NIST Special Publication 1500-103, Version 1.0
 
@@ -40,12 +39,11 @@ John Wack, *Software and Systems Division,*
 
 This publication is available free of charge from:
 
-[<http://dx.doi.org/10.6028/NIST.SP.1500-1>03]{.underline}
+<span class="underline"><http://dx.doi.org/10.6028/NIST.SP.1500-1>03</span>
 
 February 2019
 
-![](media/image2.wmf "Seal of the U.S. Department of Commerce"){width="1.27in"
-height="1.25in"}
+![](media/image2.wmf "Seal of the U.S. Department of Commerce")
 
 U. S. Department of Commerce
 
@@ -87,7 +85,7 @@ development of these new publications by NIST.
 Organizations are encouraged to review all draft publications during
 public comment periods and provide feedback to NIST. All NIST
 publications are available at
-[<http://www.nist.gov/publication-portal.cfm>.]{.underline}
+<span class="underline"><http://www.nist.gov/publication-portal.cfm>.</span>
 
 National Institute of Standards and Technology
 
@@ -95,17 +93,18 @@ Attn: Software and Systems Division, Information Technology Laboratory
 
 100 Bureau Drive (Mail Stop 8970) Gaithersburg, MD 20899-8930
 
-Email: [[voting\@nist.gov]{.underline}](mailto:SP1500comments@nist.gov)
+Email:
+[<span class="underline">voting@nist.gov</span>](mailto:SP1500comments@nist.gov)
 
 **Reports on Computer Systems Technology**
 
 The Information Technology Laboratory (ITL) at the National Institute of
 Standards and Technology (NIST) promotes the U.S. economy and public
-welfare by providing technical leadership for the Nation's measurement
+welfare by providing technical leadership for the Nation’s measurement
 and standards infrastructure. ITL develops tests, test methods,
 reference data, proof of concept implementations, and technical analyses
 to advance the development and productive use of information technology.
-This document reports on ITL's research, guidance, and outreach efforts
+This document reports on ITL’s research, guidance, and outreach efforts
 in Information Technology and its collaborative activities with
 industry, government, and academic organizations.
 
@@ -124,7 +123,7 @@ Common data format (CDF); cast vote record (CVR); JavaScript Object
 Notation (JSON); unified markup language (UML); eXtensible Markup
 Language (XML).
 
-**\
+**  
 **
 
 **Acknowledgements**
@@ -136,35 +135,47 @@ content. The authors gratefully acknowledge and appreciate the following
 contributors for their keen and insightful assistance with developing
 this specification:
 
-+-----------------------+-----------------------+-----------------------+
-| Kenneth Bennett       | Kim Brace             | George Gilbert        |
-|                       |                       |                       |
-| *Office of            | *Election Data        | *Ranked Choice Voting |
-| Registrar-Recorder    | Services*             | Resource Center*      |
-| /County Clerk, Los    |                       |                       |
-| Angeles*              |                       |                       |
-+=======================+=======================+=======================+
-| Katy Owens Hubler     | Jared Marcotte        | Lauren                |
-|                       |                       | Massa-Lochridge       |
-| *Democracy Research*  | *The Turnout*         |                       |
-|                       |                       | *llochridge &         |
-|                       |                       | associates*           |
-+-----------------------+-----------------------+-----------------------+
-| Neal McBurnnett       | John McCarthy         | Jennifer Morrell      |
-|                       |                       |                       |
-| *ElectionAudits*      | *Verified Voting*     | *Democracy Fund*      |
-+-----------------------+-----------------------+-----------------------+
-| Sarah Whitt           |                       |                       |
-|                       |                       |                       |
-| *Wisconsin Elections  |                       |                       |
-| Commission*           |                       |                       |
-+-----------------------+-----------------------+-----------------------+
-
-: Table 1 Caption
+<table>
+<caption>Table 1 Caption</caption>
+<thead>
+<tr class="header">
+<th><p>Kenneth Bennett</p>
+<p><em>Office of Registrar-Recorder /County Clerk, Los Angeles</em></p></th>
+<th><p>Kim Brace</p>
+<p><em>Election Data Services</em></p></th>
+<th><p>George Gilbert</p>
+<p><em>Ranked Choice Voting Resource Center</em></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><p>Katy Owens Hubler</p>
+<p><em>Democracy Research</em></p></td>
+<td><p>Jared Marcotte</p>
+<p><em>The Turnout</em></p></td>
+<td><p>Lauren Massa-Lochridge</p>
+<p><em>llochridge &amp; associates</em></p></td>
+</tr>
+<tr class="even">
+<td><p>Neal McBurnnett</p>
+<p><em>ElectionAudits</em></p></td>
+<td><p>John McCarthy</p>
+<p><em>Verified Voting</em></p></td>
+<td><p>Jennifer Morrell</p>
+<p><em>Democracy Fund</em></p></td>
+</tr>
+<tr class="odd">
+<td><p>Sarah Whitt</p>
+<p><em>Wisconsin Elections Commission</em></p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 
 In addition to the above acknowledgments, the authors also gratefully
 acknowledge and appreciate the National Institute of Standards and
-Technology\'s Mary Brady and Benjamin Long for their exceptional
+Technology's Mary Brady and Benjamin Long for their exceptional
 contributions in helping to improve the content of the publication. And
 finally, the authors also gratefully acknowledge and appreciate the
 significant contributions from individuals and organizations in the
@@ -172,12 +183,12 @@ public and private sectors, whose thoughtful and constructive comments
 improved the overall quality, thoroughness, and usefulness of this
 publication.
 
-[]{#_Toc7687593 .anchor}**Executive Summary**
+<span id="_Toc7687593" class="anchor"></span>**Executive Summary**
 
 This document presents an interoperable, common data format
 specification for cast vote records (CVR), which are produced by
 vote-capture devices such as ballot scanners. A CVR is an electronic
-record of a voter's selections, with usually one CVR created per sheet
+record of a voter’s selections, with usually one CVR created per sheet
 (page) of a ballot. Election results are produced by tabulating the
 collection of CVRs, and audits can be done by comparisons of the paper
 ballots or paper records of voter selections against the CVRs.
@@ -214,15 +225,15 @@ candidates or other issues.
 
 This specification is geared towards the following audiences:
 
--   Election officials
+  - Election officials
 
--   Voting equipment manufacturers
+  - Voting equipment manufacturers
 
--   Election analysts and auditors
+  - Election analysts and auditors
 
--   Election-affiliated organizations
+  - Election-affiliated organizations
 
--   The public
+  - The public
 
 **Table of Contents**
 
@@ -423,16 +434,15 @@ This specification is geared towards the following audiences:
 
 **List of Appendices**
 
-[Appendix A--- Acronyms 86](#acronyms)
+[Appendix A— Acronyms 86](#acronyms)
 
-[Appendix B--- Glossary 87](#glossary)
+[Appendix B— Glossary 87](#glossary)
 
-[Appendix C--- References 90](#references)
+[Appendix C— References 90](#references)
 
-[Appendix D--- File Download Locations 91](#file-download-locations)
+[Appendix D— File Download Locations 91](#file-download-locations)
 
-Introduction
-============
+# Introduction
 
 This document is a specification for a common data format (CDF) for cast
 vote records (CVR) produced by vote-capture devices such as ballot
@@ -444,20 +454,19 @@ Object Notation) \[3\] schemas that were generated from the model.
 
 Primary features of this specification include:
 
--   The capability to export raw CVRs representing contest selections
+  - The capability to export raw CVRs representing contest selections
     and other information such as changes made to the CVRs by the
     vote-capturing device because of election or contest rules and
     changes made to the CVRs as a result of adjudication.
 
--   The capability, for a single election, to contain collections of
+  - The capability, for a single election, to contain collections of
     CVRs produced by multiple devices from multiple locations, such as
     voting centers or precincts.
 
--   A data model in UML that itemizes and defines the data involved in
+  - A data model in UML that itemizes and defines the data involved in
     CVRs and that is used to derive the XML and JSON schemas.
 
- Why this specification is needed
---------------------------------
+##  Why this specification is needed
 
 The purpose of this specification is to provide interoperable data
 interchange formats in XML and JSON for CVRs to assist election
@@ -467,22 +476,21 @@ vote-capture devices. An additional purpose is to provide greater
 transparency to CVRs and operations performed on them. Advantages of
 using this specification include:
 
--   Interoperable data interchange formats for CVRs to remove reliance
+  - Interoperable data interchange formats for CVRs to remove reliance
     on proprietary data formats.
 
--   Capability to use the same interoperable format for CVR creation,
+  - Capability to use the same interoperable format for CVR creation,
     analysis and update, tabulation, adjudication, and audit.
 
--   Greater freedom to use devices from different manufacturers for
+  - Greater freedom to use devices from different manufacturers for
     operations involving CVRs.
 
--   Consistent handling of voting variations such as Ranked Choice
+  - Consistent handling of voting variations such as Ranked Choice
     Voting.
 
--   A UML model that is easily extensible to additional use cases.
+  - A UML model that is easily extensible to additional use cases.
 
-Intended Audience
------------------
+## Intended Audience
 
 The intended audience of this specification includes election officials,
 voting system designers and developers, and others in the election
@@ -490,36 +498,34 @@ community, including the general public. Some background in election
 administration and voting equipment is useful in understanding the
 material in this specification.
 
-Document Structure
-------------------
+## Document Structure
 
 This specification is laid out as follows:
 
--   Section 2, Background: Cast Vote Record, contains background
+  - Section 2, Background: Cast Vote Record, contains background
     information about how CVRs get created, their contents, and how they
     are handled in the election process.
 
--   Section 3, Cast Vote Record UML Model Overview, contains an overview
+  - Section 3, Cast Vote Record UML Model Overview, contains an overview
     of the UML model structure and how it can be used for CVR exports
     and reports.
 
--   Section 4, Cast Vote Record UML Model Documentation, describes the
+  - Section 4, Cast Vote Record UML Model Documentation, describes the
     classes and enumerations in greater detail.
 
--   Section 5, Usage Examples, contains examples of CVR structure using
+  - Section 5, Usage Examples, contains examples of CVR structure using
     XML.
 
 Appendices contain acronyms, definitions, references, and URLs for
 downloading the associated JSON and XML schemas.
 
-Motivation and Methodology
---------------------------
+## Motivation and Methodology
 
 This document was written primarily to assist election officials,
 developers, and auditors in handling CVRs as they are created and used.
 At the time of writing, voting systems and the data produced do not
 interoperate unless they are from the same manufacturer, but even within
-a manufacturer's line of products there is often a lack of
+a manufacturer’s line of products there is often a lack of
 interoperability. This adds more complexity when attempting to integrate
 COTs (commercial off-the-shelf) or other manufacturer equipment for
 tabulations, adjudications, and audits.
@@ -542,17 +548,15 @@ JSON and XML schemas were generated from the UML model, so scanners and
 other devices can export CVRs in JSON or XML and validate usage against
 the schema.
 
-Background: Cast Vote Record Creation, Contents, and Handling
-=============================================================
+# Background: Cast Vote Record Creation, Contents, and Handling
 
 This section contains a general overview of how CVRs are created, their
 contents, and how they are subsequently handled in the election process.
 
-Overview of Cast Vote Records and their Generation
---------------------------------------------------
+## Overview of Cast Vote Records and their Generation
 
 Simply put, a cast vote record (CVR) is an electronic record of a
-voter's ballot selections, and its primary purpose is to provide a
+voter’s ballot selections, and its primary purpose is to provide a
 record of voter selections that can be counted in an efficient manner to
 produce election results. A CVR is created by equipment such as a voter
 facing scanner in a polling place into which a voter inserts a paper
@@ -565,48 +569,47 @@ management system that aggregates and tabulates the votes.
 
 Three primary types of voting devices that create CVRs are:
 
--   All-electronic voting devices that a voter uses to make ballot
+  - All-electronic voting devices that a voter uses to make ballot
     selections and that create and store a CVR for each ballot.
 
--   Ballot marking devices (BMDs) that function like all-electronic
-    devices but that produce a paper record of the voter's choices that
+  - Ballot marking devices (BMDs) that function like all-electronic
+    devices but that produce a paper record of the voter’s choices that
     must be subsequently scanned.
 
--   Voter-facing optical scanners used in polling places and batch-fed
+  - Voter-facing optical scanners used in polling places and batch-fed
     optical scanners used in central offices to scan paper ballots.
 
 The scanning devices above are sometimes referred to collectively as
-"tabulators" because they generally have a tabulation capability, but
+“tabulators” because they generally have a tabulation capability, but
 this is not always the case.
 
 CVRs may include other information besides voter choices, including:
 
--   Information on all contests and contest options on the ballot in
+  - Information on all contests and contest options on the ballot in
     addition to those marked
 
--   The ballot style associated with the CVR
+  - The ballot style associated with the CVR
 
--   The precinct or location associated with the CVR
+  - The precinct or location associated with the CVR
 
--   The equipment that produced the CVR
+  - The equipment that produced the CVR
 
--   The political party associated with the ballot for partisan
+  - The political party associated with the ballot for partisan
     primaries
 
--   Images of the entire ballot and images of write-in areas on the
+  - Images of the entire ballot and images of write-in areas on the
     ballot
 
--   An identifier that is also printed on the ballot as it is scanned
+  - An identifier that is also printed on the ballot as it is scanned
 
--   Indications of how the scanner has interpreted various mark.
+  - Indications of how the scanner has interpreted various mark.
 
 This specification includes support for the above items.
 
-Counting Cast Vote Records
---------------------------
+## Counting Cast Vote Records
 
 To produce a CVR that is countable, the scanner must interpret the
-voter's selections according to the rules of each contest to determine
+voter’s selections according to the rules of each contest to determine
 which selections can be counted. This is true primarily of hand-marked
 paper ballot scanners in which voters may write in candidates whose
 names were not on the ballot or they may make mistakes that invalidate
@@ -622,30 +625,30 @@ a mark is placed in the right location and is sufficiently formed so it
 constitutes an intentional ballot selection made by the voter. Each
 device in the jurisdiction must also be programmed with election
 specific information for the polling place that it will be used in, so
-the scanners can apply that polling place's election rules to the
+the scanners can apply that polling place’s election rules to the
 detected marks. Scanners may perform interpretation based on a number of
 different factors, including:
 
--   A scanner may flag marks as being marginal, that is not meeting the
+  - A scanner may flag marks as being marginal, that is not meeting the
     criteria for validity, and therefore not counting those marks.
 
--   Voters may vote for more than the allowable number of options
+  - Voters may vote for more than the allowable number of options
     (overvote) and the scanner must know not to count *any* of the
     selections made by the voter for that particular contest.
 
--   Likewise, voters may undervote a contest, and the scanner must
+  - Likewise, voters may undervote a contest, and the scanner must
     record that the contest was undervoted. The marked selections are
     still counted.
 
--   The scanner must be programmed to tabulate the voter marks according
+  - The scanner must be programmed to tabulate the voter marks according
     to the voting method in place for a particular contest.
 
--   A scanner may create indirect selections in the case of straight
+  - A scanner may create indirect selections in the case of straight
     party voting where a voter can decide to vote for all candidates of
     a particular party by making a single straight-party selection at
     the top of the ballot.
 
--   A scanner may invalidate voter marks in the case of straight party
+  - A scanner may invalidate voter marks in the case of straight party
     voting where a voter selects the straight party choice but votes for
     the other party in various contests. Depending on local election
     rules, the votes in those contests or the entire ballot could be
@@ -657,8 +660,7 @@ copied to a memory device or otherwise transferred to a central
 location, where it can be combined with other CVR exports to produce
 election results.
 
-Adjudication of Cast Vote Records
----------------------------------
+## Adjudication of Cast Vote Records
 
 After a CVR collection has been exported, a number of the CVRs may
 require additional inspection and adjustment as part of a process known
@@ -675,57 +677,55 @@ Write-ins are the most common reason:
 There are a number of other reasons why ballots may require
 adjudication, such as:
 
--   The ballot was unreadable by the scanner.
+  - The ballot was unreadable by the scanner.
 
--   The voter may have marked the ballot in ways that are difficult to
+  - The voter may have marked the ballot in ways that are difficult to
     interpret, for example, the voter may have circled the ovals instead
     of filling them in.
 
--   The scanner detected one or more overvotes.
+  - The scanner detected one or more overvotes.
 
--   The scanner detected that the entire ballot was blank.
+  - The scanner detected that the entire ballot was blank.
 
 This specification provides the capability to update the CVR with
 multiple annotations made by adjudicators, recording the following
 items:
 
--   The adjudicator name(s).
+  - The adjudicator name(s).
 
--   Time stamp of when the adjudication(s) was made.
+  - Time stamp of when the adjudication(s) was made.
 
--   The adjudication, i.e., the action taken by the adjudicator(s).
+  - The adjudication, i.e., the action taken by the adjudicator(s).
 
 This is discussed in more detail in Section 4.1, Class Annotation.
 
-Auditing Cast Vote Records
---------------------------
+## Auditing Cast Vote Records
 
 CVRs need to be audited against their paper counterparts so that
 election results can be verified to be accurate. This specification
 supports auditing by providing the following as options:
 
--   Support for ballot-level comparison auditing, that is, there is an
+  - Support for ballot-level comparison auditing, that is, there is an
     identifier in the CVR that can be linked to an ID printed on the
     corresponding paper ballot.
 
--   Support to include adjustments to contest selections made by
+  - Support to include adjustments to contest selections made by
     adjudicators.
 
--   Different snapshots of the CVR can be created, one for the original
+  - Different snapshots of the CVR can be created, one for the original
     scan, one for after election rules have been applied, and others as
     needed for adjudications.
 
--   Indications of marginal marks, mark quality/density can be
+  - Indications of marginal marks, mark quality/density can be
     associated with contest selections.
 
--   A CVR can include signed/hashed references to an associated image of
+  - A CVR can include signed/hashed references to an associated image of
     the ballot or images of write-ins made by the voter.
 
--   Capability to include batch information such as batch IDs and
+  - Capability to include batch information such as batch IDs and
     sequence within the batch.
 
-Cast Vote Record UML Model Overview 
-====================================
+# Cast Vote Record UML Model Overview 
 
 This section presents an overview of the CVR UML model, showing how it
 is structured and how it can be used for various voting methods. Section
@@ -739,15 +739,14 @@ The UML class and enumeration names are shown in a different font to
 distinguish them from surrounding text. For example, the name of the
 root class in the UML model is CastVoteRecordReport.
 
-CVR Report General Structure
-----------------------------
+## CVR Report General Structure
 
 The UML model implements a report of cast vote records exported by a
 device that
 
--   Creates CVRs, such as a scanner or BMD, and/or
+  - Creates CVRs, such as a scanner or BMD, and/or
 
--   Processes and generates a report of CVRs such as an EMS.
+  - Processes and generates a report of CVRs such as an EMS.
 
 In the case of an EMS, the report could consist of aggregations of CVRs
 from multiple creating devices and, if desired, multiple creating
@@ -759,12 +758,12 @@ report.
 
 The CVRs in the report can each be associated with the following:
 
--   The election,
+  - The election,
 
--   Precinct or split-precinct geography that corresponds to the ballot
+  - Precinct or split-precinct geography that corresponds to the ballot
     style, or
 
--   Creating device.
+  - Creating device.
 
 As well, the report itself can identify the election(s), where the CVRs
 were created and the creating device(s).
@@ -772,30 +771,27 @@ were created and the creating device(s).
 Figures 1 and 2 show the classes in the UML model and the enumerations
 used in a number of class attributes.
 
-Interoperability Considerations
--------------------------------
+## Interoperability Considerations
 
 A major impediment to interoperability of CVRs across different
 manufacturers is that typically, the contest selections in a
-manufacturer's CVR consist of codes and the CVR thus appears as a
+manufacturer’s CVR consist of codes and the CVR thus appears as a
 structured series of codes and contest votes. To understand the CVR, one
 must know what the codes mean and their structure, and this information
 is usually opaque and unavailable to others
 
-![](media/image3.png){width="8.400538057742782in"
-height="5.416539807524059in"}
+![](media/image3.png)
 
 Figure 1 - CVR UML Model - Classes
 
-![](media/image4.png){width="3.4332917760279966in"
-height="6.255753499562554in"}
+![](media/image4.png)
 
 Figure 2 - CVR UML Model - Enumerations and Other Classes
 
-(including auditors)[^1]. An important feature of the UML model is that
+(including auditors)\[1\]. An important feature of the UML model is that
 it allows for expanded information in the CVR to be included, in a
 space-saving manner, to identify contests and contest selections and the
-associated indications of marks. While a manufacturer's codes can still
+associated indications of marks. While a manufacturer’s codes can still
 be included, one can also include interoperable codes and descriptions
 so that others can understand the CVR and CVRs can be exchanged across
 devices and manufacturers. The UML model also allows for all contests
@@ -820,25 +816,24 @@ and contest options, followed by instances of CVR classes. As stated,
 each CVR can optionally include a link to the creating device, the
 corresponding ballot-style area, or the election.
 
-Cast Vote Record Snapshots
---------------------------
+## Cast Vote Record Snapshots
 
 Figure 3 shows CVR optionally including one or more instances of
-CVRSnapshot. A CVRSnapshot is a record of the voter's selections at a
+CVRSnapshot. A CVRSnapshot is a record of the voter’s selections at a
 particular point in time. There are three types of snapshots, which are
 listed in the CVRType enumeration:
 
--   original -- the version created when a marked paper ballot is
-    scanned and *before* interpretation of the voter's selections
-    according to contest/election rules.
+  - original – the version created when a marked paper ballot is scanned
+    and *before* interpretation of the voter’s selections according to
+    contest/election rules.
 
--   interpreted -- the version created after interpretation of the
-    voter's selections recorded in the original version, or the version
-    created by a DRE or from a BMD's encoded voter selections.
+  - interpreted – the version created after interpretation of the
+    voter’s selections recorded in the original version, or the
+    version created by a DRE or from a BMD’s encoded voter selections.
 
--   modified -- the version created after modifications have been made
-    to the interpreted version as a result of adjudication, e.g.,
-    because of write-ins on the ballot.
+  - modified – the version created after modifications have been made to
+    the interpreted version as a result of adjudication, e.g., because
+    of write-ins on the ballot.
 
 Each instance of the snapshot includes only the contest options and
 contest selections that were voted and that are valid for that snapshot.
@@ -856,8 +851,7 @@ rules. Generally, the modified snapshot would be created by adjudication
 applications so as to provide traceability for adjudications of
 voter-made marks or adjudication of write-ins.
 
-Representing Contest Selections and Selection Positions
--------------------------------------------------------
+## Representing Contest Selections and Selection Positions
 
 As shown in Figure 3 and Figure 4, CVRSnapshot includes CVRContest for
 linking contest objects to those contests that were selected by the
@@ -879,8 +873,7 @@ the Presidential contest will be associated with one position, that
 being the bubble next to the candidate. Accordingly, SelectionPosition
 will indicate position 1 for the candidate selected in the contest.
 
-![](media/image5.png){width="4.382251749781277in"
-height="2.5253652668416446in"}
+![](media/image5.png)
 
 Figure 5 - SelectionPosition Class
 
@@ -897,11 +890,11 @@ SelectionPosition will indicate position 1 for Shapiro, 3 for Walsh, and
 
 **Member of County Council at Large**
 
-  Contest Option   1st     2nd     3rd
-  ---------------- ------- ------- -------
-  Ileen Shapiro    \[x\]   \[ \]   \[ \]
-  Debbie Walsh     \[ \]   \[ \]   \[x\]
-  Sandra Kurt      \[ \]   \[x\]   \[ \]
+| Contest Option | 1st   | 2nd   | 3rd   |
+| -------------- | ----- | ----- | ----- |
+| Ileen Shapiro  | \[x\] | \[ \] | \[ \] |
+| Debbie Walsh   | \[ \] | \[ \] | \[x\] |
+| Sandra Kurt    | \[ \] | \[x\] | \[ \] |
 
 Figure 6 - RCV Contest with 3 Positions per Selection
 
@@ -915,10 +908,10 @@ software that has been programmed with the appropriate contest rules
 typically interprets the voter selections and makes those decisions as
 to
 
--   Whether a voter mark is of sufficient quality to be considered as a
+  - Whether a voter mark is of sufficient quality to be considered as a
     contest selection, and
 
--   Whether the contest selection obeys the rules of the contest and can
+  - Whether the contest selection obeys the rules of the contest and can
     be consequently counted as a vote.
 
 However, CVRs also could be simply recorded by a scanner but then
@@ -942,7 +935,7 @@ scanner-detectable mark on a paper ballot that requires some associated
 measurement of quality to determine whether the mark represents a
 tabulatable contest selection. While the mark would presumably have been
 made by the voter, a flaw on the ballot could be detected by the scanner
-and considered as a mark[^2], albeit an ambiguous one.
+and considered as a mark\[2\], albeit an ambiguous one.
 
 A *mark* is important to differentiate from a machine-made
 representation of a contest selection that was made via the voter using
@@ -963,21 +956,21 @@ term to mean either (a) a mark presumably made by a human or (b) a
 machine-made representation of a mark. Selection indications can come
 from the following sources:
 
--   A flaw on the paper ballot detected as a mark made by the voter.
+  - A flaw on the paper ballot detected as a mark made by the voter.
 
--   A mark made by the voter on the paper ballot; the mark could be
+  - A mark made by the voter on the paper ballot; the mark could be
     ambiguous or could meet scanner thresholds for quality.
 
--   A mark made by a ballot marking device onto a full-face paper
+  - A mark made by a ballot marking device onto a full-face paper
     ballot.
 
--   An indication made by the voter using a DRE or by a ballot marking
+  - An indication made by the voter using a DRE or by a ballot marking
     device using a bar code to represent voter selections.
 
--   An indication made by the scanner in certain cases as a result of
-    applying contest rules to the voter's indication[^3].
+  - An indication made by the scanner in certain cases as a result of
+    applying contest rules to the voter’s indication\[3\].
 
--   An indication made by an adjudicator.
+  - An indication made by an adjudicator.
 
 #### Use of Allocable
 
@@ -997,12 +990,12 @@ decided that there is, indeed, a selection indication that can be
 potentially counted. The following table shows the mapping of selection
 indications to HasIndication values:
 
-  Selection Indication                        HasIndication
-  ------------------------------------------- ---------------
-  machine-readable mark from a paper ballot   yes
-  machine-generated mark from a DRE or BMD    yes
-  marginally machine-readable mark            unknown
-  no mark or no mark undetected               no
+| Selection Indication                      | HasIndication |
+| ----------------------------------------- | ------------- |
+| machine-readable mark from a paper ballot | yes           |
+| machine-generated mark from a DRE or BMD  | yes           |
+| marginally machine-readable mark          | unknown       |
+| no mark or no mark undetected             | no            |
 
 Table 1 - Selection Indication to HasIndication Mapping
 
@@ -1026,12 +1019,12 @@ James.
 
 **Presidential Contest**
 
-  Contest Option                 1st     2nd     3rd     4th
-  ------------------------------ ------- ------- ------- -------
-  Jack Smith/Steven Ritz         \[x\]   \[ \]   \[ \]   \[ \]
-  Layla Front/Robert Brak        \[ \]   \[ \]   \[x\]   \[ \]
-  James Hillberry/Mark Jafrate   \[ \]   \[x\]   \[ \]   \[ \]
-  Anna James/Mary Kalman         \[ \]   \[ \]   \[ \]   \[ \]
+| Contest Option               | 1st   | 2nd   | 3rd   | 4th   |
+| ---------------------------- | ----- | ----- | ----- | ----- |
+| Jack Smith/Steven Ritz       | \[x\] | \[ \] | \[ \] | \[ \] |
+| Layla Front/Robert Brak      | \[ \] | \[ \] | \[x\] | \[ \] |
+| James Hillberry/Mark Jafrate | \[ \] | \[x\] | \[ \] | \[ \] |
+| Anna James/Mary Kalman       | \[ \] | \[ \] | \[ \] | \[ \] |
 
 Figure 7 - RCV contest with multiple contest selections; one voter mark
 per selection
@@ -1047,60 +1040,60 @@ overvote).
 A partial example of the structure representing the contest in Figure 7
 is as follows:
 
--   CVRContest:
-
-    -   Link to the Presidential contest object
-
-    -   CVRContestSelection:
-
-        -   Link to candidate object for Jack Smith/Steven Ritz
-
-        -   Total number of votes represented by the contest selection =
+  - CVRContest:
+    
+      - Link to the Presidential contest object
+    
+      - CVRContestSelection:
+        
+          - Link to candidate object for Jack Smith/Steven Ritz
+        
+          - Total number of votes represented by the contest selection =
             1
-
-        -   SelectionPosition:
-
-            -   Position = 1 (or Rank = 1)
-
-            -   HasIndication = yes
-
-            -   IsAllocable = yes
-
-            -   Number of votes = 1
-
-    -   CVRContestSelection:
-
-        -   Link to candidate object for Layla Front/Robert Brak
-
-        -   Total number of votes represented by the contest selection =
+        
+          - SelectionPosition:
+            
+              - Position = 1 (or Rank = 1)
+            
+              - HasIndication = yes
+            
+              - IsAllocable = yes
+            
+              - Number of votes = 1
+    
+      - CVRContestSelection:
+        
+          - Link to candidate object for Layla Front/Robert Brak
+        
+          - Total number of votes represented by the contest selection =
             1
-
-        -   SelectionPosition:
-
-            -   Position = 3 (or Rank = 3)
-
-            -   HasIndication = yes
-
-            -   IsAllocable = yes
-
-            -   Number of votes = 1
-
-    -   CVRContestSelection:
-
-        -   Link to candidate object for James Hillberry/Mark Jafrate
-
-        -   Total number of votes represented by the contest selection =
+        
+          - SelectionPosition:
+            
+              - Position = 3 (or Rank = 3)
+            
+              - HasIndication = yes
+            
+              - IsAllocable = yes
+            
+              - Number of votes = 1
+    
+      - CVRContestSelection:
+        
+          - Link to candidate object for James Hillberry/Mark Jafrate
+        
+          - Total number of votes represented by the contest selection =
             1
-
-        -   SelectionPosition:
-
-            -   Position = 2 (or Rank = 2)
-
-            -   HasIndication = yes
-
-            -   IsAllocable = yes
-
-            -   Number of votes = 1
+        
+          - SelectionPosition:
+            
+              - Position = 2 (or Rank = 2)
+            
+              - HasIndication = yes
+            
+              - IsAllocable = yes
+            
+              - Number of votes = 1
 
 ### Cumulative Voting Example
 
@@ -1114,63 +1107,62 @@ two candidates received
 votes, Ford and Hill. Thus, CVRContest will include two instances of
 CVRContestSelection, one for Ford and one for Hill. Each
 CVRContestSelection includes SelectionPosition for each bubble filled in
-to the left of each candidate's name, for a maximum of three. In this
+to the left of each candidate’s name, for a maximum of three. In this
 case, there will be two SelectionPosition instances for Henry Ford and
 one for Mary Hill.
 
-![](media/image6.png){width="1.9416666666666667in"
-height="2.296527777777778in"}
+![](media/image6.png)
 
 A partial example of the structure representing the contest in Figure 8
 is as follows:
 
--   CVRContest:
-
-    -   Link to contest object for this contest
-
-    -   CVRContestSelection1:
-
-        -   Link to candidate object for Henry Ford
-
-        -   Total number of votes represented by the contest selection =
+  - CVRContest:
+    
+      - Link to contest object for this contest
+    
+      - CVRContestSelection1:
+        
+          - Link to candidate object for Henry Ford
+        
+          - Total number of votes represented by the contest selection =
             2
-
-        -   SelectionPosition:
-
-            -   Position = 1
-
-            -   HasIndication = yes
-
-            -   IsAllocable = yes
-
-            -   Number of votes = 1
-
-        -   SelectionPosition:
-
-            -   Position = 2
-
-            -   HasIndication = yes
-
-            -   IsAllocable = yes
-
-            -   Number of votes = 1
-
-    -   CVRContestSelection2:
-
-        -   Link to candidate object for Mary Hill
-
-        -   Total number of votes represented by the contest selection =
+        
+          - SelectionPosition:
+            
+              - Position = 1
+            
+              - HasIndication = yes
+            
+              - IsAllocable = yes
+            
+              - Number of votes = 1
+        
+          - SelectionPosition:
+            
+              - Position = 2
+            
+              - HasIndication = yes
+            
+              - IsAllocable = yes
+            
+              - Number of votes = 1
+    
+      - CVRContestSelection2:
+        
+          - Link to candidate object for Mary Hill
+        
+          - Total number of votes represented by the contest selection =
             2
-
-        -   SelectionPosition:
-
-            -   Position = 3
-
-            -   HasIndication = yes
-
-            -   IsAllocable = yes
-
-            -   Number of votes = 1
+        
+          - SelectionPosition:
+            
+              - Position = 3
+            
+              - HasIndication = yes
+            
+              - IsAllocable = yes
+            
+              - Number of votes = 1
 
 ### Range Voting Example
 
@@ -1182,8 +1174,7 @@ votes, with the maximum score of 9. The position of the bubble is highly
 meaningful, as the bubble in position 1 represents no votes and the
 bubble in position 10 represents 9 votes.
 
-![](media/image7.png){width="3.989795494313211in"
-height="1.9236526684164479in"}
+![](media/image7.png)
 
 Figure 9 - Range Voting contest with multiple contest selections; one
 voter mark per selection
@@ -1191,63 +1182,62 @@ voter mark per selection
 A partial example of the structure representing the contest in Figure 9
 is as follows:
 
--   CVRContest:
-
-    -   Link to contest object for this contest
-
-    -   CVRContestSelection:
-
-        -   Link to candidate object for Candidate A
-
-        -   Total number of votes represented by the contest selection =
+  - CVRContest:
+    
+      - Link to contest object for this contest
+    
+      - CVRContestSelection:
+        
+          - Link to candidate object for Candidate A
+        
+          - Total number of votes represented by the contest selection =
             0
-
-        -   SelectionPosition:
-
-            -   Position = 1
-
-            -   HasIndication = yes
-
-            -   IsAllocable = yes
-
-            -   Number of votes = 0
-
-    -   CVRContestSelection:
-
-        -   Link to candidate object for Candidate B
-
-        -   Total number of votes represented by the contest selection =
+        
+          - SelectionPosition:
+            
+              - Position = 1
+            
+              - HasIndication = yes
+            
+              - IsAllocable = yes
+            
+              - Number of votes = 0
+    
+      - CVRContestSelection:
+        
+          - Link to candidate object for Candidate B
+        
+          - Total number of votes represented by the contest selection =
             9
-
-        -   SelectionPosition:
-
-            -   Position = 10
-
-            -   HasIndication = yes
-
-            -   IsAllocable = yes
-
-            -   Number of votes = 9
-
-    -   CVRContestSelection:
-
-        -   Link to candidate object for Candidate C
-
-        -   Total number of votes represented by the contest selection =
+        
+          - SelectionPosition:
+            
+              - Position = 10
+            
+              - HasIndication = yes
+            
+              - IsAllocable = yes
+            
+              - Number of votes = 9
+    
+      - CVRContestSelection:
+        
+          - Link to candidate object for Candidate C
+        
+          - Total number of votes represented by the contest selection =
             7
+        
+          - SelectionPosition:
+            
+              - Position = 8
+            
+              - HasIndication = yes
+            
+              - IsAllocable = yes
+            
+              - Number of votes = 7
 
-        -   SelectionPosition:
-
-            -   Position = 8
-
-            -   HasIndication = yes
-
-            -   IsAllocable = yes
-
-            -   Number of votes = 7
-
-Identifiers Within the CVR
---------------------------
+## Identifiers Within the CVR
 
 The CVR can contain potentially up to ten different identifiers whose
 purpose in general is to make CVRs easier to use in tabulation and more
@@ -1317,20 +1307,19 @@ classes are referenced (linked) from each CVR because the information
 within each class is entirely static and thus need not be repeated in
 each CVR. These classes are:
 
-1.  BallotStyleUnit -- contains static information about the political
-    geography corresponding to the ballot's ballot style. Most likely
+1.  BallotStyleUnit – contains static information about the political
+    geography corresponding to the ballot’s ballot style. Most likely
     the political geography will correspond to a precinct or a precinct
     split.
 
-2.  CreatingDevice -- contains static information about the device that
+2.  CreatingDevice – contains static information about the device that
     created the CVR, including the manufacture, model, serial number,
     and the type of mark metric measure used by the device.
 
-3.  Election -- contains identifying information about the election,
+3.  Election – contains identifying information about the election,
     including the name and any associated codes.
 
-Cast Vote Record UML Model Documentation
-========================================
+# Cast Vote Record UML Model Documentation
 
 This section contains documentation and discussion of the features
 included in the CVR UML model. As noted previously, this model was used
@@ -1339,151 +1328,138 @@ follows that of the UML model.
 
 The UML classes are described first, followed by the enumerations. Each
 description contains an image of the class (from the UML model) and a
-table containing details about each of the class's attributes. To denote
-that certain class attributes derive from the class's associations with
+table containing details about each of the class’s attributes. To denote
+that certain class attributes derive from the class’s associations with
 other classes, curly braces are used around those attribute names, e.g.,
-if ClassA has an association with ClassB that is named "Automobile",
-then the table of attributes for ClassA would include "{Automobile}" as
+if ClassA has an association with ClassB that is named “Automobile”,
+then the table of attributes for ClassA would include “{Automobile}” as
 one of the attributes.
 
 Class attributes and enumeration values are strictly alphabetically
 ordered without exception. The ordering occasionally can be confusing,
-e.g., "OtherStatus" comes before "Status" in some classes, but using a
+e.g., “OtherStatus” comes before “Status” in some classes, but using a
 consistent ordering is ultimately simpler.
 
-Class Annotation
-----------------
+## Class Annotation
 
 Annotation is used to record annotations made by one or more
 adjudicators.
 
 [CVRSnapshot](#class-cvrsnapshot) includes Annotation.
 
-![1862059450.png](media/image8.png){width="1.9166666666666667in"
-height="0.96875in"}
+![1862059450.png](media/image8.png)
 
 Figure 10 - Class Annotation
 
-  Attribute         Multiplicity   Type       Attribute Description
-  ----------------- -------------- ---------- ------------------------------------------
-  AdjudicatorName   0..\*          string     The name(s) of the adjudicator(s).
-  Message           0..\*          string     A message created by the adjudicator(s).
-  TimeStamp         0..1           dateTime   The date and time of the annotation.
+| Attribute       | Multiplicity | Type     | Attribute Description                    |
+| --------------- | ------------ | -------- | ---------------------------------------- |
+| AdjudicatorName | 0..\*        | string   | The name(s) of the adjudicator(s).       |
+| Message         | 0..\*        | string   | A message created by the adjudicator(s). |
+| TimeStamp       | 0..1         | dateTime | The date and time of the annotation.     |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Class BallotMeasureContest
---------------------------
+## Class BallotMeasureContest
 
 BallotMeasureContest is a subclass of [Contest](#_Toc7679288) and is
 used to identify the type of contest as involving one or more ballot
 measures. It inherits attributes from [Contest](#_Toc7679288).
 
-![-1349962198.png](media/image9.png){width="1.6666666666666667in"
-height="0.5625in"}
+![-1349962198.png](media/image9.png)
 
-Figure 11 -- Class BallotMeasureContest
+Figure 11 – Class BallotMeasureContest
 
-**\
+**  
 **
 
-Class BallotMeasureSelection
-----------------------------
+## Class BallotMeasureSelection
 
 BallotMeasureSelection is a subclass of
 [ContestSelection](#class-contestselection) and is used for ballot
-measures. The voter\'s selected response to the contest selection (e.g.,
-\"yes\" or \"no\") may be in English or other languages as utilized on
-the voter\'s ballot.
+measures. The voter's selected response to the contest selection (e.g.,
+"yes" or "no") may be in English or other languages as utilized on the
+voter's ballot.
 
-![-637953320.png](media/image10.png){width="2.1875in"
-height="0.7395833333333334in"}
+![-637953320.png](media/image10.png)
 
 Figure 12 - BallotMeasureSelection
 
-  Attribute   Multiplicity   Type     Attribute Description
-  ----------- -------------- -------- -----------------------------------------------------------------------------------------------------------------------
-  Selection   1              String   The voter\'s selection, i.e., \'yes\' or \'no\', in English or in other languages as utilized on the voter\'s ballot.
+| Attribute | Multiplicity | Type   | Attribute Description                                                                                           |
+| --------- | ------------ | ------ | --------------------------------------------------------------------------------------------------------------- |
+| Selection | 1            | String | The voter's selection, i.e., 'yes' or 'no', in English or in other languages as utilized on the voter's ballot. |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Class Candidate
----------------
+## Class Candidate
 
-Candidate identifies a candidate in a contest on the voter\'s ballot.
+Candidate identifies a candidate in a contest on the voter's ballot.
 [Election](#_Toc7679295) includes instances of Candidate for each
 candidate in a contest; typically, only those candidates who received
 votes would be included.
 
-![260442740.png](media/image11.png){width="2.5in"
-height="1.0208333333333333in"}
+![260442740.png](media/image11.png)
 
 Figure 13 - Class Candidate
 
-  Attribute   Multiplicity   Type                                          Attribute Description
-  ----------- -------------- --------------------------------------------- -----------------------------------------------------
-  Code        0..\*          [Code](#_9d2bbb28c8f74433d1faa7883e83980a)    A code or identifier associated with the candidate.
-  Name        0..1           String                                        Candidate\'s name as listed on the ballot.
-  {Party}     0..1           [Party](#_3d1e5ffda20d2c609ee94d45da777050)   The party associated with the candidate.
+| Attribute | Multiplicity | Type                                        | Attribute Description                               |
+| --------- | ------------ | ------------------------------------------- | --------------------------------------------------- |
+| Code      | 0..\*        | [Code](#_9d2bbb28c8f74433d1faa7883e83980a)  | A code or identifier associated with the candidate. |
+| Name      | 0..1         | String                                      | Candidate's name as listed on the ballot.           |
+| {Party}   | 0..1         | [Party](#_3d1e5ffda20d2c609ee94d45da777050) | The party associated with the candidate.            |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Class CandidateContest
-----------------------
+## Class CandidateContest
 
 CandidateContest is a subclass of [Contest](#_Toc7679288) and is used to
 identify the type of contest as involving one or more candidates. It
 inherits attributes from [Contest](#_Toc7679288).
 
-![-2002379431.png](media/image12.png){width="1.9791666666666667in"
-height="0.875in"}
+![-2002379431.png](media/image12.png)
 
 Figure 14 - Class CandidateContest
 
-  Attribute        Multiplicity   Type                                          Attribute Description
-  ---------------- -------------- --------------------------------------------- -------------------------------------------------------------------------------------------------
-  NumberElected    0..1           Integer                                       The number of candidates to be elected in the contest.
-  {PrimaryParty}   0..1           [Party](#_3d1e5ffda20d2c609ee94d45da777050)   The party associated with the contest, if a partisan primary.
-  VotesAllowed     0..1           Integer                                       The number of votes allowed in the contest, e.g., 3 for a \'choose 3 of 5 candidates\' contest.
+| Attribute      | Multiplicity | Type                                        | Attribute Description                                                                         |
+| -------------- | ------------ | ------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| NumberElected  | 0..1         | Integer                                     | The number of candidates to be elected in the contest.                                        |
+| {PrimaryParty} | 0..1         | [Party](#_3d1e5ffda20d2c609ee94d45da777050) | The party associated with the contest, if a partisan primary.                                 |
+| VotesAllowed   | 0..1         | Integer                                     | The number of votes allowed in the contest, e.g., 3 for a 'choose 3 of 5 candidates' contest. |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Class CandidateSelection
-------------------------
+## Class CandidateSelection
 
 CandidateSelection is a subclass of
 [ContestSelection](#class-contestselection) and is used for candidates,
 including for write-in candidates.
 
-![-378070365.png](media/image13.png){width="1.9895833333333333in"
-height="0.75in"}
+![-378070365.png](media/image13.png)
 
 Figure 15 - Class CandidateSelection
 
-  Attribute     Multiplicity   Type                        Attribute Description
-  ------------- -------------- --------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  {Candidate}   0..\*          [Candidate](#_Toc7679283)   The candidate associated with the contest selection. For contests involving a ticket of multiple candidates, an ordered list of candidates as they appeared on the ballot would be created.
-  IsWriteIn     0..1           boolean                     A flag to indicate if the candidate selection is associated with a write-in.
+| Attribute   | Multiplicity | Type                      | Attribute Description                                                                                                                                                                       |
+| ----------- | ------------ | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| {Candidate} | 0..\*        | [Candidate](#_Toc7679283) | The candidate associated with the contest selection. For contests involving a ticket of multiple candidates, an ordered list of candidates as they appeared on the ballot would be created. |
+| IsWriteIn   | 0..1         | boolean                   | A flag to indicate if the candidate selection is associated with a write-in.                                                                                                                |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Class CastVoteRecordReport
---------------------------
+## Class CastVoteRecordReport
 
 The root class/element; attributes pertain to the status and format of
 the report and when created.
@@ -1496,57 +1472,53 @@ voted so as to reduce file size. The [Contest](#_Toc7679288) instances
 are later referenced by other classes to link them to contest options
 that were voted and the indication(s)/mark(s) made.
 
-![1018729442.png](media/image14.png){width="2.6770833333333335in"
-height="1.4479166666666667in"}
+![1018729442.png](media/image14.png)
 
 Figure 16 - Class CastVoteRecordReport
 
-  Attribute                                                         Multiplicity   Type                                                    Attribute Description
-  ----------------------------------------------------------------- -------------- ------------------------------------------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  {CVR}                                                             0..\*          [CVR](#class-cvr)                                       Used to include instances of CVR classes, one per cast vote record in the report.
-  {Election}                                                        1..\*          [Election](#_Toc7679295)                                Used to include the election(s) associated with the CVRs.
-  GeneratedDate                                                     1              dateTime                                                Identifies the time that the election report was created.
-  {GpUnit}                                                          1..\*          [GpUnit](#_Toc7679298)                                  Used to include the political geography, i.e., location, for where the cast vote record report was created and for linking cast vote records to their corresponding precinct or split (or otherwise smallest unit).
-  Notes                                                             0..1           String                                                  Notes that can be added as appropriate, presumably by an adjudicator.
-  OtherReportType                                                   0..1           String                                                  If [ReportType](#_Toc7679319) is \'other\', this contains the report type.
-  {[]{#_3d1e5ffda20d2c609ee94d45da777050 .anchor}Party}             0..\*          [Party](#_3d1e5ffda20d2c609ee94d45da777050)             The party associated with the ballot sheet for a partisan primary.
-  {ReportGeneratingDevice}                                          1..\*          [ReportingDevice](#_5d808eebeef3948b3a2036f8a258695f)   Identifies the device used to create the CVR report.
-  {[]{#_5d808eebeef3948b3a2036f8a258695f .anchor}ReportingDevice}   1..\*          [ReportingDevice](#_5d808eebeef3948b3a2036f8a258695f)   The device creating the report. The reporting device need not necessarily be the creating device, i.e., for an aggregated report, the reporting device could be an EMS used to aggregate and tabulate cast vote records.
-  ReportType                                                        0..\*          [ReportType](#_Toc7679319)                              The type of report, using the [ReportType](#_Toc7679319) enumeration.
-  Version                                                           1              [CastVoteRecordVersion](#_Toc7679309)                   The version of the CVR specification being used (1.0).
+| Attribute                                                                            | Multiplicity | Type                                                  | Attribute Description                                                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------ | ------------ | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| {CVR}                                                                                | 0..\*        | [CVR](#class-cvr)                                     | Used to include instances of CVR classes, one per cast vote record in the report.                                                                                                                                        |
+| {Election}                                                                           | 1..\*        | [Election](#_Toc7679295)                              | Used to include the election(s) associated with the CVRs.                                                                                                                                                                |
+| GeneratedDate                                                                        | 1            | dateTime                                              | Identifies the time that the election report was created.                                                                                                                                                                |
+| {GpUnit}                                                                             | 1..\*        | [GpUnit](#_Toc7679298)                                | Used to include the political geography, i.e., location, for where the cast vote record report was created and for linking cast vote records to their corresponding precinct or split (or otherwise smallest unit).      |
+| Notes                                                                                | 0..1         | String                                                | Notes that can be added as appropriate, presumably by an adjudicator.                                                                                                                                                    |
+| OtherReportType                                                                      | 0..1         | String                                                | If [ReportType](#_Toc7679319) is 'other', this contains the report type.                                                                                                                                                 |
+| {<span id="_3d1e5ffda20d2c609ee94d45da777050" class="anchor"></span>Party}           | 0..\*        | [Party](#_3d1e5ffda20d2c609ee94d45da777050)           | The party associated with the ballot sheet for a partisan primary.                                                                                                                                                       |
+| {ReportGeneratingDevice}                                                             | 1..\*        | [ReportingDevice](#_5d808eebeef3948b3a2036f8a258695f) | Identifies the device used to create the CVR report.                                                                                                                                                                     |
+| {<span id="_5d808eebeef3948b3a2036f8a258695f" class="anchor"></span>ReportingDevice} | 1..\*        | [ReportingDevice](#_5d808eebeef3948b3a2036f8a258695f) | The device creating the report. The reporting device need not necessarily be the creating device, i.e., for an aggregated report, the reporting device could be an EMS used to aggregate and tabulate cast vote records. |
+| ReportType                                                                           | 0..\*        | [ReportType](#_Toc7679319)                            | The type of report, using the [ReportType](#_Toc7679319) enumeration.                                                                                                                                                    |
+| Version                                                                              | 1            | [CastVoteRecordVersion](#_Toc7679309)                 | The version of the CVR specification being used (1.0).                                                                                                                                                                   |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Class Code
-----------
+## Class Code
 
 Code is used in [Election](#_Toc7679295), [GpUnit](#_Toc7679298),
 [Contest](#_Toc7679288), [Candidate](#_Toc7679283), and
 [Party](#_3d1e5ffda20d2c609ee94d45da777050) to identify an associated
 code and the type of code.
 
-![1903570317.png](media/image15.png){width="1.6354166666666667in"
-height="1.1458333333333333in"}
+![1903570317.png](media/image15.png)
 
 Figure 17 - Class Code
 
-  Attribute   Multiplicity   Type                             Attribute Description
-  ----------- -------------- -------------------------------- -----------------------------------------------------------------------------------------
-  Label       0..1           string                           A label associated with the code, used as needed.
-  OtherType   0..1           string                           If [Type](#Type) is \'other\', the type of code.
-  Type        1              [IdentifierType](#_Toc7679315)   Used to indicate the type of code, from the [IdentifierType](#_Toc7679315) enumeration.
-  Value       1              string                           The value of the code, i.e., the identifier.
+| Attribute | Multiplicity | Type                           | Attribute Description                                                                   |
+| --------- | ------------ | ------------------------------ | --------------------------------------------------------------------------------------- |
+| Label     | 0..1         | string                         | A label associated with the code, used as needed.                                       |
+| OtherType | 0..1         | string                         | If [Type](#Type) is 'other', the type of code.                                          |
+| Type      | 1            | [IdentifierType](#_Toc7679315) | Used to indicate the type of code, from the [IdentifierType](#_Toc7679315) enumeration. |
+| Value     | 1            | string                         | The value of the code, i.e., the identifier.                                            |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Class Contest
--------------
+## Class Contest
 
 Contest represents a contest on the ballot. CastVoteRecordReport
 initially includes an instance of Contest for each contest on the
@@ -1556,35 +1528,33 @@ contest, its voted contest selection(s), and the mark(s) associated with
 the selection(s).
 
 Contest has three subclasses, each used for a specific type of contest:
-These subclasses inherit Contest\'s attributes.
+These subclasses inherit Contest's attributes.
 
-(1) PartyContest - used for straight party contests,
+1)  PartyContest - used for straight party contests,
 
-(2) BallotMeasureContest - used for contests, and
+2)  BallotMeasureContest - used for contests, and
 
-(3) CandidateContest - used for candidate contests.
+3)  CandidateContest - used for candidate contests.
 
-![1739124523.png](media/image16.png){width="2.6458333333333335in"
-height="1.28125in"}
+![1739124523.png](media/image16.png)
 
 Figure 18 - Class Contest
 
-  Attribute            Multiplicity   Type                                          Attribute Description
-  -------------------- -------------- --------------------------------------------- -----------------------------------------------------------------------------------------------
-  Abbreviation         0..1           String                                        An abbreviation associated with the contest.
-  Code                 0..\*          [Code](#_9d2bbb28c8f74433d1faa7883e83980a)    A code or identifier used for this contest.
-  {ContestSelection}   1..\*          [ContestSelection](#class-contestselection)   Identifies the contest selections in the contest.
-  Name                 0..1           String                                        Title or name of the contest, e.g., \"Governor\" or \"Question on Legalization of Gambling\".
-  OtherVoteVariation   0..1           String                                        If VoteVariation is \'other\', the vote variation for this contest.
-  VoteVariation        0..1           [VoteVariation](#_Toc7679320)                 The vote variation for this contest, from the VoteVariation enumeration.
+| Attribute          | Multiplicity | Type                                        | Attribute Description                                                                     |
+| ------------------ | ------------ | ------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Abbreviation       | 0..1         | String                                      | An abbreviation associated with the contest.                                              |
+| Code               | 0..\*        | [Code](#_9d2bbb28c8f74433d1faa7883e83980a)  | A code or identifier used for this contest.                                               |
+| {ContestSelection} | 1..\*        | [ContestSelection](#class-contestselection) | Identifies the contest selections in the contest.                                         |
+| Name               | 0..1         | String                                      | Title or name of the contest, e.g., "Governor" or "Question on Legalization of Gambling". |
+| OtherVoteVariation | 0..1         | String                                      | If VoteVariation is 'other', the vote variation for this contest.                         |
+| VoteVariation      | 0..1         | [VoteVariation](#_Toc7679320)               | The vote variation for this contest, from the VoteVariation enumeration.                  |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Class ContestSelection
-----------------------
+## Class ContestSelection
 
 ContestSelection represents a contest selection in a contest.
 [Contest](#_Toc7679288) can include an instance of ContestSelection for
@@ -1594,12 +1564,12 @@ selections.
 ContestSelection has three subclasses, each used for a specific type of
 contest selection:
 
-(1) [BallotMeasureSelection](#_Toc7679282) - used for ballot measures,
+1)  [BallotMeasureSelection](#_Toc7679282) - used for ballot measures,
 
-(2) [CandidateSelection](#_Toc7679285) - used for candidate selections,
+2)  [CandidateSelection](#_Toc7679285) - used for candidate selections,
     and
 
-(3) [PartySelection](#_Toc7679304) - used for straight party selections.
+3)  [PartySelection](#_Toc7679304) - used for straight party selections.
 
 Instances of [CVRContestSelection](#class-cvrcontestselection)
 subsequently link to the contest selections as needed so as to tie
@@ -1611,22 +1581,20 @@ ContestSelection contains one attribute,
 the contest selection and thereby eliminate the need to identify it
 using the subclasses.
 
-![-566003369.png](media/image17.png){width="2.208332239720035in"
-height="0.75in"}
+![-566003369.png](media/image17.png)
 
 Figure 19 - Class ContestSelection
 
-  Attribute                                            Multiplicity   Type                                         Attribute Description
-  ---------------------------------------------------- -------------- -------------------------------------------- ----------------------------------------------
-  []{#_9d2bbb28c8f74433d1faa7883e83980a .anchor}Code   0..\*          [Code](#_9d2bbb28c8f74433d1faa7883e83980a)   Code used to identify the contest selection.
+| Attribute                                                               | Multiplicity | Type                                       | Attribute Description                        |
+| ----------------------------------------------------------------------- | ------------ | ------------------------------------------ | -------------------------------------------- |
+| <span id="_9d2bbb28c8f74433d1faa7883e83980a" class="anchor"></span>Code | 0..\*        | [Code](#_9d2bbb28c8f74433d1faa7883e83980a) | Code used to identify the contest selection. |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Class CVR
----------
+## Class CVR
 
 CVR constitutes a cast vote record, created by a ballot scanning device,
 containing indications of contests and contest options chosen by the
@@ -1637,35 +1605,33 @@ CVRs will be created.
 [CastVoteRecordReport](#class-castvoterecordreport) includes multiple
 instances of CVR as applicable.
 
-![-815608039.png](media/image18.png){width="2.3958333333333335in"
-height="1.59375in"}
+![-815608039.png](media/image18.png)
 
 Figure 20 - Class CVR
 
-  Attribute                                                     Multiplicity   Type                                                    Attribute Description
-  ------------------------------------------------------------- -------------- ------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  []{#_f0141c7ccec7ffd3f729d497d07f2e28 .anchor}BallotAuditId   0..1           String                                                  A unique identifier for this CVR, used to link the CVR with the corresponding audit record, e.g., a paper ballot. This identifier may be printed on the corresponding audit record as it is scanned, or otherwise associated with the corresponding ballot.
-  BallotImage                                                   0..\*          [ImageData](#_Toc7679301)                               An image of the ballot sheet created by the scanning device.
-  BallotPrePrintedId                                            0..1           String                                                  A unique identifier for the ballot (or sheet of a multi-sheet ballot) that this CVR represents, used if ballots are pre-marked with unique identifiers. If provided, this number would be the same on all CVRs that represent individual sheets from the same multi-sheet ballot. This identifier is not the same as one that may be printed on the corresponding ballot as it is scanned or otherwise associated with the corresponding ballot; see the BallotAuditId attribute.
-  BallotSheetId                                                 0..1           Integer                                                 A unique number for the ballot (or sheet of a multi-sheet ballot) that this CVR represents, used if ballots are pre-marked with unique numbers. If provided, this number would be the same on all CVRs that represent individual sheets from the same multi-sheet ballot. This number is not the same as one that may be printed on the corresponding ballot as it is scanned or otherwise associated with the corresponding ballot; see the [BallotAuditId](#_f0141c7ccec7ffd3f729d497d07f2e28) attribute.
-  BallotStyleId                                                 0..1           String                                                  An identifier of the ballot style associated with the corresponding ballot.
-  {BallotStyleUnit}                                             0..1           [GpUnit](#_Toc7679298)                                  Identifies the smallest unit of geography associated with the corresponding ballot, typically a precinct or split-precinct.
-  BatchId                                                       0..1           String                                                  The identifier for the batch that includes this CVR.
-  BatchSequenceId                                               0..1           Integer                                                 The sequence number of the corresponding paper ballot within a batch.
-  {CreatingDevice}                                              0..1           [ReportingDevice](#_5d808eebeef3948b3a2036f8a258695f)   Identifies the device that created the CVR.
-  {CurrentSnapshot}                                             1              CVRSnapshot                                             Identifies the snapshot that is currently tabulatable.
-  {CVRSnapshot}                                                 1..\*          [CVRSnapshot](#class-cvrsnapshot)                       Identifies the repeatable portion of the CVR that links to contest selections and related information.
-  {Election}                                                    1              [Election](#_Toc7679295)                                Used to identify an election with which the CVR is associated.
-  {Party}                                                       0..\*          [Party](#_3d1e5ffda20d2c609ee94d45da777050)             Identifies the party associated with a CVR, typically for partisan primaries.
-  UniqueId                                                      0..1           String                                                  The sequence number for this CVR. This represents the ordinal number that this CVR was processed by the tabulating device.
+| Attribute                                                                        | Multiplicity | Type                                                  | Attribute Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| -------------------------------------------------------------------------------- | ------------ | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <span id="_f0141c7ccec7ffd3f729d497d07f2e28" class="anchor"></span>BallotAuditId | 0..1         | String                                                | A unique identifier for this CVR, used to link the CVR with the corresponding audit record, e.g., a paper ballot. This identifier may be printed on the corresponding audit record as it is scanned, or otherwise associated with the corresponding ballot.                                                                                                                                                                                                                                                 |
+| BallotImage                                                                      | 0..\*        | [ImageData](#_Toc7679301)                             | An image of the ballot sheet created by the scanning device.                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| BallotPrePrintedId                                                               | 0..1         | String                                                | A unique identifier for the ballot (or sheet of a multi-sheet ballot) that this CVR represents, used if ballots are pre-marked with unique identifiers. If provided, this number would be the same on all CVRs that represent individual sheets from the same multi-sheet ballot. This identifier is not the same as one that may be printed on the corresponding ballot as it is scanned or otherwise associated with the corresponding ballot; see the BallotAuditId attribute.                           |
+| BallotSheetId                                                                    | 0..1         | Integer                                               | A unique number for the ballot (or sheet of a multi-sheet ballot) that this CVR represents, used if ballots are pre-marked with unique numbers. If provided, this number would be the same on all CVRs that represent individual sheets from the same multi-sheet ballot. This number is not the same as one that may be printed on the corresponding ballot as it is scanned or otherwise associated with the corresponding ballot; see the [BallotAuditId](#_f0141c7ccec7ffd3f729d497d07f2e28) attribute. |
+| BallotStyleId                                                                    | 0..1         | String                                                | An identifier of the ballot style associated with the corresponding ballot.                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| {BallotStyleUnit}                                                                | 0..1         | [GpUnit](#_Toc7679298)                                | Identifies the smallest unit of geography associated with the corresponding ballot, typically a precinct or split-precinct.                                                                                                                                                                                                                                                                                                                                                                                 |
+| BatchId                                                                          | 0..1         | String                                                | The identifier for the batch that includes this CVR.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| BatchSequenceId                                                                  | 0..1         | Integer                                               | The sequence number of the corresponding paper ballot within a batch.                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| {CreatingDevice}                                                                 | 0..1         | [ReportingDevice](#_5d808eebeef3948b3a2036f8a258695f) | Identifies the device that created the CVR.                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| {CurrentSnapshot}                                                                | 1            | CVRSnapshot                                           | Identifies the snapshot that is currently tabulatable.                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| {CVRSnapshot}                                                                    | 1..\*        | [CVRSnapshot](#class-cvrsnapshot)                     | Identifies the repeatable portion of the CVR that links to contest selections and related information.                                                                                                                                                                                                                                                                                                                                                                                                      |
+| {Election}                                                                       | 1            | [Election](#_Toc7679295)                              | Used to identify an election with which the CVR is associated.                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| {Party}                                                                          | 0..\*        | [Party](#_3d1e5ffda20d2c609ee94d45da777050)           | Identifies the party associated with a CVR, typically for partisan primaries.                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| UniqueId                                                                         | 0..1         | String                                                | The sequence number for this CVR. This represents the ordinal number that this CVR was processed by the tabulating device.                                                                                                                                                                                                                                                                                                                                                                                  |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Class CVRContest
-----------------
+## Class CVRContest
 
 CVRContest class is included by [CVRSnapshot](#class-cvrsnapshot) for
 each contest on the ballot that was voted, that is, whose contest
@@ -1682,96 +1648,81 @@ CVRContest attributes are for including summary information about the
 contest.
 
 Overvotes plus Undervotes plus TotalVotes must equal the number of votes
-allowable in the contest, e.g., in a \"chose 3 of 5\" contest in which
-the voter chooses only 2, then Overvotes = 0, Undervotes = 1, and
-TotalVotes = 2, which adds up to the number of votes allowable = 3.
+allowable in the contest, e.g., in a "chose 3 of 5" contest in which the
+voter chooses only 2, then Overvotes = 0, Undervotes = 1, and TotalVotes
+= 2, which adds up to the number of votes allowable = 3.
 
-![17417232.png](media/image19.png){width="1.8125in" height="1.34375in"}
+![17417232.png](media/image19.png)
 
 Figure 21 - Class CVRContest
 
-+-----------------+-----------------+-----------------+-----------------+
-| Attribute       | Multiplicity    | Type            | Attribute       |
-|                 |                 |                 | Description     |
-+=================+=================+=================+=================+
-| {Contest}       | 1               | [Contest](#_Toc | Used to link to |
-|                 |                 | 7679288)        | an instance of  |
-|                 |                 |                 | [Contest](#_Toc |
-|                 |                 |                 | 7679288)        |
-|                 |                 |                 | specific to the |
-|                 |                 |                 | contest at      |
-|                 |                 |                 | hand, for the   |
-|                 |                 |                 | purpose of      |
-|                 |                 |                 | specifying      |
-|                 |                 |                 | information     |
-|                 |                 |                 | about the       |
-|                 |                 |                 | contest such as |
-|                 |                 |                 | its contest     |
-|                 |                 |                 | identifier.     |
-+-----------------+-----------------+-----------------+-----------------+
-| {CVRContestSele | 0..\*           | [CVRContestSele | Used to include |
-| ction}          |                 | ction](#class-c | information     |
-|                 |                 | vrcontestselect | about a contest |
-|                 |                 | ion)            | selection in    |
-|                 |                 |                 | the contest,    |
-|                 |                 |                 | including the   |
-|                 |                 |                 | associated      |
-|                 |                 |                 | indication(s).  |
-+-----------------+-----------------+-----------------+-----------------+
-| OtherStatus     | 0..1            | String          | Used when       |
-|                 |                 |                 | Status is       |
-|                 |                 |                 | \'other\' to    |
-|                 |                 |                 | include a       |
-|                 |                 |                 | user-defined    |
-|                 |                 |                 | status.         |
-+-----------------+-----------------+-----------------+-----------------+
-| Overvotes       | 0..1            | Integer         | The number of   |
-|                 |                 |                 | votes lost due  |
-|                 |                 |                 | to overvoting.  |
-+-----------------+-----------------+-----------------+-----------------+
-| Selections      | 0..1            | Integer         | Used to         |
-|                 |                 |                 | indicate the    |
-|                 |                 |                 | number of       |
-|                 |                 |                 | possible        |
-|                 |                 |                 | contest         |
-|                 |                 |                 | selections in   |
-|                 |                 |                 | the contest.    |
-+-----------------+-----------------+-----------------+-----------------+
-| Status          | 0..\*           | [ContestStatus] | The status of   |
-|                 |                 | (#_Toc7679311)  | the contest,    |
-|                 |                 |                 | e.g.,           |
-|                 |                 |                 | overvoted,      |
-|                 |                 |                 | undervoted,     |
-|                 |                 |                 | from            |
-|                 |                 |                 | the ContestStat |
-|                 |                 |                 | us              |
-|                 |                 |                 |                 |
-|                 |                 |                 | enumeration. If |
-|                 |                 |                 | no values       |
-|                 |                 |                 | apply, use      |
-|                 |                 |                 | \'other\' and   |
-|                 |                 |                 | include a       |
-|                 |                 |                 | user-defined    |
-|                 |                 |                 | status          |
-|                 |                 |                 | in OtherStatus. |
-+-----------------+-----------------+-----------------+-----------------+
-| Undervotes      | 0..1            | Integer         | The number of   |
-|                 |                 |                 | votes lost due  |
-|                 |                 |                 | to undervoting. |
-+-----------------+-----------------+-----------------+-----------------+
-| WriteIns        | 0..1            | Integer         | The total       |
-|                 |                 |                 | number of       |
-|                 |                 |                 | write-ins in    |
-|                 |                 |                 | the contest.    |
-+-----------------+-----------------+-----------------+-----------------+
+<table>
+<caption>Table 1 Caption</caption>
+<thead>
+<tr class="header">
+<th>Attribute</th>
+<th>Multiplicity</th>
+<th>Type</th>
+<th>Attribute Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>{Contest}</td>
+<td>1</td>
+<td><a href="#_Toc7679288">Contest</a></td>
+<td>Used to link to an instance of <a href="#_Toc7679288">Contest</a> specific to the contest at hand, for the purpose of specifying information about the contest such as its contest identifier.</td>
+</tr>
+<tr class="even">
+<td>{CVRContestSelection}</td>
+<td>0..*</td>
+<td><a href="#class-cvrcontestselection">CVRContestSelection</a></td>
+<td>Used to include information about a contest selection in the contest, including the associated indication(s).</td>
+</tr>
+<tr class="odd">
+<td>OtherStatus</td>
+<td>0..1</td>
+<td>String</td>
+<td>Used when Status is 'other' to include a user-defined status.</td>
+</tr>
+<tr class="even">
+<td>Overvotes</td>
+<td>0..1</td>
+<td>Integer</td>
+<td>The number of votes lost due to overvoting.</td>
+</tr>
+<tr class="odd">
+<td>Selections</td>
+<td>0..1</td>
+<td>Integer</td>
+<td>Used to indicate the number of possible contest selections in the contest.</td>
+</tr>
+<tr class="even">
+<td>Status</td>
+<td>0..*</td>
+<td><a href="#_Toc7679311">ContestStatus</a></td>
+<td><p>The status of the contest, e.g., overvoted, undervoted, from the ContestStatus </p>
+<p>enumeration. If no values apply, use 'other' and include a user-defined status in OtherStatus.</p></td>
+</tr>
+<tr class="odd">
+<td>Undervotes</td>
+<td>0..1</td>
+<td>Integer</td>
+<td>The number of votes lost due to undervoting.</td>
+</tr>
+<tr class="even">
+<td>WriteIns</td>
+<td>0..1</td>
+<td>Integer</td>
+<td>The total number of write-ins in the contest.</td>
+</tr>
+</tbody>
+</table>
 
-: Table 1 Caption
-
-Class CVRContestSelection
--------------------------
+## Class CVRContestSelection
 
 CVRContestSelection is used to link a contest option indication with
-information about the indication, such as whether the indication's mark
+information about the indication, such as whether the indication’s mark
 constitutes a countable vote or whether the mark is determined to be
 marginal, etc. [CVRContest](#class-cvrcontest) includes an instance of
 CVRContestSelection when an indication for the selection is present, and
@@ -1794,29 +1745,27 @@ CVRContestSelection has one subtype, [CVRWriteIn](#_Toc7679294), whose
 attributes are used to include information about the write-in including
 the text of the write-in or an image of the write-in.
 
-![-1631934528.png](media/image20.png){width="2.7083333333333335in"
-height="1.34375in"}
+![-1631934528.png](media/image20.png)
 
 Figure 22 - Class CVRContestSelection
 
-  Attribute              Multiplicity   Type                                          Attribute Description
-  ---------------------- -------------- --------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  {ContestSelection}     0..1           [ContestSelection](#class-contestselection)   Used to link to an instance of a contest selection that was previously included by [Contest](#_Toc7679288).
-  OptionPosition         0..1           Integer                                       Used to include the ordinal position of the contest option as it appeared on the ballot.
-  OtherStatus            0..1           String                                        Used when [Status](#_2936b54900c66f036b459882af2c4cd3) is \'other\' to include a user-defined status.
-  Rank                   0..1           Integer                                       For the RCV voting variation, the rank chosen by the voter, for when a contest selection can represent a ranking.
-  {SelectionPosition}    0..\*          SelectionPosition                             Used to include further information about the indication/mark associated with the contest selection. Depending on the voting method, multiple indications/marks per selection may be possible.
-  Status                 0..\*          [ContestSelectionStatus](#_Toc7679310)        Contains the status of the contest selection, e.g., \'needs-adjudication\' for a contest requiring adjudication, using values from the [ContestSelectionStatus](#_Toc7679310) enumeration. If no values apply, use \'other\' and include a user-defined status in [OtherStatus](#IsCurrent).
-  TotalFractionalVotes   0..1           [FractionalNumber](#_Toc7679297)              For cumulative or range and other similar voting variations, contains the total proper fractional number of votes across all indications/marks.
-  TotalNumberVotes       0..1           Integer                                       For cumulative or range and other similar voting variations, contains the integer total number of votes across all indications/marks.
+| Attribute            | Multiplicity | Type                                        | Attribute Description                                                                                                                                                                                                                                                                    |
+| -------------------- | ------------ | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| {ContestSelection}   | 0..1         | [ContestSelection](#class-contestselection) | Used to link to an instance of a contest selection that was previously included by [Contest](#_Toc7679288).                                                                                                                                                                              |
+| OptionPosition       | 0..1         | Integer                                     | Used to include the ordinal position of the contest option as it appeared on the ballot.                                                                                                                                                                                                 |
+| OtherStatus          | 0..1         | String                                      | Used when [Status](#_2936b54900c66f036b459882af2c4cd3) is 'other' to include a user-defined status.                                                                                                                                                                                      |
+| Rank                 | 0..1         | Integer                                     | For the RCV voting variation, the rank chosen by the voter, for when a contest selection can represent a ranking.                                                                                                                                                                        |
+| {SelectionPosition}  | 0..\*        | SelectionPosition                           | Used to include further information about the indication/mark associated with the contest selection. Depending on the voting method, multiple indications/marks per selection may be possible.                                                                                           |
+| Status               | 0..\*        | [ContestSelectionStatus](#_Toc7679310)      | Contains the status of the contest selection, e.g., 'needs-adjudication' for a contest requiring adjudication, using values from the [ContestSelectionStatus](#_Toc7679310) enumeration. If no values apply, use 'other' and include a user-defined status in [OtherStatus](#IsCurrent). |
+| TotalFractionalVotes | 0..1         | [FractionalNumber](#_Toc7679297)            | For cumulative or range and other similar voting variations, contains the total proper fractional number of votes across all indications/marks.                                                                                                                                          |
+| TotalNumberVotes     | 0..1         | Integer                                     | For cumulative or range and other similar voting variations, contains the integer total number of votes across all indications/marks.                                                                                                                                                    |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Class CVRSnapshot
------------------
+## Class CVRSnapshot
 
 CVRSnapshot contains a version of the contest selections for a CVR;
 there can be multiple versions of CVRSnapshot within the same CVR.
@@ -1829,47 +1778,43 @@ Other attributes are repeated in each CVRSnapshot because they may
 differ across snapshots, e.g., the contests could be different as well
 as other status.
 
-![](media/image21.png){width="2.3958333333333335in"
-height="1.5833333333333333in"}
+![](media/image21.png)
 
 Figure 23 - Class CVRSnapshot
 
-  Attribute                                              Multiplicity   Type                              Attribute Description
-  ------------------------------------------------------ -------------- --------------------------------- ---------------------------------------------------------------------------------------------
-  {Annotation}                                           0..\*          [Annotation](#class-annotation)   Used to include an annotation associated with the CVR snapshot.
-  {CVRContest}                                           0..\*          [CVRContest](#class-cvrcontest)   Identifies the contests in the CVR.
-  []{#IsCurrent .anchor}OtherStatus                      0..1           String                            When [Status](#_2936b54900c66f036b459882af2c4cd3) is \'other\', contains the ballot status.
-  []{#_2936b54900c66f036b459882af2c4cd3 .anchor}Status   0..\*          [CVRStatus](#_Toc7679312)         The status of the CVR.
-  []{#Type .anchor}Type                                  1              [CVRType](#enumeration-cvrtype)   The type of the snapshot, e.g., original.
+| Attribute                                                                 | Multiplicity | Type                            | Attribute Description                                                                     |
+| ------------------------------------------------------------------------- | ------------ | ------------------------------- | ----------------------------------------------------------------------------------------- |
+| {Annotation}                                                              | 0..\*        | [Annotation](#class-annotation) | Used to include an annotation associated with the CVR snapshot.                           |
+| {CVRContest}                                                              | 0..\*        | [CVRContest](#class-cvrcontest) | Identifies the contests in the CVR.                                                       |
+| <span id="IsCurrent" class="anchor"></span>OtherStatus                    | 0..1         | String                          | When [Status](#_2936b54900c66f036b459882af2c4cd3) is 'other', contains the ballot status. |
+| <span id="_2936b54900c66f036b459882af2c4cd3" class="anchor"></span>Status | 0..\*        | [CVRStatus](#_Toc7679312)       | The status of the CVR.                                                                    |
+| <span id="Type" class="anchor"></span>Type                                | 1            | [CVRType](#enumeration-cvrtype) | The type of the snapshot, e.g., original.                                                 |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Class CVRWriteIn
-----------------
+## Class CVRWriteIn
 
 CVRWriteIn is used when the contest selection is a write-in. It has
 attributes for the image or text of the write-in.
 
-![-149283966.png](media/image22.png){width="1.9583333333333333in"
-height="0.84375in"}
+![-149283966.png](media/image22.png)
 
 Figure 24 - Class CVRWriteIn
 
-  Attribute      Multiplicity   Type                        Attribute Description
-  -------------- -------------- --------------------------- ----------------------------------------------------------------------------------------------------------------------------
-  Text           0..1           String                      Used for the text of the write-in, typically present when the CVR has been created by electronic ballot marking equipment.
-  WriteInImage   0..1           [ImageData](#_Toc7679301)   Used for an image of the write-in, typically made by a scanner when scanning a paper ballot.
+| Attribute    | Multiplicity | Type                      | Attribute Description                                                                                                      |
+| ------------ | ------------ | ------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Text         | 0..1         | String                    | Used for the text of the write-in, typically present when the CVR has been created by electronic ballot marking equipment. |
+| WriteInImage | 0..1         | [ImageData](#_Toc7679301) | Used for an image of the write-in, typically made by a scanner when scanning a paper ballot.                               |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Class Election
---------------
+## Class Election
 
 Election defines instances of the [Contest](#_Toc7679288) and
 [Candidate](#_Toc7679283) classes so that they can be later referenced
@@ -1879,26 +1824,24 @@ for each contest in the election and includes an instance of
 file sizes more efficiently; otherwise each CVR would need to define
 these instances separately and much duplication would occur.
 
-![-160491755.png](media/image23.png){width="2.6458333333333335in"
-height="0.8958333333333334in"}
+![-160491755.png](media/image23.png)
 
 Figure 25 - Class Election
 
-  Attribute         Multiplicity   Type                                         Attribute Description
-  ----------------- -------------- -------------------------------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------
-  {Candidate}       0..\*          [Candidate](#_Toc7679283)                    Used to establish a collection of candidate definitions that will be referenced by the CVRs. The contests in each CVR will reference the candidate definitions.
-  Code              0..\*          [Code](#_9d2bbb28c8f74433d1faa7883e83980a)   Used for a code associated with the election, e.g., a precinct identifier if the election scope is a precinct.
-  {Contest}         1..\*          [Contest](#_Toc7679288)                      Used for establishing a collection of contest definitions that will be referenced by the CVRs.
-  {ElectionScope}   1              [GpUnit](#_Toc7679298)                       Used to identify the election scope, i.e., the political geography corresponding to the election.
-  Name              0..1           String                                       A text string identifying the election.
+| Attribute       | Multiplicity | Type                                       | Attribute Description                                                                                                                                           |
+| --------------- | ------------ | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| {Candidate}     | 0..\*        | [Candidate](#_Toc7679283)                  | Used to establish a collection of candidate definitions that will be referenced by the CVRs. The contests in each CVR will reference the candidate definitions. |
+| Code            | 0..\*        | [Code](#_9d2bbb28c8f74433d1faa7883e83980a) | Used for a code associated with the election, e.g., a precinct identifier if the election scope is a precinct.                                                  |
+| {Contest}       | 1..\*        | [Contest](#_Toc7679288)                    | Used for establishing a collection of contest definitions that will be referenced by the CVRs.                                                                  |
+| {ElectionScope} | 1            | [GpUnit](#_Toc7679298)                     | Used to identify the election scope, i.e., the political geography corresponding to the election.                                                               |
+| Name            | 0..1         | String                                     | A text string identifying the election.                                                                                                                         |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Class File
-----------
+## Class File
 
 Used to hold the contents of a file or identify a file created by the
 scanning device. The file generally would contain an image of the
@@ -1906,51 +1849,48 @@ scanned ballot or an image of a write-in entered by a voter onto the
 scanned ballot. SubClass [Image](#_Toc7679300) is used if the file
 contains an image.
 
-![-1359252015.png](media/image24.png){width="3.2083333333333335in"
-height="1.1354155730533684in"}
+![-1359252015.png](media/image24.png)
 
 Figure 26 - Class File
 
-  Attribute   Multiplicity   Type           Attribute Description
-  ----------- -------------- -------------- -------------------------------------------------------------
-  Data        1              base64Binary   Contains the base64 binary contents of the file.
-  FileName    0..1           string         Contains the name of the file or an identifier of the file.
-  MimeType    0..1           string         The mime type of the file, e.g., image/jpeg.
+| Attribute | Multiplicity | Type         | Attribute Description                                       |
+| --------- | ------------ | ------------ | ----------------------------------------------------------- |
+| Data      | 1            | base64Binary | Contains the base64 binary contents of the file.            |
+| FileName  | 0..1         | string       | Contains the name of the file or an identifier of the file. |
+| MimeType  | 0..1         | string       | The mime type of the file, e.g., image/jpeg.                |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Class FractionalNumber
-----------------------
+## Class FractionalNumber
 
 A proper fractional value represented using fractional or decimal
 notation.
 
-> ![1837476355.png](media/image25.png){width="2.75in" height="0.875in"}
+> ![1837476355.png](media/image25.png)
 
 Figure 27 - Class FractionalNumber
 
-  **Attribute**   **Multiplicity**   **Type**   **Attribute Description**
-  --------------- ------------------ ---------- -------------------------------------------------------------------------------
-  pattern                            String     Pattern describing the allowed values for a [FractionalNumber](#_Toc7679297).
+| **Attribute** | **Multiplicity** | **Type** | **Attribute Description**                                                     |
+| ------------- | ---------------- | -------- | ----------------------------------------------------------------------------- |
+| pattern       |                  | String   | Pattern describing the allowed values for a [FractionalNumber](#_Toc7679297). |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Class GpUnit
-------------
+## Class GpUnit
 
 Used for identifying a geographical unit for various purposes,
 including:
 
--   The reporting unit of the report generation device, e.g., a precinct
+  - The reporting unit of the report generation device, e.g., a precinct
     location of a scanner that creates the collection of CVRs,
 
--   The geographical scope of the election, or the unit of geography
+  - The geographical scope of the election, or the unit of geography
     associated with an individual CVR.
 
 [CastVoteRecordReport](#class-castvoterecordreport) includes instances
@@ -1958,184 +1898,168 @@ of GpUnit as needed. [Election](#_Toc7679295) references GpUnit as
 ElectionScope, for the geographical scope of the election.
 [CVR](#class-cvr) references GpUnit as BallotStyleUnit to link a CVR to
 the smallest political subdivision that uses the same ballot style as
-was used for the voter's ballot.
+was used for the voter’s ballot.
 
-![-954890237.png](media/image26.png){width="1.8854166666666667in"
-height="1.1458333333333333in"}
+![-954890237.png](media/image26.png)
 
 Figure 28 - Class GpUnit
 
-  Attribute           Multiplicity   Type                                                    Attribute Description
-  ------------------- -------------- ------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Code                0..\*          [Code](#_9d2bbb28c8f74433d1faa7883e83980a)              A code associated with the geographical unit.
-  Name                0..1           String                                                  Name of the geographical unit.
-  OtherType           0..1           String                                                  Used when [Type](#Type) is \'other\' to include a user-defined type.
-  {ReportingDevice}   0..\*          [ReportingDevice](#_5d808eebeef3948b3a2036f8a258695f)   The collection of cast vote records associated with the reporting unit and the reporting device.
-  Type                1              [ReportingUnitType](#_Toc7679318)                       Contains the type of geographical unit, e.g., precinct, split-precinct, vote center, using values from the [ReportingUnitType](#_Toc7679318) enumeration. If no values apply, use \'other\' and include a user-defined type in OtherType.
+| Attribute         | Multiplicity | Type                                                  | Attribute Description                                                                                                                                                                                                                   |
+| ----------------- | ------------ | ----------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Code              | 0..\*        | [Code](#_9d2bbb28c8f74433d1faa7883e83980a)            | A code associated with the geographical unit.                                                                                                                                                                                           |
+| Name              | 0..1         | String                                                | Name of the geographical unit.                                                                                                                                                                                                          |
+| OtherType         | 0..1         | String                                                | Used when [Type](#Type) is 'other' to include a user-defined type.                                                                                                                                                                      |
+| {ReportingDevice} | 0..\*        | [ReportingDevice](#_5d808eebeef3948b3a2036f8a258695f) | The collection of cast vote records associated with the reporting unit and the reporting device.                                                                                                                                        |
+| Type              | 1            | [ReportingUnitType](#_Toc7679318)                     | Contains the type of geographical unit, e.g., precinct, split-precinct, vote center, using values from the [ReportingUnitType](#_Toc7679318) enumeration. If no values apply, use 'other' and include a user-defined type in OtherType. |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Class Hash
-----------
+## Class Hash
 
 Hash is used to specify a hash associated with a file such as an image
 file of a scanned ballot.
 
-![-1216715874.png](media/image27.png){width="1.6354166666666667in"
-height="1.0104155730533684in"}
+![-1216715874.png](media/image27.png)
 
 Figure 29 - Class Hash
 
-  Attribute   Multiplicity   Type                       Attribute Description
-  ----------- -------------- -------------------------- ----------------------------------------------------------------------
-  OtherType   0..1           string                     If [Type](#Type) is \'other\', the type of the hash.
-  Type        1              [HashType](#_Toc7679314)   The type of the hash, from the [HashType](#_Toc7679314) enumeration.
-  Value       1              string                     The hash value, encoded as a string.
+| Attribute | Multiplicity | Type                     | Attribute Description                                                |
+| --------- | ------------ | ------------------------ | -------------------------------------------------------------------- |
+| OtherType | 0..1         | string                   | If [Type](#Type) is 'other', the type of the hash.                   |
+| Type      | 1            | [HashType](#_Toc7679314) | The type of the hash, from the [HashType](#_Toc7679314) enumeration. |
+| Value     | 1            | string                   | The hash value, encoded as a string.                                 |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Class Image
------------
+## Class Image
 
 Used by [File](#_Toc7679296) for a file containing an image, e.g., an
 image of a write-in on a paper ballot.
 
-![-1320838961.png](media/image28.png){width="1.7708333333333333in"
-height="0.6041666666666666in"}
+![-1320838961.png](media/image28.png)
 
 Figure 30 - Class Image
 
-**\
+**  
 **
 
-Class ImageData
----------------
+## Class ImageData
 
 ImageData is used to specify an image file such as for a write-in or the
 entire ballot. It works with several other classes, as follows:
 
--   [File](#_Toc7679296) with SubClass [Image](#_Toc7679300) -- to
+  - [File](#_Toc7679296) with SubClass [Image](#_Toc7679300) – to
     contain either a filename for an external file or the file contents,
     and
 
--   [Hash](#_Toc7679299) -- to contain cryptographic hash function data
+  - [Hash](#_Toc7679299) – to contain cryptographic hash function data
     for the file.
 
-![2046989636.png](media/image29.png){width="2.78125in"
-height="1.0104155730533684in"}
+![2046989636.png](media/image29.png)
 
 Figure 31 - Class ImageData
 
-  Attribute   Multiplicity   Type                    Attribute Description
-  ----------- -------------- ----------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  {Hash}      0..1           [Hash](#_Toc7679299)    A hash value for the image data, used for verification comparisons against subsequent copies of the image.
-  {Image}     0..1           [Image](#_Toc7679300)   The image of an individual ballot sheet created by the scanner, could possibly include both sides of a two-sided ballot sheet depending on the scanner\'s configuration.
-  Location    0..1           anyURI                  A pointer to the location of the image file.
-  Signature   0..1           Signature               Either a signature for the embedded image, or a detached signature for the image available at the specified location.
+| Attribute | Multiplicity | Type                  | Attribute Description                                                                                                                                                   |
+| --------- | ------------ | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| {Hash}    | 0..1         | [Hash](#_Toc7679299)  | A hash value for the image data, used for verification comparisons against subsequent copies of the image.                                                              |
+| {Image}   | 0..1         | [Image](#_Toc7679300) | The image of an individual ballot sheet created by the scanner, could possibly include both sides of a two-sided ballot sheet depending on the scanner's configuration. |
+| Location  | 0..1         | anyURI                | A pointer to the location of the image file.                                                                                                                            |
+| Signature | 0..1         | Signature             | Either a signature for the embedded image, or a detached signature for the image available at the specified location.                                                   |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Class Party
------------
+## Class Party
 
 Party is used for describing information about a political party
-associated with the voter\'s ballot. [CVR](#class-cvr) includes
-instances of Party as needed, e.g., for a [CVR](#class-cvr)
-corresponding to a ballot in a partisan primary, and
+associated with the voter's ballot. [CVR](#class-cvr) includes instances
+of Party as needed, e.g., for a [CVR](#class-cvr) corresponding to a
+ballot in a partisan primary, and
 [CandidateContest](#class-candidatecontest) references Party as needed
 to link a candidate to their political party.
 
-![133801878.png](media/image30.png){width="2.15625in"
-height="1.0104155730533684in"}
+![133801878.png](media/image30.png)
 
 Figure 32 - Class Party
 
-  Attribute      Multiplicity   Type                                         Attribute Description
-  -------------- -------------- -------------------------------------------- --------------------------------------------------------
-  Abbreviation   0..1           String                                       Short name for the party, e.g., \"DEM\".
-  Code           0..\*          [Code](#_9d2bbb28c8f74433d1faa7883e83980a)   A code associated with the party.
-  Name           0..1           String                                       Official full name of the party, e.g., \"Republican\".
+| Attribute    | Multiplicity | Type                                       | Attribute Description                                |
+| ------------ | ------------ | ------------------------------------------ | ---------------------------------------------------- |
+| Abbreviation | 0..1         | String                                     | Short name for the party, e.g., "DEM".               |
+| Code         | 0..\*        | [Code](#_9d2bbb28c8f74433d1faa7883e83980a) | A code associated with the party.                    |
+| Name         | 0..1         | String                                     | Official full name of the party, e.g., "Republican". |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Class PartyContest
-------------------
+## Class PartyContest
 
 PartyContest is a subclass of [Contest](#_Toc7679288) and is used to
 identify the type of contest as involving a straight party selection. It
 inherits attributes from [Contest](#_Toc7679288).
 
-![857847513.png](media/image31.png){width="1.1354155730533684in"
-height="0.5625in"}
+![857847513.png](media/image31.png)
 
 Figure 33 - Class PartyContest
 
-**\
+**  
 **
 
-Class PartySelection
---------------------
+## Class PartySelection
 
 PartySelection is a subclass of ContestSelection and is used typically
 for a contest selection in a straight-party contest.
 
-![-1447129566.png](media/image32.png){width="1.2083333333333333in"
-height="0.5625in"}
+![-1447129566.png](media/image32.png)
 
 Figure 34 - Class PartySelection
 
-  Attribute   Multiplicity   Type                                          Attribute Description
-  ----------- -------------- --------------------------------------------- --------------------------------------------------
-  {Party}     1..\*          [Party](#_3d1e5ffda20d2c609ee94d45da777050)   The party associated with the contest selection.
+| Attribute | Multiplicity | Type                                        | Attribute Description                            |
+| --------- | ------------ | ------------------------------------------- | ------------------------------------------------ |
+| {Party}   | 1..\*        | [Party](#_3d1e5ffda20d2c609ee94d45da777050) | The party associated with the contest selection. |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Class ReportingDevice
----------------------
+## Class ReportingDevice
 
-ReportingDevice is used to specify a voting device as the "political
-geography" at hand. [CastVoteRecordReport](#class-castvoterecordreport)
+ReportingDevice is used to specify a voting device as the “political
+geography” at hand. [CastVoteRecordReport](#class-castvoterecordreport)
 refers to it as ReportGeneratingDevice and uses it to specify the device
 that created the CVR report. [CVR](#class-cvr) refers to it as
 CreatingDevice to specify the device that created the CVRs.
 
-![-1264558902.png](media/image33.png){width="1.9479166666666667in"
-height="1.4166666666666667in"}
+![-1264558902.png](media/image33.png)
 
 Figure 35 - Class ReportingDevice
 
-  Attribute        Multiplicity   Type                  Attribute Description
-  ---------------- -------------- --------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Application      0..1           String                The application associated with the reporting device.
-  Code             0..\*          [Code](#class-code)   A code associated with the reporting device.
-  Manufacturer     0..1           String                Manufacturer of the reporting device.
-  MarkMetricType   0..1           String                The type of metric being used to determine quality. The type must be specific enough that the attached value can be accurately verified later, e.g., \'Acme Mark Density\' may be a sufficiently specific type.
-  Model            0..1           String                Manufacturer\'s model of the reporting device.
-  Notes            0..\*          String                Additional explanatory notes as applicable.
-  SerialNumber     0..1           String                Serial number or other identification that can uniquely identify the reporting device.
+| Attribute      | Multiplicity | Type                | Attribute Description                                                                                                                                                                                         |
+| -------------- | ------------ | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Application    | 0..1         | String              | The application associated with the reporting device.                                                                                                                                                         |
+| Code           | 0..\*        | [Code](#class-code) | A code associated with the reporting device.                                                                                                                                                                  |
+| Manufacturer   | 0..1         | String              | Manufacturer of the reporting device.                                                                                                                                                                         |
+| MarkMetricType | 0..1         | String              | The type of metric being used to determine quality. The type must be specific enough that the attached value can be accurately verified later, e.g., 'Acme Mark Density' may be a sufficiently specific type. |
+| Model          | 0..1         | String              | Manufacturer's model of the reporting device.                                                                                                                                                                 |
+| Notes          | 0..\*        | String              | Additional explanatory notes as applicable.                                                                                                                                                                   |
+| SerialNumber   | 0..1         | String              | Serial number or other identification that can uniquely identify the reporting device.                                                                                                                        |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Class RetentionContest
-----------------------
+## Class RetentionContest
 
 RetentionContest is a subclass of [BallotMeasureContest](#_Toc7679281)
 and is used to identify the type of contest as involving a retention,
@@ -2144,25 +2068,23 @@ such as for a judicial retention. While it is similar to
 [Candidate](#_Toc7679283) that [BallotMeasureContest](#_Toc7679281) does
 not. RetentionContest inherits attributes from [Contest](#_Toc7679288).
 
-![-1325574944.png](media/image34.png){width="1.5520833333333333in"
-height="0.5625in"}
+![-1325574944.png](media/image34.png)
 
 Figure 36 - Class RetentionContest
 
-  Attribute     Multiplicity   Type                        Attribute Description
-  ------------- -------------- --------------------------- ----------------------------------------------------
-  {Candidate}                  [Candidate](#_Toc7679283)   Identifies the candidate in the retention contest.
+| Attribute   | Multiplicity | Type                      | Attribute Description                              |
+| ----------- | ------------ | ------------------------- | -------------------------------------------------- |
+| {Candidate} |              | [Candidate](#_Toc7679283) | Identifies the candidate in the retention contest. |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Class SelectionPosition
------------------------
+## Class SelectionPosition
 
 [CVRContestSelection](#class-cvrcontestselection) includes
-SelectionPosition to specify a voter\'s indication/mark in a contest
+SelectionPosition to specify a voter's indication/mark in a contest
 option, and thus, a potential vote. The number of potential
 SelectionPositions that could be included by CVRContestSelection is the
 same as the number of ovals next to a particular option. There will be
@@ -2179,422 +2101,382 @@ is assigned by the scanner for measurements of mark density or quality
 and would be used by the scanner to indicate whether the mark is a valid
 voter mark representing a vote or is marginal.
 
-![](media/image35.png){width="2.18in" height="1.8257491251093614in"}
+![](media/image35.png)
 
 Figure 37 - Class SelectionPosition
 
-+-----------------+-----------------+-----------------+-----------------+
-| Attribute       | Multiplicity    | Type            | Attribute       |
-|                 |                 |                 | Description     |
-+=================+=================+=================+=================+
-| Code            | 0..\*           | Code            | Code used to    |
-|                 |                 |                 | identify the    |
-|                 |                 |                 | contest         |
-|                 |                 |                 | selection       |
-|                 |                 |                 | position.       |
-+-----------------+-----------------+-----------------+-----------------+
-| {CVRWriteIn}    | 0..1            | CVRWriteIn      | Used to store   |
-|                 |                 |                 | information     |
-|                 |                 |                 | regarding a     |
-|                 |                 |                 | write-in vote.  |
-+-----------------+-----------------+-----------------+-----------------+
-| FractionalVotes | 0..1            | FractionalNumbe | The proper      |
-|                 |                 | r               | fractional      |
-|                 |                 |                 | number of votes |
-|                 |                 |                 | represented by  |
-|                 |                 |                 | the position.   |
-+-----------------+-----------------+-----------------+-----------------+
-| HasIndication   | 1               | IndicationStatu | Whether there   |
-|                 |                 | s               | is a selection  |
-|                 |                 |                 | indication      |
-|                 |                 |                 | present.        |
-+-----------------+-----------------+-----------------+-----------------+
-| IsAllocable     | 0..1            | AllocationStatu | Whether this    |
-|                 |                 | s               | indication      |
-|                 |                 |                 | should be       |
-|                 |                 |                 | allocated to    |
-|                 |                 |                 | the contest     |
-|                 |                 |                 | option\'s       |
-|                 |                 |                 | accumulator.    |
-+-----------------+-----------------+-----------------+-----------------+
-| IsGenerated     | 0..1            | boolean         | Whether this    |
-|                 |                 |                 | indication was  |
-|                 |                 |                 | generated by    |
-|                 |                 |                 | election rules, |
-|                 |                 |                 | if not present, |
-|                 |                 |                 | False is        |
-|                 |                 |                 | assumed.        |
-+-----------------+-----------------+-----------------+-----------------+
-| MarkMetricValue | 0..1            | String          | The value of    |
-|                 |                 |                 | the mark        |
-|                 |                 |                 | metric,         |
-|                 |                 |                 | represented as  |
-|                 |                 |                 | a string.       |
-+-----------------+-----------------+-----------------+-----------------+
-| NumberVotes     | 1               | Integer         | The number of   |
-|                 |                 |                 | votes           |
-|                 |                 |                 | represented by  |
-|                 |                 |                 | the position,   |
-|                 |                 |                 | usually 1 but   |
-|                 |                 |                 | may be more     |
-|                 |                 |                 | depending on    |
-|                 |                 |                 | the voting      |
-|                 |                 |                 | method.         |
-+-----------------+-----------------+-----------------+-----------------+
-| OtherStatus     | 0..1            | String          | Used when       |
-|                 |                 |                 | [Status](#_2936 |
-|                 |                 |                 | b54900c66f036b4 |
-|                 |                 |                 | 59882af2c4cd3)  |
-|                 |                 |                 | is \'other\' to |
-|                 |                 |                 | include a       |
-|                 |                 |                 | user-defined    |
-|                 |                 |                 | status.         |
-+-----------------+-----------------+-----------------+-----------------+
-| Position        | 0..1            | Integer         | The ordinal     |
-|                 |                 |                 | position of the |
-|                 |                 |                 | selection       |
-|                 |                 |                 | position within |
-|                 |                 |                 | the contest     |
-|                 |                 |                 | option.         |
-+-----------------+-----------------+-----------------+-----------------+
-| Rank            | 0..1            | Integer         | For the RCV     |
-|                 |                 |                 | voting          |
-|                 |                 |                 | variation, the  |
-|                 |                 |                 | rank chosen by  |
-|                 |                 |                 | the voter, for  |
-|                 |                 |                 | when a position |
-|                 |                 |                 | can represent a |
-|                 |                 |                 | ranking.        |
-+-----------------+-----------------+-----------------+-----------------+
-| Status          | 0..\*           | [PositionStatus | Status of the   |
-|                 |                 | ](#_Toc7679317) | position, e.g., |
-|                 |                 |                 | \"generated-rul |
-|                 |                 |                 | es\"            |
-|                 |                 |                 | for generated   |
-|                 |                 |                 | by the machine, |
-|                 |                 |                 | from            |
-|                 |                 |                 | the PositionSta |
-|                 |                 |                 | tus             |
-|                 |                 |                 |                 |
-|                 |                 |                 | enumeration. If |
-|                 |                 |                 | no values       |
-|                 |                 |                 | apply, use      |
-|                 |                 |                 | \'other\' and   |
-|                 |                 |                 | include a       |
-|                 |                 |                 | user-defined    |
-|                 |                 |                 | status in       |
-|                 |                 |                 | OtherStatus.    |
-+-----------------+-----------------+-----------------+-----------------+
+<table>
+<caption>Table 1 Caption</caption>
+<thead>
+<tr class="header">
+<th>Attribute</th>
+<th>Multiplicity</th>
+<th>Type</th>
+<th>Attribute Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Code</td>
+<td>0..*</td>
+<td>Code</td>
+<td>Code used to identify the contest selection position.</td>
+</tr>
+<tr class="even">
+<td>{CVRWriteIn}</td>
+<td>0..1</td>
+<td>CVRWriteIn</td>
+<td>Used to store information regarding a write-in vote.</td>
+</tr>
+<tr class="odd">
+<td>FractionalVotes</td>
+<td>0..1</td>
+<td>FractionalNumber</td>
+<td>The proper fractional number of votes represented by the position.</td>
+</tr>
+<tr class="even">
+<td>HasIndication</td>
+<td>1</td>
+<td>IndicationStatus</td>
+<td>Whether there is a selection indication present.</td>
+</tr>
+<tr class="odd">
+<td>IsAllocable</td>
+<td>0..1</td>
+<td>AllocationStatus</td>
+<td>Whether this indication should be allocated to the contest option's accumulator.</td>
+</tr>
+<tr class="even">
+<td>IsGenerated</td>
+<td>0..1</td>
+<td>boolean</td>
+<td>Whether this indication was generated by election rules, if not present, False is assumed.</td>
+</tr>
+<tr class="odd">
+<td>MarkMetricValue</td>
+<td>0..1</td>
+<td>String</td>
+<td>The value of the mark metric, represented as a string.</td>
+</tr>
+<tr class="even">
+<td>NumberVotes</td>
+<td>1</td>
+<td>Integer</td>
+<td>The number of votes represented by the position, usually 1 but may be more depending on the voting method.</td>
+</tr>
+<tr class="odd">
+<td>OtherStatus</td>
+<td>0..1</td>
+<td>String</td>
+<td>Used when <a href="#_2936b54900c66f036b459882af2c4cd3">Status</a> is 'other' to include a user-defined status.</td>
+</tr>
+<tr class="even">
+<td>Position</td>
+<td>0..1</td>
+<td>Integer</td>
+<td>The ordinal position of the selection position within the contest option.</td>
+</tr>
+<tr class="odd">
+<td>Rank</td>
+<td>0..1</td>
+<td>Integer</td>
+<td>For the RCV voting variation, the rank chosen by the voter, for when a position can represent a ranking.</td>
+</tr>
+<tr class="even">
+<td>Status</td>
+<td>0..*</td>
+<td><a href="#_Toc7679317">PositionStatus</a></td>
+<td><p>Status of the position, e.g., "generated-rules" for generated by the machine, from the PositionStatus</p>
+<p>enumeration. If no values apply, use 'other' and include a user-defined status in OtherStatus.</p></td>
+</tr>
+</tbody>
+</table>
 
-: Table 1 Caption
-
-Enumeration AllocationStatus
-----------------------------
+## Enumeration AllocationStatus
 
 Used in SelectionPosition::IsAllocable to indicate whether the
 
 SelectionPosition::NumberVotes should be allocated to the underlying
 contest option counter.
 
-![](media/image36.png){width="1.2291666666666667in"
-height="1.0925918635170604in"}
+![](media/image36.png)
 
-Figure 38 -- Enumeration AllocationStatus
+Figure 38 – Enumeration AllocationStatus
 
-  Value     Value Description
-  --------- --------------------------------------------------------------------------------------
-  no        To not allocate votes to the contest option's accumulator.
-  unknown   When the decision to allocate votes is unknown, such as when adjudication is needed.
-  yes       To allocate votes to the contest option's accumulator.
+| Value   | Value Description                                                                    |
+| ------- | ------------------------------------------------------------------------------------ |
+| no      | To not allocate votes to the contest option’s accumulator.                           |
+| unknown | When the decision to allocate votes is unknown, such as when adjudication is needed. |
+| yes     | To allocate votes to the contest option’s accumulator.                               |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Enumeration CastVoteRecordVersion
----------------------------------
+## Enumeration CastVoteRecordVersion
 
 To identify the version of the CVR specification being used, i.e.,
 version 1.0.0. This will need to be updated for different versions of
 the specification.
 
-![1159947266.png](media/image37.png){width="1.78125in" height="0.875in"}
+![1159947266.png](media/image37.png)
 
-Figure 39 -- Enumeration CastVoteRecordVersion
+Figure 39 – Enumeration CastVoteRecordVersion
 
-  Value   Value Description
-  ------- ----------------------------------------------------
-  1.0.0   Fixed value for the version of this specification.
+| Value | Value Description                                  |
+| ----- | -------------------------------------------------- |
+| 1.0.0 | Fixed value for the version of this specification. |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Enumeration ContestSelectionStatus
-----------------------------------
+## Enumeration ContestSelectionStatus
 
 Used in
 [CVRContestSelection](#class-cvrcontestselection)::[Status](#_2936b54900c66f036b459882af2c4cd3)
 to identify the status of a contest selection in the CVR.
 
-![-2047350109.png](media/image38.png){width="1.7395833333333333in"
-height="1.25in"}
+![-2047350109.png](media/image38.png)
 
-Figure 40 -- Enumeration ContestSelectionStatus
+Figure 40 – Enumeration ContestSelectionStatus
 
-  Value                Value Description
-  -------------------- ------------------------------------------------------------------------------------------------------------------------------------------------
-  generated-rules      To indicate that the contest selection was created per contest rules.
-  invalidated-rules    To indicate that the contest selection was invalidated by the creating device because of contest rules.
-  needs-adjudication   To indicate that the contest selection was flagged by the creating device for adjudication.
-  other                Used in conjunction with [CVRContestSelection](#class-cvrcontestselection)::[OtherStatus](\l) when no other value in this enumeration applies.
+| Value              | Value Description                                                                                                                               |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| generated-rules    | To indicate that the contest selection was created per contest rules.                                                                           |
+| invalidated-rules  | To indicate that the contest selection was invalidated by the creating device because of contest rules.                                         |
+| needs-adjudication | To indicate that the contest selection was flagged by the creating device for adjudication.                                                     |
+| other              | Used in conjunction with [CVRContestSelection](#class-cvrcontestselection)::[OtherStatus](\\l) when no other value in this enumeration applies. |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Enumeration ContestStatus
--------------------------
+## Enumeration ContestStatus
 
 Used in
 [CVRContest](#class-cvrcontest)::[Status](#_2936b54900c66f036b459882af2c4cd3)
 to identify the status of a contest in which contest selection(s) were
 made.
 
-![](media/image39.png){width="1.0984842519685039in" height="1.25in"}
+![](media/image39.png)
 
-Figure 41 -- Enumeration ContestStatus
+Figure 41 – Enumeration ContestStatus
 
-  Value               Value Description
-  ------------------- ------------------------------------------------------------------------------------------------------------------------
-  invalidated-rules   To indicate that the contest has been invalidated by the creating device because of contest rules.
-  not-indicated       For a CVRContest with no SelectionPosition, i.e. to specify the position contains no marks or other indications.
-  other               Used in conjunction with [CVRContest](#class-cvrcontest)::OtherStatus when no other value in this enumeration applies.
-  overvoted           To indicate that the contest was overvoted.
-  undervoted          To indicate that the contest was undervoted.
+| Value             | Value Description                                                                                                      |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| invalidated-rules | To indicate that the contest has been invalidated by the creating device because of contest rules.                     |
+| not-indicated     | For a CVRContest with no SelectionPosition, i.e. to specify the position contains no marks or other indications.       |
+| other             | Used in conjunction with [CVRContest](#class-cvrcontest)::OtherStatus when no other value in this enumeration applies. |
+| overvoted         | To indicate that the contest was overvoted.                                                                            |
+| undervoted        | To indicate that the contest was undervoted.                                                                           |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Enumeration CVRStatus
----------------------
+## Enumeration CVRStatus
 
 Used in
 [CVRSnapshot](#class-cvrsnapshot)::[Status](#_2936b54900c66f036b459882af2c4cd3)
 to identify the status of the CVR.
 
-![977259592.png](media/image40.png){width="1.3333333333333333in"
-height="1.0in"}
+![977259592.png](media/image40.png)
 
 Figure 42 - Enumeration CVRStatus
 
-  Value                Value Description
-  -------------------- --------------------------------------------------------------------------------------------------------------------------------
-  needs-adjudication   To indicate that the CVR needs to be adjudicated.
-  other                Used in conjunction with [CVRSnapshot](#class-cvrsnapshot)::[OtherStatus](\l) when no other value in this enumeration applies.
+| Value              | Value Description                                                                                                               |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| needs-adjudication | To indicate that the CVR needs to be adjudicated.                                                                               |
+| other              | Used in conjunction with [CVRSnapshot](#class-cvrsnapshot)::[OtherStatus](\\l) when no other value in this enumeration applies. |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Enumeration CVRType
--------------------
+## Enumeration CVRType
 
 Used in CVRSnapshot::Type to indicate the type of snapshot.
 
-![2009555091.png](media/image41.png){width="1.1354155730533684in"
-height="1.1770833333333333in"}
+![2009555091.png](media/image41.png)
 
 Figure 43 - Enumeration CVRType
 
-  Value         Value Description
-  ------------- ---------------------------------------
-  interpreted   Has been adjudicated.
-  modified      After contest rules applied.
-  original      As scanned, no contest rules applied.
+| Value       | Value Description                     |
+| ----------- | ------------------------------------- |
+| interpreted | Has been adjudicated.                 |
+| modified    | After contest rules applied.          |
+| original    | As scanned, no contest rules applied. |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Enumeration HashType
---------------------
+## Enumeration HashType
 
 Used in [Hash](#_Toc7679299)::[Type](#Type) to indicate the type of hash
 being used for an image file.
 
-![1454348558.png](media/image42.png){width="1.125in" height="1.25in"}
+![1454348558.png](media/image42.png)
 
 Figure 44 - Enumeration HashType
 
-  Value     Value Description
-  --------- -----------------------------------------------------------------------------------------------------------
-  md6       To indicate that the MD6 message digest algorithm is being used.
-  other     Used in conjunction with [Hash](#_Toc7679299)::OtherType when no other value in this enumeration applies.
-  sha-256   To indicate that the SHA 256-bit signature is being used.
-  sha-512   To indicate that the SHA 512-bit (32-byte) signature is being used.
+| Value   | Value Description                                                                                         |
+| ------- | --------------------------------------------------------------------------------------------------------- |
+| md6     | To indicate that the MD6 message digest algorithm is being used.                                          |
+| other   | Used in conjunction with [Hash](#_Toc7679299)::OtherType when no other value in this enumeration applies. |
+| sha-256 | To indicate that the SHA 256-bit signature is being used.                                                 |
+| sha-512 | To indicate that the SHA 512-bit (32-byte) signature is being used.                                       |
 
-  : Table 1 Caption
+Table 1 Caption
 
-Enumeration IdentifierType
---------------------------
+## Enumeration IdentifierType
 
 Used in [Code](#_9d2bbb28c8f74433d1faa7883e83980a)::[Type](#Type) to
 indicate the type of code/identifier being used.
 
-![-959074089.png](media/image43.png){width="1.1875in" height="1.5in"}
+![-959074089.png](media/image43.png)
 
 Figure 45 - Enumeration IdentifierType
 
-  Value            Value Description
-  ---------------- ---------------------------------------------------------------------------------------------------------------------------------
-  fips             To indicate that the identifier is a FIPS code.
-  local-level      To indicate that the identifier is from a local-level scheme, i.e., unique to a county or city.
-  national-level   To indicate that the identifier is from a national-level scheme other than FIPS or OCD-ID.
-  ocd-id           To indicate that the identifier is from the OCD-ID scheme.
-  other            Used in conjunction with [Code](#_9d2bbb28c8f74433d1faa7883e83980a)::OtherType when no other value in this enumeration applies.
-  state-level      To indicate that the identifier is from a state-level scheme, i.e., unique to a particular state.
+| Value          | Value Description                                                                                                               |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| fips           | To indicate that the identifier is a FIPS code.                                                                                 |
+| local-level    | To indicate that the identifier is from a local-level scheme, i.e., unique to a county or city.                                 |
+| national-level | To indicate that the identifier is from a national-level scheme other than FIPS or OCD-ID.                                      |
+| ocd-id         | To indicate that the identifier is from the OCD-ID scheme.                                                                      |
+| other          | Used in conjunction with [Code](#_9d2bbb28c8f74433d1faa7883e83980a)::OtherType when no other value in this enumeration applies. |
+| state-level    | To indicate that the identifier is from a state-level scheme, i.e., unique to a particular state.                               |
 
-  : Table 1 Caption
+Table 1 Caption
 
-Enumeration IndicationStatus
-----------------------------
+## Enumeration IndicationStatus
 
 Used by SelectionPosition::HasIndication to identify whether a selection
 indication is present.
 
-![](media/image44.png){width="1.1875in" height="1.0725798337707786in"}
+![](media/image44.png)
 
 Figure 46 - Enumeration IndicationStatus
 
-  Value     Value Description
-  --------- ----------------------------------------------------------------------------------------
-  no        There is no selection indication.
-  unknown   It is unknown whether there is a selection indication, e.g., used for ambiguous marks.
-  yes       There is a selection indication present.
+| Value   | Value Description                                                                      |
+| ------- | -------------------------------------------------------------------------------------- |
+| no      | There is no selection indication.                                                      |
+| unknown | It is unknown whether there is a selection indication, e.g., used for ambiguous marks. |
+| yes     | There is a selection indication present.                                               |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Enumeration PositionStatus
---------------------------
+## Enumeration PositionStatus
 
 Used in
 [SelectionPosition](#class-selectionposition)::[Status](#_2936b54900c66f036b459882af2c4cd3)
 to identify the status of a selection indication.
 
-![](media/image45.png){width="1.230158573928259in" height="1.25in"}
+![](media/image45.png)
 
 Figure 47 - Enumeration PositionStatus
 
-  Value               Value Description
-  ------------------- --------------------------------------------------------------------------------------------------------------------------------------------
-  adjudicated         Used if the indication was adjudicated.
-  generated-rules     Used if the indication was generated by the creating device per contest rules.
-  invalidated-rules   Used if the indication was invalidated by the creating device because of contest rules.
-  other               Used in conjunction with [SelectionPosition](#class-selectionposition)::[OtherStatus](\l) when no other value in this enumeration applies.
+| Value             | Value Description                                                                                                                           |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| adjudicated       | Used if the indication was adjudicated.                                                                                                     |
+| generated-rules   | Used if the indication was generated by the creating device per contest rules.                                                              |
+| invalidated-rules | Used if the indication was invalidated by the creating device because of contest rules.                                                     |
+| other             | Used in conjunction with [SelectionPosition](#class-selectionposition)::[OtherStatus](\\l) when no other value in this enumeration applies. |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Enumeration ReportingUnitType
------------------------------
+## Enumeration ReportingUnitType
 
 Used in [GpUnit](#_Toc7679298)::[Type](#Type) to indicate a type of
 political geography.
 
-![-598659202.png](media/image46.png){width="1.4479166666666667in"
-height="1.5in"}
+![-598659202.png](media/image46.png)
 
 Figure 48 - Enumeration ReportingUnitType
 
-  Value               Value Description
-  ------------------- -------------------------------------------------------------------------------------------------------------
-  combined-precinct   To indicate a combined precinct.
-  other               Used in conjunction with [GpUnit](#_Toc7679298)::OtherType when no other value in this enumeration applies.
-  polling-place       To indicate a polling place.
-  precinct            To indicate a precinct.
-  split-precinct      To indicate a split-precinct.
-  vote-center         To indicate a vote-center.
+| Value             | Value Description                                                                                           |
+| ----------------- | ----------------------------------------------------------------------------------------------------------- |
+| combined-precinct | To indicate a combined precinct.                                                                            |
+| other             | Used in conjunction with [GpUnit](#_Toc7679298)::OtherType when no other value in this enumeration applies. |
+| polling-place     | To indicate a polling place.                                                                                |
+| precinct          | To indicate a precinct.                                                                                     |
+| split-precinct    | To indicate a split-precinct.                                                                               |
+| vote-center       | To indicate a vote-center.                                                                                  |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Enumeration ReportType
-----------------------
+## Enumeration ReportType
 
 Used in
-[CastVoteRecordReport](#class-castvoterecordreport)::[ReportType](\l) to
-indicate the type of the CVR report.
+[CastVoteRecordReport](#class-castvoterecordreport)::[ReportType](\\l)
+to indicate the type of the CVR report.
 
-![665180475.png](media/image47.png){width="1.6354166666666667in"
-height="1.375in"}
+![665180475.png](media/image47.png)
 
 Figure 49 - Enumeration ReportType
 
-  Value                       Value Description
-  --------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------
-  adjudicated                 To indicate that the report contains adjudications.
-  aggregated                  To indicate that the report is an aggregation of device reports.
-  originating-device-export   To indicate that the report is an export from a device such as a scanner.
-  other                       Used in conjunction with [CastVoteRecordReport](#class-castvoterecordreport)::OtherReportType when no other value in this enumeration applies.
-  rcv-round                   To indicate that the report is the result of a ranked choice voting round.
+| Value                     | Value Description                                                                                                                              |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| adjudicated               | To indicate that the report contains adjudications.                                                                                            |
+| aggregated                | To indicate that the report is an aggregation of device reports.                                                                               |
+| originating-device-export | To indicate that the report is an export from a device such as a scanner.                                                                      |
+| other                     | Used in conjunction with [CastVoteRecordReport](#class-castvoterecordreport)::OtherReportType when no other value in this enumeration applies. |
+| rcv-round                 | To indicate that the report is the result of a ranked choice voting round.                                                                     |
 
-  : Table 1 Caption
+Table 1 Caption
 
-**\
+**  
 **
 
-Enumeration VoteVariation
--------------------------
+## Enumeration VoteVariation
 
-Used in [Contest](#_Toc7679288)::[VoteVariation](\l) to indicate the
+Used in [Contest](#_Toc7679288)::[VoteVariation](\\l) to indicate the
 vote variation (vote method) used to tabulate the contest.
 
-![](media/image48.png){width="1.1666666666666667in"
-height="2.3958333333333335in"}
+![](media/image48.png)
 
 Figure 50 - Enumeration VoteVariation
 
-  Value            Value Description
-  ---------------- -----------------------------------------------------------------------------------------------------------------------
-  approval         To indicate approval voting.
-  borda            To indicate the borda count method.
-  cumulative       To indicate cumulative voting.
-  majority         To indicate majority voting.
-  n-of-m           To indicate the N of M voting method.
-  other            Used in conjunction with [Contest](#_Toc7679288)::OtherVoteVariation when no other value in this enumeration applies.
-  plurality        To indicate plurality voting.
-  proportional     To indicate proportional voting.
-  range            To indicate range voting.
-  rcv              To indicate Ranked Choice Voting (RCV).
-  super-majority   To indicate the super majority voting method.
+| Value          | Value Description                                                                                                     |
+| -------------- | --------------------------------------------------------------------------------------------------------------------- |
+| approval       | To indicate approval voting.                                                                                          |
+| borda          | To indicate the borda count method.                                                                                   |
+| cumulative     | To indicate cumulative voting.                                                                                        |
+| majority       | To indicate majority voting.                                                                                          |
+| n-of-m         | To indicate the N of M voting method.                                                                                 |
+| other          | Used in conjunction with [Contest](#_Toc7679288)::OtherVoteVariation when no other value in this enumeration applies. |
+| plurality      | To indicate plurality voting.                                                                                         |
+| proportional   | To indicate proportional voting.                                                                                      |
+| range          | To indicate range voting.                                                                                             |
+| rcv            | To indicate Ranked Choice Voting (RCV).                                                                               |
+| super-majority | To indicate the super majority voting method.                                                                         |
 
-  : Table 1 Caption
+Table 1 Caption
 
-Usage Examples
-==============
+# Usage Examples
 
 This section contains examples showing how to use this specification in
 various voting scenarios. The examples refer to several XML files whose
 locations can be found in Appendix D. Some of the sections use examples
 from Section 3 but show them in XML.
 
-Anatomy of a CVR
-----------------
+## Anatomy of a CVR
 
 This section refers to the file for Example 1.
 
@@ -2617,10 +2499,10 @@ selections so that the CVR elements can link to them as necessary. Lines
 contest selection definitions.
 
 The CVR elements link to these items by using identifiers defined in the
-contest, candidate, and contest selection\'s ObjectId attributes. For
+contest, candidate, and contest selection's ObjectId attributes. For
 example, the contest definition starting on line 228 contains:
 
-\<Contest ObjectId=\"\_C1\" xsi:type=\"CandidateContest\"\>
+\<Contest ObjectId="\_C1" xsi:type="CandidateContest"\>
 
 so that CVR elements can link to this contest definition by using \_C1:
 
@@ -2645,10 +2527,9 @@ to the voted contest whose object identifier is \_C1, thereby
 identifying that contest within the report file. It then includes
 CVRContestSelection, which links to a contest option that was selected
 by the voter. Each CVR element also includes an optional sequence number
-(SequenceNumber); this isn't required but could be helpful to auditors.
+(SequenceNumber); this isn’t required but could be helpful to auditors.
 
-Basic Example
--------------
+## Basic Example
 
 This section refers to the file for Example 2.
 
@@ -2684,29 +2565,29 @@ which can be represented with the following XML fragment:
 
 \<cdf:TotalNumberVotes\>1\</cdf:TotalNumberVotes\>
 
-\...
+...
 
 \</cdf:CVRContest\>
 
 The ContestSelectionId value of \_1ECP represents the reference to the
 selected contest option:
 
-\<cdf:Candidate ObjectId=\"\_1ECP\"\>
+\<cdf:Candidate ObjectId="\_1ECP"\>
 
-\...
+...
 
 \<cdf:Name\>Connie Pillich\</cdf:Name\>
 
-\...
+...
 
 \</cdf:Candidate\>
 
 By dereferencing \_5TS, we can see this does indeed represent a contest
 selection of Connie Pillich for Treasurer of State:
 
-\<cdf:Contest xsi:type=\"cdf:CandidateContest\" ObjectId=\"\_5TS\"\>
+\<cdf:Contest xsi:type="cdf:CandidateContest" ObjectId="\_5TS"\>
 
-\...
+...
 
 \<cdf:Name\>For Treasurer of State\</cdf:Name\>
 
@@ -2716,8 +2597,7 @@ selection of Connie Pillich for Treasurer of State:
 
 \</cdf:Contest\>
 
-SelectionPosition
------------------
+## SelectionPosition
 
 Section 3.4 discussed SelectionPosition in detail; this section contains
 additional information about usage and examples.
@@ -2733,16 +2613,16 @@ ranked for a county council position:
 
 **Member of County Council at Large**
 
-  Contest Option   1st     2nd     3rd
-  ---------------- ------- ------- -------
-  Ileen Shapiro    \[x\]   \[ \]   \[ \]
-  Debbie Walsh     \[ \]   \[ \]   \[x\]
-  Sandra Kurt      \[ \]   \[x\]   \[ \]
+| Contest Option | 1st   | 2nd   | 3rd   |
+| -------------- | ----- | ----- | ----- |
+| Ileen Shapiro  | \[x\] | \[ \] | \[ \] |
+| Debbie Walsh   | \[ \] | \[ \] | \[x\] |
+| Sandra Kurt    | \[ \] | \[x\] | \[ \] |
 
 Figure 52 - Importance of Position and Rank
 
 Each contest option has three possible choices and each possible
-position indicates a ranking. The selection of Sandra Kurt\'s contest
+position indicates a ranking. The selection of Sandra Kurt's contest
 option corresponds to the following XML fragment:
 
 \<cdf:CVRContestSelection\>
@@ -2767,7 +2647,7 @@ option corresponds to the following XML fragment:
 
 \</cdf:CVRContestSelection\>
 
-From the above, Kurt's (\_1HSK) position on the ballot is third and she
+From the above, Kurt’s (\_1HSK) position on the ballot is third and she
 was ranked second. This is represented by setting
 CVRContestSelection.SelectionPosition to 3 and
 SelectionPosition.OptionPosition to 2. Depending on how the contest
@@ -2781,9 +2661,9 @@ MarkMetricValues, which is an implementation dependent measure of a
 mark.
 
 When a metric is used, its type (MarkMetricType) must be first specified
-by the ReportingDevice playing the role of the CVR\'s CreatingDevice.
+by the ReportingDevice playing the role of the CVR's CreatingDevice.
 
-\<cdf:ReportingDevice ObjectId=\"rd\"\>
+\<cdf:ReportingDevice ObjectId="rd"\>
 
 \<cdf:MarkMetricType\>AJAX\</cdf:MarkMetricType\>
 
@@ -2807,11 +2687,11 @@ selection (human interpretation).
 The following table, repeated from Section 3, shows the mapping of mark
 types to HasIndication values:
 
-  Mark type                          HasIndication
-  ---------------------------------- ---------------
-  machine-readable mark              yes
-  marginally machine-readable mark   unknown
-  machine unreadable mark            no
+| Mark type                        | HasIndication |
+| -------------------------------- | ------------- |
+| machine-readable mark            | yes           |
+| marginally machine-readable mark | unknown       |
+| machine unreadable mark          | no            |
 
 Figure 53 - Mapping of Mark Types to HasIndication Values
 
@@ -2835,8 +2715,7 @@ HasIndication will have, of course, a value of yes.
 
 \</cdf:SelectionPosition\>
 
-Handling Overvotes
-------------------
+## Handling Overvotes
 
 This section only applies to paper ballots.
 
@@ -2900,13 +2779,12 @@ Pillich nor John Mandel, but instead to the overvote accumulator.
 
 *Where adjudication is warrented, IsAllocable should be set to unknown.*
 
-Write-Ins
----------
+## Write-Ins
 
 Consider the following plurality contest in which one vote can be
 allocated across the 4 possible choices:
 
-The write-in box was selected, and "John Smith" is the candidate name.
+The write-in box was selected, and “John Smith” is the candidate name.
 This can be represented with the following XML fragment:
 
 \<cdf:CVRContest\>
@@ -2943,19 +2821,19 @@ Note that this fragment is the original CVR from the CreatingDevice and
 thus we do not yet know the validity of the write-in (it has not yet
 been adjudicated). Still we can say some things about it:
 
--   The text of the write-in is John Smith, represented using the Text
+  - The text of the write-in is John Smith, represented using the Text
     element.
 
--   SelectionPosition represents both the selection of the write-in
+  - SelectionPosition represents both the selection of the write-in
     contest option and the write-in itself. Therefore, it is not
     possible for one to be valid but the other not.
 
 If John Smith is determined to be a valid write-in, then the following
 may occur:
 
--   IsAllocable is set to yes
+  - IsAllocable is set to yes
 
--   CVRContestSelection is linked to the ContestSelection associated
+  - CVRContestSelection is linked to the ContestSelection associated
     with the candidate.
 
 Some systems may not be capable of tabulating votes for the candidate
@@ -2977,22 +2855,21 @@ Adjudication can accomplish two things:
 
 2.  Determine if the contest selection should be allocated.
 
-\(2) is different from (1), in that if it is determined that the write-in
+(2) is different from (1), in that if it is determined that the write-in
 text represents a valid write-in option, it could still be overwritten
 by interpretation of voter intent.
 
-CVR Snapshots
--------------
+## CVR Snapshots
 
 A CVR can be used throughout various points in the election lifecycle:
 
--   Capture of contest selections
+  - Capture of contest selections
 
--   Interpretation of contest selections
+  - Interpretation of contest selections
 
--   Adjudication of contest selections
+  - Adjudication of contest selections
 
--   Other operations
+  - Other operations
 
 If a downstream system needs to modify the CVR, e.g., to add a
 CVRContestSelection as the result of adjudication, a new CVRSnapshot
@@ -3000,7 +2877,7 @@ should be created.
 
 Consider the following XML fragment:
 
-\<cdf:CVRSnapshot ObjectId=\"css-02\"\>
+\<cdf:CVRSnapshot ObjectId="css-02"\>
 
 \<cdf:CVRContest\>
 
@@ -3044,9 +2921,9 @@ resting their pen on the contest option position, and not voter intent
 to make a selection for Mark Zetzer. Thus, HasIndication is set to no,
 and a new CVRSnapshot is created recording this action:
 
-\...
+...
 
-\<cdf:CVRSnapshot ObjectId=\"css-03\"\>
+\<cdf:CVRSnapshot ObjectId="css-03"\>
 
 \<cdf:Annotation\>
 
@@ -3109,8 +2986,7 @@ CVR, which CVRSnapshot is the currently tabulatable record. This is
 achieved by using a CurrentSnapshot reference from CVR to the relevant
 CVRSnapshot.
 
-Ballot Images
--------------
+## Ballot Images
 
 If a scanner is capable of capturing raster ballot images, then that
 data can be stored alongside the structured CVR. Ballot images can
@@ -3129,14 +3005,13 @@ base64 encoded binary.
 
 \<BallotImage\>
 
-\<Image FileName=\"CVR1\_Ballot.jpg\"
+\<Image FileName="CVR1\_Ballot.jpg"
 
-MimeType=\"image/jpeg\"\>Q1ZSIEltYWdl\</Image\>
+MimeType="image/jpeg"\>Q1ZSIEltYWdl\</Image\>
 
 \</BallotImage\>
 
-Voting Method Support
----------------------
+## Voting Method Support
 
 This specifications supports all major voting methods currently in use
 in the United States (plurality, cumulative, N of M, range, RCV). The
@@ -3149,11 +3024,11 @@ from 1 to 3:
 
 **Member of County Council at Large**
 
-  Contest Option   1st     2nd     3rd
-  ---------------- ------- ------- -------
-  Ileen Shapiro    \[ \]   \[x\]   \[ \]
-  Debbie Walsh     \[x\]   \[ \]   \[ \]
-  Sandra Kurt      \[ \]   \[ \]   \[x\]
+| Contest Option | 1st   | 2nd   | 3rd   |
+| -------------- | ----- | ----- | ----- |
+| Ileen Shapiro  | \[ \] | \[x\] | \[ \] |
+| Debbie Walsh   | \[x\] | \[ \] | \[ \] |
+| Sandra Kurt    | \[ \] | \[ \] | \[x\] |
 
 Figure 56 - RCV Example
 
@@ -3243,11 +3118,11 @@ allocated among the candidates:
 
 **Member of County Council at Large**
 
-  Contest Option   1st     2nd     3rd
-  ---------------- ------- ------- -------
-  Ileen Shapiro    \[ \]   \[x\]   \[ \]
-  Debbie Walsh     \[x\]   \[ \]   \[x\]
-  Sandra Kurt      \[ \]   \[ \]   \[ \]
+| Contest Option | 1st   | 2nd   | 3rd   |
+| -------------- | ----- | ----- | ----- |
+| Ileen Shapiro  | \[ \] | \[x\] | \[ \] |
+| Debbie Walsh   | \[x\] | \[ \] | \[x\] |
+| Sandra Kurt    | \[ \] | \[ \] | \[ \] |
 
 Figure 57 - Cumulative Voting Example
 
@@ -3374,7 +3249,7 @@ simplified somewhat:
 \</cdf:CVRContest\>
 
 The representation of the indication for Ilene Shapiro is unchanged, but
-Debbie Walsh\'s votes have been consolidated into a single
+Debbie Walsh's votes have been consolidated into a single
 SelectionIndication, with a NumberVotes of 2.
 
 ###### Acronyms 
@@ -3382,302 +3257,170 @@ SelectionIndication, with a NumberVotes of 2.
 Selected acronyms and abbreviations used in this *document* are defined
 below.
 
-  ------ -----------------------------
-  BMD    Ballot Marking Device
-  CDF    Common Data Format
-  CVR    Cast Vote Record
-  DRE    Direct Record Electronic
-  EMS    Election Management System
-  ID     Identifer
-  JSON   JavaScript Object Notation
-  RCV    Ranked Choice Voting
-  UML    Unified Modeling Language
-  URI    Uniform Resource Identifier
-  XML    eXtensible Markup Language
-  ------ -----------------------------
+|      |                             |
+| ---- | --------------------------- |
+| BMD  | Ballot Marking Device       |
+| CDF  | Common Data Format          |
+| CVR  | Cast Vote Record            |
+| DRE  | Direct Record Electronic    |
+| EMS  | Election Management System  |
+| ID   | Identifer                   |
+| JSON | JavaScript Object Notation  |
+| RCV  | Ranked Choice Voting        |
+| UML  | Unified Modeling Language   |
+| URI  | Uniform Resource Identifier |
+| XML  | eXtensible Markup Language  |
 
-  : Table of acronyms and abbreviations
+Table of acronyms and abbreviations
 
 ###### Glossary
 
 Selected terms used throughout this document are defined below. In some
 of the definitions, there is ancillary information that is not part of
 the definition but helpful in understanding the definition; this
-ancillary information is preceded with "*Note:*".
+ancillary information is preceded with “*Note:*”.
 
-+-----------------------------------+-----------------------------------+
-| **Adjudication:**                 | Process of resolving flagged cast |
-|                                   | ballots to reflect voter intent.  |
-|                                   | Common reasons for flagging       |
-|                                   | include:                          |
-|                                   |                                   |
-|                                   | -   write-ins,                    |
-|                                   |                                   |
-|                                   | -   overvotes,                    |
-|                                   |                                   |
-|                                   | -   marginal marks,               |
-|                                   |                                   |
-|                                   | -   having no contest selections  |
-|                                   |     marked on the entire ballot,  |
-|                                   |     or                            |
-|                                   |                                   |
-|                                   | -   the ballot being unreadable   |
-|                                   |     by a scanner.                 |
-+-----------------------------------+-----------------------------------+
-| **Batch:**                        | As used in auditing elections, a  |
-|                                   | collection of paper ballots       |
-|                                   | gathered as a group for           |
-|                                   | tabulation or for auditing.       |
-+-----------------------------------+-----------------------------------+
-| **Batch fed scanner:**            | A ballot processing device that:  |
-|                                   |                                   |
-|                                   | -   accepts stacks of hand-marked |
-|                                   |     or BMD-produced paper ballots |
-|                                   |     and automatically processes   |
-|                                   |     them until the stack is       |
-|                                   |     empty,                        |
-|                                   |                                   |
-|                                   | -   is usually used at an         |
-|                                   |     election jurisdiction's       |
-|                                   |     central location,             |
-|                                   |                                   |
-|                                   | -   is mostly commonly used to    |
-|                                   |     process absentee or mail      |
-|                                   |     ballots,                      |
-|                                   |                                   |
-|                                   | -   usually has input and output  |
-|                                   |     hoppers for ballots,          |
-|                                   |                                   |
-|                                   | -   scans a ballot and rejects it |
-|                                   |     if either unreadable or       |
-|                                   |     un-processable,               |
-|                                   |                                   |
-|                                   | -   detects, interprets, and      |
-|                                   |     validates contest selections, |
-|                                   |                                   |
-|                                   | -   detects and sorts (either     |
-|                                   |     digitally or physically)      |
-|                                   |     ballots that are unreadable   |
-|                                   |     or un-processable, or that    |
-|                                   |     contain undeterminable        |
-|                                   |     selections, marking           |
-|                                   |     exceptions, or write-ins, and |
-|                                   |                                   |
-|                                   | -   tabulates and reports contest |
-|                                   |     results as required.          |
-|                                   |                                   |
-|                                   | This unit was previously referred |
-|                                   | to as central count optical       |
-|                                   | scanner or CCOS.                  |
-+-----------------------------------+-----------------------------------+
-|                                   |                                   |
-+-----------------------------------+-----------------------------------+
-| **Ballot marking device (BMD):**  | A device that:                    |
-|                                   |                                   |
-|                                   | -   permits contest options to be |
-|                                   |     reviewed on an electronic     |
-|                                   |     interface,                    |
-|                                   |                                   |
-|                                   | -   produces a                    |
-|                                   |     human-readable paper ballot,  |
-|                                   |     and                           |
-|                                   |                                   |
-|                                   | -   does not make any other       |
-|                                   |     lasting record of the voter's |
-|                                   |     selections.                   |
-+-----------------------------------+-----------------------------------+
-| **Cumulative voting:**            | A voting method used in           |
-|                                   | multi-seat contests where a voter |
-|                                   | is permitted to distributed       |
-|                                   | allowed selections to 1 or more   |
-|                                   | candidates in whole vote          |
-|                                   | increments. See also proportional |
-|                                   | voting.                           |
-+-----------------------------------+-----------------------------------+
-| **DRE:**                          | A vote-capture device that        |
-|                                   | allows:                           |
-|                                   |                                   |
-|                                   | -   electronic presentation of    |
-|                                   |     a ballot,                     |
-|                                   |                                   |
-|                                   | -   electronic selection of       |
-|                                   |     valid contest options, and    |
-|                                   |                                   |
-|                                   | -   electronic storage of contest |
-|                                   |     selections as                 |
-|                                   |     individual records. It also   |
-|                                   |     provides a summary of         |
-|                                   |     these contest selections.     |
-+-----------------------------------+-----------------------------------+
-| **Election management system**    | Set of processing functions and   |
-| **(EMS)**:                        | databases within a voting system  |
-|                                   | typically used to:                |
-|                                   |                                   |
-|                                   | -   define, develop, and maintain |
-|                                   |     election databases,           |
-|                                   |                                   |
-|                                   | -   perform election definition   |
-|                                   |     and ballot layout functions,  |
-|                                   |                                   |
-|                                   | -   create ballot presentation    |
-|                                   |     templates for ballot printers |
-|                                   |     or devices used by voters for |
-|                                   |     ballot markup,                |
-|                                   |                                   |
-|                                   | -   count votes,                  |
-|                                   |                                   |
-|                                   | -   consolidate and report        |
-|                                   |     results and maintain audit    |
-|                                   |     trails.                       |
-+-----------------------------------+-----------------------------------+
-| **Hash function:**                | A data processing function,       |
-|                                   | usually using a specified NIST    |
-|                                   | approved cryptographic rule, to   |
-|                                   | produce a fixed-length bit string |
-|                                   | from a set of data that is        |
-|                                   | variable in both content and      |
-|                                   | length and unique to that         |
-|                                   | specific data. The resultant      |
-|                                   | "hash value" cannot be used to    |
-|                                   | reproduce the original data that  |
-|                                   | it was derived from. It is used   |
-|                                   | as a digital signature to confirm |
-|                                   | that the data being evaluated is  |
-|                                   | identical to another set of data  |
-|                                   | with the same hash value.         |
-+-----------------------------------+-----------------------------------+
-| **N-of-M voting**:                | Voting variation in which the     |
-|                                   | voter is entitled to allocate a   |
-|                                   | fixed number of votes (N) over a  |
-|                                   | list of M contest options or      |
-|                                   | write-in options, with the        |
-|                                   | constraint that at most 1 vote    |
-|                                   | may be allocated to a given       |
-|                                   | contest option. This usually      |
-|                                   | occurs when multiple seats are    |
-|                                   | concurrently being filled in a    |
-|                                   | governing body such as a city     |
-|                                   | council or school board where     |
-|                                   | candidates run at-large. The      |
-|                                   | voter is not obliged to allocate  |
-|                                   | all N votes. 1-of-M is N-of-M     |
-|                                   | where N = 1.                      |
-+-----------------------------------+-----------------------------------+
-| **Overvote**:                     | Occurs when the number of         |
-|                                   | selections made by the voter in a |
-|                                   | contest is more than the maximum  |
-|                                   | number allowed in a contest.      |
-+-----------------------------------+-----------------------------------+
-| **Range voting:**                 | A voting method for single-seat   |
-|                                   | elections, in which voters give   |
-|                                   | each candidate a score, the       |
-|                                   | scores are added (or averaged),   |
-|                                   | and the candidate with the        |
-|                                   | highest total is elected.         |
-+-----------------------------------+-----------------------------------+
-| **Ranked Coice Voting (RCV):**    | A set of election methods which   |
-|                                   | allow each voter to rank contest  |
-|                                   | options in order of the voter\'s  |
-|                                   | preference, in which votes are    |
-|                                   | counted in rounds using a series  |
-|                                   | of runoff tabulations to defeat   |
-|                                   | contest options with the fewest   |
-|                                   | votes, and which elects a winner  |
-|                                   | with a majority of final round    |
-|                                   | votes in a single-winner contest  |
-|                                   | and provides proportional         |
-|                                   | representation in multi-winner    |
-|                                   | contests.                         |
-+-----------------------------------+-----------------------------------+
-| **Schema**:                       | A file containing definitions of  |
-|                                   | data elements and attributes with |
-|                                   | rules for usage, e.g., for JSON   |
-|                                   | or XML.                           |
-+-----------------------------------+-----------------------------------+
-| **Straight party override**:      | Explicit voter selection that     |
-|                                   | overrides or supplements the vote |
-|                                   | selections made by a straight     |
-|                                   | party voting option. Straight     |
-|                                   | party overrides may be subject to |
-|                                   | state election rules for how they |
-|                                   | work or whether they are allowed. |
-+-----------------------------------+-----------------------------------+
-| **Tabulator**:                    | A device that counts votes.       |
-+-----------------------------------+-----------------------------------+
-| **Undervote**:                    | Occurs when the number of voter   |
-|                                   | selections in a contest is less   |
-|                                   | than the maximum number allowed   |
-|                                   | for that contest or when no       |
-|                                   | selection is made. The number of  |
-|                                   | undervotes is equal to the number |
-|                                   | of votes lost, e.g., if no        |
-|                                   | selection is made in a single     |
-|                                   | option contest, the number of     |
-|                                   | votes lost is 1.                  |
-+-----------------------------------+-----------------------------------+
-| **Voter facing scanner:**         | A ballot processing device that:  |
-|                                   |                                   |
-|                                   | -   accepts hand-marked or        |
-|                                   |     BMD-produced paper ballots    |
-|                                   |     one sheet at a time;          |
-|                                   |                                   |
-|                                   | -   is usually used for in-person |
-|                                   |     voting;                       |
-|                                   |                                   |
-|                                   | -   permits election workers to   |
-|                                   |     open and close the polls;     |
-|                                   |     scans a ballot and rejects it |
-|                                   |     if either unreadable or       |
-|                                   |     un-processable; detects,      |
-|                                   |     interprets and validates      |
-|                                   |     contest selections; notifies  |
-|                                   |     the voter of voting           |
-|                                   |     exceptions (such as           |
-|                                   |     undervotes or overvotes) or   |
-|                                   |     unreadable marks; stores      |
-|                                   |     accepted ballots in a secure  |
-|                                   |     container; sorts or otherwise |
-|                                   |     marks ballots or ballot       |
-|                                   |     images that need subsequent   |
-|                                   |     human review; and tabulates   |
-|                                   |     and reports contest results   |
-|                                   |     after polls are closed.       |
-|                                   |                                   |
-|                                   | This unit was previously referred |
-|                                   | to as precinct count optical      |
-|                                   | scanner or PCOS.                  |
-+-----------------------------------+-----------------------------------+
-| **Voting method**:                | Voting style such as in-person    |
-|                                   | voting, absentee voting, straight |
-|                                   | party voting, N-of-M voting,      |
-|                                   | cumulative voting, or ranked      |
-|                                   | choice voting.                    |
-+-----------------------------------+-----------------------------------+
-|                                   |                                   |
-+-----------------------------------+-----------------------------------+
-| **Write-in option**:              | A type of contest option that     |
-|                                   | allows a voter to specify a       |
-|                                   | candidate, usually not already    |
-|                                   | listed as a contest option.       |
-|                                   | Depending on jurisdiction rules,  |
-|                                   | in some cases only previously     |
-|                                   | approved names will be considered |
-|                                   | as valid write-in contest         |
-|                                   | selections.                       |
-+-----------------------------------+-----------------------------------+
-
-: Glossary of terms and their definitions
+<table>
+<caption>Glossary of terms and their definitions</caption>
+<tbody>
+<tr class="odd">
+<td><strong>Adjudication:</strong></td>
+<td><p>Process of resolving flagged cast ballots to reflect voter intent. Common reasons for flagging include:</p>
+<ul>
+<li><p>write-ins,</p></li>
+<li><p>overvotes,</p></li>
+<li><p>marginal marks,</p></li>
+<li><p>having no contest selections marked on the entire ballot, or</p></li>
+<li><p>the ballot being unreadable by a scanner.</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td><strong>Batch:</strong></td>
+<td>As used in auditing elections, a collection of paper ballots gathered as a group for tabulation or for auditing.</td>
+</tr>
+<tr class="odd">
+<td><strong>Batch fed scanner:</strong></td>
+<td><p>A ballot processing device that:</p>
+<ul>
+<li><p>accepts stacks of hand-marked or BMD-produced paper ballots and automatically processes them until the stack is empty,</p></li>
+<li><p>is usually used at an election jurisdiction’s central location,</p></li>
+<li><p>is mostly commonly used to process absentee or mail ballots,</p></li>
+<li><p>usually has input and output hoppers for ballots,</p></li>
+<li><p>scans a ballot and rejects it if either unreadable or un-processable,</p></li>
+<li><p>detects, interprets, and validates contest selections,</p></li>
+<li><p>detects and sorts (either digitally or physically) ballots that are unreadable or un-processable, or that contain undeterminable selections, marking exceptions, or write-ins, and</p></li>
+<li><p>tabulates and reports contest results as required.</p></li>
+</ul>
+<p>This unit was previously referred to as central count optical scanner or CCOS.</p></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>Ballot marking device (BMD):</strong></td>
+<td><p>A device that:</p>
+<ul>
+<li><p>permits contest options to be reviewed on an electronic interface,</p></li>
+<li><p>produces a human-readable paper ballot, and</p></li>
+<li><p>does not make any other lasting record of the voter’s selections.</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td><strong>Cumulative voting:</strong></td>
+<td>A voting method used in multi-seat contests where a voter is permitted to distributed allowed selections to 1 or more candidates in whole vote increments. See also proportional voting.</td>
+</tr>
+<tr class="odd">
+<td><strong>DRE:</strong></td>
+<td><p>A vote-capture device that allows:</p>
+<ul>
+<li><p>electronic presentation of a ballot,</p></li>
+<li><p>electronic selection of valid contest options, and</p></li>
+<li><p>electronic storage of contest selections as individual records. It also provides a summary of these contest selections.</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td><strong>Election management system</strong> <strong>(EMS)</strong>:</td>
+<td><p>Set of processing functions and databases within a voting system typically used to:</p>
+<ul>
+<li><p>define, develop, and maintain election databases,</p></li>
+<li><p>perform election definition and ballot layout functions,</p></li>
+<li><p>create ballot presentation templates for ballot printers or devices used by voters for ballot markup,</p></li>
+<li><p>count votes,</p></li>
+<li><p>consolidate and report results and maintain audit trails.</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td><strong>Hash function:</strong></td>
+<td>A data processing function, usually using a specified NIST approved cryptographic rule, to produce a fixed-length bit string from a set of data that is variable in both content and length and unique to that specific data. The resultant “hash value” cannot be used to reproduce the original data that it was derived from. It is used as a digital signature to confirm that the data being evaluated is identical to another set of data with the same hash value.</td>
+</tr>
+<tr class="even">
+<td><strong>N-of-M voting</strong>:</td>
+<td>Voting variation in which the voter is entitled to allocate a fixed number of votes (N) over a list of M contest options or write-in options, with the constraint that at most 1 vote may be allocated to a given contest option. This usually occurs when multiple seats are concurrently being filled in a governing body such as a city council or school board where candidates run at-large. The voter is not obliged to allocate all N votes. 1-of-M is N-of-M where N = 1.</td>
+</tr>
+<tr class="odd">
+<td><strong>Overvote</strong>:</td>
+<td>Occurs when the number of selections made by the voter in a contest is more than the maximum number allowed in a contest.</td>
+</tr>
+<tr class="even">
+<td><strong>Range voting:</strong></td>
+<td>A voting method for single-seat elections, in which voters give each candidate a score, the scores are added (or averaged), and the candidate with the highest total is elected.</td>
+</tr>
+<tr class="odd">
+<td><strong>Ranked Coice Voting (RCV):</strong></td>
+<td>A set of election methods which allow each voter to rank contest options in order of the voter's preference, in which votes are counted in rounds using a series of runoff tabulations to defeat contest options with the fewest votes, and which elects a winner with a majority of final round votes in a single-winner contest and provides proportional representation in multi-winner contests.</td>
+</tr>
+<tr class="even">
+<td><strong>Schema</strong>:</td>
+<td>A file containing definitions of data elements and attributes with rules for usage, e.g., for JSON or XML.</td>
+</tr>
+<tr class="odd">
+<td><strong>Straight party override</strong>:</td>
+<td>Explicit voter selection that overrides or supplements the vote selections made by a straight party voting option. Straight party overrides may be subject to state election rules for how they work or whether they are allowed.</td>
+</tr>
+<tr class="even">
+<td><strong>Tabulator</strong>:</td>
+<td>A device that counts votes.</td>
+</tr>
+<tr class="odd">
+<td><strong>Undervote</strong>:</td>
+<td>Occurs when the number of voter selections in a contest is less than the maximum number allowed for that contest or when no selection is made. The number of undervotes is equal to the number of votes lost, e.g., if no selection is made in a single option contest, the number of votes lost is 1.</td>
+</tr>
+<tr class="even">
+<td><strong>Voter facing scanner:</strong></td>
+<td><p>A ballot processing device that:</p>
+<ul>
+<li><p>accepts hand-marked or BMD-produced paper ballots one sheet at a time;</p></li>
+<li><p>is usually used for in-person voting;</p></li>
+<li><p>permits election workers to open and close the polls; scans a ballot and rejects it if either unreadable or un-processable; detects, interprets and validates contest selections; notifies the voter of voting exceptions (such as undervotes or overvotes) or unreadable marks; stores accepted ballots in a secure container; sorts or otherwise marks ballots or ballot images that need subsequent human review; and tabulates and reports contest results after polls are closed.</p></li>
+</ul>
+<p>This unit was previously referred to as precinct count optical scanner or PCOS.</p></td>
+</tr>
+<tr class="odd">
+<td><strong>Voting method</strong>:</td>
+<td>Voting style such as in-person voting, absentee voting, straight party voting, N-of-M voting, cumulative voting, or ranked choice voting.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>Write-in option</strong>:</td>
+<td>A type of contest option that allows a voter to specify a candidate, usually not already listed as a contest option. Depending on jurisdiction rules, in some cases only previously approved names will be considered as valid write-in contest selections.</td>
+</tr>
+</tbody>
+</table>
 
 ###### References
 
-  ------- ----------------------------------------------------------------------------------------------------------------------------------------------------------
-  \[1\]   Object Management Group (OMG), *UML Specification version 1.1* (OMG document ad/97-08-11) September 22, 2011, <http://omg.org/> \[accessed 02/01/2019\].
-          
-  \[2\]   W3C, *Extensible Markup Language (XML) 1.0 (Fifth Edition)*, W3C Recommendation, November 26, 2008, <http://www.w3.org/TR/xml/> \[accessed 02/01/2019\].
-          
-  \[3\]   JavaScript Object Notation, <http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf> \[accessed 02/01/2019\].
-          
-  ------- ----------------------------------------------------------------------------------------------------------------------------------------------------------
+|       |                                                                                                                                                          |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \[1\] | Object Management Group (OMG), *UML Specification version 1.1* (OMG document ad/97-08-11) September 22, 2011, <http://omg.org/> \[accessed 02/01/2019\]. |
+|       |                                                                                                                                                          |
+| \[2\] | W3C, *Extensible Markup Language (XML) 1.0 (Fifth Edition)*, W3C Recommendation, November 26, 2008, <http://www.w3.org/TR/xml/> \[accessed 02/01/2019\]. |
+|       |                                                                                                                                                          |
+| \[3\] | JavaScript Object Notation, <http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf> \[accessed 02/01/2019\].                         |
+|       |                                                                                                                                                          |
 
 ###### File Download Locations
 
@@ -3692,21 +3435,23 @@ These files are also available from:
 
 The files include:
 
--   This specification,
+  - This specification,
 
--   UML model,
+  - UML model,
 
--   XML and JSON schemas, and
+  - XML and JSON schemas, and
 
--   Example files.
+  - Example files.
 
-[^1]: There were space-savings benefits to using structured codes with
-    older devices that had less memory than today's devices.
+<!-- end list -->
 
-[^2]: For example, a crease in a paper ballot or a smudge that runs
-    through a contest option's oval or checkbox could be detected as a
+1.  There were space-savings benefits to using structured codes with
+    older devices that had less memory than today’s devices.
+
+2.  For example, a crease in a paper ballot or a smudge that runs
+    through a contest option’s oval or checkbox could be detected as a
     human-made mark.
 
-[^3]: For example, a voter may choose a straight party option, and the
+3.  For example, a voter may choose a straight party option, and the
     scanner may, in the CVR, create selection indications for each
     contest according to the straight party contest rules.
