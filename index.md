@@ -17,7 +17,7 @@ John Wack
 This publication is available free of charge from:  
 http://dx.doi.org/10.6028/NIST.SP.1500-103
 
-![](media/image1.emf)
+![](Pics/media/image1.emf)
 
 NIST Special Publication 1500-103, Version 1.0
 
@@ -43,7 +43,7 @@ This publication is available free of charge from:
 
 February 2019
 
-![](media/image2.wmf "Seal of the U.S. Department of Commerce")
+![](Pics/media/image2.wmf "Seal of the U.S. Department of Commerce")
 
 U. S. Department of Commerce
 
@@ -780,11 +780,11 @@ structured series of codes and contest votes. To understand the CVR, one
 must know what the codes mean and their structure, and this information
 is usually opaque and unavailable to others
 
-![](media/image3.png)
+![](Pics/media/image3.png)
 
 Figure 1 - CVR UML Model - Classes
 
-![](media/image4.png)
+![](Pics/media/image4.png)
 
 Figure 2 - CVR UML Model - Enumerations and Other Classes
 
@@ -873,7 +873,7 @@ the Presidential contest will be associated with one position, that
 being the bubble next to the candidate. Accordingly, SelectionPosition
 will indicate position 1 for the candidate selected in the contest.
 
-![](media/image5.png)
+![](Pics/media/image5.png)
 
 Figure 5 - SelectionPosition Class
 
@@ -1111,7 +1111,7 @@ to the left of each candidate’s name, for a maximum of three. In this
 case, there will be two SelectionPosition instances for Henry Ford and
 one for Mary Hill.
 
-![](media/image6.png)
+![](Pics/media/image6.png)
 
 A partial example of the structure representing the contest in Figure 8
 is as follows:
@@ -1174,7 +1174,7 @@ votes, with the maximum score of 9. The position of the bubble is highly
 meaningful, as the bubble in position 1 represents no votes and the
 bubble in position 10 represents 9 votes.
 
-![](media/image7.png)
+![](Pics/media/image7.png)
 
 Figure 9 - Range Voting contest with multiple contest selections; one
 voter mark per selection
@@ -1347,7 +1347,7 @@ adjudicators.
 
 [CVRSnapshot](#class-cvrsnapshot) includes Annotation.
 
-![1862059450.png](media/image8.png)
+![1862059450.png](Pics/media/image8.png)
 
 Figure 10 - Class Annotation
 
@@ -1368,7 +1368,7 @@ BallotMeasureContest is a subclass of [Contest](#_Toc7679288) and is
 used to identify the type of contest as involving one or more ballot
 measures. It inherits attributes from [Contest](#_Toc7679288).
 
-![-1349962198.png](media/image9.png)
+![-1349962198.png](Pics/media/image9.png)
 
 Figure 11 – Class BallotMeasureContest
 
@@ -1383,7 +1383,7 @@ measures. The voter's selected response to the contest selection (e.g.,
 "yes" or "no") may be in English or other languages as utilized on the
 voter's ballot.
 
-![-637953320.png](media/image10.png)
+![-637953320.png](Pics/media/image10.png)
 
 Figure 12 - BallotMeasureSelection
 
@@ -1403,7 +1403,7 @@ Candidate identifies a candidate in a contest on the voter's ballot.
 candidate in a contest; typically, only those candidates who received
 votes would be included.
 
-![260442740.png](media/image11.png)
+![260442740.png](Pics/media/image11.png)
 
 Figure 13 - Class Candidate
 
@@ -1424,7 +1424,7 @@ CandidateContest is a subclass of [Contest](#_Toc7679288) and is used to
 identify the type of contest as involving one or more candidates. It
 inherits attributes from [Contest](#_Toc7679288).
 
-![-2002379431.png](media/image12.png)
+![-2002379431.png](Pics/media/image12.png)
 
 Figure 14 - Class CandidateContest
 
@@ -1445,7 +1445,7 @@ CandidateSelection is a subclass of
 [ContestSelection](#class-contestselection) and is used for candidates,
 including for write-in candidates.
 
-![-378070365.png](media/image13.png)
+![-378070365.png](Pics/media/image13.png)
 
 Figure 15 - Class CandidateSelection
 
@@ -1472,7 +1472,7 @@ voted so as to reduce file size. The [Contest](#_Toc7679288) instances
 are later referenced by other classes to link them to contest options
 that were voted and the indication(s)/mark(s) made.
 
-![1018729442.png](media/image14.png)
+![1018729442.png](Pics/media/image14.png)
 
 Figure 16 - Class CastVoteRecordReport
 
@@ -1502,7 +1502,7 @@ Code is used in [Election](#_Toc7679295), [GpUnit](#_Toc7679298),
 [Party](#_3d1e5ffda20d2c609ee94d45da777050) to identify an associated
 code and the type of code.
 
-![1903570317.png](media/image15.png)
+![1903570317.png](Pics/media/image15.png)
 
 Figure 17 - Class Code
 
@@ -1536,7 +1536,7 @@ These subclasses inherit Contest's attributes.
 
 3)  CandidateContest - used for candidate contests.
 
-![1739124523.png](media/image16.png)
+![1739124523.png](Pics/media/image16.png)
 
 Figure 18 - Class Contest
 
@@ -1581,7 +1581,7 @@ ContestSelection contains one attribute,
 the contest selection and thereby eliminate the need to identify it
 using the subclasses.
 
-![-566003369.png](media/image17.png)
+![-566003369.png](Pics/media/image17.png)
 
 Figure 19 - Class ContestSelection
 
@@ -1605,7 +1605,7 @@ CVRs will be created.
 [CastVoteRecordReport](#class-castvoterecordreport) includes multiple
 instances of CVR as applicable.
 
-![-815608039.png](media/image18.png)
+![-815608039.png](Pics/media/image18.png)
 
 Figure 20 - Class CVR
 
@@ -1652,7 +1652,7 @@ allowable in the contest, e.g., in a "chose 3 of 5" contest in which the
 voter chooses only 2, then Overvotes = 0, Undervotes = 1, and TotalVotes
 = 2, which adds up to the number of votes allowable = 3.
 
-![17417232.png](media/image19.png)
+![17417232.png](Pics/media/image19.png)
 
 Figure 21 - Class CVRContest
 
@@ -1745,7 +1745,7 @@ CVRContestSelection has one subtype, [CVRWriteIn](#_Toc7679294), whose
 attributes are used to include information about the write-in including
 the text of the write-in or an image of the write-in.
 
-![-1631934528.png](media/image20.png)
+![-1631934528.png](Pics/media/image20.png)
 
 Figure 22 - Class CVRContestSelection
 
@@ -1778,7 +1778,7 @@ Other attributes are repeated in each CVRSnapshot because they may
 differ across snapshots, e.g., the contests could be different as well
 as other status.
 
-![](media/image21.png)
+![](Pics/media/image21.png)
 
 Figure 23 - Class CVRSnapshot
 
@@ -1800,7 +1800,7 @@ Table 1 Caption
 CVRWriteIn is used when the contest selection is a write-in. It has
 attributes for the image or text of the write-in.
 
-![-149283966.png](media/image22.png)
+![-149283966.png](Pics/media/image22.png)
 
 Figure 24 - Class CVRWriteIn
 
@@ -1824,7 +1824,7 @@ for each contest in the election and includes an instance of
 file sizes more efficiently; otherwise each CVR would need to define
 these instances separately and much duplication would occur.
 
-![-160491755.png](media/image23.png)
+![-160491755.png](Pics/media/image23.png)
 
 Figure 25 - Class Election
 
@@ -1849,7 +1849,7 @@ scanned ballot or an image of a write-in entered by a voter onto the
 scanned ballot. SubClass [Image](#_Toc7679300) is used if the file
 contains an image.
 
-![-1359252015.png](media/image24.png)
+![-1359252015.png](Pics/media/image24.png)
 
 Figure 26 - Class File
 
@@ -1869,7 +1869,7 @@ Table 1 Caption
 A proper fractional value represented using fractional or decimal
 notation.
 
-> ![1837476355.png](media/image25.png)
+> ![1837476355.png](Pics/media/image25.png)
 
 Figure 27 - Class FractionalNumber
 
@@ -1900,7 +1900,7 @@ ElectionScope, for the geographical scope of the election.
 the smallest political subdivision that uses the same ballot style as
 was used for the voter’s ballot.
 
-![-954890237.png](media/image26.png)
+![-954890237.png](Pics/media/image26.png)
 
 Figure 28 - Class GpUnit
 
@@ -1922,7 +1922,7 @@ Table 1 Caption
 Hash is used to specify a hash associated with a file such as an image
 file of a scanned ballot.
 
-![-1216715874.png](media/image27.png)
+![-1216715874.png](Pics/media/image27.png)
 
 Figure 29 - Class Hash
 
@@ -1942,7 +1942,7 @@ Table 1 Caption
 Used by [File](#_Toc7679296) for a file containing an image, e.g., an
 image of a write-in on a paper ballot.
 
-![-1320838961.png](media/image28.png)
+![-1320838961.png](Pics/media/image28.png)
 
 Figure 30 - Class Image
 
@@ -1961,7 +1961,7 @@ entire ballot. It works with several other classes, as follows:
   - [Hash](#_Toc7679299) – to contain cryptographic hash function data
     for the file.
 
-![2046989636.png](media/image29.png)
+![2046989636.png](Pics/media/image29.png)
 
 Figure 31 - Class ImageData
 
@@ -1986,7 +1986,7 @@ ballot in a partisan primary, and
 [CandidateContest](#class-candidatecontest) references Party as needed
 to link a candidate to their political party.
 
-![133801878.png](media/image30.png)
+![133801878.png](Pics/media/image30.png)
 
 Figure 32 - Class Party
 
@@ -2007,7 +2007,7 @@ PartyContest is a subclass of [Contest](#_Toc7679288) and is used to
 identify the type of contest as involving a straight party selection. It
 inherits attributes from [Contest](#_Toc7679288).
 
-![857847513.png](media/image31.png)
+![857847513.png](Pics/media/image31.png)
 
 Figure 33 - Class PartyContest
 
@@ -2019,7 +2019,7 @@ Figure 33 - Class PartyContest
 PartySelection is a subclass of ContestSelection and is used typically
 for a contest selection in a straight-party contest.
 
-![-1447129566.png](media/image32.png)
+![-1447129566.png](Pics/media/image32.png)
 
 Figure 34 - Class PartySelection
 
@@ -2040,7 +2040,7 @@ refers to it as ReportGeneratingDevice and uses it to specify the device
 that created the CVR report. [CVR](#class-cvr) refers to it as
 CreatingDevice to specify the device that created the CVRs.
 
-![-1264558902.png](media/image33.png)
+![-1264558902.png](Pics/media/image33.png)
 
 Figure 35 - Class ReportingDevice
 
@@ -2068,7 +2068,7 @@ such as for a judicial retention. While it is similar to
 [Candidate](#_Toc7679283) that [BallotMeasureContest](#_Toc7679281) does
 not. RetentionContest inherits attributes from [Contest](#_Toc7679288).
 
-![-1325574944.png](media/image34.png)
+![-1325574944.png](Pics/media/image34.png)
 
 Figure 36 - Class RetentionContest
 
@@ -2101,7 +2101,7 @@ is assigned by the scanner for measurements of mark density or quality
 and would be used by the scanner to indicate whether the mark is a valid
 voter mark representing a vote or is marginal.
 
-![](media/image35.png)
+![](Pics/media/image35.png)
 
 Figure 37 - Class SelectionPosition
 
@@ -2199,7 +2199,7 @@ Used in SelectionPosition::IsAllocable to indicate whether the
 SelectionPosition::NumberVotes should be allocated to the underlying
 contest option counter.
 
-![](media/image36.png)
+![](Pics/media/image36.png)
 
 Figure 38 – Enumeration AllocationStatus
 
@@ -2220,7 +2220,7 @@ To identify the version of the CVR specification being used, i.e.,
 version 1.0.0. This will need to be updated for different versions of
 the specification.
 
-![1159947266.png](media/image37.png)
+![1159947266.png](Pics/media/image37.png)
 
 Figure 39 – Enumeration CastVoteRecordVersion
 
@@ -2239,7 +2239,7 @@ Used in
 [CVRContestSelection](#class-cvrcontestselection)::[Status](#_2936b54900c66f036b459882af2c4cd3)
 to identify the status of a contest selection in the CVR.
 
-![-2047350109.png](media/image38.png)
+![-2047350109.png](Pics/media/image38.png)
 
 Figure 40 – Enumeration ContestSelectionStatus
 
@@ -2262,7 +2262,7 @@ Used in
 to identify the status of a contest in which contest selection(s) were
 made.
 
-![](media/image39.png)
+![](Pics/media/image39.png)
 
 Figure 41 – Enumeration ContestStatus
 
@@ -2285,7 +2285,7 @@ Used in
 [CVRSnapshot](#class-cvrsnapshot)::[Status](#_2936b54900c66f036b459882af2c4cd3)
 to identify the status of the CVR.
 
-![977259592.png](media/image40.png)
+![977259592.png](Pics/media/image40.png)
 
 Figure 42 - Enumeration CVRStatus
 
@@ -2303,7 +2303,7 @@ Table 1 Caption
 
 Used in CVRSnapshot::Type to indicate the type of snapshot.
 
-![2009555091.png](media/image41.png)
+![2009555091.png](Pics/media/image41.png)
 
 Figure 43 - Enumeration CVRType
 
@@ -2323,7 +2323,7 @@ Table 1 Caption
 Used in [Hash](#_Toc7679299)::[Type](#Type) to indicate the type of hash
 being used for an image file.
 
-![1454348558.png](media/image42.png)
+![1454348558.png](Pics/media/image42.png)
 
 Figure 44 - Enumeration HashType
 
@@ -2341,7 +2341,7 @@ Table 1 Caption
 Used in [Code](#_9d2bbb28c8f74433d1faa7883e83980a)::[Type](#Type) to
 indicate the type of code/identifier being used.
 
-![-959074089.png](media/image43.png)
+![-959074089.png](Pics/media/image43.png)
 
 Figure 45 - Enumeration IdentifierType
 
@@ -2361,7 +2361,7 @@ Table 1 Caption
 Used by SelectionPosition::HasIndication to identify whether a selection
 indication is present.
 
-![](media/image44.png)
+![](Pics/media/image44.png)
 
 Figure 46 - Enumeration IndicationStatus
 
@@ -2382,7 +2382,7 @@ Used in
 [SelectionPosition](#class-selectionposition)::[Status](#_2936b54900c66f036b459882af2c4cd3)
 to identify the status of a selection indication.
 
-![](media/image45.png)
+![](Pics/media/image45.png)
 
 Figure 47 - Enumeration PositionStatus
 
@@ -2403,7 +2403,7 @@ Table 1 Caption
 Used in [GpUnit](#_Toc7679298)::[Type](#Type) to indicate a type of
 political geography.
 
-![-598659202.png](media/image46.png)
+![-598659202.png](Pics/media/image46.png)
 
 Figure 48 - Enumeration ReportingUnitType
 
@@ -2427,7 +2427,7 @@ Used in
 [CastVoteRecordReport](#class-castvoterecordreport)::[ReportType](\\l)
 to indicate the type of the CVR report.
 
-![665180475.png](media/image47.png)
+![665180475.png](Pics/media/image47.png)
 
 Figure 49 - Enumeration ReportType
 
@@ -2449,7 +2449,7 @@ Table 1 Caption
 Used in [Contest](#_Toc7679288)::[VoteVariation](\\l) to indicate the
 vote variation (vote method) used to tabulate the contest.
 
-![](media/image48.png)
+![](Pics/media/image48.png)
 
 Figure 50 - Enumeration VoteVariation
 
