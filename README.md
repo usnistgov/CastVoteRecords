@@ -10,9 +10,9 @@ The CVR specification supports 3 general use cases:
 
 3. Interoperable export of CVRs from adjudication devices.
 
-The UML model and JSON schema are under development but expected to be finalized in time to be considered in the next VVSG under development by NIST and the Election Assistance Commission (EAC).  
+The CVR specification is complete and now being published as NIST Special Publication 1500-103.  
 
-The nist-pages branch holds documentation files for an HTML version located on https://pages.nist.gov/CastVoteRecords.
+The nist-pages branch holds documentation files for an upcoming HTML version located on https://pages.nist.gov/CastVoteRecords.
 
 Contact [John P. Wack](mailto:john.wack@nist.gov) for questions and more information.
 
