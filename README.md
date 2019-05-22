@@ -23,8 +23,9 @@ Contact [John P. Wack](mailto:john.wack@nist.gov) for questions and more informa
 |**CastVoteRecords_UML_Documentation_files**|Images of UML classes|
 |CastVoteRecords_UML_Documentation.md|UML Documentation        |
 |CastVoteRecords.png|Image of Cast Vote Records model          |
-|DRAFT NIST 1500-103 CVR Specification 2018-11-29.docm|Word version of CVR specification|
-|DRAFT NIST 1500-103 CVR Specification 2018-11-29.pdf|PDF version of CVR specification|
+|NIST 1500-103 CVR Specification 2019-05-06.docm|Word version of CVR specification|
+|NIST 1500-103 CVR Specification 2019-05-06.pdf|PDF version of CVR specification|
+|NIST 1500-103 CVR Specification 2019-02-08.pdf|Identical to the 05-06 document, needed so that links from Democracy Fund's RLA guides work|
 |example_*.xml|Full listing of examples referenced in specification|
 |NIST V1.0 - CastVoteRecords.xml|MagicDraw UML Model           |
 |NIST_V0_cast_vote_records.json|JSON Schema                    |
