@@ -242,6 +242,7 @@
         "ContestId": {
           "type": "string",
           "refTypes": [
+            "CVR.Contest",
             "CVR.PartyContest",
             "CVR.BallotMeasureContest",
             "CVR.CandidateContest",
@@ -676,6 +677,65 @@
       },
       "type": "object"
     },
+    "CVR.Contest": {
+      "required": [
+        "@id",
+        "@type",
+        "ContestSelection"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "@id": {
+          "type": "string"
+        },
+        "@type": {
+          "enum": [
+            "CVR.Contest"
+          ],
+          "type": "string"
+        },
+        "Abbreviation": {
+          "type": "string"
+        },
+        "Code": {
+          "items": {
+            "$ref": "#/definitions/CVR.Code"
+          },
+          "minItems": 0,
+          "type": "array"
+        },
+        "ContestSelection": {
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/CVR.ContestSelection"
+              },
+              {
+                "$ref": "#/definitions/CVR.PartySelection"
+              },
+              {
+                "$ref": "#/definitions/CVR.BallotMeasureSelection"
+              },
+              {
+                "$ref": "#/definitions/CVR.CandidateSelection"
+              }
+            ]
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "OtherVoteVariation": {
+          "type": "string"
+        },
+        "VoteVariation": {
+          "$ref": "#/definitions/CVR.VoteVariation"
+        }
+      },
+      "type": "object"
+    },
     "CVR.ContestSelection": {
       "required": [
         "@id",
@@ -756,6 +816,9 @@
         "Contest": {
           "items": {
             "oneOf": [
+              {
+                "$ref": "#/definitions/CVR.Contest"
+              },
               {
                 "$ref": "#/definitions/CVR.PartyContest"
               },
