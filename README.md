@@ -1,6 +1,13 @@
 # Voting - Cast Vote Records(CVR) CDF Specification
 
-This repository holds the NIST Special Publication 1500-103 Cast Vote Record (CVR) common data format specification and related information and files that are being created by NIST and collaborators. The CVR specification is complete and awaiting final publishing by NIST. Besides the PDF and Word versions of the specification located in this repository, there is an HTML version being developed at https://pages.nist.gov/CastVoteRecords.
+This repository holds the NIST Special Publication 1500-103 Cast Vote Record (CVR) common data format specification and related information and other related information and supporting files. The CVR specification is available using either of the following Digital Object Identifiers (DOI):
+
+https://doi.org/10.6028/NIST.SP.1500-103
+
+https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.1500-103.pdf
+
+
+Besides the PDF and Word versions of the specification located in this repository, there is an HTML version being developed at https://pages.nist.gov/CastVoteRecords.
 
 The CVR specification supports 3 general use cases:
 
@@ -11,7 +18,7 @@ The CVR specification supports 3 general use cases:
 3. Interoperable export of CVRs from adjudication devices.
 
 
-Please contact [John P. Wack](mailto:john.wack@nist.gov) for questions and more information.
+Please contact [John Wack](mailto:john.wack@nist.gov) or [John Dziurlaj] (mailto:john@hiltonroscoe.com) for questions and more information.
 
 ## Repo Structure
 
