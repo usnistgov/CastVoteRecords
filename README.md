@@ -18,7 +18,7 @@ The CVR specification supports 3 general use cases:
 3. Interoperable export of CVRs from adjudication devices.
 
 
-Please contact [John Wack](mailto:john.wack@nist.gov) or [John Dziurlaj] (mailto:john@hiltonroscoe.com) for questions and more information.
+Please contact [John Wack](mailto:john.wack@nist.gov) or [John Dziurlaj](mailto:john@hiltonroscoe.com) for questions and more information.
 
 ## Repo Structure
 
