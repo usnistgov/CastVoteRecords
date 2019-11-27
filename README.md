@@ -1,10 +1,8 @@
 # Voting - NIST Special Publication 1500-103 Cast Vote Records Common Data Format Specification Version 1
 
-This repository holds the NIST Special Publication 1500-103 Cast Vote Record (CVR) Common Data Format Specification Version 1 and other related information and supporting files. The CVR specification is available using either of the following Digital Object Identifiers (DOI):
+This repository holds the NIST Special Publication 1500-103 Cast Vote Record (CVR) Common Data Format Specification Version 1 and supporting files. The CVR specification is available using either the following Digital Object Identifier (DOI):
 
-1. https://doi.org/10.6028/NIST.SP.1500-103
-
-2. https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.1500-103.pdf
+- https://doi.org/10.6028/NIST.SP.1500-103
 
 
 Besides the PDF and Word versions of the specification located in this repository, there is an HTML version being developed at https://pages.nist.gov/CastVoteRecords.
