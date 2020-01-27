@@ -43,6 +43,8 @@ This publication is available free of charge from:
 
 February 2019
 
+`*NOTE: This version of the CVR specification is from an earlier draft. The final version is available on the CVR GitHub repository.*`
+
 ![](Pics/media/image2.wmf "Seal of the U.S. Department of Commerce")
 
 U. S. Department of Commerce
