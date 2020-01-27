@@ -1,6 +1,6 @@
 # Site settings
-title: NIST SP 1500-102 Cast Vote Records Common Data Format Specification Draft Version 1.0
-description: "NIST SP 1500-102 Cast Vote Records Common Data Format Specification Draft Version 1.0"
+title: NIST SP 1500-103 Cast Vote Records Common Data Format Specification Draft Version 1.0
+description: "NIST SP 1500-103 Cast Vote Records Common Data Format Specification Draft Version 1.0"
 baseurl: "/CastVoteRecords" # the subpath of your site, e.g. /blog
 url: "https://pages.nist.gov/" # the base hostname & protocol for your site
 
