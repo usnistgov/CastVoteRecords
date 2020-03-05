@@ -119,6 +119,7 @@ Name | Value
 `modified`|After contest rules applied.
 `original`|As scanned, no contest rules applied.
 
+
 ### <a name="_18_0_2_6340208_1485894679180_11599_4655"></a>*The **HashType** Enumeration*
 
 ![Image of HashType](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1485894679181_566848_4656.png)
@@ -233,8 +234,8 @@ Name | Value
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-<a name="_18_0_5_43401a7_1475856818925_753666_4441"></a>`AdjudicatorName`|0..*|`string`|The name(s) of the adjudicator(s).
-<a name="_18_0_5_43401a7_1475856861979_461651_4445"></a>`Message`|0..*|`string`|A message created by the adjudicator(s).
+<a name="_18_0_5_43401a7_1475856818925_753666_4441"></a>`AdjudicatorName`|0..*|`String`|The name(s) of the adjudicator(s).
+<a name="_18_0_5_43401a7_1475856861979_461651_4445"></a>`Message`|0..*|`String`|A message created by the adjudicator(s).
 <a name="_18_0_5_43401a7_1475856758084_638015_4437"></a>`TimeStamp`|0..1|`dateTime`|The date and time of the annotation.
 
 
@@ -291,7 +292,7 @@ Attribute | Multiplicity | Type | Attribute Description
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
 <a name="_17_0_2_4_d420315_1392145686219_781480_2594"></a>`{Candidate}`|0..*|`Candidate`|The candidate associated with the contest selection. For contests involving a ticket of multiple candidates, an ordered list of candidates as they appeared on the ballot would be created.
-<a name="_18_0_2_6340208_1477060857505_890997_4554"></a>`IsWriteIn`|0..1|`boolean`|A flag to indicate if the candidate selection is associated with a write-in.
+<a name="_18_0_2_6340208_1477060857505_890997_4554"></a>`IsWriteIn`|0..1|`Boolean`|A flag to indicate if the candidate selection is associated with a write-in.
 
 
 ### <a name="_17_0_2_4_78e0236_1389366195564_913164_2300"></a>*The **CastVoteRecordReport** Class*
@@ -326,10 +327,10 @@ Attribute | Multiplicity | Type | Attribute Description
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_f71035d_1441215385623_864674_2521"></a>`Label`|0..1|`string`|A label associated with the code, used as needed.
+<a name="_17_0_2_4_f71035d_1441215385623_864674_2521"></a>`Label`|0..1|`String`|A label associated with the code, used as needed.
 <a name="_17_0_2_4_f71035d_1430405763078_743585_2433"></a>`Type`|1|`IdentifierType`|Used to indicate the type of code, from the [IdentifierType](#_17_0_2_4_f71035d_1425061188508_163854_2613) enumeration.
-<a name="_17_0_2_4_f71035d_1430405732252_109247_2429"></a>`OtherType`|0..1|`string`|If [Type](#_17_0_2_4_f71035d_1430405763078_743585_2433) is 'other', the type of code.
-<a name="_17_0_2_4_f71035d_1430405785820_123111_2437"></a>`Value`|1|`string`|The value of the code, i.e., the identifier.
+<a name="_17_0_2_4_f71035d_1430405732252_109247_2429"></a>`OtherType`|0..1|`String`|If [Type](#_17_0_2_4_f71035d_1430405763078_743585_2433) is 'other', the type of code.
+<a name="_17_0_2_4_f71035d_1430405785820_123111_2437"></a>`Value`|1|`String`|The value of the code, i.e., the identifier.
 
 
 ### <a name="_17_0_2_4_78e0236_1389366251994_876831_2400"></a>*The **Contest** Class*
@@ -498,8 +499,8 @@ Used to hold the contents of a file or identify a file created by the scanning d
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
 <a name="_18_0_2_6340208_1485284639723_485833_4550"></a>`Data`|1|`base64Binary`|Contains the base64 binary contents of the file.
-<a name="_18_0_2_6340208_1485284639724_125436_4551"></a>`FileName`|0..1|`string`|Contains the name of the file or an identifier of the file.
-<a name="_18_0_2_6340208_1485284639724_875893_4552"></a>`MimeType`|0..1|`string`|The mime type of the file, e.g., image/jpeg.
+<a name="_18_0_2_6340208_1485284639724_125436_4551"></a>`FileName`|0..1|`String`|Contains the name of the file or an identifier of the file.
+<a name="_18_0_2_6340208_1485284639724_875893_4552"></a>`MimeType`|0..1|`String`|The mime type of the file, e.g., image/jpeg.
 
 
 ### <a name="_19_0_43701b0_1556049559972_974781_5102"></a>*The **FractionalNumber** Class*
@@ -542,8 +543,8 @@ Attribute | Multiplicity | Type | Attribute Description
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
 <a name="_18_0_2_6340208_1485894641846_811323_4646"></a>`Type`|1|`HashType`|The type of the hash, from the [HashType](#_18_0_2_6340208_1485894679180_11599_4655) enumeration.
-<a name="_18_0_2_6340208_1485894652084_23532_4650"></a>`OtherType`|0..1|`string`|If [Type](#_18_0_2_6340208_1485894641846_811323_4646) is 'other', the type of the hash.
-<a name="_18_0_2_6340208_1485894623486_698989_4642"></a>`Value`|1|`string`|The hash value, encoded as a string.
+<a name="_18_0_2_6340208_1485894652084_23532_4650"></a>`OtherType`|0..1|`String`|If [Type](#_18_0_2_6340208_1485894641846_811323_4646) is 'other', the type of the hash.
+<a name="_18_0_2_6340208_1485894623486_698989_4642"></a>`Value`|1|`String`|The hash value, encoded as a string.
 
 
 ### <a name="_18_0_2_6340208_1485284639720_737438_4549"></a>*The **Image** Class*
