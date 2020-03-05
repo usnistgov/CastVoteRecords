@@ -649,7 +649,7 @@ Attribute | Multiplicity | Type | Attribute Description
 <a name="_19_0_43701b0_1556130739145_967916_5093"></a>`FractionalVotes`|0..1|`FractionalNumber`|The proper fractional number of votes represented by the position.
 <a name="_19_0_43701b0_1541095481007_618279_4996"></a>`HasIndication`|1|`IndicationStatus`|Whether there is a selection indication present.
 <a name="_18_0_2_6340208_1532546142492_921207_4764"></a>`IsAllocable`|0..1|`AllocationStatus`|Whether this indication should be allocated to the contest option's accumulator.
-<a name="_19_0_43701b0_1543438269888_294947_5070"></a>`IsGenerated`|0..1|`boolean`|Whether or not the indication was generated, rather than directly made by the voter.
+<a name="_19_0_43701b0_1543438269888_294947_5070"></a>`IsGenerated`|0..1|`Boolean`|Whether or not the indication was generated, rather than directly made by the voter.
 <a name="_18_0_2_6340208_1488984862414_760136_4710"></a>`MarkMetricValue`|0..*|`String`|The value of the mark metric, represented as a string.
 <a name="_18_0_2_6340208_1485892992408_339917_4637"></a>`NumberVotes`|1|`Integer`|The number of votes represented by the position, usually 1 but may be more depending on the voting method.
 <a name="_18_0_2_6340208_1485892992408_897036_4641"></a>`Position`|0..1|`Integer`|The ordinal position of the selection position within the contest option.
