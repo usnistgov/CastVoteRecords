@@ -85,7 +85,7 @@ This specification is geared towards the following audiences:
 
 ![Image of AllocationStatus](CastVoteRecords_UML_Documentation_files/_18_5_3_43701b0_1533322047923_796623_5683.png)
 
-![](Pics/media/_18_5_3_43701b0_1533322047923_796623_5683.png)
+![](Pics/media/qw.png)
 
 ![](Pics/media/image3.png)
 
