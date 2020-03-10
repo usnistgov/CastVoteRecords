@@ -85,6 +85,10 @@ This specification is geared towards the following audiences:
 
 ![Image of AllocationStatus](CastVoteRecords_UML_Documentation_files/_18_5_3_43701b0_1533322047923_796623_5683.png)
 
+![Image of AllocationStatus](Pics/media/_18_5_3_43701b0_1533322047923_796623_5683.png)
+
+![](Pics/media/image3.png)
+
 Used in [SelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635)::[IsAllocable](#_18_0_2_6340208_1532546142492_921207_4764) to indicate whether the [SelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635)::[NumberVotes](#_18_0_2_6340208_1485892992408_339917_4637) should be allocated to the underlying contest option counter.
 
 Name | Value
