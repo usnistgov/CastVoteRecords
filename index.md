@@ -1,1241 +1,696 @@
-# National Institute of Standards and Technology (NIST) Special Publication 1500-100, Revision 2.0
+# National Institute of Standards and Technology (NIST) Special Publication 1500-103, Cast Vote Records Common Data Format Specification Version 1.0
 
 **March 2020**
 
-**The following is an excerpt from the SP 1500-100 specification. It contains the specification's executive summary and class documentation.**
+**The following is an excerpt from the SP 1500-103 specification. It contains the specification's executive summary and class documentation.**
 
 The complete publication including JSON and XML schemas is available free of charge from:
 
-<https://github.com/usnistgov/ElectionResultsReporting>
+<https://github.com/usnistgov/CastVoteRecords>
 
 # Executive Summary
 
-This publication presents a common data format (CDF) for pre-election
-setup information and post-election results reporting. The format, known
-as the Election Results Common Data Format Specification Version 2.0, is
-comprehensive and detailed in its coverage of election results-related
-data and at the same time very flexible, able to accommodate election
-scenarios used throughout the United States. This publication describes:
+This document presents an interoperable, common data format specification for cast vote records (CVR), which are produced by vote-capture devices such as ballot scanners.  A CVR is an electronic record of a voter’s selections, with usually one CVR created per sheet (page) of a ballot.  Election results are produced by tabulating the collection of CVRs, and audits can be done by comparisons of the paper ballots or paper records of voter selections against the CVRs.
 
-  - a UML (Unified Modeling Language) model,
+This specification supports three general use cases for CVRs:
 
-  - derived XML (eXtensible Markup Language) and JSON (JavaScript Object
-    Notation) schemas,
+- Interoperable exports of CVRs from devices such as scanners for import into tabulators, election management systems (EMS), or auditing systems.
+- Interoperable exports of aggregated collections of CVRs from aggregating devices such as election management systems.
+- Update of CVRs after adjudication.
 
-  - usage information and guidance, and
+The purpose of this specification is to provide an interoperable, non-proprietary data exchange format in JavaScript Object Notation (JSON) and eXtensible Markup Language (XML) for CVRs so as to promote greater transparency to voting records produced by vote-capture devices, and to facilitate the exchange of CVRs with other devices that operate upon CVRs regardless of device manufacturer.
 
-  - background information.
+The specification includes a UML (Unified Markup Language) model and references XML (eXtensible Markup Language) and JSON (JavaScript Object Notation) schemas that were created from the UML model.
 
-This specification provides a common data interchange format for
-election data used in voting systems across U.S. jurisdictions. Using
-this specification, pre-election and post-election data can be published
-in a common, well-understood format. The format accommodates highly
-detailed election results data and is sufficiently flexible to
-accommodate many different types of contests and political structures.
-
-This specification provides manufacturers of election management systems
-(EMS) and managers of election jurisdictions with standard methods for
-importing and exporting election data, thereby increasing
-interoperability among election devices and reducing the need to create
-software to translate between proprietary formats. Interoperable data
-will reduce costs to election jurisdictions by reducing the complexity
-in election management and offering jurisdictions more choice in
-election equipment.
+There are many complex operations performed by voting devices when voters submit their paper ballots to be scanned.  These operations are mostly invisible to voters but are necessary to determine whether contest selections have been marked adequately and whether voter intent is reflected by what is marked on the ballot.  This specification includes the necessary detail to capture these operations so that CVRs can be better audited and adjudicated as necessary to include write-in candidates or other issues.
 
 This specification is geared towards the following audiences:
 
-  - Election officials
-
-  - Voting equipment manufacturers
-
-  - Election-affiliated organizations and
-
-  - Election analysts and the general public
-
-The format accommodates three different election scenarios:
-
-**Pre-election**. The period prior to an election, for reporting
-pre-election data from a jurisdiction but not yet complete information
-about any election.
-
-**Election**. The period during which an election is being conducted and
-election results reports are produced. The reports include aggregated
-results data or more detailed, precinct-level reporting, depending on
-the capabilities of the reporting jurisdiction.
-
-**Post-election**. The period after the polls close when more detailed
-election results reports are produced with options for precinct
-reporting, type of ballot, and type of device.
-
-The XML and JSON schemas associated with this specification are derived
-from the UML model, which defines the types, structure, and
-interrelationships of geopolitical geography across the United States.
-The model was designed to accommodate multiple types of contests and
-their many variations. It also provides the capability to report on
-these contests from higher aggregate levels down to very fine levels of
-detail, including:
-
-  - reporting by precincts and split precincts;
-
-  - reporting by ballot type, for example, absentee and election day;
-    and
-
-  - reporting by device type and specific voting device.
-
-The UML model can be re-used and modified to meet the needs of other
-planned common data format specifications for voting devices such as
-electronic pollbooks and ballot marking devices.
-
-# Notice of Revision 2.0
-
-This document is a version 2.0 revision to the NIST Special Publication
-1500-100, Election Results Common Data Format Specification, Version 1.
-Changes were made to the version 1 UML model to add additional
-information and make the model easier to implement and use.
-Additionally, the XML schema was updated accordingly and a new JSON
-schema was generated.
+- Election officials
+- Voting equipment manufacturers
+- Election analysts and auditors
+- Election-affiliated organizations
+- The public
 
 # Table of Contents
+
+- Table of Contents
   - Enumerations
-    - *The **[BallotMeasureType](#_17_0_2_4_f71035d_1426549604222_56408_2487)** Enumeration*
-    - *The **[CandidatePostElectionStatus](#_17_0_2_4_78e0236_1389797791548_146399_4136)** Enumeration*
-    - *The **[CandidatePreElectionStatus](#_17_0_2_4_f71035d_1427223542780_950918_2213)** Enumeration*
-    - *The **[CountItemStatus](#_17_0_2_4_78e0236_1389797161173_369293_4078)** Enumeration*
-    - *The **[CountItemType](#_17_0_2_4_78e0236_1389798097477_664878_4228)** Enumeration*
-    - *The **[DayType](#_18_0_2_6340208_1425647845906_917814_4818)** Enumeration*
-    - *The **[DeviceType](#_17_0_2_4_78e0236_1389798087342_91702_4210)** Enumeration*
-    - *The **[ElectionType](#_17_0_2_4_78e0236_1389734457182_720347_3938)** Enumeration*
-    - *The **[GeoSpatialFormat](#_17_0_2_4_f71035d_1425325534467_889921_2544)** Enumeration*
+    - *The **[AllocationStatus](#_18_5_3_43701b0_1533322047899_321573_5682)** Enumeration*
+    - *The **[CastVoteRecordVersion](#_18_0_2_6340208_1488984734564_983877_4662)** Enumeration*
+    - *The **[ContestSelectionStatus](#_18_0_5_43401a7_1475850153090_186243_4311)** Enumeration*
+    - *The **[ContestStatus](#_18_0_5_43401a7_1475850124791_123384_4291)** Enumeration*
+    - *The **[CVRStatus](#_18_0_2_6340208_1472159006307_546162_4628)** Enumeration*
+    - *The **[CVRType](#_18_0_2_6340208_1532543997676_592413_4694)** Enumeration*
+    - *The **[HashType](#_18_0_2_6340208_1485894679180_11599_4655)** Enumeration*
     - *The **[IdentifierType](#_17_0_2_4_f71035d_1425061188508_163854_2613)** Enumeration*
-    - *The **[OfficeTermType](#_17_0_2_4_f71035d_1425314816880_411605_2504)** Enumeration*
-    - *The **[ReportDetailLevel](#_17_0_2_4_d420315_1392318380928_311473_2471)** Enumeration*
+    - *The **[IndicationStatus](#_19_0_43701b0_1541430872294_37549_5007)** Enumeration*
+    - *The **[PositionStatus](#_18_0_2_6340208_1485894157707_572874_4551)** Enumeration*
     - *The **[ReportingUnitType](#_17_0_2_4_f71035d_1431607637366_785815_2242)** Enumeration*
-    - *The **[ResultsStatus](#_17_0_2_4_78e0236_1389734128637_37089_3895)** Enumeration*
-    - *The **[VoteVariation](#_17_0_2_4_78e0236_1389798224990_11192_4272)** Enumeration*
+    - *The **[ReportType](#_18_0_5_43401a7_1483727563257_179426_4343)** Enumeration*
+    - *The **[VoteVariation](#_18_0_5_43401a7_1483727021192_184103_4291)** Enumeration*
   - Classes
-    - *The **[AnnotatedString](#_18_0_2_6340208_1497553224568_429892_4565)** Class*
-    - *The **[AnnotatedUri](#_18_0_2_6340208_1498658436378_308208_4565)** Class*
-    - *The **[BallotCounts](#_17_0_2_4_78e0236_1397156576157_466818_2461)** Class*
+    - *The **[Annotation](#_18_0_5_43401a7_1475856712376_208252_4416)** Class*
     - *The **[BallotMeasureContest](#_17_0_2_4_78e0236_1389366932057_929676_2783)** Class*
     - *The **[BallotMeasureSelection](#_17_0_2_4_78e0236_1389372163799_981952_2926)** Class*
-    - *The **[BallotStyle](#_17_0_2_4_78e0236_1389366224561_797289_2360)** Class*
     - *The **[Candidate](#_17_0_2_4_78e0236_1389366272694_544359_2440)** Class*
     - *The **[CandidateContest](#_17_0_2_4_78e0236_1389366970084_183781_2806)** Class*
     - *The **[CandidateSelection](#_17_0_2_4_d420315_1392145640524_831493_2562)** Class*
-    - *The **[Coalition](#_18_0_2_6340208_1425647247631_162984_4712)** Class*
-    - *The **[ContactInformation](#_17_0_5_1_43401a7_1400624327407_326048_3637)** Class*
+    - *The **[CastVoteRecordReport](#_17_0_2_4_78e0236_1389366195564_913164_2300)** Class*
+    - *The **[Code](#_17_0_2_4_f71035d_1430405712653_451634_2410)** Class*
     - *The **[Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400)** Class*
     - *The **[ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906)** Class*
-    - *The **[Counts](#_17_0_2_4_78e0236_1389367291663_284973_2835)** Class*
-    - *The **[CountStatus](#_17_0_2_4_f71035d_1430412663878_61362_2269)** Class*
-    - *The **[DateTimeWithZone](#_18_0_2_6340208_1519999692422_172889_4576)** Class*
-    - *The **[DeviceClass](#_18_0_2_6340208_1425911626288_420556_4530)** Class*
+    - *The **[CVR](#_18_0_2_6340208_1532543460307_914551_4600)** Class*
+    - *The **[CVRContest](#_18_0_2_6340208_1469203058990_306165_4565)** Class*
+    - *The **[CVRContestSelection](#_18_0_5_43401a7_1474452890357_299022_4292)** Class*
+    - *The **[CVRSnapshot](#_17_0_2_4_78e0236_1389366224561_797289_2360)** Class*
+    - *The **[CVRWriteIn](#_18_0_2_6340208_1485892911278_166697_4594)** Class*
     - *The **[Election](#_17_0_2_4_f71035d_1426101822599_430942_2209)** Class*
-    - *The **[ElectionAdministration](#_18_0_2_6340208_1441311877439_710008_4433)** Class*
-    - *The **[ElectionReport](#_17_0_2_4_78e0236_1389366195564_913164_2300)** Class*
-    - *The **[ExternalIdentifier](#_17_0_2_4_f71035d_1430405712653_451634_2410)** Class*
+    - *The **[File](#_18_0_2_6340208_1485284639717_497586_4548)** Class*
+    - *The **[FractionalNumber](#_19_0_43701b0_1556049559972_974781_5102)** Class*
     - *The **[GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380)** Class*
-    - *The **[Header](#_18_5_3_43701b0_1527684342703_968085_6144)** Class*
-    - *The **[Hours](#_18_0_2_6340208_1427122205989_885563_4602)** Class*
-    - *The **[HtmlColorString](#_17_0_2_4_f71035d_1428586849773_722256_2252)** Class*
-    - *The **[InternationalizedText](#_17_0_2_4_f71035d_1428953680097_700602_2220)** Class*
-    - *The **[LanguageString](#_17_0_2_4_f71035d_1428953680095_709464_2219)** Class*
-    - *The **[LatLng](#_17_0_2_4_f71035d_1443104838926_393729_2222)** Class*
-    - *The **[Office](#_17_0_5_1_43401a7_1400623830572_164081_3518)** Class*
-    - *The **[OfficeGroup](#_17_0_2_4_f71035d_1433183615993_866714_2239)** Class*
-    - *The **[OrderedContent](#_18_5_3_43701b0_1527684342715_643544_6146)** Class*
-    - *The **[OrderedContest](#_17_0_3_43401a7_1394476416139_808596_3142)** Class*
-    - *The **[OrderedHeader](#_18_5_3_43701b0_1527684342714_129907_6145)** Class*
-    - *The **[OtherCounts](#_18_0_2_6340208_1508176198256_527421_4561)** Class*
+    - *The **[Hash](#_18_0_2_6340208_1485894593826_736413_4615)** Class*
+    - *The **[Image](#_18_0_2_6340208_1485284639720_737438_4549)** Class*
+    - *The **[ImageData](#_18_0_2_6340208_1485894533655_402033_4588)** Class*
     - *The **[Party](#_17_0_2_4_78e0236_1389366278128_412819_2460)** Class*
     - *The **[PartyContest](#_17_0_2_4_d420315_1393514218965_55008_3144)** Class*
-    - *The **[PartyRegistration](#_17_0_2_4_78e0236_1394566839296_58362_2826)** Class*
     - *The **[PartySelection](#_17_0_2_4_f71035d_1426519980658_594892_2511)** Class*
-    - *The **[Person](#_17_0_5_1_43401a7_1400623980732_100904_3567)** Class*
     - *The **[ReportingDevice](#_17_0_2_4_78e0236_1389798013459_389380_4178)** Class*
-    - *The **[ReportingUnit](#_17_0_2_4_f71035d_1400606476166_735297_2593)** Class*
     - *The **[RetentionContest](#_18_0_2_6340208_1425646217522_163181_4554)** Class*
-    - *The **[Schedule](#_18_0_2_6340208_1427122121448_198970_4547)** Class*
-    - *The **[ShortString](#_18_0_2_6340208_1499878618645_537953_4560)** Class*
-    - *The **[SpatialDimension](#_17_0_2_4_f71035d_1407165065674_39189_2188)** Class*
-    - *The **[SpatialExtent](#_17_0_2_4_f71035d_1409080246279_778720_2209)** Class*
-    - *The **[Term](#_17_0_2_4_f71035d_1428489072598_282236_2217)** Class*
-    - *The **[TimeWithZone](#_18_0_2_6340208_1427385616970_86952_4407)** Class*
-    - *The **[VoteCounts](#_17_0_2_4_78e0236_1397156604549_15838_2489)** Class*
+    - *The **[SelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635)** Class*
 
 ## Enumerations
 
-### <a name="_17_0_2_4_f71035d_1426549604222_56408_2487"></a>*The **BallotMeasureType** Enumeration*
+### <a name="_18_5_3_43701b0_1533322047899_321573_5682"></a>*The **AllocationStatus** Enumeration*
 
-![Image of BallotMeasureType](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_f71035d_1426549604223_980638_2488.png)
+![Image of AllocationStatus](CastVoteRecords_UML_Documentation_files/_18_5_3_43701b0_1533322047923_796623_5683.png)
 
-Enumeration for types of ballot measures in the [BallotMeasureContest](#_17_0_2_4_78e0236_1389366932057_929676_2783) element.
+![Image of Alloca](Pics/media/18_5_3_43701b0_1533322047923_796623_5683.png)
 
-Name | Value
----- | -----
-`ballot-measure`|For reports that contain only aggregated counts.
-`initiative`|For an initiative.
-`recall`|For a recall.
-`referendum`|For a referendum.
-`other`|Used when the type of ballot measure is not included in this enumeration.
+![](Pics/media/qw.png)
 
-### <a name="_17_0_2_4_78e0236_1389797791548_146399_4136"></a>*The **CandidatePostElectionStatus** Enumeration*
-
-![Image of CandidatePostElectionStatus](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_78e0236_1389798977982_58243_5353.png)
-
-Enumeration for various post-election statuses applicable to a candidate in the [Candidate](#_17_0_2_4_78e0236_1389366272694_544359_2440) element.
+Used in [SelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635)::[IsAllocable](#_18_0_2_6340208_1532546142492_921207_4764) to indicate whether the [SelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635)::[NumberVotes](#_18_0_2_6340208_1485892992408_339917_4637) should be allocated to the underlying contest option counter.
 
 Name | Value
 ---- | -----
-`advanced-to-runoff`|For candidates who have advanced to a runoff.
-`defeated`|Used for candidates who were defeated in the election.
-`projected-winner`|For a projected contest winner.
-`winner`|For the official contest winner or one of “n” contest winners for n-of-m voting.
-`withdrawn`|For candidates who have withdrawn from the contest.
+`no`|To not allocate votes to the contest option's accumulator.
+`unknown`|When the decision to allocate votes is unknown, such as when the adjudication is needed.
+`yes`|To allocate votes to the contest option's accumulator.
 
-### <a name="_17_0_2_4_f71035d_1427223542780_950918_2213"></a>*The **CandidatePreElectionStatus** Enumeration*
+### <a name="_18_0_2_6340208_1488984734564_983877_4662"></a>*The **CastVoteRecordVersion** Enumeration*
 
-![Image of CandidatePreElectionStatus](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_f71035d_1427223542789_361508_2214.png)
+![Image of CastVoteRecordVersion](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1488984734567_410041_4663.png)
 
-Enumeration for various pre-election statuses applicable to a candidate in the [Candidate](#_17_0_2_4_78e0236_1389366272694_544359_2440) class.
+To identify the version of the CVR specification being used, i.e., version 1.0.0. This will need to be updated for different versions of the specification.
 
 Name | Value
 ---- | -----
-`filed`|For candidates who have filed with the election authority but not necessarily qualified.
-`qualified`|For candidates who are qualified by the election authority to be on the ballot for a contest.
-`withdrawn`|For candidates who have withdrawn from the contest.
+`1.0.0`|Fixed value for the version of this specification.
 
-### <a name="_17_0_2_4_78e0236_1389797161173_369293_4078"></a>*The **CountItemStatus** Enumeration*
+### <a name="_18_0_5_43401a7_1475850153090_186243_4311"></a>*The **ContestSelectionStatus** Enumeration*
 
-![Image of CountItemStatus](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_78e0236_1389798977982_740364_5352.png)
+![Image of ContestSelectionStatus](CastVoteRecords_UML_Documentation_files/_18_0_5_43401a7_1475850153092_221720_4312.png)
 
-Enumeration for various counting-related statuses for types of ballots or write-ins, used in the [CountStatus](#_17_0_2_4_f71035d_1430412663878_61362_2269) class.
+Used in [CVRContestSelection](#_18_0_5_43401a7_1474452890357_299022_4292)::[Status](#_18_0_5_43401a7_1475850275266_189599_4334) to identify the status of a contest selection in the CVR.
 
 Name | Value
 ---- | -----
-`completed`|For counts that are complete.
-`in-process`|For counts that are in process.
-`not-processed`|When the counting has not started or is not underway.
-`unknown`|When the status of the counting is unknown.
+`generated-rules`|To indicate that the contest selection was generated per contest rules.
+`invalidated-rules`|To indicate that the contest selection was invalidated by the generating device because of contest rules.
+`needs-adjudication`|To indicate that the contest selection was flagged by the generating device for adjudication.
+`other`|Used in conjunction with CVRContestSelection::OtherStatus when no other value in this enumeration applies.
 
-### <a name="_17_0_2_4_78e0236_1389798097477_664878_4228"></a>*The **CountItemType** Enumeration*
+### <a name="_18_0_5_43401a7_1475850124791_123384_4291"></a>*The **ContestStatus** Enumeration*
 
-![Image of CountItemType](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_78e0236_1389798977982_781011_5347.png)
+![Image of ContestStatus](CastVoteRecords_UML_Documentation_files/_18_0_5_43401a7_1475850124799_533420_4292.png)
 
-Enumeration for the items that are counted during the course of an election and for which the status of the counts is of interest. Used in the [Counts](#_17_0_2_4_78e0236_1389367291663_284973_2835) and [CountStatus](#_17_0_2_4_f71035d_1430412663878_61362_2269) classes.
-
-Name | Value
----- | -----
-`absentee`|For any/all classes of absentee, generally when absentee is not broken out into specific classes.
-`absentee-fwab`|A type of absentee; for Federal Write-in Absentee Ballots.
-`absentee-in-person`|A class of absentee; for absentee ballots cast in-person, e.g., at a county office.
-`absentee-mail`|A class of absentee; for postal mail absentee ballots separately.
-`early`|For ballots cast during early voting periods.
-`election-day`|For ballots cast on election day.
-`provisional`|For challenged ballots.
-`seats`|For legislative balance-of-power results information.
-`total`|Total of all ballots cast regardless of voting class.
-`uocava`|A class of absentee; for absentee ballots from Uniformed and Overseas Citizens Absentee Voting Act (UOCAVA) voters.
-`write-in`|For write-ins on ballots.
-`other`|Used when the type of counting item is not included in this enumeration.
-
-### <a name="_18_0_2_6340208_1425647845906_917814_4818"></a>*The **DayType** Enumeration*
-
-![Image of DayType](Election_Results_Reporting_UML_documentation_files/_18_0_2_6340208_1425647845916_861367_4819.png)
-
-Enumeration for the day(s) in a schedule in the [Schedule](#_18_0_2_6340208_1427122121448_198970_4547) element.
+Used in [CVRContest](#_18_0_2_6340208_1469203058990_306165_4565)::[Status](#_18_0_5_43401a7_1475850227700_908488_4330) to identify the status of a contest in which contest selection(s) were made.
 
 Name | Value
 ---- | -----
-`all`|Used for all days of the week.
-`sunday`|Used if day of week is Sunday.
-`monday`|Used if day of week is Monday.
-`tuesday`|Used if day of week is Tuesday.
-`wednesday`|Used if day of week is Wednesday.
-`thursday`|Used if day of week is Thursday.
-`friday`|Used if day of week is Friday.
-`saturday`|Used if day of week is Saturday.
-`weekday`|Used for any day of the week.
-`weekend`|Used for both Saturday and Sunday.
+`invalidated-rules`|To indicate that the contest has been invalidated by the generating device because of contest rules.
+`not-indicated`|For a CVRContest with no SelectionPosition, i.e. to specify the position contains no marks or other indications.
+`overvoted`|To indicate that the contest was overvoted.
+`undervoted`|To indicate that the contest was undervoted.
+`other`|Used in conjunction with CVRContest::OtherStatus when no other value in this enumeration applies.
 
-### <a name="_17_0_2_4_78e0236_1389798087342_91702_4210"></a>*The **DeviceType** Enumeration*
+### <a name="_18_0_2_6340208_1472159006307_546162_4628"></a>*The **CVRStatus** Enumeration*
 
-![Image of DeviceType](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_78e0236_1389798977982_639477_5345.png)
+![Image of CVRStatus](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1472159006313_115999_4629.png)
 
-Enumeration for the type of device in the [DeviceClass](#_18_0_2_6340208_1425911626288_420556_4530) class.
+Used in [CVRSnapshot](#_17_0_2_4_78e0236_1389366224561_797289_2360)::[Status](#_18_0_2_6340208_1472158928951_402259_4603) to identify the status of the CVR.
 
 Name | Value
 ---- | -----
-`bmd`|For ballots prepared on ballot marking devices and then scanned.
-`dre`|For DRE (Direct Record Electronic) and other all-electronic devices.
-`manual-count`|For hand-counted paper ballots.
-`opscan-central`|For an optical scanner used at a central office with no opportunity for voter correction of mistakes.
-`opscan-precinct`|For an optical scanner used at a precinct or other location where voter correction of mistakes such as overvotes is possible.
-`unknown`|Used when the type of device is unknown.
-`other`|Used when the device type is not listed in this enumeration.
+`needs-adjudication`|To indicate that the CVR needs to be adjudicated.
+`other`|Used in conjunction with CVRSnapshot::OtherStatus when no other value in this enumeration applies.
 
-### <a name="_17_0_2_4_78e0236_1389734457182_720347_3938"></a>*The **ElectionType** Enumeration*
+### <a name="_18_0_2_6340208_1532543997676_592413_4694"></a>*The **CVRType** Enumeration*
 
-![Image of ElectionType](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_78e0236_1389798977982_571622_5349.png)
+![Image of CVRType](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1532543997679_592668_4695.png)
 
-Enumeration for the type of election in the [ElectionReport](#_17_0_2_4_78e0236_1389366195564_913164_2300) class.
+Used in [CVRSnapshot](#_17_0_2_4_78e0236_1389366224561_797289_2360)::[Type](#_18_0_2_6340208_1532543968111_779654_4689) to indicate the type of snapshot.
 
 Name | Value
 ---- | -----
-`general`|Election in which all eligible voters, regardless of party affiliation, are permitted to select candidates to fill public office and/or vote on ballot measures.
-`partisan-primary-closed`|Primary election in which the voter receives a ballot containing only those party-specific contests pertaining to the political party with which the voter is affiliated, along with non-party-specific contests presented at the same election. Unaffiliated voters may be permitted to vote only on non-party-specific contests.
-`partisan-primary-open`|Primary election in which the voter may choose a political party at the time of voting and vote in party-specific contests associated with that party, along with non-party-specific contests presented at the same election. Some states require voters to publicly declare their choice of party at the polling place, after which the election worker provides or activates the appropriate ballot. Other states allow the voters to make their choice of party within the privacy of the voting booth.
-`primary`|Election held to determine which candidates qualify to appear as contest options in subsequent elections.
-`runoff`|Election to select a winner following a primary or a general election, in which no candidate in the contest received the required minimum percentage of the votes cast. The two candidates receiving the most votes for the contest in question proceed to a runoff election.
-`special`|Primary or general election that is not regularly scheduled. A special election may be combined with a scheduled election.
-`other`|Used when the election type is not listed in this enumeration.
+`interpreted`|Has been adjudicated.
+`modified`|After contest rules applied.
+`original`|As scanned, no contest rules applied.
 
-### <a name="_17_0_2_4_f71035d_1425325534467_889921_2544"></a>*The **GeoSpatialFormat** Enumeration*
 
-![Image of GeoSpatialFormat](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_f71035d_1425325534469_261190_2545.png)
+### <a name="_18_0_2_6340208_1485894679180_11599_4655"></a>*The **HashType** Enumeration*
 
-Enumeration for geospatial vector data formats used in Geographic Information System (GIS) software, used in the [SpatialExtent](#_17_0_2_4_f71035d_1409080246279_778720_2209) class.
+![Image of HashType](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1485894679181_566848_4656.png)
+
+Used in [Hash](#_18_0_2_6340208_1485894593826_736413_4615)::[Type](#_18_0_2_6340208_1485894641846_811323_4646) to indicate the type of hash being used for an image file.
 
 Name | Value
 ---- | -----
-`geo-json`|For GeoJSON open standard format.
-`gml`|For Geography Markup Language format.
-`kml`|For Keyhole Markup Language format.
-`shp`|For the shape file format associated with Esri.
-`wkt`|For Well-known Text format.
+`md6`|To indicate that the MD6 message digest algorithm is being used.
+`sha-256`|To indicate that the SHA 256-bit signature is being used.
+`sha-512`|To indicate that the SHA 512-bit (32-byte) signature is being used.
+`other`|Used in conjunction with Hash::OtherType when no other value in this enumeration applies.
 
 ### <a name="_17_0_2_4_f71035d_1425061188508_163854_2613"></a>*The **IdentifierType** Enumeration*
 
-![Image of IdentifierType](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_f71035d_1425061188510_56434_2614.png)
+![Image of IdentifierType](CastVoteRecords_UML_Documentation_files/_17_0_2_4_f71035d_1425061188510_56434_2614.png)
 
-Enumeration for election data-related codes in the [ExternalIdentifier](#_17_0_2_4_f71035d_1430405712653_451634_2410) class .
-
-Name | Value
----- | -----
-`fips`|For FIPS codes.
-`local-level`|For a code that is specific to a county or other similar locality.
-`national-level`|For a code that is used at the national level other than “fips” or “ocd-id”.
-`ocd-id`|For Open Civic Data identifiers.
-`state-level`|For a code that is specific to a state.
-`other`|Used when the type of code is not included in this enumeration.
-
-### <a name="_17_0_2_4_f71035d_1425314816880_411605_2504"></a>*The **OfficeTermType** Enumeration*
-
-![Image of OfficeTermType](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_f71035d_1425314816883_792510_2505.png)
-
-Enumeration for the office term type in the [Office](#_17_0_5_1_43401a7_1400623830572_164081_3518) class.
+Used in [Code](#_17_0_2_4_f71035d_1430405712653_451634_2410)::[Type](#_17_0_2_4_f71035d_1430405763078_743585_2433) to indicate the type of code/identifier being used.
 
 Name | Value
 ---- | -----
-`full-term`|When the officeholder’s term began at the beginning of the full term of the office, e.g., 6 years for U.S. Senate.
-`unexpired-term`|When the officeholder’s term began at some date after the beginning of the full term of the office, generally because the previous officeholder vacated the office before the fullterm expired.
+`fips`|To indicate that the identifier is a FIPS code.
+`local-level`|To indicate that the identifier is from a local-level scheme, i.e., unique to a county or city.
+`national-level`|To indicate that the identifier is from a national-level scheme other than FIPS or OCD-ID.
+`ocd-id`|To indicate that the identifier is from the OCD-ID scheme.
+`state-level`|To indicate that the identifier is from a state-level scheme, i.e., unique to a particular state.
+`other`|Used in conjunction with Code::OtherType when no other value in this enumeration applies.
 
-### <a name="_17_0_2_4_d420315_1392318380928_311473_2471"></a>*The **ReportDetailLevel** Enumeration*
+### <a name="_19_0_43701b0_1541430872294_37549_5007"></a>*The **IndicationStatus** Enumeration*
 
-![Image of ReportDetailLevel](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_d420315_1392318381019_76514_2472.png)
+![Image of IndicationStatus](CastVoteRecords_UML_Documentation_files/_19_0_43701b0_1541430872330_109394_5014.png)
 
-Enumeration for the detail level of the election results report in the [Election](#_17_0_2_4_f71035d_1426101822599_430942_2209) class.
+Used in [SelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635)::[HasIndication](#_19_0_43701b0_1541095481007_618279_4996) to identify whether a selection indication is present.
+
 
 Name | Value
 ---- | -----
-`precinct-level`|For reports that contain counts from precincts in the reporting jurisdiction.
-`summary-contest`|For reports that contain only aggregated counts.
+`no`|There is no selection indication.
+`unknown`|It is unknown whether there is a selection indication, e.g., used for ambiguous marks.
+`yes`|There is a selection indication present.
+
+### <a name="_18_0_2_6340208_1485894157707_572874_4551"></a>*The **PositionStatus** Enumeration*
+
+![Image of PositionStatus](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1485894157711_931606_4552.png)
+
+Used in [SelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635)::[Status](#_18_0_2_6340208_1485892992408_985925_4639) to identify the status of a selection indication.
+
+Name | Value
+---- | -----
+`adjudicated`|Used if the indication was adjudicated.
+`generated-rules`|Used if the indication was generated by the creating device per contest rules.
+`invalidated-rules`|Used if the indication was invalidated by the creating device because of contest rules.
+`other`|Used in conjunction with SelectionPosition::OtherStatus when no other value in this enumeration applies.
 
 ### <a name="_17_0_2_4_f71035d_1431607637366_785815_2242"></a>*The **ReportingUnitType** Enumeration*
 
-![Image of ReportingUnitType](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_f71035d_1431607637380_196295_2243.png)
+![Image of ReportingUnitType](CastVoteRecords_UML_Documentation_files/_17_0_2_4_f71035d_1431607637380_196295_2243.png)
 
-Enumeration for the type of geopolitical unit in the [ReportingUnit](#_17_0_2_4_f71035d_1400606476166_735297_2593) class.
-
-Name | Value
----- | -----
-`ballot-batch`|Used for reporting batches of ballots that may cross precinct boundaries.
-`ballot-style-area`|Used for ballot style areas generally composed of precincts.
-`borough`|Used in CT, NJ, PA, other states, and New York City for boroughs. For AK and LA, see county.
-`city`|Used for a city that reports results and/or for the district that encompasses it.
-`city-council`|Used for city council districts.
-`combined-precinct`|Used for one or more precincts that have been combined for the purposes of reporting. Used for “Ward” if “Ward” is used interchangeably with “CombinedPrecinct”.
-`congressional`|Used for U.S. Congressional districts.
-`country`|Used for a reporting unit of type country.
-`county`|Used for a county and/or for the district that encompasses it. In AK, used for counties that are called boroughs. In LA, used for parishes.
-`county-council`|Used for county council districts.
-`drop-box`|Used for a dropbox for absentee ballots.
-`judicial`|Used for judicial districts.
-`municipality`|Used as applicable for various units such as towns, townships, villages that report votes and/or for the district that encompasses it.
-`polling-place`|Used for a polling place.
-`precinct`|Used also for “Ward” or “District” when these terms are used interchangeably with “Precinct”.
-`school`|Used for a school district.
-`special`|Used for a special district.
-`split-precinct`|Used for splits of precincts.
-`state`|Used for a state and/or for the district that encompasses it.
-`state-house`|Used for a state house or assembly district.
-`state-senate`|Used for a state senate district.
-`town`|Used in some New England states as a type of municipality that reports votes and/or for the district that encompasses it.
-`township`|Used in some mid-western states as a type of municipality that reports votes and/or for the district that encompasses it.
-`utility`|Used for a utility district.
-`village`|Used as a type of municipality that reports votes and/or for the district that encompasses it.
-`vote-center`|Used for a vote center.
-`ward`|Used for combinations or groupings of precincts or other units.
-`water`|Used for a water district.
-`other`|Used for other types of reporting units not included in this enumeration.
-
-### <a name="_17_0_2_4_78e0236_1389734128637_37089_3895"></a>*The **ResultsStatus** Enumeration*
-
-![Image of ResultsStatus](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_78e0236_1389798977982_795592_5348.png)
-
-Enumeration for the status of the election results in the [ElectionReport](#_17_0_2_4_78e0236_1389366195564_913164_2300) class.
+Used in [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380)::[Type](#_17_0_2_4_78e0236_1389713376966_77071_2393) to indicate a type of political geography.
 
 Name | Value
 ---- | -----
-`certified`|For results that have been certified by the election authority.
-`correction`|For results that are a correction to an earlier report.
-`pre-election`|For a pre-election data.
-`recount`|For results that are a recount of an earlier election.
-`unofficial-complete`|For results that are unofficial and complete, e.g., the complete election night results.
-`unofficial-partial`|For results that are unofficial and partial, e.g., partial election night results.
+`combined-precinct`|To indicate a combined precinct.
+`polling-place`|To indicate a polling place.
+`precinct`|To indicate a precinct.
+`split-precinct`|To indicate a split-precinct.
+`vote-center`|To indicate a vote-center.
+`other`|Used in conjunction with GpUnit::OtherType when no other value in this enumeration applies.
 
-### <a name="_17_0_2_4_78e0236_1389798224990_11192_4272"></a>*The **VoteVariation** Enumeration*
+### <a name="_18_0_5_43401a7_1483727563257_179426_4343"></a>*The **ReportType** Enumeration*
 
-![Image of VoteVariation](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_78e0236_1389798977982_521336_5354.png)
+![Image of ReportType](CastVoteRecords_UML_Documentation_files/_18_0_5_43401a7_1483727563261_758233_4344.png)
 
-Enumeration for contest decision algorithm or rules in the [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) element.
+Used in [CastVoteRecordReport](#_17_0_2_4_78e0236_1389366195564_913164_2300)::[ReportType](#_18_0_5_43401a7_1483727759336_770912_4370) to indicate the type of the CVR report.
 
 Name | Value
 ---- | -----
-`approval`|When voter can select as many candidates as desired in a contest up to a maximum number.
-`borda`|For the Borda count voting.
-`cumulative`|When voter can allocate more than one vote to a given candidate.
-`majority`|For majority voting.
-`n-of-m`|Includes vote for 1, i.e., 1-of-m.
-`plurality`|For plurality voting.
-`proportional`|For proportional voting.
-`range`|For range voting.
-`rcv`|For ranked choice voting.
-`super-majority`|For super majority voting.
-`other`|Used when the vote variation type is not included in this enumeration.
+`adjudicated`|To indicate that the report contains adjudications.
+`aggregated`|To indicate that the report is an aggregation of device reports.
+`originating-device-export`|To indicate that the report is an export from a device such as a scanner.
+`rcv-round`|To indicate that the report is the result of a ranked choice voting round.
+`other`|Used in conjunction with CastVoteRecordReport::OtherReportType when no other value in this enumeration applies.
+
+### <a name="_18_0_5_43401a7_1483727021192_184103_4291"></a>*The **VoteVariation** Enumeration*
+
+![Image of VoteVariation](CastVoteRecords_UML_Documentation_files/_18_0_5_43401a7_1483727021198_32472_4292.png)
+
+Used in [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400)::[VoteVariation](#_18_0_5_43401a7_1483727343854_246701_4334) to indicate the vote variation (vote method) used to tabulate the contest.
+
+Name | Value
+---- | -----
+`approval`|To indicate approval voting.
+`borda`|To indicate the borda count method.
+`cumulative`|To indicate cumulative voting.
+`majority`|To indicate majority voting.
+`n-of-m`|To indicate the N of M voting method.
+`plurality`|To indicate plurality voting.
+`proportional`|To indicate proportional voting.
+`range`|To indicate range voting.
+`rcv`|To indicate Ranked Choice Voting (RCV).
+`super-majority`|To indicate the super majority voting method.
+`other`|Used in conjunction with Contest::OtherVoteVariation when no other value in this enumeration applies.
 
 ## Classes
 
-### <a name="_18_0_2_6340208_1497553224568_429892_4565"></a>*The **AnnotatedString** Class*
+### <a name="_18_0_5_43401a7_1475856712376_208252_4416"></a>*The **Annotation** Class*
 
-![Image of AnnotatedString](Election_Results_Reporting_UML_documentation_files/_18_0_2_6340208_1497553224573_140163_4566.png)
+![Image of Annotation](CastVoteRecords_UML_Documentation_files/_18_0_5_43401a7_1475856712378_788981_4417.png)
 
-Used as a type for character strings; it adds a 16-character annotation to a character string.
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_18_0_2_6340208_1497553268113_377804_4591"></a>`Annotation`|0..1|`ShortString`|An annotation of up to 16 characters associated with a character string.
-<a name="_18_0_2_6340208_1497553239224_304629_4586"></a>`Content`|1|`String`|The string to be annotated.
-
-
-### <a name="_18_0_2_6340208_1498658436378_308208_4565"></a>*The **AnnotatedUri** Class*
-
-![Image of AnnotatedUri](Election_Results_Reporting_UML_documentation_files/_18_0_2_6340208_1498658436383_253730_4566.png)
-
-Used as a type for character strings that represent Uniform Resource Identifiers (URI); it adds a 16-character annotation to a character string.
+[Annotation](#_18_0_5_43401a7_1475856712376_208252_4416) is used to record annotations made by one or more adjudicators.
+[CVRSnapshot](#_17_0_2_4_78e0236_1389366224561_797289_2360) includes Annotation.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-<a name="_18_0_2_6340208_1498658485557_944083_4589"></a>`Annotation`|0..1|`ShortString`|An annotation of up to 16 characters associated with a character string.
-<a name="_18_0_2_6340208_1498658457673_356828_4586"></a>`Content`|1|`anyURI`|The URI to be annotated.
-
-
-### <a name="_17_0_2_4_78e0236_1397156576157_466818_2461"></a>*The **BallotCounts** Class*
-
-![Image of BallotCounts](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_78e0236_1397156576165_50958_2462.png)
-
-Used for identifying various ballot counts. It inherits the attributes of [Counts](#_17_0_2_4_78e0236_1389367291663_284973_2835).
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_f71035d_1426507405852_561323_2207"></a>`BallotsCast`|0..1|`Integer`|Number of ballots cast.
-<a name="_17_0_2_4_f71035d_1426007069403_906238_2480"></a>`BallotsOutstanding`|0..1|`Integer`|Number of ballots not yet counted.
-<a name="_17_0_2_4_f71035d_1430935326894_744193_2504"></a>`BallotsRejected`|0..1|`Integer`|Number of ballots rejected.
+<a name="_18_0_5_43401a7_1475856818925_753666_4441"></a>`AdjudicatorName`|0..*|`String`|The name(s) of the adjudicator(s).
+<a name="_18_0_5_43401a7_1475856861979_461651_4445"></a>`Message`|0..*|`String`|A message created by the adjudicator(s).
+<a name="_18_0_5_43401a7_1475856758084_638015_4437"></a>`TimeStamp`|0..1|`dateTime`|The date and time of the annotation.
 
 
 ### <a name="_17_0_2_4_78e0236_1389366932057_929676_2783"></a>*The **BallotMeasureContest** Class*
 
-![Image of BallotMeasureContest](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_78e0236_1389798977982_80297_5351.png)
+![Image of BallotMeasureContest](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_80297_5351.png)
 
-For ballot measure (i.e., referenda or a tax measure) and judicial retention contests. It inherits the attributes of [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400).
-
-If the type of ballot measure is not listed in enumeration [BallotMeasureType](#_17_0_2_4_f71035d_1426549604222_56408_2487), use other and include the type (that is not listed in the enumeration) in [OtherType](#_17_0_2_4_f71035d_1426550214099_344315_2520).
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_f71035d_1426519421663_178011_2491"></a>`ConStatement`|0..1|`InternationalizedText`|For a statement on the ballot associated with a “no” vote.
-<a name="_17_0_2_4_f71035d_1426519513798_649615_2501"></a>`EffectOfAbstain`|0..1|`InternationalizedText`|For a statement on the ballot detailing the effect of abstaining from voting on the ballot measure.
-<a name="_17_0_2_4_78e0236_1389733794199_310242_3824"></a>`FullText`|0..1|`InternationalizedText`|For full text on the ballot of the ballot measure.
-<a name="_17_0_2_4_f71035d_1441214816702_348487_2511"></a>`InfoUri`|0..*|`AnnotatedUri`|For associating a URI with the ballot measure contest.
-<a name="_17_0_2_4_f71035d_1426519474233_980390_2497"></a>`PassageThreshold`|0..1|`InternationalizedText`|For a statement on the ballot of the number or percentage of votes needed to approve or pass the ballot measure.
-<a name="_17_0_2_4_f71035d_1426519388364_485730_2487"></a>`ProStatement`|0..1|`InternationalizedText`|For a statement on the ballot associated with a “yes” vote.
-<a name="_17_0_2_4_78e0236_1389733722505_364946_3820"></a>`SummaryText`|0..1|`InternationalizedText`|For a summary on the ballot of the ballot measure.
-<a name="_17_0_2_4_f71035d_1426550181692_978243_2516"></a>`Type`|0..1|`BallotMeasureType`|For indicating the type of ballot measure.
-<a name="_17_0_2_4_f71035d_1426550214099_344315_2520"></a>`OtherType`|0..1|`String`|Used when BallotMeasureType is other.
+[BallotMeasureContest](#_17_0_2_4_78e0236_1389366932057_929676_2783) is a subclass of [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) and is used to identify the type of contest as involving one or more ballot measures. It inherits attributes from [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400).
 
 
 ### <a name="_17_0_2_4_78e0236_1389372163799_981952_2926"></a>*The **BallotMeasureSelection** Class*
 
-![Image of BallotMeasureSelection](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_78e0236_1389798977982_930954_5339.png)
+![Image of BallotMeasureSelection](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_930954_5339.png)
 
-For a contest selection in a ballot measure contest. Because judicial or other retention contests are often treated like ballot measure contests, this element can be used also for retention contests. It inherits the attributes of [ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906).
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_19_0_2_43701b0_1576350241608_897910_4990"></a>`ExternalIdentifier`|0..*|`ExternalIdentifier`|For associating an ID with the ballot measure selection.
-<a name="_17_0_2_4_78e0236_1389710917151_765889_2176"></a>`Selection`|1|`InternationalizedText`|Contains the text used to indicate a vote for or against the ballot measure, e.g., “yes”, “no”.
-
-
-### <a name="_17_0_2_4_78e0236_1389366224561_797289_2360"></a>*The **BallotStyle** Class*
-
-![Image of BallotStyle](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_78e0236_1389799207465_976765_6435.png)
-
-For defining a ballot style composed of ordered content (i.e. Headers or Contests) and their contest selections, and associating the ballot style with a political party, a reference to an image of the ballot, and a reference to a precinct or other geopolitical unit that the ballot is unique to. [Election](#_17_0_2_4_f71035d_1426101822599_430942_2209) includes BallotStyle.
-BallotStyle references [OrderedContent](#_18_5_3_43701b0_1527684342715_643544_6146) to include content that appears on that ballot style. To preserve any rotation associated with the ballot, it is expected that the generating application will list the occurrences of [OrderedContest](#_17_0_3_43401a7_1394476416139_808596_3142) in the order as on the ballot for the associated geopolitical unit.
-BallotStyle references one or more [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) instances defined for the associated precincts or split precincts. If the ballot style is associated with multiple precincts (or other geographies), multiple references to the precinct [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) instances can be included.
+[BallotMeasureSelection](#_17_0_2_4_78e0236_1389372163799_981952_2926) is a subclass of [ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906) and is used for ballot measures. The voter's selected response to the contest selection (e.g., "yes" or "no") may be in English or other languages as utilized on the voter's ballot.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_f71035d_1441377633582_32184_2220"></a>`ExternalIdentifier`|0..*|`ExternalIdentifier`|For associating an ID with the ballot style.
-<a name="_17_0_2_4_f71035d_1436214223050_585224_2515"></a>`{GpUnit}`|1..*|`GpUnit`|Unique identifier for one or more GpUnit instances. For associating specific geopolitical units with the ballot style.
-<a name="_17_0_2_4_f71035d_1428529376950_608184_2486"></a>`ImageUri`|0..*|`AnnotatedUri`|URI for a ballot image.
-<a name="_17_0_2_4_f71035d_1426189065873_416235_2489"></a>`{OrderedContent}`|0..*|`OrderedContent`|For associating a ballot style with ballot content, such as contests or headers.
-<a name="_18_0_2_6340208_1427483833143_782361_4565"></a>`{Party}`|0..*|`Party`|Unique identifier for one or more Party instances. For associating one or more parties with the ballot style.
+<a name="_17_0_2_4_78e0236_1389710917151_765889_2176"></a>`Selection`|1|`String`|The voter's selection, i.e., 'yes' or 'no', in English or in other languages as utilized on the voter's ballot.
 
 
 ### <a name="_17_0_2_4_78e0236_1389366272694_544359_2440"></a>*The **Candidate** Class*
 
-![Image of Candidate](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_78e0236_1389798977982_557229_5346.png)
+![Image of Candidate](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_557229_5346.png)
 
-For defining information about a candidate in a contest. [CandidateSelection](#_17_0_2_4_d420315_1392145640524_831493_2562) references Candidate instances to associate one or more candidates with a contest selection. [Election](#_17_0_2_4_f71035d_1426101822599_430942_2209) includes Candidate.
-
-Candidate uses the [Party](#_17_0_2_4_78e0236_1389366597377_433664_2698) association to reference the candidate’s political party. If the candidate is endorsed by other parties for a particular contest, the endorsing parties are referenced using the [CandidateSelection](#_17_0_2_4_d420315_1392145640524_831493_2562) attribute.
-
-[ExternalIdentifier](#_17_0_2_4_f71035d_1430405890311_465205_2454) can be used to associate an ID with the candidate. If the type is not listed in enumeration [IdentifierType](#_17_0_2_4_f71035d_1425061188508_163854_2613), use other and include the type (that is not listed in the enumeration) in [OtherType](#_17_0_2_4_f71035d_1430405732252_109247_2429).
+[Candidate](#_17_0_2_4_78e0236_1389366272694_544359_2440) identifies a candidate in a contest on the voter's ballot. [Election](#_17_0_2_4_f71035d_1426101822599_430942_2209) includes instances of [Candidate](#_17_0_2_4_78e0236_1389366272694_544359_2440) for each candidate in a contest; typically, only those candidates who received votes would be included.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_78e0236_1389710816659_20227_2170"></a>`BallotName`|1|`InternationalizedText`|For the candidate’s name as listed on the ballot.
-<a name="_19_0_2_43701b0_1576187672054_587470_4958"></a>`CampaignSlogan`|0..1|`InternationalizedText`|The slogan or motto used by the candidate in their campaign.
-<a name="_18_0_2_6340208_1498659302196_151943_4608"></a>`{ContactInformation}`|0..1|`ContactInformation`|For associating contact information for the candidate.
-<a name="_17_0_2_4_f71035d_1430405890311_465205_2454"></a>`ExternalIdentifier`|0..*|`ExternalIdentifier`|For associating codes with the candidate.
-<a name="_17_0_2_4_f71035d_1400615133498_375109_2704"></a>`FileDate`|0..1|`date`|Date when the candidate filed for the contest.
-<a name="_17_0_2_4_f71035d_1401280462978_833890_2462"></a>`IsIncumbent`|0..1|`Boolean`|Boolean to indicate whether the candidate is the incumbent for the office associated with the contest. Assumed to be “no” if not present.
-<a name="_17_0_2_4_f71035d_1403276277476_329066_2190"></a>`IsTopTicket`|0..1|`Boolean`|Boolean to indicate whether the candidate is the top of a ticket that includes multiple candidates. Assumed to be “no” if not present.
-<a name="_17_0_2_4_78e0236_1389366597377_433664_2698"></a>`{Party}`|0..1|`Party`|For associating a party with the candidate.
-<a name="_17_0_5_1_43401a7_1400624143347_418542_3604"></a>`{Person}`|0..1|`Person`|For associating more detailed information about the candidate.
-<a name="_17_0_2_4_78e0236_1389797778404_982263_4132"></a>`PostElectionStatus`|0..1|`CandidatePostElectionStatus`|Final status of the candidate, e.g., winner, withdrawn, etc.
-<a name="_17_0_2_4_f71035d_1426535359938_597654_2790"></a>`PreElectionStatus`|0..1|`CandidatePreElectionStatus`|Registration status of the candidate, e.g., filed, qualified, etc.
+<a name="_17_0_2_4_f71035d_1430405890311_465205_2454"></a>`Code`|0..*|`Code`|A code or identifier associated with the candidate.
+<a name="_17_0_2_4_78e0236_1389710816659_20227_2170"></a>`Name`|0..1|`String`|Candidate's name as listed on the ballot.
+<a name="_17_0_2_4_78e0236_1389366597377_433664_2698"></a>`{Party}`|0..1|`Party`|The party associated with the candidate.
 
 
 ### <a name="_17_0_2_4_78e0236_1389366970084_183781_2806"></a>*The **CandidateContest** Class*
 
-![Image of CandidateContest](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_78e0236_1389798977982_347543_5358.png)
+![Image of CandidateContest](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_347543_5358.png)
 
-For a contest that involves selecting one or more candidates. It inherits the attributes of [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400).
-
-This class optionally references [Office](#_17_0_5_1_43401a7_1400623830572_164081_3518) and [Party](#_17_0_2_4_78e0236_1389366278128_412819_2460). If the candidate contest is associated with a ticket (of candidates) and each candidate in the ticket is associated with a separate office, the [association to Office](#_17_0_5_1_43401a7_1400624734486_732685_3699) can reference each of the separate offices. For example, if the contest is for the state governor ticket but Governor and Lieutenant (Lt.) Governor are both separate offices, the association references first to the [Office](#_17_0_5_1_43401a7_1400623830572_164081_3518) instance defined for the Governor’s office and then to the Lt. Governor’s office. In this case, it is expected that the generating application will list the multiple references according to a jurisdiction-defined ordering scheme, e.g., Governor first and Lt. Governor second.
-
-Note that when using the [CandidateSelection](#_17_0_2_4_d420315_1392145640524_831493_2562) class to associate the candidates with a contest selection for the contest, the order of the candidates should match the order of offices. Again, using the example of the state governor ticket, if the offices are listed with Governor first and Lt. Governor second, then the order of the candidates in the [ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906) instance should be identical, with the Governor candidate first and the Lt. Governor candidate second.
+[CandidateContest](#_17_0_2_4_78e0236_1389366970084_183781_2806) is a subclass of [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) and is used to identify the type of contest as involving one or more candidates. It inherits attributes from [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400).
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_78e0236_1389797739578_12603_4129"></a>`NumberElected`|0..1|`Integer`|Number of candidates that are elected in the contest (“n” of n-of-m).
-<a name="_18_0_2_6340208_1498659576131_900303_4636"></a>`NumberRunoff`|0..1|`Integer`|The number of candidates in a runoff contest.
-<a name="_17_0_5_1_43401a7_1400624734486_732685_3699"></a>`{Office}`|0..*|`Office`|For associating office descriptions.
-<a name="_17_0_2_4_78e0236_1389735000217_728769_4016"></a>`{PrimaryParty}`|0..*|`Party`|For associating parties with the contest.
-<a name="_17_0_2_4_78e0236_1389797728177_241732_4126"></a>`VotesAllowed`|1|`Integer`|Maximum number of votes per voter in this contest.
+<a name="_18_0_2_6340208_1472160807984_726708_4721"></a>`NumberElected`|0..1|`Integer`|The number of candidates to be elected in the contest.
+<a name="_17_0_2_4_78e0236_1389735000217_728769_4016"></a>`{PrimaryParty}`|0..1|`Party`|The party associated with the contest, if a partisan primary.
+<a name="_18_0_2_6340208_1472160823529_29923_4725"></a>`VotesAllowed`|0..1|`Integer`|The number of votes allowed in the contest, e.g., 3 for a 'choose 3 of 5 candidates' contest.
 
 
 ### <a name="_17_0_2_4_d420315_1392145640524_831493_2562"></a>*The **CandidateSelection** Class*
 
-![Image of CandidateSelection](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_d420315_1392145640527_433768_2563.png)
+![Image of CandidateSelection](CastVoteRecords_UML_Documentation_files/_17_0_2_4_d420315_1392145640527_433768_2563.png)
 
-For the contest selections in a candidate contest, including for write-ins. It inherits the attributes of [ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906). References to multiple [Candidate](#_17_0_2_4_78e0236_1389366272694_544359_2440) instances can be included if necessary, e.g., when the contest selection would be for a ticket of candidates (unless the ticket itself is defined as a candidate).
-
-[EndorsementParty](#_17_0_2_4_d420315_1391370669921_519404_2559) is used to reference any associated endorsement parties other than the specific party of the candidate ([Candidate](#_17_0_2_4_78e0236_1389366272694_544359_2440) references [Party](#_17_0_2_4_78e0236_1389366278128_412819_2460) for that purpose). For example, if a candidate of one party is also endorsed by a second party, use [EndorsementParty](#_17_0_2_4_d420315_1391370669921_519404_2559) to reference the second party. A second example would be for ballot fusion as used in some states, where the same candidate is listed multiple times in the same contest, but with different endorsement parties.
-
-When multiple candidates are referenced for a ticket and the ordering of the candidates is important to preserve, it is expected that the generating application will list the references to [Candidate](#_17_0_2_4_d420315_1392145686219_781480_2594) instances according to the ordering scheme in place. For example, if the contest is for a ticket in which each candidate is associated with a different office, then the order of the candidates should match the same ordering of the <Office> element references within <OfficeIds> in the <Contest xsi:type="CandidateContest" ... /> element.
+[CandidateSelection](#_17_0_2_4_d420315_1392145640524_831493_2562) is a subclass of [ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906) and is used for candidates, including for write-in candidates.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_d420315_1392145686219_781480_2594"></a>`{Candidate}`|0..*|`Candidate`|For associating a candidate with the candidate selection on the ballot and for cases where the contest selection is for multiple candidates, e.g., a ticket.
-<a name="_17_0_2_4_78e0236_1389797859448_230579_4174"></a>`IsWriteIn`|0..1|`Boolean`|Indicates whether the candidate is a write-in, e.g., true or false. Assumed to be false if not present.
-<a name="_17_0_2_4_d420315_1391370669921_519404_2559"></a>`{EndorsementParty}`|0..*|`Party`|For associating one or more endorsing parties with the candidate selection.
+<a name="_17_0_2_4_d420315_1392145686219_781480_2594"></a>`{Candidate}`|0..*|`Candidate`|The candidate associated with the contest selection. For contests involving a ticket of multiple candidates, an ordered list of candidates as they appeared on the ballot would be created.
+<a name="_18_0_2_6340208_1477060857505_890997_4554"></a>`IsWriteIn`|0..1|`Boolean`|A flag to indicate if the candidate selection is associated with a write-in.
 
 
-### <a name="_18_0_2_6340208_1425647247631_162984_4712"></a>*The **Coalition** Class*
+### <a name="_17_0_2_4_78e0236_1389366195564_913164_2300"></a>*The **CastVoteRecordReport** Class*
 
-![Image of Coalition](Election_Results_Reporting_UML_documentation_files/_18_0_2_6340208_1425647247641_920572_4713.png)
+![Image of CastVoteRecordReport](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_73815_5340.png)
 
-For defining a coalition, i.e., a collection of parties organized for the purpose of endorsing a candidate in a contest. It inherits the attributes and elements of [Party](#_17_0_2_4_78e0236_1389366278128_412819_2460).
+The root class/element; attributes pertain to the status and format of the report and when created.
 
-Coalition instances themselves are composed of multiple [Party](#_17_0_2_4_78e0236_1389366278128_412819_2460) references along with a reference to an associated [Contests](#_17_0_2_4_78e0236_1389366251994_876831_2400).
+[CastVoteRecordReport](#_17_0_2_4_78e0236_1389366195564_913164_2300) includes multiple instances of [CVR](#_18_0_2_6340208_1532543460307_914551_4600), one per [CVR](#_18_0_2_6340208_1532543460307_914551_4600) or sheet of a multi-page cast vote record. [CastVoteRecordReport](#_17_0_2_4_78e0236_1389366195564_913164_2300) also includes multiple instances of [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400), typically only for those contests that were voted so as to reduce file size. The [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) instances are later referenced by other classes to link them to contest options that were voted and the indication(s)/mark(s) made.
 
-If there are no associated [Contests](#_17_0_2_4_78e0236_1389366251994_876831_2400), a general default is that the coalition endorses the associated parties.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-<a name="_18_0_2_6340208_1427484451489_775363_4609"></a>`{Contest}`|0..*|`Contest`|For associating contests with the coalition.
-<a name="_18_0_2_6340208_1425647321121_89855_4744"></a>`{Party}`|0..*|`Party`|For associating parties with the coalition.
+<a name="_18_0_5_43401a7_1469813329803_508626_4301"></a>`{CVR}`|0..*|`CVR`|Used to include instances of [CVR](#_18_0_2_6340208_1532543460307_914551_4600) classes, one per cast vote record in the report.
+<a name="_18_0_2_6340208_1488998728442_776822_4559"></a>`{Election}`|1..*|`Election`|Used to include the election(s) associated with the CVRs.
+<a name="_17_0_2_4_78e0236_1389733247429_431211_3338"></a>`GeneratedDate`|1|`dateTime`|Identifies the time that the election report was created.
+<a name="_18_0_2_6340208_1488999116122_796953_4633"></a>`{GpUnit}`|1..*|`GpUnit`|Used to include the political geography, i.e., location, for where the cast vote record report was created and for linking cast vote records to their corresponding precinct or split (or otherwise smallest unit).
+<a name="_17_0_2_4_f71035d_1400594737789_912202_2453"></a>`Notes`|0..1|`String`|Notes that can be added as appropriate, presumably by an adjudicator.
+<a name="_18_0_2_6340208_1532543674900_374654_4626"></a>`{Party}`|0..*|`Party`|The party associated with the ballot sheet for a partisan primary.
+<a name="_18_0_5_43401a7_1484155960667_232191_4295"></a>`{ReportGeneratingDevice}`|1..*|`ReportingDevice`|Identifies the device used to create the CVR report.
+<a name="_18_0_2_6340208_1538322120049_840860_4675"></a>`{ReportingDevice}`|1..*|`ReportingDevice`|The device creating the report. The reporting device need not necessarily be the creating device, i.e., for an aggregated report, the reporting device could be an EMS used to aggregate and tabulate cast vote records.
+<a name="_18_0_5_43401a7_1483727759336_770912_4370"></a>`ReportType`|0..*|`ReportType`|The type of report, using the [ReportType](#_18_0_5_43401a7_1483727563257_179426_4343) enumeration.
+<a name="_18_0_5_43401a7_1483727799922_278659_4374"></a>`OtherReportType`|0..1|`String`|If [ReportType](#_18_0_5_43401a7_1483727759336_770912_4370) is 'other', this contains the report type.
+<a name="_18_0_2_6340208_1488984515169_690457_4657"></a>`Version`|1|`CastVoteRecordVersion`|The version of the CVR specification being used (1.0).
 
 
-### <a name="_17_0_5_1_43401a7_1400624327407_326048_3637"></a>*The **ContactInformation** Class*
+### <a name="_17_0_2_4_f71035d_1430405712653_451634_2410"></a>*The **Code** Class*
 
-![Image of ContactInformation](Election_Results_Reporting_UML_documentation_files/_17_0_5_1_43401a7_1400624327409_934516_3638.png)
+![Image of Code](CastVoteRecords_UML_Documentation_files/_17_0_2_4_f71035d_1430405712661_66241_2411.png)
 
-For defining contact information about objects such as persons, boards of authorities, organizations, etc. [Election](#_17_0_2_4_f71035d_1426101822599_430942_2209), [ElectionAdministration](#_18_0_2_6340208_1441311877439_710008_4433), [Person](#_17_0_5_1_43401a7_1400623980732_100904_3567), [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380), and [Office](#_17_0_5_1_43401a7_1400623830572_164081_3518) include ContactInformation.
-
-To include an address for the contact, use multiple occurrences of [AddressLine](#_18_0_2_6340208_1425645912998_115448_4529). It is expected that the generating application will list the name of the person/organization in the first occurrence of [AddressLine](#_18_0_2_6340208_1425645912998_115448_4529), with subsequent ordered occurrences for street address, city, state, zip code, etc. [Directions](#_17_0_2_4_f71035d_1443105112875_46223_2290) can be used to supply any additional address-related information that may appear in multiple languages.
-
-ContactInformation includes [LatLng](#_17_0_2_4_f71035d_1443104838926_393729_2222) so as to associate latitude/longitude with the contact address.
-
-[Email](#_17_0_5_1_43401a7_1400668036651_743620_3650), [Fax](#_17_0_5_1_43401a7_1400668021448_721992_3646), and [Phone](#_17_0_5_1_43401a7_1400667951215_637516_3638) are of type [AnnotatedString](#_18_0_2_6340208_1497553224568_429892_4565), which permits up to a 16-character annotation to be associated with the data.
+[Code](#_17_0_2_4_f71035d_1430405712653_451634_2410) is used in [Election](#_17_0_2_4_f71035d_1426101822599_430942_2209), [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380), [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400), [Candidate](#_17_0_2_4_78e0236_1389366272694_544359_2440), and [Party](#_17_0_2_4_78e0236_1389366278128_412819_2460) to identify an associated code as well as the type of code.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-<a name="_18_0_2_6340208_1425645912998_115448_4529"></a>`AddressLine`|0..*|`RichText`|For associating an address with the contact.
-<a name="_17_0_2_4_f71035d_1443105112875_46223_2290"></a>`Directions`|0..1|`InternationalizedText`|Directional information in addition to address information.
-<a name="_17_0_5_1_43401a7_1400668036651_743620_3650"></a>`Email`|0..*|`AnnotatedString`|Email address associated with the contact.
-<a name="_17_0_5_1_43401a7_1400668021448_721992_3646"></a>`Fax`|0..*|`AnnotatedString`|Fax number associated with the contact.
-<a name="_17_0_2_4_f71035d_1441215163702_951734_2515"></a>`Label`|0..1|`String`|For use as needed and compatibility with the VIP schema.
-<a name="_17_0_2_4_f71035d_1443105009955_640511_2261"></a>`{LatLng}`|0..1|`LatLng`|For latitude and longitude information associated with the contact.
-<a name="_18_0_2_6340208_1429287939709_269212_4416"></a>`Name`|0..1|`RichText`|Name associated with the contact.
-<a name="_17_0_5_1_43401a7_1400667951215_637516_3638"></a>`Phone`|0..*|`AnnotatedString`|Phone number associated with the contact.
-<a name="_17_0_2_4_f71035d_1429176643252_845913_2230"></a>`{Schedule}`|0..*|`Schedule`|For associating a schedule with the contact.
-<a name="_17_0_5_1_43401a7_1400668251889_705688_3666"></a>`Uri`|0..*|`AnnotatedUri`|URI associated with the contact.
+<a name="_17_0_2_4_f71035d_1441215385623_864674_2521"></a>`Label`|0..1|`String`|A label associated with the code, used as needed.
+<a name="_17_0_2_4_f71035d_1430405763078_743585_2433"></a>`Type`|1|`IdentifierType`|Used to indicate the type of code, from the [IdentifierType](#_17_0_2_4_f71035d_1425061188508_163854_2613) enumeration.
+<a name="_17_0_2_4_f71035d_1430405732252_109247_2429"></a>`OtherType`|0..1|`String`|If [Type](#_17_0_2_4_f71035d_1430405763078_743585_2433) is 'other', the type of code.
+<a name="_17_0_2_4_f71035d_1430405785820_123111_2437"></a>`Value`|1|`String`|The value of the code, i.e., the identifier.
 
 
 ### <a name="_17_0_2_4_78e0236_1389366251994_876831_2400"></a>*The **Contest** Class*
 
-![Image of Contest](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_78e0236_1389798977982_293750_5341.png)
+![Image of Contest](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_293750_5341.png)
 
-For defining a contest and linking the contest to the associated candidates, ballot measures, parties, or retention contests. [Election](#_17_0_2_4_f71035d_1426101822599_430942_2209) includes Contest.
+[Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) represents a contest on the ballot. [CastVoteRecordReport](#_17_0_2_4_78e0236_1389366195564_913164_2300) initially includes an instance of [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) for each contest on the ballot.  Other classes can subsequently reference the instances as necessary to link together items on the cast vote record, such as a contest, its voted contest selection(s), and the mark(s) associated with the selection(s).
 
-Contest is an abstract class with four subclasses that get used according to the type of contest:
+[Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) has three subclasses, each used for a specific type of contest:   These subclasses inherit Contest's attributes.
 
- *  [BallotMeasureContest](#_17_0_2_4_78e0236_1389366932057_929676_2783), used for a contest involving a ballot measure
- *  [CandidateContest](#_17_0_2_4_78e0236_1389366970084_183781_2806), used for a contest involving one or more candidates for an office
- *  [PartyContest](#_17_0_2_4_d420315_1393514218965_55008_3144), used for a contest for a straight party selection on the ballot
- *  [RetentionContest](#_18_0_2_6340208_1425646217522_163181_4554), used for a judicial or other type of retention contest 
-
-Contest includes [ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906) to link the selections on the ballot to the contest, e.g., to link one or more candidates to a candidate contest. Like Contest, [ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906) is also an abstract class and has subclasses that correspond to those of Contest, as follows: 
-
- *  [BallotMeasureContest](#_17_0_2_4_78e0236_1389366932057_929676_2783) includes [BallotMeasureSelection](#_17_0_2_4_78e0236_1389372163799_981952_2926)
- *  [CandidateContest](#_17_0_2_4_78e0236_1389366970084_183781_2806) includes [CandidateSelection](#_17_0_2_4_d420315_1392145640524_831493_2562)
- *  [PartyContest](#_17_0_2_4_d420315_1393514218965_55008_3144) includes [PartySelection](#_17_0_2_4_f71035d_1426519980658_594892_2511)
- *  [RetentionContest](#_18_0_2_6340208_1425646217522_163181_4554) includes [BallotMeasureSelection](#_17_0_2_4_78e0236_1389372163799_981952_2926)
-
-[Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) includes a required [ElectionDistrict](#_17_0_2_4_78e0236_1389366667508_703141_2753) reference to a [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) defined for the geographical scope of the contest. For example, in a state senate contest, [ElectionDistrict](#_17_0_2_4_78e0236_1389366667508_703141_2753) would reference a [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) of type [ReportingUnit](#_17_0_2_4_f71035d_1400606476166_735297_2593) element defined for the district associated with the contest. [Office](#_17_0_5_1_43401a7_1400623830572_164081_3518) also includes an optional reference that serves the same purpose. Note that for contests that are state-wide or county-wide and so forth, the same [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) defined for the state or county, etc., can be re-used.
-[Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) includes [OtherCounts](#_18_0_2_6340208_1508176198256_527421_4561) for providing a summary of miscellaneous counts associated with the contest, including total number of ballots cast containing the contest, total number of overvotes, undervotes, or write-ins. The summary counts can be associated with the contest as a whole, or with precincts or other lower-level reporting units by using multiple occurrences of [OtherCounts](#_18_0_2_6340208_1508176198256_527421_4561).
-[SequenceOrder](#_17_0_2_4_f71035d_1426083547931_912709_2690) is used for results display ordering, i.e., to display contests according to a particular ordering. For example, “100” may indicate a U.S. Senatorial contest, “200” may indicate a U.S. Congressional contest, etc. [SequenceOrder](#_17_0_2_4_f71035d_1426083547931_912709_2690) is not appropriate to use as the contest order on the ballot; contest order on each ballot can be preserved, however, using the [BallotStyle](#_17_0_2_4_78e0236_1389366224561_797289_2360) element, which associates ballot styles with their corresponding precincts or other geopolitical units.
-When including [ExternalIdentifiers](#_17_0_2_4_f71035d_1430405712653_451634_2410), if the type is not listed in enumeration [IdentifierType](#_17_0_2_4_f71035d_1425061188508_163854_2613), use other and include the type (that is not listed in the enumeration) in [OtherType](#_17_0_2_4_f71035d_1430405732252_109247_2429).
-
+ *  [PartyContest](#_17_0_2_4_d420315_1393514218965_55008_3144) \- used for straight party contests,
+ *  [BallotMeasureContest](#_17_0_2_4_78e0236_1389366932057_929676_2783) \- used for contests, and
+ *  [CandidateContest](#_17_0_2_4_78e0236_1389366970084_183781_2806) \- used for candidate contests.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-<a name="_17_0_5_1_43401a7_1395831571231_804795_3632"></a>`Abbreviation`|0..1|`String`|Abbreviation for the contest.
-<a name="_17_0_2_4_f71035d_1426519324658_821208_2483"></a>`BallotSubTitle`|0..1|`InternationalizedText`|Subtitle of the contest as it appears on the ballot.
-<a name="_17_0_2_4_f71035d_1426519300284_211849_2479"></a>`BallotTitle`|0..1|`InternationalizedText`|Title of the contest as it appears on the ballot.
-<a name="_17_0_2_4_78e0236_1389366541302_23458_2637"></a>`{ContestSelection}`|0..*|`ContestSelection`|For associating a contest selection for the contest, i.e., a candidate, a ballot measure.
-<a name="_17_0_2_4_78e0236_1397059165386_471037_2443"></a>`{OtherCounts}`|0..*|`OtherCounts`|For associating counts such as overvote and undervotes with the contest.
-<a name="_17_0_2_4_f71035d_1430428675044_368644_2247"></a>`CountStatus`|0..*|`CountStatus`|For providing various counting status associated with the contest.
-<a name="_17_0_2_4_78e0236_1389366667508_703141_2753"></a>`{ElectionDistrict}`|1|`ReportingUnit`|Link to a [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) instance. For associating the contest with a reporting unit that represents the geographical scope of the contest, e.g., a district, etc.
-<a name="_17_0_2_4_f71035d_1430412090176_814999_2249"></a>`ExternalIdentifier`|0..*|`ExternalIdentifier`|For associating an ID with the contest.
-<a name="_17_0_2_4_f71035d_1426006769365_710376_2474"></a>`HasRotation`|0..1|`Boolean`|Boolean to indicate whether the selections in the contest are rotated. Assumed to be “no” if not present.
-<a name="_17_0_2_4_78e0236_1389712460582_306281_2220"></a>`Name`|1|`RichText`|Name of the contest, not necessarily as it appears on the ballot.
-<a name="_17_0_2_4_f71035d_1426083547931_912709_2690"></a>`SequenceOrder`|0..1|`Integer`|Orderering for listing the contest for purposes of results display. If not present, no order is assumed.
-<a name="_17_0_2_4_d420315_1393508523463_695325_3041"></a>`SubUnitsReported`|0..1|`Integer`|Number of subunits, e.g., precincts, that have completed reporting votes for this contest.
-<a name="_17_0_2_4_d420315_1393508532825_910334_3045"></a>`TotalSubUnits`|0..1|`Integer`|Total number of subunits, e.g., precincts that have this contest on the ballot.
-<a name="_17_0_2_4_78e0236_1389798198604_276106_4268"></a>`VoteVariation`|0..1|`VoteVariation`|Vote variation associated with the contest, e.g., n-of-m.
-<a name="_17_0_2_4_f71035d_1426537329540_929122_2797"></a>`OtherVoteVariation`|0..1|`String`|For use when [VoteVariation](#_17_0_2_4_78e0236_1389798198604_276106_4268) is other.
+<a name="_17_0_5_1_43401a7_1395831571231_804795_3632"></a>`Abbreviation`|0..1|`String`|An abbreviation associated with the contest.
+<a name="_17_0_2_4_f71035d_1430412090176_814999_2249"></a>`Code`|0..*|`Code`|A code or identifier used for this contest.
+<a name="_17_0_2_4_78e0236_1389366541302_23458_2637"></a>`{ContestSelection}`|1..*|`ContestSelection`|Identifies the contest selections in the contest.
+<a name="_17_0_2_4_78e0236_1389712460582_306281_2220"></a>`Name`|0..1|`String`|Title or name of the contest, e.g., "Governor" or "Question on Legalization of Gambling".
+<a name="_18_0_5_43401a7_1483727343854_246701_4334"></a>`VoteVariation`|0..1|`VoteVariation`|The vote variation for this contest, from the [VoteVariation](#_18_0_5_43401a7_1483727021192_184103_4291) enumeration.
+<a name="_18_0_5_43401a7_1483727376096_587155_4338"></a>`OtherVoteVariation`|0..1|`String`|If [VoteVariation](#_18_0_5_43401a7_1483727343854_246701_4334) is 'other', the vote variation for this contest.
 
 
 ### <a name="_17_0_2_4_78e0236_1389372124445_11077_2906"></a>*The **ContestSelection** Class*
 
-![Image of ContestSelection](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_78e0236_1389798977982_125024_5356.png)
+![Image of ContestSelection](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_125024_5356.png)
 
-Used for the contest selections in a contest (e.g., for candidates, for ballot measures) and to generally link them to vote counts. [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) includes [ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906).
+[ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906) represents a contest selection in a contest.  [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) can include an instance of [ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906) for each contest selection in the contest or, as desired, all contest selections.  
 
-[ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906) is an abstract class with three subclasses that get used according to the type of contest:
+ContestSelection has three subclasses, each used for a specific type of contest selection:
 
- *  [BallotMeasureSelection](#_17_0_2_4_78e0236_1389372163799_981952_2926), used if the contest type is for a ballot measure, including for retentions
- *  [CandidateSelection](#_17_0_2_4_d420315_1392145640524_831493_2562), used if the contest type is for one or more candidates, to link the contest selection to the candidate instances and endorsement parties; and
- *  [PartySelection](#_17_0_2_4_f71035d_1426519980658_594892_2511), used if the contest type is for a party, e.g., for a straight party contest. [ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906) includes [VoteCounts](#_17_0_2_4_78e0236_1389372026000_187007_2862) for associating vote counts with the contest selection.
- *  [SequenceOrder](#_17_0_2_4_f71035d_1426296042287_22607_2200) is included to specify an ordering for the contest selections for purposes of display only. The original ballot ordering can be preserved, however, by using the [BallotStyle](#_17_0_2_4_78e0236_1389366224561_797289_2360) class.
+ *  [BallotMeasureSelection](#_17_0_2_4_78e0236_1389372163799_981952_2926) \- used for ballot measures,
+ *  [CandidateSelection](#_17_0_2_4_d420315_1392145640524_831493_2562) \- used for candidate selections, and
+ *  [PartySelection](#_17_0_2_4_f71035d_1426519980658_594892_2511) \- used for straight party selections.
+
+Instances of [CVRContestSelection](#_18_0_5_43401a7_1474452890357_299022_4292) subsequently link to the contest selections as needed so as to tie together the contest, the contest selection, and the mark(s) made for the contest selection.
+
+[ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906) contains one attribute, [Code](#_18_5_3_43701b0_1534269642876_463463_5873), that can be used to identify the contest selection and thereby eliminate the need to identify it using the subclasses.
+
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_f71035d_1426296042287_22607_2200"></a>`SequenceOrder`|0..1|`Integer`|Order in which the candidate is listed on the ballot for purposes of results display. If not present, no order is assumed.
-<a name="_17_0_2_4_78e0236_1389372026000_187007_2862"></a>`{VoteCounts}`|0..*|`VoteCounts`|For associating the contest selection’s vote counts.
+<a name="_18_5_3_43701b0_1534269642876_463463_5873"></a>`Code`|0..*|`Code`|Code used to identify the contest selection.
 
 
-### <a name="_17_0_2_4_78e0236_1389367291663_284973_2835"></a>*The **Counts** Class*
+### <a name="_18_0_2_6340208_1532543460307_914551_4600"></a>*The **CVR** Class*
 
-![Image of Counts](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_78e0236_1389798977982_267901_5355.png)
+![Image of CVR](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1532543460312_263838_4601.png)
 
-Used for reporting on contest vote counts. Contains attributes to categorize the counts according to voting classification (e.g., election day, early voting, etc.) and type of device on which the votes were cast (e.g., DRE, accessible device, etc.).
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_f71035d_1430428463182_799732_2239"></a>`DeviceClass`|0..1|`DeviceClass`|For filtering counts by device type.
-<a name="_17_0_2_4_78e0236_1389372033343_84394_2882"></a>`{GpUnit}`|1|`GpUnit`|For filtering counts by political geography or device or device type.
-<a name="_17_0_2_4_f71035d_1443037119396_390572_2220"></a>`IsSuppressedForPrivacy`|0..1|`Boolean`|Boolean to indicate if votes are suppressed for voter privacy, e.g., true or false. Assumed to be false if not present.
-<a name="_18_0_5_43401a7_1508329922419_951254_4303"></a>`Round`|0..1|`Integer`|An identification of the RCV round being reported.
-<a name="_17_0_2_4_f71035d_1401285906925_720136_2261"></a>`Type`|1|`CountItemType`|The type of count being used as a filter on the vote counts, e.g., election day, early voting, etc.
-<a name="_17_0_2_4_f71035d_1426077947627_227957_2665"></a>`OtherType`|0..1|`String`|Used when Type is other.
-
-
-### <a name="_17_0_2_4_f71035d_1430412663878_61362_2269"></a>*The **CountStatus** Class*
-
-![Image of CountStatus](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_f71035d_1430412663882_602578_2270.png)
-
-For reporting on the counting status for various items such as ballot types or write-ins, e.g., whether for a certain type of ballot, the counts are in progress, not yet started, complete, etc. [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400), [Election](#_17_0_2_4_f71035d_1426101822599_430942_2209), and [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) include CountStatus.
-
-If the type of count item is not listed in enumeration [CountItemType](#_17_0_2_4_78e0236_1389798097477_664878_4228), use other and include the type (that is not listed in the enumeration) in [OtherType](#_17_0_2_4_f71035d_1426077858771_890955_2661).
+[CVR](#_18_0_2_6340208_1532543460307_914551_4600) constitutes a cast vote record, generated by a ballot scanning device, containing indications of contests and contest options chosen by the voter, as well as other information for auditing and annotation purposes. Each sheet of a multi-page paper ballot is represented by an individual [CVR](#_18_0_2_6340208_1532543460307_914551_4600), e.g., if all sheets of a 5-sheet ballot are scanned, 5 CVRs will be created. [CastVoteRecordReport](#_17_0_2_4_78e0236_1389366195564_913164_2300) includes multiple instances of [CVR](#_18_0_2_6340208_1532543460307_914551_4600) as applicable.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_f71035d_1426077427867_28021_2619"></a>`Status`|1|`CountItemStatus`|The status of the count, from the [CountItemStatus](#_17_0_2_4_78e0236_1389797161173_369293_4078) enumeration.
-<a name="_17_0_2_4_f71035d_1426077318387_348887_2615"></a>`Type`|1|`CountItemType`|The type of item, from the [CountItemType](#_17_0_2_4_78e0236_1389798097477_664878_4228) enumeration.
-<a name="_17_0_2_4_f71035d_1426077858771_890955_2661"></a>`OtherType`|0..1|`String`|Used when Type is other.
+<a name="_18_0_2_6340208_1469207550920_513772_4736"></a>`BallotAuditId`|0..1|`String`|A unique identifier for this CVR, used to link the CVR with the corresponding audit record, e.g., a paper ballot. This identifier may be impressed on the corresponding audit record as it is scanned, or otherwise associated with the corresponding ballot.
+<a name="_18_0_2_6340208_1477335811070_110072_4695"></a>`BallotImage`|0..*|`ImageData`|An image of the ballot sheet created by the scanning device.
+<a name="_18_0_2_6340208_1485889604690_46103_4553"></a>`BallotPrePrintedId`|0..1|`String`|A unique identifier for the ballot (or sheet of a multi-sheet ballot) that this CVR represents, used if ballots are pre-marked with unique identifiers. If provided, this number would be the same on all CVRs that represent individual sheets from the same multi-sheet ballot. This identifier is not the same as one that may be impressed on the corresponding ballot as it is scanned or otherwise associated with the corresponding ballot; see the [BallotAuditId](#_18_0_2_6340208_1469207550920_513772_4736) attribute.
+<a name="_18_0_2_6340208_1485889507713_842254_4548"></a>`BallotSheetId`|0..1|`String`|A unique number for the ballot (or sheet of a multi-sheet ballot) that this CVR represents, used if ballots are pre-marked with unique numbers. If provided, this number would be the same on all CVRs that represent individual sheets from the same multi-sheet ballot. This number is not the same as one that may be impressed on the corresponding ballot as it is scanned or otherwise associated with the corresponding ballot; see the [BallotAuditId](#_18_0_2_6340208_1469207550920_513772_4736) attribute.
+<a name="_18_0_2_6340208_1477336326894_57154_4725"></a>`BallotStyleId`|0..1|`String`|An identifier of the ballot style associated with the corresponding ballot.
+<a name="_18_0_2_6340208_1491322891923_301659_4571"></a>`{BallotStyleUnit}`|0..1|`GpUnit`|Identifies the smallest unit of geography associated with the corresponding ballot, typically a precinct or split-precinct.
+<a name="_18_0_2_6340208_1485284914250_330502_4620"></a>`BatchId`|0..1|`String`|The identifier for the batch that includes this CVR.
+<a name="_18_0_2_6340208_1491322213394_604125_4555"></a>`BatchSequenceId`|0..1|`Integer`|The sequence number of the corresponding paper ballot within a batch.
+<a name="_18_5_3_43701b0_1533931125455_124502_5709"></a>`{CreatingDevice}`|0..1|`ReportingDevice`|Identifies the device that created the CVR.
+<a name="_19_0_43701b0_1541096043878_35148_5034"></a>`{CurrentSnapshot}`|1|`CVRSnapshot`|Identifies the snapshot that is currently tabulatable.
+<a name="_18_0_2_6340208_1532543700707_228349_4655"></a>`{CVRSnapshot}`|1..*|`CVRSnapshot`|Identifies the repeatable portion of the CVR that links to contest selections and related information.
+<a name="_18_0_2_6340208_1489002073957_902699_4732"></a>`{Election}`|1|`Election`|Used to identify an election with which the CVR is associated.
+<a name="_17_0_2_4_f71035d_1426788475880_621446_2579"></a>`{Party}`|0..*|`Party`|Identifies the party associated with a CVR, typically for partisan primaries.
+<a name="_18_0_2_6340208_1485285067563_572486_4624"></a>`UniqueId`|0..1|`String`|The sequence number for this CVR. This represents the ordinal number that this CVR was processed by the tabulating device.
 
 
-### <a name="_18_0_2_6340208_1519999692422_172889_4576"></a>*The **DateTimeWithZone** Class*
+### <a name="_18_0_2_6340208_1469203058990_306165_4565"></a>*The **CVRContest** Class*
 
-![Image of DateTimeWithZone](Election_Results_Reporting_UML_documentation_files/_18_0_2_6340208_1519999692425_740254_4577.png)
+![Image of CVRContest](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1469203058998_13088_4566.png)
 
-Restricts dateTime to require inclusion of time zone information and excludes fractional seconds.
+[CVRContest](#_18_0_2_6340208_1469203058990_306165_4565) class is included by [CVRSnapshot](#_17_0_2_4_78e0236_1389366224561_797289_2360) for each contest on the ballot that was voted, that is, whose contest options contain indications that may constitute a vote. [CVRContest](#_18_0_2_6340208_1469203058990_306165_4565) includes [CVRContestSelection](#_18_0_5_43401a7_1474452890357_299022_4292) for each contest option in the contest containing an indication or write-in.
+
+[CVRSnapshot](#_17_0_2_4_78e0236_1389366224561_797289_2360) can also include [CVRContest](#_18_0_2_6340208_1469203058990_306165_4565) for every contest on the ballot regardless of whether any of the contest options contain an indication, for cases where the CVR must include all contests that appeared on the ballot.
+
+[CVRContest](#_18_0_2_6340208_1469203058990_306165_4565) attributes are for including summary information about the contest.
+
+Overvotes plus Undervotes plus TotalVotes must equal the number of votes allowable in the contest, e.g., in a "chose 3 of 5" contest in which the voter chooses only 2, then Overvotes = 0, Undervotes = 1, and TotalVotes = 2, which adds up to the number of votes allowable = 3.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-<a name="_18_0_2_6340208_1519999795210_981371_4601"></a>`pattern`||`String`|Pattern used for indicating the date, time and the accompanying time zone.
+<a name="_18_0_2_6340208_1469203119527_802583_4612"></a>`{Contest}`|1|`Contest`|Used to link to an instance of [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) specific to the contest at hand, for the purpose of specifying information about the contest such as its contest identifier.
+<a name="_18_0_5_43401a7_1474453069356_745132_4326"></a>`{CVRContestSelection}`|0..*|`CVRContestSelection`|Used to include information about a contest selection in the contest, including the associated indication(s).
+<a name="_18_0_2_6340208_1491331465665_822585_4606"></a>`Overvotes`|0..1|`Integer`|The number of votes lost due to overvoting.
+<a name="_18_0_2_6340208_1491409925893_814149_4553"></a>`Selections`|0..1|`Integer`|Used to indicate the number of possible contest selections in the contest.
+<a name="_18_0_5_43401a7_1475850227700_908488_4330"></a>`Status`|0..*|`ContestStatus`|The status of the contest, e.g., overvoted, undervoted, from the [ContestStatus](#_18_0_5_43401a7_1475850124791_123384_4291) enumeration. If no values apply, use 'other' and include a user-defined status in [OtherStatus](#_18_0_5_43401a7_1475856016959_840864_4388).
+<a name="_18_0_5_43401a7_1475856016959_840864_4388"></a>`OtherStatus`|0..1|`String`|Used when [Status](#_18_0_5_43401a7_1475850227700_908488_4330) is 'other' to include a user-defined status.
+<a name="_18_0_2_6340208_1491331452091_318387_4602"></a>`Undervotes`|0..1|`Integer`|The number of votes lost due to undervoting.
+<a name="_18_5_3_43701b0_1534266820963_828170_5833"></a>`WriteIns`|0..1|`Integer`|The total number of write-ins in the contest.
 
 
-### <a name="_18_0_2_6340208_1425911626288_420556_4530"></a>*The **DeviceClass** Class*
+### <a name="_18_0_5_43401a7_1474452890357_299022_4292"></a>*The **CVRContestSelection** Class*
 
-![Image of DeviceClass](Election_Results_Reporting_UML_documentation_files/_18_0_2_6340208_1425911626300_559547_4531.png)
+![Image of CVRContestSelection](CastVoteRecords_UML_Documentation_files/_18_0_5_43401a7_1474452890365_842519_4293.png)
 
-For filtering vote counts by device-related information. [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380), [Counts](#_17_0_2_4_78e0236_1389367291663_284973_2835), and [OtherCounts](#_18_0_2_6340208_1508176198256_527421_4561) include [DeviceClass](#_18_0_2_6340208_1425911626288_420556_4530).
+[CVRContestSelection](#_18_0_5_43401a7_1474452890357_299022_4292) is used to link a contest option containing an indication with information about the indication, such as whether a mark constitutes a countable vote, or whether a mark is determined to be marginal, etc. [CVRContest](#_18_0_2_6340208_1469203058990_306165_4565) includes an instance of [CVRContestSelection](#_18_0_5_43401a7_1474452890357_299022_4292) when an indication for the selection is present, and [CVRContestSelection](#_18_0_5_43401a7_1474452890357_299022_4292) then includes [SelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635) for each indication present. To tie the indication to the specific contest selection, [CVRContestSelection](#_18_0_5_43401a7_1474452890357_299022_4292) links to an instance of [ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906) that has previously been included by [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400).
+
+Since multiple indications per contest option are possible for some voting methods, [CVRContestSelection](#_18_0_5_43401a7_1474452890357_299022_4292) can include multiple instances of [SelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635), one per indication. [CVRContestSelection](#_18_0_5_43401a7_1474452890357_299022_4292) can also be used for the purpose of including, in the CVR, all contest options in the contest regardless of whether indications are present. In this case, CVRContestSelection would not include [SelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635) if no indication is present but would link to the appropriate instance of [ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906).
+
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_f71035d_1401286171326_648907_2273"></a>`Manufacturer`|0..1|`String`|Manufacturer of the device.
-<a name="_17_0_2_4_f71035d_1401286117587_806540_2269"></a>`Model`|0..1|`String`|Manufacturer’s device model, used to filter on, e.g., a specific model of DRE or other device type.
-<a name="_17_0_2_4_f71035d_1401285959630_42686_2265"></a>`Type`|0..1|`DeviceType`|Enumerated type of device, e.g., "dre", "opscan-precinct", etc.
-<a name="_18_0_2_6340208_1497894619958_710016_4605"></a>`OtherType`|0..1|`String`|Used when Type is other.
+<a name="_18_0_2_6340208_1469203113749_298974_4591"></a>`{ContestSelection}`|0..1|`ContestSelection`|Used to link to an instance of a contest selection that was previously included by [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400).
+<a name="_18_0_5_43401a7_1484322103253_625422_4289"></a>`OptionPosition`|0..1|`Integer`|Used to include the ordinal position of the contest option as it appeared on the ballot.
+<a name="_18_0_5_43401a7_1525884900274_453930_4291"></a>`Rank`|0..1|`Integer`|For the RCV voting variation, the rank chosen by the voter, for when a contest selection can represent a ranking.
+<a name="_18_0_2_6340208_1485892992410_316802_4653"></a>`{SelectionPosition}`|1..*|`SelectionPosition`|Used to include further information about the indication/mark associated with the contest selection. Depending on the voting method, multiple indications/marks per selection may be possible.
+<a name="_18_0_5_43401a7_1475850275266_189599_4334"></a>`Status`|0..*|`ContestSelectionStatus`|Contains the status of the contest selection, e.g., 'needs-adjudication' for a contest requiring adjudication, using values from the [ContestSelectionStatus](#_18_0_5_43401a7_1475850153090_186243_4311) enumeration. If no values apply, use 'other' and include a user-defined status in [OtherStatus](#_18_0_5_43401a7_1475855963037_920235_4384).
+<a name="_18_0_5_43401a7_1475855963037_920235_4384"></a>`OtherStatus`|0..1|`String`|Used when [Status](#_18_0_5_43401a7_1475850275266_189599_4334) is 'other' to include a user-defined status.
+<a name="_19_0_43701b0_1556050052423_495068_5158"></a>`TotalFractionalVotes`|0..1|`FractionalNumber`|For cumulative or range and other similar voting variations, contains the total proper fractional number of votes across all indications/marks.
+<a name="_18_0_2_6340208_1488988324514_948852_4757"></a>`TotalNumberVotes`|0..1|`Integer`|For cumulative or range and other similar voting variations, contains the total number of votes across all indications/marks.
+
+
+### <a name="_17_0_2_4_78e0236_1389366224561_797289_2360"></a>*The **CVRSnapshot** Class*
+
+![Image of CVRSnapshot](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389799207465_976765_6435.png)
+
+[CVRSnapshot](#_17_0_2_4_78e0236_1389366224561_797289_2360) contains a version of the contest selections for a CVR; there can be multiple versions of [CVRSnapshot](#_17_0_2_4_78e0236_1389366224561_797289_2360) within the same CVR. Type specifies the type of the snapshot, i.e., whether interpreted by the scanner according to contest rules, modified as a result of adjudication, or the original, that is, the version initially scanned before contest rules are applied. [CVR](#_18_0_2_6340208_1532543460307_914551_4600) includes [CVRSnapshot](#_17_0_2_4_78e0236_1389366224561_797289_2360).
+
+Other attributes are repeated in each [CVRSnapshot](#_17_0_2_4_78e0236_1389366224561_797289_2360) because they may differ across snapshots, e.g., the contests could be different as well as other status.
+
+Attribute | Multiplicity | Type | Attribute Description
+--------- | ------------ | ---- | ---------------------
+<a name="_18_0_5_43401a7_1475856929390_368624_4454"></a>`{Annotation}`|0..*|`Annotation`|Used to include an annotation associated with the CVR snapshot.
+<a name="_18_0_2_6340208_1469203129639_870971_4633"></a>`{CVRContest}`|0..*|`CVRContest`|Identifies the contests in the CVR.
+<a name="_18_0_2_6340208_1472158928951_402259_4603"></a>`Status`|0..*|`CVRStatus`|The status of the CVR.
+<a name="_18_0_5_43401a7_1475856170152_824205_4392"></a>`OtherStatus`|0..1|`String`|When [Status](#_18_0_2_6340208_1472158928951_402259_4603) is 'other', contains the ballot status.
+<a name="_18_0_2_6340208_1532543968111_779654_4689"></a>`Type`|1|`CVRType`|The type of the snapshot, e.g., original.
+
+
+### <a name="_18_0_2_6340208_1485892911278_166697_4594"></a>*The **CVRWriteIn** Class*
+
+![Image of CVRWriteIn](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1485892911283_45277_4605.png)
+
+[CVRWriteIn](#_18_0_2_6340208_1485892911278_166697_4594) is used when the contest selection is a write-in. It has attributes for the image or text of the write-in.
+
+Attribute | Multiplicity | Type | Attribute Description
+--------- | ------------ | ---- | ---------------------
+<a name="_18_0_2_6340208_1485892911278_481541_4596"></a>`Text`|0..1|`String`|Used for the text of the write-in, typically present when the CVR has been created by electronic ballot marking equipment.
+<a name="_18_0_2_6340208_1485892911278_517000_4595"></a>`WriteInImage`|0..1|`ImageData`|Used for an image of the write-in, typically made by a scanner when scanning a paper ballot.
 
 
 ### <a name="_17_0_2_4_f71035d_1426101822599_430942_2209"></a>*The **Election** Class*
 
-![Image of Election](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_f71035d_1426101822601_995748_2210.png)
+![Image of Election](CastVoteRecords_UML_Documentation_files/_17_0_2_4_f71035d_1426101822601_995748_2210.png)
 
-For defining the status of the election and associated information such as candidates, contests, and vote counts.
-
-Election includes links to the major instances that are specific to an election: [BallotStyle](#_17_0_2_4_78e0236_1389366224561_797289_2360), [Candidate](#_17_0_2_4_78e0236_1389366272694_544359_2440), and [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400).
-
-Election includes a required association end [ElectionScope](#_17_0_2_4_f71035d_1426102211616_609900_2331), which links to a [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) instance for the purpose of identifying the geographical scope of the election. For example, for an election within a county, [ElectionScope](#_17_0_2_4_f71035d_1426102211616_609900_2331) would reference a [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) defined for the county. If it is desired to include election authority information, the [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) can include [ElectionAdministration](#_18_0_2_6340208_1441311877439_710008_4433).
+[Election](#_17_0_2_4_f71035d_1426101822599_430942_2209) defines instances of the [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) and [Candidate](#_17_0_2_4_78e0236_1389366272694_544359_2440) classes so that they can be later referenced in CVR classes. [Election](#_17_0_2_4_f71035d_1426101822599_430942_2209) includes an instance of [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) for each contest in the election and includes an instance of [Candidate](#_17_0_2_4_78e0236_1389366272694_544359_2440) for each candidate. This is done to utilize file sizes more efficiently; otherwise each CVR would need to define these instances separately and much duplication would occur.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-<a name="_18_0_2_6340208_1508176491404_114747_4598"></a>`{BallotCounts}`|0..*|`BallotCounts`|Used for identifying various ballot counts.
-<a name="_17_0_2_4_f71035d_1426789041442_265842_2746"></a>`{BallotStyle}`|0..*|`BallotStyle`|For defining ballot styles associated with the election.
-<a name="_17_0_2_4_f71035d_1426788786008_599642_2643"></a>`{Candidate}`|0..*|`Candidate`|For defining candidates associated with the election.
-<a name="_18_0_2_6340208_1429710511392_588063_4545"></a>`{ContactInformation}`|0..1|`ContactInformation`|For associating various contact information with the election.
-<a name="_17_0_2_4_f71035d_1426788714136_545781_2616"></a>`{Contest}`|0..*|`Contest`|For defining contests associated with the election.
-<a name="_17_0_2_4_f71035d_1430428731982_612772_2251"></a>`CountStatus`|0..*|`CountStatus`|For providing various counting status on types of ballots or other items.
-<a name="_17_0_2_4_f71035d_1426102211616_609900_2331"></a>`{ElectionScope}`|1|`ReportingUnit`|Unique identifier for a [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) element. For associating the election with a reporting unit that represents the geographical scope of the election, e.g., a state, a county, etc.
-<a name="_17_0_2_4_f71035d_1430411992333_911417_2240"></a>`ExternalIdentifier`|0..*|`ExternalIdentifier`|For associating an ID with the election.
-<a name="_17_0_2_4_f71035d_1426101865703_367602_2232"></a>`Name`|1|`InternationalizedText`|For including a name for the election; the name could be the same name as appears on the ballot.
-<a name="_17_0_2_4_f71035d_1426101837248_396898_2228"></a>`StartDate`|1|`date`|Calendar start date of the election, e.g., “2018-11-04”.
-<a name="_17_0_2_4_f71035d_1431009646277_24904_2233"></a>`EndDate`|1|`date`|Calendar end date of the election; for a typical one-day election, the end date is the same as the start date.
-<a name="_17_0_2_4_f71035d_1426101886743_683410_2236"></a>`Type`|1|`ElectionType`|Enumerated type of election, e.g., partisan-primary, open-primary, etc.
-<a name="_17_0_2_4_f71035d_1447709724802_42785_2220"></a>`OtherType`|0..1|`String`|Used when [Type](#_17_0_2_4_f71035d_1426101886743_683410_2236) is other.
+<a name="_17_0_2_4_f71035d_1426788786008_599642_2643"></a>`{Candidate}`|0..*|`Candidate`|Used to establish a collection of candidate definitions that will be referenced by the CVRs. The contests in each CVR will reference the candidate definitions.
+<a name="_17_0_2_4_f71035d_1430411992333_911417_2240"></a>`Code`|0..*|`Code`|Used for a code associated with the election, e.g., a precinct identifier if the election scope is a precinct.
+<a name="_17_0_2_4_f71035d_1426788714136_545781_2616"></a>`{Contest}`|1..*|`Contest`|Used for establishing a collection of contest definitions that will be referenced by the CVRs.
+<a name="_18_2_43401a7_1450723692857_875635_4654"></a>`{ElectionScope}`|1|`GpUnit`|Used to identify the election scope, i.e., the political geography corresponding to the election.
+<a name="_17_0_2_4_f71035d_1426101865703_367602_2232"></a>`Name`|0..1|`String`|A text string identifying the election.
 
 
-### <a name="_18_0_2_6340208_1441311877439_710008_4433"></a>*The **ElectionAdministration** Class*
+### <a name="_18_0_2_6340208_1485284639717_497586_4548"></a>*The **File** Class*
 
-![Image of ElectionAdministration](Election_Results_Reporting_UML_documentation_files/_18_0_2_6340208_1441311877445_664685_4434.png)
+![Image of File](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1485284639742_53322_4561.png)
 
-Used to provide various information about an election authority. [ReportingUnit](#_17_0_2_4_f71035d_1400606476166_735297_2593) includes ElectionAdministration.
-
-ElectionAdministration includes [ContactInformation](#_17_0_5_1_43401a7_1400624327407_326048_3637) for the election authority and, using [ElectionOfficialPerson](#_18_0_2_6340208_1441312523523_377380_4513) references one or more [Person](#_17_0_5_1_43401a7_1400623980732_100904_3567) instances defined for individuals/organizations associated with the election authority.
+Used to hold the contents of a file or identify a file created by the scanning device. The file generally would contain an image of the scanned ballot or an image of a write-in entered by a voter onto the scanned ballot. SubClass [Image](#_18_0_2_6340208_1485284639720_737438_4549) is used if the file contains an image.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-<a name="_18_0_2_6340208_1441312459706_787590_4464"></a>`{ContactInformation}`|0..1|`ContactInformation`|For including various contact information.
-<a name="_18_0_2_6340208_1441312523523_377380_4513"></a>`{ElectionOfficialPerson}`|0..*|`Person`|Unique identifier for one or more Person elements defined for the election authority.
-<a name="_18_0_2_6340208_1441312432223_272740_4455"></a>`Name`|0..1|`RichText`|Name of the election authority.
+<a name="_18_0_2_6340208_1485284639723_485833_4550"></a>`Data`|1|`base64Binary`|Contains the base64 binary contents of the file.
+<a name="_18_0_2_6340208_1485284639724_125436_4551"></a>`FileName`|0..1|`String`|Contains the name of the file or an identifier of the file.
+<a name="_18_0_2_6340208_1485284639724_875893_4552"></a>`MimeType`|0..1|`String`|The mime type of the file, e.g., image/jpeg.
 
 
-### <a name="_17_0_2_4_78e0236_1389366195564_913164_2300"></a>*The **ElectionReport** Class*
+### <a name="_19_0_43701b0_1556049559972_974781_5102"></a>*The **FractionalNumber** Class*
 
-![Image of ElectionReport](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_78e0236_1389798977982_73815_5340.png)
+![Image of FractionalNumber](CastVoteRecords_UML_Documentation_files/_19_0_43701b0_1556049559993_299889_5103.png)
 
-For defining items pertaining to the status and format of the report and when it was generated.
-
-ElectionReport references the major elements that are not necessarily specific to an election and that therefore can exist in a pre-election report: [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380), [Office](#_17_0_5_1_43401a7_1400623830572_164081_3518) and [OfficeGroup](#_17_0_2_4_f71035d_1433183615993_866714_2239), [Party](#_17_0_2_4_78e0236_1389366278128_412819_2460), [Person](#_17_0_5_1_43401a7_1400623980732_100904_3567), and [Election](#_17_0_2_4_f71035d_1426101822599_430942_2209).
+A proper fractional value, represented using fractional or decimal notation.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_f71035d_1426102320351_976615_2363"></a>`{Election}`|0..*|`Election`|For associating elections with the report.
-<a name="_17_0_2_4_f71035d_1430412040553_669909_2247"></a>`ExternalIdentifier`|0..*|`ExternalIdentifier`|For associating an ID with the report.
-<a name="_17_0_2_4_d420315_1392318153856_710707_2448"></a>`Format`|1|`ReportDetailLevel`|Detail level of the report, e.g., contest summary, precinct level results, etc.
-<a name="_17_0_2_4_78e0236_1389733247429_431211_3338"></a>`GeneratedDate`|1|`DateTimeWithZone`|Identifies the date and time that the election report was generated.
-<a name="_17_0_2_4_f71035d_1426788982595_725441_2719"></a>`{GpUnit}`|0..*|`GpUnit`|For associating geopolitical units with the report.
-<a name="_18_5_3_43701b0_1527684452231_716184_6305"></a>`{Header}`|0..*|`Header`|For associating headers with parts of a ballot style.
-<a name="_17_0_5_1_43401a7_1394578590416_259347_3759"></a>`Issuer`|1|`RichText`|Identification of the report issuer.
-<a name="_17_0_2_4_f71035d_1426542944036_608477_2211"></a>`IssuerAbbreviation`|1|`RichText`|An abbreviation of the report issuer such as the 2-character U.S. Census Bureau abbreviation of the state whose results are being reported, e.g., AL, TX, MN, etc.
-<a name="_18_0_2_6340208_1425917205849_590264_4699"></a>`IsTest`|0..1|`Boolean`|Used to indicate whether the report is a test report. Assumed to be “false” if not present.
-<a name="_17_0_2_4_f71035d_1400594737789_912202_2453"></a>`Notes`|0..1|`RichText`|For including an arbitrary message with the report.
-<a name="_17_0_2_4_f71035d_1426788177421_963220_2552"></a>`{Office}`|0..*|`Office`|For associating offices with the report.
-<a name="_17_0_2_4_f71035d_1433183761792_828366_2293"></a>`{OfficeGroup}`|0..*|`OfficeGroup`|For associating a name for a grouping of offices with the report.
-<a name="_17_0_2_4_f71035d_1426788475880_621446_2579"></a>`{Party}`|0..*|`Party`|For associating parties with the report.
-<a name="_17_0_2_4_f71035d_1426788901070_281905_2692"></a>`{Person}`|0..*|`Person`|For associating persons with the report.
-<a name="_17_0_2_4_78e0236_1389734122703_834255_3892"></a>`SequenceStart`|1|`Integer`|The report’s number as part of a sequence of reports, used with  so as to be read as, e.g., 1 of 1, 1 of 2, 2 of 2, etc. Starts with “1”.
-<a name="_17_0_3_43401a7_1390917636239_792774_2880"></a>`SequenceEnd`|1|`Integer`|The upper bound of the sequence; e.g., “1” if there is only 1 report, “2” if there are two reports in the sequence, etc.
-<a name="_17_0_2_4_78e0236_1389734118887_523907_3888"></a>`Status`|1|`ResultsStatus`|Status of the election report, e.g., test mode, unofficial, etc.
-<a name="_17_0_2_4_f71035d_1428427515312_561619_2215"></a>`TestType`|0..1|`String`|A description of the type of test, e.g., pre-election, logic and accuracy, etc.
-<a name="_17_0_2_4_78e0236_1389733233791_999255_3335"></a>`VendorApplicationId`|1|`String`|An identifier of the vendor application generating the election report, e.g., X-EMS version 3.1.a.
-
-
-### <a name="_17_0_2_4_f71035d_1430405712653_451634_2410"></a>*The **ExternalIdentifier** Class*
-
-![Image of ExternalIdentifier](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_f71035d_1430405712661_66241_2411.png)
-
-For associating a jurisdiction’s codes, i.e., identifiers, with objects such as candidates, offices, or geopolitical units such as counties, towns, precincts, etc. Multiple occurrences of the ExternalIdentifier sub-element can be used to associate multiple codes, e.g., if there is a desire to associate multiple codes with a particular object such as FIPS (Federal Information Processing Standard) codes as well as OCD-IDs (Open Civic Data Identifiers).
-
-For elements that link to ExternalIdentifier instances, if the type is not listed in enumeration [IdentifierType](#_17_0_2_4_f71035d_1425061188508_163854_2613), use other and include the type (that is not listed in the enumeration) in [OtherType](#_17_0_2_4_f71035d_1430405732252_109247_2429).
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_f71035d_1441215385623_864674_2521"></a>`Label`|0..1|`String`|For use as needed and compatibility with the VIP schema.
-<a name="_17_0_2_4_f71035d_1430405763078_743585_2433"></a>`Type`|1|`IdentifierType`|An identifier type, e.g., FIPS.
-<a name="_17_0_2_4_f71035d_1430405732252_109247_2429"></a>`OtherType`|0..1|`String`|Used when [IdentifierType](#_17_0_2_4_f71035d_1430405763078_743585_2433) value is other.
-<a name="_17_0_2_4_f71035d_1430405785820_123111_2437"></a>`Value`|1|`String`|The identifier used by the jurisdiction.
+<a name="_19_0_43701b0_1556049825598_445953_5155"></a>`pattern`||`String`|Pattern describing the allowed values for a [FractionalNumber](#_19_0_43701b0_1556049559972_974781_5102).
 
 
 ### <a name="_17_0_2_4_78e0236_1389366233346_42391_2380"></a>*The **GpUnit** Class*
 
-![Image of GpUnit](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_78e0236_1390579885871_183088_2445.png)
+![Image of GpUnit](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1390579885871_183088_2445.png)
 
-Class for describing a geo-politically bounded area of geography such as a city, district, or jurisdiction, or a precinct or split-precinct, or specific vote-capture device, for the purpose of associating contest vote counts and ballot counts (and other information) with the reporting unit. Reporting units can link to each other to form a hierarchicallly-oriented model of a state's (or a county's, etc.) jurisdictions, districts, and precincts.
+Used for identifying a geographical unit for various purposes, including:
 
-[GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) is an abstract class with two subclasses that get used according to the type of unit:
+ *  The reporting unit of the report generation device, e.g., a precinct location of a scanner that generates the collection of CVRs,
+ *  The geographical scope of the election, or the unit of geography associated with an individual CVR.
 
- *  [ReportingDevice](#_17_0_2_4_78e0236_1389798013459_389380_4178), used for associating vote counts with a specific vote-capture device
- *  [ReportingUnit](#_17_0_2_4_f71035d_1400606476166_735297_2593), for associating vote counts with geopolitical units such as cities, districts, counties, precincts, etc.
+[CastVoteRecordReport](#_17_0_2_4_78e0236_1389366195564_913164_2300) includes instances of [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) as needed. [Election](#_17_0_2_4_f71035d_1426101822599_430942_2209) references [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) as [ElectionScope](#_18_2_43401a7_1450723692857_875635_4654), for the geographical scope of the election.  [CVR](#_18_0_2_6340208_1532543460307_914551_4600) CastVoteRecordReport includes instances of GpUnit as needed. Election references GpUnit as ElectionScope, for the geographical scope of the election.  CVR references GpUnit as BallotStyleUnit to link a CVR to the smallest political subdivision that uses the same ballot style as was used for the voter’s ballot.
 
-[Election](#_17_0_2_4_f71035d_1426101822599_430942_2209) and [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) contain a required reference to [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) representing the jurisdiction of the election or contest respectively; [Office](#_17_0_5_1_43401a7_1400623830572_164081_3518) contains a similar reference that is optional.  OtherCounts and VoteCounts reference [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) to link vote or summary counts to [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) instances defined for precincts or other types of geopolitical units.  [BallotStyle](#_17_0_2_4_78e0236_1389366224561_797289_2360) references [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) to link a ballot style to its corresponding geopolitical unit.
+Attribute | Multiplicity | Type | Attribute Description
+--------- | ------------ | ---- | ---------------------
+<a name="_17_0_2_4_f71035d_1430412120441_638024_2251"></a>`Code`|0..*|`Code`|A code associated with the geographical unit.
+<a name="_17_0_2_4_d420315_1393450176252_314086_2868"></a>`Name`|0..1|`String`|Name of the geographical unit.
+<a name="_18_0_2_6340208_1489681733700_296781_4553"></a>`{ReportingDevice}`|0..*|`ReportingDevice`|The collection of cast vote records associated with the reporting unit and the reporting device.
+<a name="_17_0_2_4_78e0236_1389713376966_77071_2393"></a>`Type`|1|`ReportingUnitType`|Contains the type of geographical unit, e.g., precinct, split-precinct, vote center, using values from the [ReportingUnitType](#_17_0_2_4_f71035d_1431607637366_785815_2242) enumeration. If no values apply, use 'other' and include a user-defined type in [OtherType](#_17_0_2_4_f71035d_1426007519161_685921_2510).
+<a name="_17_0_2_4_f71035d_1426007519161_685921_2510"></a>`OtherType`|0..1|`String`|Used when [Type](#_17_0_2_4_78e0236_1389713376966_77071_2393) is 'other' to include a user-defined type.
+
+
+### <a name="_18_0_2_6340208_1485894593826_736413_4615"></a>*The **Hash** Class*
+
+![Image of Hash](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1485894619632_889587_4622.png)
+
+[Hash](#_18_0_2_6340208_1485894593826_736413_4615) is used to specify a hash associated with a file such as an image file of a scanned ballot.
+
+Attribute | Multiplicity | Type | Attribute Description
+--------- | ------------ | ---- | ---------------------
+<a name="_18_0_2_6340208_1485894641846_811323_4646"></a>`Type`|1|`HashType`|The type of the hash, from the [HashType](#_18_0_2_6340208_1485894679180_11599_4655) enumeration.
+<a name="_18_0_2_6340208_1485894652084_23532_4650"></a>`OtherType`|0..1|`String`|If [Type](#_18_0_2_6340208_1485894641846_811323_4646) is 'other', the type of the hash.
+<a name="_18_0_2_6340208_1485894623486_698989_4642"></a>`Value`|1|`String`|The hash value, encoded as a string.
+
+
+### <a name="_18_0_2_6340208_1485284639720_737438_4549"></a>*The **Image** Class*
+
+![Image of Image](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1485284639744_493211_4562.png)
+
+Used by [File](#_18_0_2_6340208_1485284639717_497586_4548) for a file containing an image, e.g., an image of a write-in on a paper ballot.
+
+
+### <a name="_18_0_2_6340208_1485894533655_402033_4588"></a>*The **ImageData** Class*
+
+![Image of ImageData](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1485894533656_423599_4589.png)
+
+[ImageData](#_18_0_2_6340208_1485894533655_402033_4588) is used to specify an image file such as for a write-in or the entire ballot.  It works with several other classes, as follows:
+
+ *  [File](#_18_0_2_6340208_1485284639717_497586_4548) with SubClass [Image](#_18_0_2_6340208_1485284639720_737438_4549) – to contain either a filename for an external file or the file contents, and
+ *  [Hash](#_18_0_2_6340208_1485894593826_736413_4615) – to contain cryptographic hash function data for the file.
 
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_f71035d_1442233726833_338497_2238"></a>`{ComposingGpUnit}`|0..*|`GpUnit`|Unique identifier for one or more GpUnit instances. For creating a reference to another GpUnit that is contained with the parent GpUnit.
-<a name="_17_0_2_4_f71035d_1430412120441_638024_2251"></a>`ExternalIdentifier`|0..*|`ExternalIdentifier`|For associating an ID with the GpUnit, e.g., a district’s or county’s code.
-<a name="_17_0_2_4_d420315_1393450176252_314086_2868"></a>`Name`|0..1|`InternationalizedText`|Name of the geopolitical unit.
-
-
-### <a name="_18_5_3_43701b0_1527684342703_968085_6144"></a>*The **Header** Class*
-
-![Image of Header](Election_Results_Reporting_UML_documentation_files/_18_5_3_43701b0_1527684342785_40098_6174.png)
-
-For defining a reusable set of headers.
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_18_5_3_43701b0_1527684342717_856894_6148"></a>`ExternalIdentifier`|0..*|`ExternalIdentifier`|For associating an ID with the header.
-<a name="_18_5_3_43701b0_1527684342719_705794_6149"></a>`Name`|1|`InternationalizedText`|Name of the header, as it is to appear on a ballot style.
-
-
-### <a name="_18_0_2_6340208_1427122205989_885563_4602"></a>*The **Hours** Class*
-
-![Image of Hours](Election_Results_Reporting_UML_documentation_files/_18_0_2_6340208_1427122205998_606908_4603.png)
-
-Hours is used to specify a specific day and hours on that day, including the time zone. Multiple occurrences of Hours can be used if the schedule includes a range of days and hours.
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_18_0_2_6340208_1427123259576_729129_4765"></a>`Day`|0..1|`DayType`|Day of the week.
-<a name="_17_0_2_4_f71035d_1441215533034_678840_2525"></a>`Label`|0..1|`String`|For use as needed and compatibility with the VIP schema.
-<a name="_18_0_2_6340208_1427122284481_637314_4650"></a>`StartTime`|1|`TimeWithZone`|Start time of the schedule.
-<a name="_18_0_2_6340208_1427122318779_390600_4652"></a>`EndTime`|1|`TimeWithZone`|End time of the schedule.
-
-
-### <a name="_17_0_2_4_f71035d_1428586849773_722256_2252"></a>*The **HtmlColorString** Class*
-
-![Image of HtmlColorString](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_f71035d_1428586856729_349934_2257.png)
-
-For a string containing a 6-digit Red-Green-Blue (RGB) code that can be displayed using HTML. Used in Party to associate a web-displayable color with the party. The RGB code is specified in hexadecimal, such that the RGB code for the color green is “00FF00” (“\#00” + “\#FF” + “\#00”).
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_f71035d_1428586849775_553802_2253"></a>`pattern`||`String`|Pattern used for indicating the RGB color to use.
-
-
-### <a name="_17_0_2_4_f71035d_1428953680097_700602_2220"></a>*The **InternationalizedText** Class*
-
-![Image of InternationalizedText](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_f71035d_1428953680136_311337_2237.png)
-
-For strings that can contain multi-national text, for use with text as shown on a ballot containing multi-national text. The Identifier attribute can be used to assign an identifier to the text as desired.
-
-[Text](#_17_0_2_4_f71035d_1428953680100_198341_2225) uses the xsd:language type such that its language attribute must be set to a value that identifies the language.
-
-Values for language are from ISO 639 \[12\] and include:
-
- *  en – English
- *  en-US – U.S. English
- *  en-GB – U.K. English
- *  fr – French
- *  es – Spanish
- *  zh – Chinese
- *  ja – Japanese
- *  ko – Korean
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_f71035d_1441215669264_408334_2533"></a>`Label`|0..1|`String`|For use as needed and compatibility with the VIP schema.
-<a name="_17_0_2_4_f71035d_1428953680100_198341_2225"></a>`{Text}`|1..*|`LanguageString`|Used to hold a string of text with an associated table indicating the language used.
-
-
-### <a name="_17_0_2_4_f71035d_1428953680095_709464_2219"></a>*The **LanguageString** Class*
-
-![Image of LanguageString](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_f71035d_1428953680134_904840_2236.png)
-
-Used to hold a string of text with an associated table indicating the language used.
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_f71035d_1428953680098_437370_2221"></a>`Content`|1|`String`|The string in the specified language.
-<a name="_17_0_2_4_f71035d_1428953680098_683534_2222"></a>`Language`|1|`language`|Identification of the language, such as 'es'.
-
-
-### <a name="_17_0_2_4_f71035d_1443104838926_393729_2222"></a>*The **LatLng** Class*
-
-![Image of LatLng](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_f71035d_1443104838931_652630_2223.png)
-
-Associates latitude/longitude with a contact address.
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_f71035d_1443104953915_703386_2253"></a>`Label`|0..1|`String`|For use as needed and compatibility with the VIP schema.
-<a name="_17_0_2_4_f71035d_1443104855995_933877_2241"></a>`Latitude`|1|`double`|Latitude of the contact location.
-<a name="_17_0_2_4_f71035d_1443104888887_851843_2245"></a>`Longitude`|1|`double`|Longitude of the contact location.
-<a name="_17_0_2_4_f71035d_1443104920563_575015_2249"></a>`Source`|0..1|`String`|System used to perform the lookup from location name to lat/lng, e.g., the name of a geocoding service.
-
-
-### <a name="_17_0_5_1_43401a7_1400623830572_164081_3518"></a>*The **Office** Class*
-
-![Image of Office](Election_Results_Reporting_UML_documentation_files/_17_0_5_1_43401a7_1400623830579_197715_3519.png)
-
-For defining an office and information associated with a contest and/or a district. [ElectionReport](#_17_0_2_4_78e0236_1389366195564_913164_2300) includes Office. [CandidateContest](#_17_0_2_4_78e0236_1389366970084_183781_2806) and [RetentionContest](#_18_0_2_6340208_1425646217522_163181_4554) reference Office.
-
-Office includes [Term](#_17_0_2_4_f71035d_1428489072598_282236_2217) for defining details about the term of an office such as start/end dates and the type of term. [OfficeGroup](#_17_0_2_4_f71035d_1433183615993_866714_2239) is included from [ElectionReport](#_17_0_2_4_78e0236_1389366195564_913164_2300) to assign a name to a grouping of office definitions.
-
-Office includes an optional [ElectionDistrict](#_17_0_5_1_43401a7_1400701616170_933421_3684) reference to a [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) for the purpose of identifying the geographical scope of the office. For example, for an office for a state senate seat, [ElectionDistrict](#_17_0_5_1_43401a7_1400701616170_933421_3684) would include a reference to the [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) defined for the district associated with that office.
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_f71035d_1429207941244_121672_2262"></a>`{ContactInformation}`|0..1|`ContactInformation`|For associating various contact information with the office.
-<a name="_18_0_2_6340208_1498658815063_675104_4595"></a>`Description`|0..1|`InternationalizedText`|A description of the office, possibly as shown on the ballot to the voter.
-<a name="_17_0_5_1_43401a7_1400701616170_933421_3684"></a>`{ElectionDistrict}`|0..1|`ReportingUnit`|Link to a [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) instance. For associating the office with a reporting unit that represents the geographical scope of the contest, e.g., a district, etc.
-<a name="_17_0_2_4_f71035d_1430411943269_859941_2238"></a>`ExternalIdentifier`|0..*|`ExternalIdentifier`|For associating an ID with the office.
-<a name="_17_0_2_4_f71035d_1400610269818_58929_2680"></a>`FilingDeadline`|0..1|`date`|Date and time when a candidate must have filed for the contest for the office.
-<a name="_17_0_2_4_f71035d_1400610117397_796726_2672"></a>`IsPartisan`|0..1|`Boolean`|Boolean to indicate whether the office is partisan, e.g., true or false. If not present, assumption is true.
-<a name="_17_0_5_1_43401a7_1400701703746_703309_3706"></a>`Name`|1|`InternationalizedText`|Name of the office; can appear on the ballot.
-<a name="_17_0_2_4_f71035d_1429177738058_248218_2294"></a>`{OfficeHolderPerson}`|0..*|`Person`|Links to one or more [Person](#_17_0_5_1_43401a7_1400623980732_100904_3567) instances defined for the office holder.
-<a name="_17_0_2_4_f71035d_1428489163406_781378_2243"></a>`{Term}`|0..1|`Term`|For including office term-related information.
-
-
-### <a name="_17_0_2_4_f71035d_1433183615993_866714_2239"></a>*The **OfficeGroup** Class*
-
-![Image of OfficeGroup](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_f71035d_1433183615994_647505_2240.png)
-
-Used to assign a name to a grouping of office definitions. It includes references to [Office](#_17_0_5_1_43401a7_1400623830572_164081_3518) instances and a name to identify the grouping of references, e.g., “Judicial” or “Statewide”, etc. SubOfficeGroup can be used to create a nested hierarchy of groupings. [ElectionReport](#_17_0_2_4_78e0236_1389366195564_913164_2300) includes OfficeGroup.
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_f71035d_1441363295584_2457_2492"></a>`Label`|0..1|`String`|For use as needed and compatibility with the VIP schema.
-<a name="_17_0_2_4_f71035d_1433183632661_693280_2258"></a>`Name`|1|`String`|Name of the office grouping.
-<a name="_17_0_2_4_f71035d_1433183725966_939706_2266"></a>`{Office}`|0..*|`Office`|Link to one or more [Office](#_17_0_5_1_43401a7_1400623830572_164081_3518) instances.
-<a name="_17_0_2_4_f71035d_1433429126207_828493_2535"></a>`{SubOfficeGroup}`|0..*|`OfficeGroup`|For defining a nested hierarchy of [Office](#_17_0_5_1_43401a7_1400623830572_164081_3518) instance groupings.
-
-
-### <a name="_18_5_3_43701b0_1527684342715_643544_6146"></a>*The **OrderedContent** Class*
-
-![Image of OrderedContent](Election_Results_Reporting_UML_documentation_files/_18_5_3_43701b0_1527684342791_594538_6176.png)
-
-An abstract base class for content that can appear under a particular ballot style.
-
-OrderedContent is an abstract class with two subclasses that get used according to the type of content:
-
- *  OrderedContest, used for the appearance of a contest.
- *  OrderedHeader, used for the appearance of a header, optionally with the inclusion of contests.
-
-
-### <a name="_17_0_3_43401a7_1394476416139_808596_3142"></a>*The **OrderedContest** Class*
-
-![Image of OrderedContest](Election_Results_Reporting_UML_documentation_files/_17_0_3_43401a7_1394476416143_213625_3143.png)
-
-For the appearance of a contest on a particular ballot style.
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_17_0_3_43401a7_1394477833535_563732_3249"></a>`{Contest}`|1|`Contest`|The contest associated represented by OrderedContest.
-<a name="_17_0_3_43401a7_1394477871277_951066_3270"></a>`{OrderedContestSelection}`|0..*|`ContestSelection`|The contest selections for the ballot.
-
-
-### <a name="_18_5_3_43701b0_1527684342714_129907_6145"></a>*The **OrderedHeader** Class*
-
-![Image of OrderedHeader](Election_Results_Reporting_UML_documentation_files/_18_5_3_43701b0_1527684342790_575094_6175.png)
-
-For the appearance of a header on a particular ballot style.
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_18_5_3_43701b0_1527684342723_761487_6155"></a>`{Header}`|1|`Header`|Association to the header to be used.
-<a name="_19_0_43701b0_1535731879583_845997_4783"></a>`{OrderedContent}`|0..*|`OrderedContent`|For associating a header with ballot content, such as contests or nested headers.
-
-
-### <a name="_18_0_2_6340208_1508176198256_527421_4561"></a>*The **OtherCounts** Class*
-
-![Image of OtherCounts](Election_Results_Reporting_UML_documentation_files/_18_0_2_6340208_1508176198261_91260_4562.png)
-
-Identifies other counts associated with a contest.
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_18_0_2_6340208_1508176283326_821025_4589"></a>`DeviceClass`|0..1|`DeviceClass`|For filtering counts by device type.
-<a name="_18_0_2_6340208_1508176572777_602711_4625"></a>`{GpUnit}`|1|`GpUnit`|For filter counts by political geography or device or device type.
-<a name="_17_0_2_4_78e0236_1397155833926_751839_2443"></a>`Overvotes`|0..1|`float`|Number of overvotes.
-<a name="_17_0_2_4_78e0236_1397155803428_746302_2439"></a>`Undervotes`|0..1|`float`|Number of undervotes.
-<a name="_17_0_2_4_78e0236_1397155839370_24420_2447"></a>`WriteIns`|0..1|`Integer`|Number of write-ins.
+<a name="_18_0_2_6340208_1485894809122_512616_4712"></a>`{Hash}`|0..1|`Hash`|A hash value for the image data, used for verification comparisons against subsequent copies of the image.
+<a name="_18_0_2_6340208_1485894784931_504817_4685"></a>`{Image}`|0..1|`Image`|The image of an individual ballot sheet created by the scanner, could possibly include both sides of a two-sided ballot sheet depending on the scanner's configuration.
+<a name="_18_0_2_6340208_1485894593835_110320_4618"></a>`Location`|0..1|`anyURI`|A pointer to the location of the image file.
 
 
 ### <a name="_17_0_2_4_78e0236_1389366278128_412819_2460"></a>*The **Party** Class*
 
-![Image of Party](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_78e0236_1389798977982_989674_5350.png)
+![Image of Party](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_989674_5350.png)
 
-Used to describe a political party that can then be referenced in other elements. [ElectionReport](#_17_0_2_4_78e0236_1389366195564_913164_2300) includes Party. [Candidate](#_17_0_2_4_78e0236_1389366272694_544359_2440), [PartyContest](#_17_0_2_4_d420315_1393514218965_55008_3144), [PartyRegistration](#_17_0_2_4_78e0236_1394566839296_58362_2826), and [Person](#_17_0_5_1_43401a7_1400623980732_100904_3567) reference Party.
-
-Party is an abstract type with one subtype [Coalition](#_18_0_2_6340208_1425647247631_162984_4712), used to define coalitions.
-
-The Color attribute specifies a 6-digit RGB code displayable using HTML.
+[Party](#_17_0_2_4_78e0236_1389366278128_412819_2460) is used for describing information about a political party associated with the voter's ballot. [CVR](#_18_0_2_6340208_1532543460307_914551_4600) includes instances of [Party](#_17_0_2_4_78e0236_1389366278128_412819_2460) as needed, e.g., for a [CVR](#_18_0_2_6340208_1532543460307_914551_4600) corresponding to a ballot in a partisan primary, and [CandidateContest](#_17_0_2_4_78e0236_1389366970084_183781_2806) references Party as needed to link a candidate to their political party.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_78e0236_1389734813018_766516_3987"></a>`Abbreviation`|0..1|`InternationalizedText`|Short name for the party, e.g., “DEM”.
-<a name="_18_0_2_6340208_1425913135379_377945_4658"></a>`Color`|0..1|`HtmlColorString`|For associating an HTML RGB color coding with the party.
-<a name="_18_5_3_43701b0_1527686777870_350302_6379"></a>`{ContactInformation}`|0..1|`ContactInformation`|For associating contact information regarding the party, e.g., party offices.
-<a name="_17_0_2_4_f71035d_1430412372015_749476_2263"></a>`ExternalIdentifier`|0..*|`ExternalIdentifier`|For associating an ID with the party.
-<a name="_18_0_2_6340208_1498658977530_13951_4599"></a>`IsRecognizedParty`|0..1|`Boolean`|For indicating whether the party is recognized by the election authority; “false” is assumed if not present.
-<a name="_18_0_2_6340208_1506626085733_481329_4570"></a>`{LeaderPerson}`|0..*|`Person`|Identification of a Party's leader.
-<a name="_18_0_2_6340208_1425913456780_607661_4662"></a>`LogoUri`|0..*|`AnnotatedUri`|A URI to the party’s graphical logo.
-<a name="_17_0_2_4_78e0236_1389710882517_230322_2174"></a>`Name`|1|`InternationalizedText`|Official full name of the party, e.g., “Republican”; can appear on the ballot.
-<a name="_19_0_2_43701b0_1576188118603_242873_4972"></a>`{PartyScopeGpUnit}`|0..*|`GpUnit`|The GpUnit(s) the party operates in or the top-most GpUnit.
-<a name="_19_0_2_43701b0_1576187804877_651454_4962"></a>`Slogan`|0..1|`InternationalizedText`|The slogan or motto used by a political party.
+<a name="_17_0_2_4_78e0236_1389734813018_766516_3987"></a>`Abbreviation`|0..1|`String`|Short name for the party, e.g., "DEM".
+<a name="_17_0_2_4_f71035d_1430412372015_749476_2263"></a>`Code`|0..*|`Code`|A code associated with the party.
+<a name="_17_0_2_4_78e0236_1389710882517_230322_2174"></a>`Name`|0..1|`String`|Official full name of the party, e.g., "Republican".
 
 
 ### <a name="_17_0_2_4_d420315_1393514218965_55008_3144"></a>*The **PartyContest** Class*
 
-![Image of PartyContest](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_d420315_1393514218978_361648_3145.png)
+![Image of PartyContest](CastVoteRecords_UML_Documentation_files/_17_0_2_4_d420315_1393514218978_361648_3145.png)
 
-For a contest that involves choosing a party, typically for a straight party selection on the ballot.
-
-
-### <a name="_17_0_2_4_78e0236_1394566839296_58362_2826"></a>*The **PartyRegistration** Class*
-
-![Image of PartyRegistration](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_78e0236_1394566839298_705765_2827.png)
-
-For tracking the number of registered voters per party per geopolitical unit, i.e., for reporting on the number of registered voters of a particular party in a district or other type of reporting unit. Referenced by [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380).
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_78e0236_1394566847763_82144_2845"></a>`Count`|1|`Integer`|A count for tracking the number of registered voters.
-<a name="_17_0_2_4_78e0236_1394566867126_871059_2851"></a>`{Party}`|1|`Party`|Link to a [Party](#_17_0_2_4_78e0236_1389366278128_412819_2460) instance. For associating a political party.
+[PartyContest](#_17_0_2_4_d420315_1393514218965_55008_3144) is a subclass of [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) and is used to identify the type of contest as involving a straight party selection. It inherits attributes from [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400).
 
 
 ### <a name="_17_0_2_4_f71035d_1426519980658_594892_2511"></a>*The **PartySelection** Class*
 
-![Image of PartySelection](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_f71035d_1426519980661_572615_2512.png)
+![Image of PartySelection](CastVoteRecords_UML_Documentation_files/_17_0_2_4_f71035d_1426519980661_572615_2512.png)
 
-For a contest selection involving a party such as for a straight party selection on the ballot. It inherits the attributes of [ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906).
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_f71035d_1426520590194_384550_2564"></a>`{Party}`|1..*|`Party`|Link to one or more [Party](#_17_0_2_4_78e0236_1389366278128_412819_2460) instances. For associating one or more parties with the party selection.
-
-
-### <a name="_17_0_5_1_43401a7_1400623980732_100904_3567"></a>*The **Person** Class*
-
-![Image of Person](Election_Results_Reporting_UML_documentation_files/_17_0_5_1_43401a7_1400623980734_867286_3568.png)
-
-For defining information about a person; the person may be a candidate, election official, authority for a reporting unit, etc. [ElectionReport](#_17_0_2_4_78e0236_1389366195564_913164_2300) includes Person. [Candidate](#_17_0_2_4_78e0236_1389366272694_544359_2440) and [ElectionAdministration](#_18_0_2_6340208_1441311877439_710008_4433) and
-[GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) references Person. Person optionally references [ContactInformation](#_17_0_5_1_43401a7_1400624327407_326048_3637) for associating contact information.
-
-Multiple occurrences of the MiddleName attribute can be used as needed, e.g., for names such as “John Andrew Winston Smith”.
+[PartySelection](#_17_0_2_4_f71035d_1426519980658_594892_2511) is a subclass of [ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906) and is used typically for a contest selection in a straight-party contest.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_f71035d_1409158807179_27867_2211"></a>`{ContactInformation}`|0..*|`ContactInformation`|For associating contact information with the person.
-<a name="_18_0_2_6340208_1425648435033_458578_4893"></a>`DateOfBirth`|0..1|`date`|Person’s date of birth.
-<a name="_18_0_2_6340208_1498659439219_798023_4630"></a>`ExternalIdentifier`|0..*|`ExternalIdentifier`|For associating codes with the person.
-<a name="_17_0_2_4_f71035d_1400615204010_564458_2712"></a>`FirstName`|0..1|`RichText`|Person’s first (given) name.
-<a name="_17_0_2_4_f71035d_1430494058940_208317_2499"></a>`FullName`|0..1|`InternationalizedText`|Person’s full name.
-<a name="_17_0_2_4_f71035d_1434470206427_617716_2233"></a>`Gender`|0..1|`RichText`|Person’s gender.
-<a name="_17_0_2_4_78e0236_1389710872821_553533_2172"></a>`LastName`|0..1|`RichText`|Person’s last (family) name.
-<a name="_17_0_2_4_f71035d_1400615257828_340032_2716"></a>`MiddleName`|0..*|`RichText`|Person’s middle name.
-<a name="_17_0_2_4_f71035d_1401280254171_19718_2456"></a>`Nickname`|0..1|`RichText`|Nickname associated with the person.
-<a name="_17_0_5_1_43401a7_1400673254137_48726_3702"></a>`{Party}`|0..1|`Party`|Links to a [Party](#_17_0_2_4_78e0236_1389366278128_412819_2460) instance. For associating a political party with the person.
-<a name="_17_0_5_1_43401a7_1400674672870_670385_3783"></a>`Prefix`|0..1|`RichText`|A prefix associated with the person, e.g., Mr.
-<a name="_17_0_5_1_43401a7_1400673145437_284424_3693"></a>`Profession`|0..1|`InternationalizedText`|Person’s profession.
-<a name="_17_0_2_4_f71035d_1400615284895_343066_2720"></a>`Suffix`|0..1|`RichText`|A suffix associated with the person, e.g., Jr.
-<a name="_17_0_5_1_43401a7_1400624817153_655858_3721"></a>`Title`|0..1|`InternationalizedText`|A title associated with the person.
+<a name="_17_0_2_4_f71035d_1426520590194_384550_2564"></a>`{Party}`|1..*|`Party`|The party associated with the contest selection.
 
 
 ### <a name="_17_0_2_4_78e0236_1389798013459_389380_4178"></a>*The **ReportingDevice** Class*
 
-![Image of ReportingDevice](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_78e0236_1389798977982_371820_5343.png)
+![Image of ReportingDevice](CastVoteRecords_UML_Documentation_files/_17_0_2_4_78e0236_1389798977982_371820_5343.png)
 
-Class/element describing a specific vote-capture device.
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_f71035d_1430428476569_589857_2241"></a>`DeviceClass`|0..1|`DeviceClass`|Used for reporting on details about the type of voting device used for the results in question.
-<a name="_17_0_2_4_d420315_1393446014406_394266_2688"></a>`SerialNumber`|0..1|`RichText`|Device's serial number or other unique identifier.
-
-
-### <a name="_17_0_2_4_f71035d_1400606476166_735297_2593"></a>*The **ReportingUnit** Class*
-
-![Image of ReportingUnit](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_f71035d_1400606476167_480570_2594.png)
-
-For defining a geopolitical unit such as state, county, township, precinct, etc., using the [ReportingUnitType](#_17_0_2_4_f71035d_1431607637366_785815_2242) enumeration. It inherits the attributes of [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380).
-
-This class optionally references [Person](#_17_0_5_1_43401a7_1400623980732_100904_3567) to associate one or more individuals, e.g., authorities, for the reporting unit. It also includes [ContactInformation](#_17_0_5_1_43401a7_1400624327407_326048_3637) to provide contact addresses for the reporting unit, such as an address of a vote center.
-
-[Election](#_17_0_2_4_f71035d_1426101822599_430942_2209) references this class so as to identify the geographical scope of the election. In this case, the [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) element defined for the scope of the election may include [ElectionAdministration](#_18_0_2_6340208_1441311877439_710008_4433) to include election authority-related information.
-
-The [Type](#_17_0_2_4_78e0236_1389713376966_77071_2393) attribute uses the [ReportingUnitType](#_17_0_2_4_f71035d_1431607637366_785815_2242) enumeration to specify the type of geopolitical geography being defined. [ReportingUnitType](#_17_0_2_4_f71035d_1431607637366_785815_2242) contains the most common types of geographies, e.g., state, county, precinct, and so forth. If the reporting unit type is not listed in enumeration [ReportingUnitType](#_17_0_2_4_f71035d_1431607637366_785815_2242), use other and include the reporting unit type (that is not listed in the enumeration) in [OtherType](#_17_0_2_4_f71035d_1426007519161_685921_2510).
-
-The [IsDistricted](#_17_0_2_4_f71035d_1441207733430_83517_2240) boolean can be used in a number of ways. It is not strictly necessary, as it is possible to identify districts by their [Type](#_17_0_2_4_78e0236_1389713376966_77071_2393) attribute or by examining the [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) instance’s [ElectionDistrict](#_17_0_2_4_78e0236_1389366667508_703141_2753) reference, which links to the election district associated with the contest. However, if a district is defined but is not linked from a contest, or if the type of district is not listed in the [ReportingUnitType](#_17_0_2_4_f71035d_1431607637366_785815_2242) enumeration and therefore [OtherType](#_17_0_2_4_f71035d_1426007519161_685921_2510) is used, then [IsDistricted](#_17_0_2_4_f71035d_1441207733430_83517_2240) is necessary to identify the [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) as a district. The [IsDistricted](#_17_0_2_4_f71035d_1441207733430_83517_2240) boolean can also be used to signify that a [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) defined as a jurisdiction, e.g., a county, is also used as a district for, e.g., county-wide contests.
+[ReportingDevice](#_17_0_2_4_78e0236_1389798013459_389380_4178) is used to specify a voting device as the “political geography” at hand. [CastVoteRecordReport](#_17_0_2_4_78e0236_1389366195564_913164_2300) refers to it as [ReportGeneratingDevice](#_18_0_5_43401a7_1484155960667_232191_4295) and uses it to specify the device that created the CVR report. [CVR](#_18_0_2_6340208_1532543460307_914551_4600) refers to it as [CreatingDevice](#_18_5_3_43701b0_1533931125455_124502_5709) to specify the device that created the CVRs.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-<a name="_17_0_5_1_43401a7_1400624362436_113642_3662"></a>`{Authority}`|0..*|`Person`|A link to one or more [Person](#_17_0_5_1_43401a7_1400623980732_100904_3567) instances describing an authority responsible for the reporting unit.
-<a name="_17_0_2_4_f71035d_1429207854277_960649_2231"></a>`{ContactInformation}`|0..1|`ContactInformation`|For associating contact information with the reporting unit.
-<a name="_17_0_2_4_f71035d_1430754449802_75794_2264"></a>`CountStatus`|0..*|`CountStatus`|For providing various counting status on types of ballots or other items.
-<a name="_18_0_2_6340208_1441312768897_951923_4552"></a>`{ElectionAdministration}`|0..1|`ElectionAdministration`|For use when the reporting unit serves as the authority in the election.
-<a name="_17_0_2_4_f71035d_1441207733430_83517_2240"></a>`IsDistricted`|0..1|`Boolean`|Boolean to indicate whether the reporting unit is a district; assumed to be “false” if not present.
-<a name="_17_0_2_4_f71035d_1443123936727_89395_2220"></a>`IsMailOnly`|0..1|`Boolean`|Boolean to indicate whether the reporting unit handles only mail-in or absentee ballot elections, assumed to be “false” if not present.
-<a name="_18_0_2_6340208_1497894720963_498162_4611"></a>`Number`|0..1|`String`|A number associated with the reporting unit; for compatibility with VIP.
-<a name="_17_0_2_4_f71035d_1409141976968_835708_2555"></a>`{PartyRegistration}`|0..*|`PartyRegistration`|For associating a count of registered voters per party with the geopolitical unit.
-<a name="_17_0_2_4_f71035d_1426084480956_43890_2738"></a>`{SpatialDimension}`|0..1|`SpatialDimension`|For describing the reporting unit’s spatial extent (a polygon that shows the related area).
-<a name="_17_0_2_4_d420315_1393507535261_72915_3031"></a>`SubUnitsReported`|0..1|`Integer`|Number of associated subunits such as precincts that have completed reporting.
-<a name="_17_0_2_4_d420315_1393507564958_992105_3035"></a>`TotalSubUnits`|0..1|`Integer`|Total number of associated subunits such as precincts.
-<a name="_17_0_2_4_78e0236_1389713376966_77071_2393"></a>`Type`|1|`ReportingUnitType`|Enumerated type of reporting unit, e.g., state, county, district, precinct, etc.
-<a name="_17_0_2_4_f71035d_1426007519161_685921_2510"></a>`OtherType`|0..1|`String`|For use when [ReportingUnitType](#_17_0_2_4_78e0236_1389713376966_77071_2393) value is other.
-<a name="_17_0_2_4_f71035d_1409163555614_991016_2207"></a>`VotersParticipated`|0..1|`Integer`|Number of voters who have participated in the election, i.e., shown up at the polls, including those who did not cast ballots.
-<a name="_17_0_2_4_78e0236_1389730517829_705754_2675"></a>`VotersRegistered`|0..1|`Integer`|Number of registered voters residing within the boundaries of the geopolitical unit.
+<a name="_18_0_5_43401a7_1484156729348_915950_4329"></a>`Application`|0..1|`String`|The application associated with the reporting device.
+<a name="_19_0_43701b0_1545400619649_205122_5079"></a>`Code`|0..*|`Code`|A code associated with the reporting device.
+<a name="_17_0_2_4_f71035d_1401286171326_648907_2273"></a>`Manufacturer`|0..1|`String`|Manufacturer of the reporting device.
+<a name="_18_0_2_6340208_1488984847640_305895_4706"></a>`MarkMetricType`|0..1|`String`|The type of metric being used to determine quality. The type must be specific enough that the attached value can be accurately verified later, e.g., 'Acme Mark Density' may be a sufficiently specific type.
+<a name="_17_0_2_4_f71035d_1401286117587_806540_2269"></a>`Model`|0..1|`String`|Manufacturer's model of the reporting device.
+<a name="_18_0_5_43401a7_1484156092074_357957_4321"></a>`Notes`|0..*|`String`|Additional explanatory notes as applicable.
+<a name="_17_0_2_4_d420315_1393446014406_394266_2688"></a>`SerialNumber`|0..1|`String`|Serial number or other identification that can uniquely identify the reporting device.
 
 
 ### <a name="_18_0_2_6340208_1425646217522_163181_4554"></a>*The **RetentionContest** Class*
 
-![Image of RetentionContest](Election_Results_Reporting_UML_documentation_files/_18_0_2_6340208_1425646217525_713812_4555.png)
+![Image of RetentionContest](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1425646217525_713812_4555.png)
 
-For judicial retention or other types of retention contests. Retention contests can be treated essentially as ballot measure contests, however this element differs from
-[BallotMeasureContest](#_17_0_2_4_78e0236_1389366932057_929676_2783) in that it can include a reference to a candidate or the associated office.
-
-This element uses [BallotMeasureContest](#_17_0_2_4_78e0236_1389366932057_929676_2783) as a superclass. Therefore, it inherits the attributes of [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400) as well as [BallotMeasureContest](#_17_0_2_4_78e0236_1389366932057_929676_2783).
+[RetentionContest](#_18_0_2_6340208_1425646217522_163181_4554) is a subclass of [BallotMeasureContest](#_17_0_2_4_78e0236_1389366932057_929676_2783) and is used to identify the type of contest as involving a retention, such as for a judicial retention. While it is similar to [BallotMeasureContest](#_17_0_2_4_78e0236_1389366932057_929676_2783), it contains a link to [Candidate](#_17_0_2_4_78e0236_1389366272694_544359_2440) that [BallotMeasureContest](#_17_0_2_4_78e0236_1389366932057_929676_2783) does not. [RetentionContest](#_18_0_2_6340208_1425646217522_163181_4554) inherits attributes from [Contest](#_17_0_2_4_78e0236_1389366251994_876831_2400).
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-<a name="_18_0_2_6340208_1425646466278_708197_4616"></a>`{Candidate}`|1|`Candidate`|Link to a [Candidate](#_17_0_2_4_78e0236_1389366272694_544359_2440) instance. For associating a candidate with the retention contest.
-<a name="_18_0_2_6340208_1425646257224_14886_4580"></a>`{Office}`|0..1|`Office`|Link to an [Office](#_17_0_5_1_43401a7_1400623830572_164081_3518) instance. For associating an office description with the retention contest.
+<a name="_18_0_2_6340208_1425646466278_708197_4616"></a>`{Candidate}`||`Candidate`|Identifies the candidate in the retention contest.
 
 
-### <a name="_18_0_2_6340208_1427122121448_198970_4547"></a>*The **Schedule** Class*
+### <a name="_18_0_2_6340208_1485892992407_492157_4635"></a>*The **SelectionPosition** Class*
 
-![Image of Schedule](Election_Results_Reporting_UML_documentation_files/_18_0_2_6340208_1427122121457_980308_4548.png)
+![Image of SelectionPosition](CastVoteRecords_UML_Documentation_files/_18_0_2_6340208_1485892992418_910967_4658.png)
 
-For defining a schedule associated with a particular election office or location. [ContactInformation](#_17_0_5_1_43401a7_1400624327407_326048_3637) includes Schedule.
+[CVRContestSelection](#_18_0_5_43401a7_1474452890357_299022_4292) includes [SelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635) to specify a voter's indication/mark in a contest option, and thus, a potential vote. The number of potential SelectionPositions that could be included by [CVRContestSelection](#_18_0_5_43401a7_1474452890357_299022_4292) is the same as the number of ovals next to a particular option. There will be usually 1 instance of [SelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635) for plurality voting, but there could be multiple instances for RCV, approval, cumulative, or other vote variations in which a voter can select multiple options per candidate.
 
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_18_0_2_6340208_1427122219893_697937_4628"></a>`{Hours}`|0..*|`Hours`|For specifying a range of hours for a schedule.
-<a name="_18_0_2_6340208_1427122382178_611115_4660"></a>`IsOnlyByAppointment`|0..1|`Boolean`|If an appointment is only by appointment; assumed to be “no” if not present.
-<a name="_18_0_2_6340208_1427122372629_379532_4658"></a>`IsOrByAppointment`|0..1|`Boolean`|If an appointment can by appointment presumably as desired; assumed to be “no” if not present.
-<a name="_18_0_2_6340208_1427122390387_8752_4662"></a>`IsSubjectToChange`|0..1|`Boolean`|If an appointment may be subject to change; assumed to be “no” if not present.
-<a name="_17_0_2_4_f71035d_1441362119057_984284_2224"></a>`Label`|0..1|`String`|For use as needed and compatibility with the VIP schema.
-<a name="_18_0_2_6340208_1427122157536_969193_4595"></a>`StartDate`|0..1|`date`|For the starting date of the schedule.
-<a name="_18_0_2_6340208_1427122178673_228183_4597"></a>`EndDate`|0..1|`date`|For the ending date of the schedule.
+[MarkMetricValue](#_18_0_2_6340208_1488984862414_760136_4710) specifies the measurement of a mark on a paper ballot. The measurement is assigned by the scanner for measurements of mark density or quality and would be used by the scanner to indicate whether the mark is a valid voter mark representing a vote or is marginal.
 
+[SelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635) contains additional information about the mark to specify whether the indication/mark is allocable, as well as information needed for certain voting methods.
 
-### <a name="_18_0_2_6340208_1499878618645_537953_4560"></a>*The **ShortString** Class*
-
-![Image of ShortString](Election_Results_Reporting_UML_documentation_files/_18_0_2_6340208_1499878618648_579134_4561.png)
-
-For defining a 32-character annotation, used with character strings in [AnnotatedString](#_18_0_2_6340208_1497553224568_429892_4565).
+[SelectionPosition](#_18_0_2_6340208_1485892992407_492157_4635) includes [CVRWriteIn](#_18_0_2_6340208_1485892911278_166697_4594), whose attributes are used to include information about the write-in including the text of the write-in or an image of the write-in.
 
 Attribute | Multiplicity | Type | Attribute Description
 --------- | ------------ | ---- | ---------------------
-<a name="_18_0_2_6340208_1499878669447_998177_4582"></a>`maxLength`||`Integer`|The maximum allowed length of a ShortString.
-
-
-### <a name="_17_0_2_4_f71035d_1407165065674_39189_2188"></a>*The **SpatialDimension** Class*
-
-![Image of SpatialDimension](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_f71035d_1407165065676_7001_2189.png)
-
-For defining the spatial layout of a [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380), e.g., a map or a spatial extent (a polygon that shows the related area) for various purposes, including to visualize election results, to understand the composition of districts, or to determine whether [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) instances are properly related. [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) includes SpatialDimension.
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_f71035d_1407172954401_413137_2508"></a>`MapUri`|0..*|`AnnotatedUri`|Typically a URI to a map of the [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380).
-<a name="_17_0_2_4_f71035d_1409080509711_839030_2261"></a>`{SpatialExtent}`|0..1|`SpatialExtent`|For associating a [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) element’s spatial extent information.
-
-
-### <a name="_17_0_2_4_f71035d_1409080246279_778720_2209"></a>*The **SpatialExtent** Class*
-
-![Image of SpatialExtent](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_f71035d_1409080246298_242462_2210.png)
-
-[SpatialDimension](#_17_0_2_4_f71035d_1407165065674_39189_2188) includes SpatialExtent for defining a [GpUnit](#_17_0_2_4_78e0236_1389366233346_42391_2380) instance’s spatial extent data and the format used for the spatial extent.
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_f71035d_1409080350911_799955_2232"></a>`Coordinates`|1|`RichText`|The data coordinates constituting the spatial extent.
-<a name="_17_0_2_4_f71035d_1409080287789_708966_2228"></a>`Format`|1|`GeoSpatialFormat`|Enumerated type for the format used, e.g., gml, kml, wkt, etc.
-
-
-### <a name="_17_0_2_4_f71035d_1428489072598_282236_2217"></a>*The **Term** Class*
-
-![Image of Term](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_f71035d_1428489072603_236447_2218.png)
-
-For describing information about an office term. [Term](#_17_0_2_4_f71035d_1428489072598_282236_2217) is included by [Office](#_17_0_5_1_43401a7_1400623830572_164081_3518).
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_18_0_2_6340208_1505852448141_524598_4584"></a>`Label`|0..1|`String`|For use as needed and compatibility with the VIP schema.
-<a name="_17_0_2_4_f71035d_1400610432611_11829_2688"></a>`StartDate`|0..1|`date`|Start date for the current term of the office.
-<a name="_17_0_2_4_f71035d_1400610488881_890128_2692"></a>`EndDate`|0..1|`date`|End date for the current term of the office.
-<a name="_17_0_2_4_f71035d_1400610203299_137168_2676"></a>`Type`|0..1|`OfficeTermType`|Enumerated type of term, e.g., full-term, unexpired-term, etc.
-
-
-### <a name="_18_0_2_6340208_1427385616970_86952_4407"></a>*The **TimeWithZone** Class*
-
-![Image of TimeWithZone](Election_Results_Reporting_UML_documentation_files/_18_0_2_6340208_1427385616977_352513_4414.png)
-
-Restricts time to require inclusion of time zone information and excludes fractional seconds
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_18_0_2_6340208_1427385616971_659746_4409"></a>`pattern`||`String`|Pattern used for indicating the time with the accompanying time zone.
-
-
-### <a name="_17_0_2_4_78e0236_1397156604549_15838_2489"></a>*The **VoteCounts** Class*
-
-![Image of VoteCounts](Election_Results_Reporting_UML_documentation_files/_17_0_2_4_78e0236_1397156604556_583070_2490.png)
-
-For reporting on vote counts for contest selections in a contest. VoteCounts includes [Counts](#_17_0_2_4_78e0236_1389367291663_284973_2835) as an extension base and therefore inherits the elements from [Counts](#_17_0_2_4_78e0236_1389367291663_284973_2835), but it is included directly by [ContestSelection](#_17_0_2_4_78e0236_1389372124445_11077_2906).
-
-Attribute | Multiplicity | Type | Attribute Description
---------- | ------------ | ---- | ---------------------
-<a name="_17_0_2_4_78e0236_1389710697333_279003_2167"></a>`Count`|1|`double`|Count of contest votes cast; can include a factional component in special cases.
+<a name="_19_0_43701b0_1541096140220_743803_5066"></a>`Code`|0..*|`Code`|Code used to identify the contest selection position.
+<a name="_19_0_43701b0_1541096285019_709577_5079"></a>`{CVRWriteIn}`|0..1|`CVRWriteIn`|Used to store information regarding a write-in vote.
+<a name="_19_0_43701b0_1556130739145_967916_5093"></a>`FractionalVotes`|0..1|`FractionalNumber`|The proper fractional number of votes represented by the position.
+<a name="_19_0_43701b0_1541095481007_618279_4996"></a>`HasIndication`|1|`IndicationStatus`|Whether there is a selection indication present.
+<a name="_18_0_2_6340208_1532546142492_921207_4764"></a>`IsAllocable`|0..1|`AllocationStatus`|Whether this indication should be allocated to the contest option's accumulator.
+<a name="_19_0_43701b0_1543438269888_294947_5070"></a>`IsGenerated`|0..1|`Boolean`|Whether or not the indication was generated, rather than directly made by the voter.
+<a name="_18_0_2_6340208_1488984862414_760136_4710"></a>`MarkMetricValue`|0..*|`String`|The value of the mark metric, represented as a string.
+<a name="_18_0_2_6340208_1485892992408_339917_4637"></a>`NumberVotes`|1|`Integer`|The number of votes represented by the position, usually 1 but may be more depending on the voting method.
+<a name="_18_0_2_6340208_1485892992408_897036_4641"></a>`Position`|0..1|`Integer`|The ordinal position of the selection position within the contest option.
+<a name="_18_0_2_6340208_1485892992407_101557_4636"></a>`Rank`|0..1|`Integer`|For the RCV voting variation, the rank chosen by the voter, for when a position can represent a ranking.
+<a name="_18_0_2_6340208_1485892992408_985925_4639"></a>`Status`|0..*|`PositionStatus`|Status of the position, e.g., "generated-rules" for generated by the machine, from the [PositionStatus](#_18_0_2_6340208_1485894157707_572874_4551) enumeration. If no values apply, use 'other' and include a user-defined status in OtherStatus.
+<a name="_18_0_2_6340208_1485892992408_385738_4640"></a>`OtherStatus`|0..1|`String`|Used when [Status](#_18_0_2_6340208_1485892992408_985925_4639) is 'other' to include a user-defined status.
