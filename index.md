@@ -1,40 +1,17 @@
-# National Institute of Standards and Technology (NIST) Special Publication 1500-103, Cast Vote Records Common Data Format Specification Version 1.0
+# National Institute of Standards and Technology (NIST) Special Publication 1500-103, Cast Vote Records Common Data Format Specification Version 1
 
 **March 2020**
 
-**The following is an excerpt from the SP 1500-103 specification. It contains the specification's executive summary and class documentation.**
+**The following is an excerpt from the SP 1500-103 V1 specification. It contains the specification's executive summary and class documentation.**
 
 The complete publication including JSON and XML schemas is available free of charge from:
 
 <https://github.com/usnistgov/CastVoteRecords>
 
-# Executive Summary
-
-This document presents an interoperable, common data format specification for cast vote records (CVR), which are produced by vote-capture devices such as ballot scanners.  A CVR is an electronic record of a voter’s selections, with usually one CVR created per sheet (page) of a ballot.  Election results are produced by tabulating the collection of CVRs, and audits can be done by comparisons of the paper ballots or paper records of voter selections against the CVRs.
-
-This specification supports three general use cases for CVRs:
-
-- Interoperable exports of CVRs from devices such as scanners for import into tabulators, election management systems (EMS), or auditing systems.
-- Interoperable exports of aggregated collections of CVRs from aggregating devices such as election management systems.
-- Update of CVRs after adjudication.
-
-The purpose of this specification is to provide an interoperable, non-proprietary data exchange format in JavaScript Object Notation (JSON) and eXtensible Markup Language (XML) for CVRs so as to promote greater transparency to voting records produced by vote-capture devices, and to facilitate the exchange of CVRs with other devices that operate upon CVRs regardless of device manufacturer.
-
-The specification includes a UML (Unified Markup Language) model and references XML (eXtensible Markup Language) and JSON (JavaScript Object Notation) schemas that were created from the UML model.
-
-There are many complex operations performed by voting devices when voters submit their paper ballots to be scanned.  These operations are mostly invisible to voters but are necessary to determine whether contest selections have been marked adequately and whether voter intent is reflected by what is marked on the ballot.  This specification includes the necessary detail to capture these operations so that CVRs can be better audited and adjudicated as necessary to include write-in candidates or other issues.
-
-This specification is geared towards the following audiences:
-
-- Election officials
-- Voting equipment manufacturers
-- Election analysts and auditors
-- Election-affiliated organizations
-- The public
 
 # Table of Contents
 
-- Table of Contents
+  - **[Executive Summary](#execsum)**
   - Enumerations
     - *The **[AllocationStatus](#18_5_3_43701b0_1533322047899_321573_5682)** Enumeration*
     - *The **[CastVoteRecordVersion](#18_0_2_6340208_1488984734564_983877_4662)** Enumeration*
@@ -78,6 +55,30 @@ This specification is geared towards the following audiences:
     - *The **[ReportingDevice](#17_0_2_4_78e0236_1389798013459_389380_4178)** Class*
     - *The **[RetentionContest](#18_0_2_6340208_1425646217522_163181_4554)** Class*
     - *The **[SelectionPosition](#18_0_2_6340208_1485892992407_492157_4635)** Class*
+
+## Executive Summary<a name="execsum"></a>
+
+This document presents an interoperable, common data format specification for cast vote records (CVR), which are produced by vote-capture devices such as ballot scanners.  A CVR is an electronic record of a voter’s selections, with usually one CVR created per sheet (page) of a ballot.  Election results are produced by tabulating the collection of CVRs, and audits can be done by comparisons of the paper ballots or paper records of voter selections against the CVRs.
+
+This specification supports three general use cases for CVRs:
+
+- Interoperable exports of CVRs from devices such as scanners for import into tabulators, election management systems (EMS), or auditing systems.
+- Interoperable exports of aggregated collections of CVRs from aggregating devices such as election management systems.
+- Update of CVRs after adjudication.
+
+The purpose of this specification is to provide an interoperable, non-proprietary data exchange format in JavaScript Object Notation (JSON) and eXtensible Markup Language (XML) for CVRs so as to promote greater transparency to voting records produced by vote-capture devices, and to facilitate the exchange of CVRs with other devices that operate upon CVRs regardless of device manufacturer.
+
+The specification includes a UML (Unified Markup Language) model and references XML (eXtensible Markup Language) and JSON (JavaScript Object Notation) schemas that were created from the UML model.
+
+There are many complex operations performed by voting devices when voters submit their paper ballots to be scanned.  These operations are mostly invisible to voters but are necessary to determine whether contest selections have been marked adequately and whether voter intent is reflected by what is marked on the ballot.  This specification includes the necessary detail to capture these operations so that CVRs can be better audited and adjudicated as necessary to include write-in candidates or other issues.
+
+This specification is geared towards the following audiences:
+
+- Election officials
+- Voting equipment manufacturers
+- Election analysts and auditors
+- Election-affiliated organizations
+- The public
 
 ## Enumerations
 
