@@ -8,6 +8,8 @@ The CVR specification is also available using the following Digital Object Ident
 
 https://doi.org/10.6028/NIST.SP.1500-103
 
+NOTE: the version of the specification located in this repository has some minor documentation corrections that have not been corrected in the DOI version.
+
 The CVR specification supports 3 general use cases:
 
 1. Interoperable exports of CVRs from devices such as scanners, DREs (direct record electronic), or other devices that create CVRs and perform contest rule post-processing. Resultant interoperable import into tabulators, such as election management systems (EMS), or import into auditing systems, or import into adjudication systems.
