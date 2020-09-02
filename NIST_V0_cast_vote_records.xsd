@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema elementFormDefault="qualified" targetNamespace="NIST_V0_cast_vote_records.xsd" version="0.0" xmlns="NIST_V0_cast_vote_records.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema xmlns="http://itl.nist.gov/ns/voting/1500-103/v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://itl.nist.gov/ns/voting/1500-103/v1" elementFormDefault="qualified" version="1.0.3">
   <!-- ========== Roots ========== -->
   <xsd:element name="CastVoteRecordReport" type="CastVoteRecordReport"/>
   <!-- ========== Primitives ========== -->
