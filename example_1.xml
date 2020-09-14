@@ -1,11 +1,11 @@
-<CastVoteRecordReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="NIST_V0_cast_vote_records.xsd" xsi:schemaLocation="NIST_V0_cast_vote_records.xsd file:///C:/Users/john/Documents/GitHub/CastVoteRecords/NIST_V0_cast_vote_records.xsd">
-	<!-- 5.1 Examples -->	
-	<CVR>		
+<CastVoteRecordReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="NIST_V0_cast_vote_records.xsd">
+	<!-- 5.1 Examples -->
+	<CVR>
 		<BallotImage>
 			<Image FileName="CVR1_Ballot.jpg" MimeType="image/jpeg"/>
 		</BallotImage>
 		<BallotStyleId>bs1</BallotStyleId>
-		<CurrentSnapshotId>cvr-001</CurrentSnapshotId>		
+		<CurrentSnapshotId>cvr-001</CurrentSnapshotId>
 		<CVRSnapshot ObjectId="cvr-001">
 			<CVRContest>
 				<ContestId>_C1</ContestId>
@@ -20,7 +20,7 @@
 				</CVRContestSelection>
 			</CVRContest>
 			<Type>original</Type>
-		</CVRSnapshot>		
+		</CVRSnapshot>
 		<ElectionId>_EL7</ElectionId>
 		<UniqueId>1</UniqueId>
 	</CVR>
@@ -98,7 +98,7 @@
 						<IsAllocable>no</IsAllocable>
 						<MarkMetricValue>96</MarkMetricValue>
 						<NumberVotes>1</NumberVotes>
-						<Position>2</Position>						
+						<Position>2</Position>
 					</SelectionPosition>
 					<SelectionPosition>
 						<HasIndication>yes</HasIndication>
@@ -115,7 +115,7 @@
 		</CVRSnapshot>
 		<ElectionId>_EL7</ElectionId>
 		<UniqueId>4</UniqueId>
-	</CVR>	
+	</CVR>
 	<!-- write-in example -->
 	<CVR>
 		<BallotImage>
@@ -123,7 +123,7 @@
 		</BallotImage>
 		<BallotStyleId>bs1</BallotStyleId>
 		<CurrentSnapshotId>cvr-005</CurrentSnapshotId>
-		<CVRSnapshot ObjectId="cvr-005">	
+		<CVRSnapshot ObjectId="cvr-005">
 			<CVRContest>
 				<ContestId>_C1</ContestId>
 				<CVRContestSelection>
@@ -153,7 +153,7 @@
 		</CVRSnapshot>
 		<ElectionId>_EL7</ElectionId>
 		<UniqueId>61</UniqueId>
-	</CVR>	
+	</CVR>
 	<CVR>
 		<BallotStyleId>bs1</BallotStyleId>
 		<CurrentSnapshotId>cvr-006</CurrentSnapshotId>
@@ -161,7 +161,7 @@
 			<CVRContest>
 				<ContestId>_C1</ContestId>
 				<CVRContestSelection>
-					<ContestSelectionId>_C1CS1</ContestSelectionId>					
+					<ContestSelectionId>_C1CS1</ContestSelectionId>
 					<SelectionPosition>
 						<HasIndication>yes</HasIndication>
 						<IsAllocable>yes</IsAllocable>
@@ -171,7 +171,7 @@
 					<TotalNumberVotes>1</TotalNumberVotes>
 				</CVRContestSelection>
 				<CVRContestSelection>
-					<ContestSelectionId>_C1CS2</ContestSelectionId>					
+					<ContestSelectionId>_C1CS2</ContestSelectionId>
 					<SelectionPosition>
 						<HasIndication>no</HasIndication>
 						<IsAllocable>no</IsAllocable>
@@ -200,7 +200,7 @@
 			<Type>original</Type>
 		</CVRSnapshot>
 		<ElectionId>_EL7</ElectionId>
-		<UniqueId>57</UniqueId>	
+		<UniqueId>57</UniqueId>
 	</CVR>
 	<Election ObjectId="_EL7">
 		<Candidate ObjectId="_C1CN1">
