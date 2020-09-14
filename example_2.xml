@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<cdf:CastVoteRecordReport xmlns:cdf="NIST_V0_cast_vote_records.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<cdf:CastVoteRecordReport xmlns:cdf="http://itl.nist.gov/ns/voting/1500-103/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<cdf:CVR>
 		<cdf:BallotStyleId>_01-0052-01</cdf:BallotStyleId>
 		<cdf:CurrentSnapshotId>css-01</cdf:CurrentSnapshotId>

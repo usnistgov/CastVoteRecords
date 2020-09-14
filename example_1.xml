@@ -1,9 +1,10 @@
-<CastVoteRecordReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="NIST_V0_cast_vote_records.xsd" xsi:schemaLocation="NIST_V0_cast_vote_records.xsd file:///C:/Users/john/Documents/GitHub/CastVoteRecords/NIST_V0_cast_vote_records.xsd">
+<CastVoteRecordReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="NIST_V0_cast_vote_records.xsd">
 	<!-- 5.1 Examples -->
 	<CVR>
 		<BallotImage>
 			<Image FileName="CVR1_Ballot.jpg" MimeType="image/jpeg"/>
 		</BallotImage>
+		<BallotStyleId>bs1</BallotStyleId>
 		<CurrentSnapshotId>cvr-001</CurrentSnapshotId>
 		<CVRSnapshot ObjectId="cvr-001">
 			<CVRContest>
@@ -27,6 +28,7 @@
 		<BallotImage>
 			<Image FileName="CVR2_Ballot.jpg" MimeType="image/jpeg"/>
 		</BallotImage>
+		<BallotStyleId>bs1</BallotStyleId>
 		<CurrentSnapshotId>cvr-002</CurrentSnapshotId>
 		<CVRSnapshot ObjectId="cvr-002">
 			<CVRContest>
@@ -46,7 +48,12 @@
 		<ElectionId>_EL7</ElectionId>
 		<UniqueId>2</UniqueId>
 	</CVR>
+	<!-- use of MarkMetric -->
 	<CVR>
+		<BallotImage>
+			<Image FileName="CVR3_Ballot.jpg" MimeType="image/jpeg"/>
+		</BallotImage>
+		<BallotStyleId>bs1</BallotStyleId>
 		<CurrentSnapshotId>cvr-003</CurrentSnapshotId>
 		<CVRSnapshot ObjectId="cvr-003">
 			<CVRContest>
@@ -72,9 +79,14 @@
 			<Type>interpreted</Type>
 		</CVRSnapshot>
 		<ElectionId>_EL7</ElectionId>
-		<UniqueId>1</UniqueId>
+		<UniqueId>3</UniqueId>
 	</CVR>
+	<!-- overvote example -->
 	<CVR>
+		<BallotImage>
+			<Image FileName="CVR4_Ballot.jpg" MimeType="image/jpeg"/>
+		</BallotImage>
+		<BallotStyleId>bs1</BallotStyleId>
 		<CurrentSnapshotId>cvr-004</CurrentSnapshotId>
 		<CVRSnapshot ObjectId="cvr-004">
 			<CVRContest>
@@ -87,7 +99,6 @@
 						<MarkMetricValue>96</MarkMetricValue>
 						<NumberVotes>1</NumberVotes>
 						<Position>2</Position>
-						<Status>invalidated-rules</Status>
 					</SelectionPosition>
 					<SelectionPosition>
 						<HasIndication>yes</HasIndication>
@@ -103,21 +114,20 @@
 			<Type>interpreted</Type>
 		</CVRSnapshot>
 		<ElectionId>_EL7</ElectionId>
-		<UniqueId>2</UniqueId>
+		<UniqueId>4</UniqueId>
 	</CVR>
-	<!-- 5.3 Example -->
+	<!-- write-in example -->
 	<CVR>
+		<BallotImage>
+			<Image FileName="CVR5_Ballot.jpg" MimeType="image/jpeg"/>
+		</BallotImage>
+		<BallotStyleId>bs1</BallotStyleId>
 		<CurrentSnapshotId>cvr-005</CurrentSnapshotId>
 		<CVRSnapshot ObjectId="cvr-005">
-			<Annotation>
-				<AdjudicatorName>Mark Kennamond</AdjudicatorName>
-				<Message>Valid, Donny Nolte</Message>
-				<TimeStamp>2018-05-16T12:10:09</TimeStamp>
-			</Annotation>
 			<CVRContest>
 				<ContestId>_C1</ContestId>
 				<CVRContestSelection>
-					<ContestSelectionId>_C1CS1</ContestSelectionId>
+					<ContestSelectionId>_C1CS3</ContestSelectionId>
 					<SelectionPosition>
 						<CVRWriteIn>
 							<Text>Donald Nolte</Text>
@@ -133,7 +143,7 @@
 							</WriteInImage>
 						</CVRWriteIn>
 						<HasIndication>yes</HasIndication>
-						<IsAllocable>yes</IsAllocable>
+						<IsAllocable>unknown</IsAllocable>
 						<NumberVotes>1</NumberVotes>
 					</SelectionPosition>
 					<TotalNumberVotes>1</TotalNumberVotes>
@@ -144,15 +154,14 @@
 		<ElectionId>_EL7</ElectionId>
 		<UniqueId>61</UniqueId>
 	</CVR>
-	<!-- 5.4 Example -->
 	<CVR>
+		<BallotStyleId>bs1</BallotStyleId>
 		<CurrentSnapshotId>cvr-006</CurrentSnapshotId>
 		<CVRSnapshot ObjectId="cvr-006">
 			<CVRContest>
 				<ContestId>_C1</ContestId>
 				<CVRContestSelection>
 					<ContestSelectionId>_C1CS1</ContestSelectionId>
-					<Rank>3</Rank>
 					<SelectionPosition>
 						<HasIndication>yes</HasIndication>
 						<IsAllocable>yes</IsAllocable>
@@ -163,10 +172,9 @@
 				</CVRContestSelection>
 				<CVRContestSelection>
 					<ContestSelectionId>_C1CS2</ContestSelectionId>
-					<Rank>2</Rank>
 					<SelectionPosition>
-						<HasIndication>yes</HasIndication>
-						<IsAllocable>yes</IsAllocable>
+						<HasIndication>no</HasIndication>
+						<IsAllocable>no</IsAllocable>
 						<NumberVotes>1</NumberVotes>
 						<Position>2</Position>
 					</SelectionPosition>
@@ -175,13 +183,13 @@
 				<CVRContestSelection>
 					<ContestSelectionId>_C1CS3</ContestSelectionId>
 					<SelectionPosition>
-						<HasIndication>yes</HasIndication>
+						<HasIndication>no</HasIndication>
 						<IsAllocable>no</IsAllocable>
 						<NumberVotes>1</NumberVotes>
 						<Position>4</Position>
 					</SelectionPosition>
 					<SelectionPosition>
-						<HasIndication>yes</HasIndication>
+						<HasIndication>no</HasIndication>
 						<IsAllocable>no</IsAllocable>
 						<NumberVotes>1</NumberVotes>
 						<Position>1</Position>
@@ -204,7 +212,7 @@
 		<Candidate ObjectId="_C1CN2">
 			<Code>
 				<Type>local-level</Type>
-				<Value>_C1CN3</Value>
+				<Value>_C1CN2</Value>
 			</Code>
 		</Candidate>
 		<Candidate ObjectId="_C1CN3">
