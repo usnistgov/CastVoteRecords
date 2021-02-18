@@ -2,7 +2,7 @@
 
 **Organization Type**:
 
-**Document (e.g., VoterRecordsInterchange)**:
+**Document (e.g., CastVoteRecords)**:
 
 **Reference (Include section and paragraph number)**:
 
