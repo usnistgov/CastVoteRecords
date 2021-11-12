@@ -6,7 +6,7 @@
 
 **March 2020**
 
-**The following is an excerpt from the SP 1500-103 V1 specification. It contains the specification's executive summary and class documentation.**
+**The following is an excerpt from the SP 1500-103 V1 specification, containing the executive summary and UML class documentation.**
 
 The complete publication including JSON and XML schemas is available free of charge from:
 
