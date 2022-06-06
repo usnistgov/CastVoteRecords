@@ -59,4 +59,3 @@ QR Code will only appear (on the last page) if the Print button is selected or C
 ## Other Notes and Limitations
 
 - This prototype uses special features of the Adobe Acrobat / Reader software and will NOT work with other PDF viewers
-- The CVR CDF output produces an XML fragment, not a full CVR CDF instance
