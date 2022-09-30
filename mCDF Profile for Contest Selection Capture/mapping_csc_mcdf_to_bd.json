@@ -1,0 +1,145 @@
+{
+	"BallotFormat": [
+		{
+			"@id": "bf-1",
+			"ExternalIdentifier": [
+				{
+					"Type": "local-level",
+					"Value": "BF1",
+					"@type": "BallotDefinition.ExternalIdentifier"
+				}
+			],
+			"LongEdge": 1224,
+			"MeasurementUnit": "pt",
+			"Orientation": "portrait",
+			"SelectionCaptureMethod": "omr",
+			"ShortEdge": 612,
+			"@type": "BallotDefinition.BallotFormat"
+		}
+	],
+	"Election": [
+		{
+			"BallotStyle": [
+				{
+					"ExternalIdentifier": [
+						{
+							"Type": "local-level",
+							"Value": "052001",
+							"@type": "BallotDefinition.ExternalIdentifier"
+						}
+					],
+					"GpUnitIds": [
+						"prec-52"
+					],
+					"@type": "BallotDefinition.BallotStyle"
+				}
+			],
+			"Contest": [
+				{
+					"VotesAllowed": 3,
+					"@type": "BallotDefinition.CandidateContest",
+					"@id": "cc-1",
+					"ContestOption": [
+						{
+							"@type": "BallotDefinition.CandidateOption",
+							"@id": "cs-1hbr",
+							"ExternalIdentifier": [
+								{
+									"Type": "local-level",
+									"Value": "1HBR",
+									"@type": "BallotDefinition.ExternalIdentifier"
+								}
+							]
+						},
+						{
+							"@type": "BallotDefinition.CandidateOption",
+							"@id": "cs-1hdw",
+							"ExternalIdentifier": [
+								{
+									"Type": "local-level",
+									"Value": "1HDW",
+									"@type": "BallotDefinition.ExternalIdentifier"
+								}
+							]
+						},
+						{
+							"@type": "BallotDefinition.CandidateOption",
+							"@id": "cs-1hjd",
+							"ExternalIdentifier": [
+								{
+									"Type": "local-level",
+									"Value": "1HJD",
+									"@type": "BallotDefinition.ExternalIdentifier"
+								}
+							]
+						}
+					],
+					"ElectionDistrictId": "ed-1",
+					"ExternalIdentifier": [
+						{
+							"Type": "local-level",
+							"Value": "9CC",
+							"@type": "BallotDefinition.ExternalIdentifier"
+						}
+					],
+					"Name": "Contest A",
+					"VoteVariation": "n-of-m"
+				}
+			],
+			"ElectionScopeId": "gpu-39153",
+			"EndDate": "2022-11-08",
+			"ExternalIdentifier": [
+				{
+					"Type": "local-level",
+					"Value": "2014-11-04G",
+					"@type": "BallotDefinition.ExternalIdentifier"
+				}
+			],
+			"Name": {
+				"Text": [
+					{
+						"Content": "Example General Election",
+						"Language": "en-US",
+						"@type": "BallotDefinition.LanguageString"
+					}
+				],
+				"@type": "BallotDefinition.InternationalizedText"
+			},
+			"StartDate": "2022-11-08",
+			"Type": "general",
+			"@type": "BallotDefinition.Election"
+		}
+	],
+	"GeneratedDate": "2022-09-24T00:00:00Z",
+	"GpUnit": [
+		{
+			"Type": "county",
+			"@type": "BallotDefinition.ReportingUnit",
+			"@id": "gpu-39153",
+			"ExternalIdentifier": [
+				{
+					"Type": "local-level",
+					"Value": "39153",
+					"@type": "BallotDefinition.ExternalIdentifier"
+				}
+			]
+		},
+		{
+			"Type": "precinct",
+			"@type": "BallotDefinition.ReportingUnit",
+			"@id": "prec-52"
+		},
+		{
+			"Type": "city-council",
+			"@type": "BallotDefinition.ReportingUnit",
+			"@id": "ed-1"
+		}
+	],
+	"Issuer": "The Turnout LLC",
+	"IssuerAbbreviation": "Turnout",
+	"SequenceEnd": 1,
+	"SequenceStart": 1,
+	"VendorApplicationId": "Hand written",
+	"Version": "1.0.0",
+	"@type": "BallotDefinition.BallotDefinition"
+}
