@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CastVoteRecordReport xmlns="http://itl.nist.gov/ns/voting/1500-103/v1" xmlns:n1="http://itl.nist.gov/ns/voting/1500-103/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<CVR>
+		<CurrentSnapshotId>cvrs-1</CurrentSnapshotId>
+		<CVRSnapshot ObjectId="cvrs-1">
+			<CVRContest>
+				<ContestId>cc-1</ContestId>
+				<CVRContestSelection>
+					<ContestSelectionId>cs-1hbr</ContestSelectionId>
+					<SelectionPosition>
+						<HasIndication>yes</HasIndication>
+						<NumberVotes>1</NumberVotes>
+					</SelectionPosition>
+				</CVRContestSelection>
+				<CVRContestSelection>
+					<ContestSelectionId>cs-1hdw</ContestSelectionId>
+					<SelectionPosition>
+						<HasIndication>yes</HasIndication>
+						<NumberVotes>1</NumberVotes>
+					</SelectionPosition>
+				</CVRContestSelection>
+				<CVRContestSelection>
+					<ContestSelectionId>cs-1hjd</ContestSelectionId>
+					<SelectionPosition>
+						<HasIndication>yes</HasIndication>
+						<NumberVotes>1</NumberVotes>
+					</SelectionPosition>
+				</CVRContestSelection>
+			</CVRContest>
+			<Type>original</Type>
+		</CVRSnapshot>
+		<ElectionId>ele-20141104</ElectionId>
+	</CVR>
+	<Election ObjectId="ele-20141104">
+		<Contest xsi:type="CandidateContest" ObjectId="cc-1">
+		<Code>
+			<Type>local-level</Type>
+			<Value>9CC</Value>
+		</Code>
+			<ContestSelection ObjectId="cs-1hbr">
+				<Code>
+					<Type>local-level</Type>
+					<Value>1HBR</Value>
+				</Code>
+			</ContestSelection>
+			<ContestSelection ObjectId="cs-1hdw">
+				<Code>
+					<Type>local-level</Type>
+					<Value>1HDW</Value>
+				</Code>
+			</ContestSelection>
+			<ContestSelection ObjectId="cs-1hjd">
+				<Code>
+					<Type>local-level</Type>
+					<Value>1HJD</Value>
+				</Code>
+			</ContestSelection>
+		</Contest>
+		<ElectionScopeId>gpu-39153</ElectionScopeId>
+	</Election>
+	<GeneratedDate>2022-09-24T00:00:00Z</GeneratedDate>
+	<GpUnit ObjectId="gpu-39153">
+		<Code>
+			<Type>local-level</Type>
+			<Value>39153</Value>
+		</Code>
+		<Type>other</Type>
+		<OtherType>county</OtherType>
+	</GpUnit>	
+	<ReportGeneratingDeviceIds>ru</ReportGeneratingDeviceIds>
+	<ReportingDevice ObjectId="ru">	
+		<SerialNumber>12345678</SerialNumber>
+	</ReportingDevice>
+	<Version>1.0.0</Version>
+</CastVoteRecordReport>

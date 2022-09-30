@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BallotDefinition xmlns="http://itl.nist.gov/ns/voting/1500-20/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<BallotFormat ObjectId="bf-1">
+		<ExternalIdentifier>
+			<Type>local-level</Type>
+			<Value>BF1</Value>
+		</ExternalIdentifier>
+		<LongEdge>1224</LongEdge>
+		<MeasurementUnit>pt</MeasurementUnit>
+		<Orientation>portrait</Orientation>
+		<SelectionCaptureMethod>omr</SelectionCaptureMethod>
+		<ShortEdge>612</ShortEdge>
+	</BallotFormat>
+	<Election>
+		<BallotStyle>
+			<ExternalIdentifier>
+				<Type>local-level</Type>
+				<Value>052001</Value>
+			</ExternalIdentifier>
+			<GpUnitIds>prec-52</GpUnitIds>
+		</BallotStyle>
+		<Contest xsi:type="CandidateContest" ObjectId="cc-1">
+			<ContestOption xsi:type="CandidateOption" ObjectId="cs-1hbr">
+				<ExternalIdentifier>
+					<Type>local-level</Type>
+					<Value>1HBR</Value>
+				</ExternalIdentifier>
+			</ContestOption>
+			<ContestOption xsi:type="CandidateOption" ObjectId="cs-1hdw">
+				<ExternalIdentifier>
+					<Type>local-level</Type>
+					<Value>1HDW</Value>
+				</ExternalIdentifier>
+			</ContestOption>
+			<ContestOption xsi:type="CandidateOption" ObjectId="cs-1hjd">
+				<ExternalIdentifier>
+					<Type>local-level</Type>
+					<Value>1HJD</Value>
+				</ExternalIdentifier>
+			</ContestOption>
+			<ElectionDistrictId>ed-1</ElectionDistrictId>
+			<ExternalIdentifier>
+				<Type>local-level</Type>
+				<Value>9CC</Value>
+			</ExternalIdentifier>
+			<Name>Contest A</Name>
+			<VoteVariation>n-of-m</VoteVariation>
+			<VotesAllowed>3</VotesAllowed>
+		</Contest>
+		<ElectionScopeId>gpu-39153</ElectionScopeId>
+		<ExternalIdentifier>
+			<Type>local-level</Type>
+			<Value>2014-11-04G</Value>
+		</ExternalIdentifier>
+		<Name>
+			<Text Language="en-US">Example General Election</Text>
+		</Name>
+		<StartDate>2022-11-08</StartDate>
+		<EndDate>2022-11-08</EndDate>
+		<Type>general</Type>
+	</Election>
+	<GeneratedDate>2022-09-24T00:00:00Z</GeneratedDate>
+	<GpUnit xsi:type="ReportingUnit" ObjectId="gpu-39153">
+		<ExternalIdentifier>
+			<Type>local-level</Type>
+			<Value>39153</Value>
+		</ExternalIdentifier>
+		<Type>county</Type>
+	</GpUnit>
+	<GpUnit xsi:type="ReportingUnit" ObjectId="prec-52">
+		<Type>precinct</Type>
+	</GpUnit>
+	<GpUnit xsi:type="ReportingUnit" ObjectId="ed-1">
+		<Type>city-council</Type>
+	</GpUnit>
+	<Issuer>The Turnout LLC</Issuer>
+	<IssuerAbbreviation>Turnout</IssuerAbbreviation>
+	<SequenceStart>1</SequenceStart>
+	<SequenceEnd>1</SequenceEnd>
+	<VendorApplicationId>Hand written</VendorApplicationId>
+	<Version>1.0.0</Version>
+</BallotDefinition>

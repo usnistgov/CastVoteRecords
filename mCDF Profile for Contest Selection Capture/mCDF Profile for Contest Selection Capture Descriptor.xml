@@ -1,53 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ConformanceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<MetaData Name="mCDF Segments" OrgName="The Turnout LLC on behalf of NIST" Version="1.0" Date="2022-05-03"/>
-	<Messages>
-		<Message ID="CSC0001" Type="CSC" Event="CS0" StructID="CSC_V01">
-			<!-- temp make optional so validation passes -->
-			<Segment Ref="NS1_V01" Usage="O" Min="0" Max="1"/>
-			<Segment Ref="BAL_V01" Usage="R" Min="1" Max="1"/>
-			<Segment Ref="ELE_V01" Usage="R" Min="1" Max="1"/>
-			<Segment Ref="SEL_V01" Usage="O" Min="0" Max="*"/>
-		</Message>
-	</Messages>
-	<Segments>
-		<Segment ID="BAL_V01" Name="BAL" Label="!" Description="BallotStyle">
-			<Field Datatype="CDE_V01" ItemNo="00001" Max="*" MaxLength="4000" Min="0" MinLength="1" Name="ElectionScope Code" Usage="R"/>
-			<Field Datatype="ST" ItemNo="00003" Max="1" MaxLength="4000" Min="0" MinLength="1" Name="Uri" Usage="O"/>
-		</Segment>
-		<Segment ID="SEL_V01" Name="SEL" Label="!" Description="CVRContest">
-			<Field Datatype="CDE_V01" ItemNo="00001" Max="*" MaxLength="4000" Min="0" MinLength="1" Name="Contest Code" Usage="O"/>
-			<Field Datatype="CCS_V01" ItemNo="00002" Max="*" MaxLength="4000" Min="0" MinLength="1" Name="CVRContestSelection" Usage="O"/>
-		</Segment>
-		<Segment ID="ELE_V01" Name="ELE" Label="!" Description="Election">
-			<Field Datatype="CDE_V01" ItemNo="00001" Max="*" MaxLength="4000" Min="0" MinLength="1" Name="ElectionScope Code" Usage="R"/>
-			<Field Datatype="CDE_V01" ItemNo="00003" Max="*" MaxLength="4000" Min="0" MinLength="1" Name="Election Code" Usage="R"/>
-		</Segment>
-		<Segment ID="NS1_V01" Name="NS1" Label="!" Description="NS1 Header">
-			<Field Datatype="ST" ItemNo="00001" Max="1" MaxLength="4000" Min="1" MinLength="1" Name="Field Separator" Usage="R"/>
-			<Field Datatype="ST" ItemNo="00002" Max="1" MaxLength="4000" Min="1" MinLength="1" Name="Field Mappings" Usage="R"/>
-			<Field Datatype="ST" ItemNo="00003" Max="1" MaxLength="4000" Min="1" MinLength="1" Name="Message Type" Usage="R"/>
-			<Field Datatype="ST" ItemNo="00004" Max="1" MaxLength="4000" Min="1" MinLength="1" Name="Packet Version" Usage="R"/>
-			<Field Datatype="ST" ItemNo="00005" Max="1" MaxLength="4000" Min="1" MinLength="1" Name="Packet Serial" Usage="R"/>
-			<Field Datatype="ST" ItemNo="00006" Max="1" MaxLength="4000" Min="0" MinLength="1" Name="Continuation ID" Usage="O"/>
-		</Segment>
-	</Segments>
-	<Datatypes>
-		<Datatype ID="CDE_V01" Name="CDE" Label="!" Description="Code">
-			<Component Datatype="ST" MaxLength="4000" MinLength="1" Name="Value" Usage="R"/>
-			<Component Name="Type" Usage="R" Datatype="ID" MinLength="1" MaxLength="1" Binding="TBL_IDT" BindingStrength="R"/>
-			<Component Datatype="ST" MaxLength="4000" MinLength="1" Name="OtherType" Usage="O"/>
-		</Datatype>
-		<Datatype ID="CCS_V01" Name="CCS" Label="!" Description="CVRContestSelection">
-			<Component Datatype="CDE_V01" MaxLength="4000" MinLength="1" Name="Contest Selection Code" Usage="O"/>
-			<Component Datatype="ID" MaxLength="4000" MinLength="1" Name="NumberVotes" Usage="R"/>
-			<Component Datatype="ID" MaxLength="4000" MinLength="1" Name="Rank" Usage="O"/>
-			<Component Datatype="ST" MaxLength="4000" MinLength="1" Name="FractionalVotes" Usage="O"/>
-			<Component Datatype="ST" MaxLength="4000" MinLength="1" Name="IsGenerated" Usage="O"/>
-			<Component Datatype="ST" MaxLength="4000" MinLength="1" Name="WriteInText" Usage="O"/>
-			<Component Datatype="CDE_V01" MaxLength="4000" MinLength="1" Name="Selection Position Code" Usage="O"/>
-		</Datatype>
-		<Datatype ID="ID" Label="ID" Name="ID" Description="String Data"/>
-		<Datatype ID="ST" Label="ST" Name="ST" Description="String Data"/>
-	</Datatypes>
+  <MetaData Name="mCDF Segments" OrgName="The Turnout LLC on behalf of NIST" Version="1.0" Date="2022-09-30"/>
+  <Messages>
+    <Message ID="CSC_V01" Type="CSC" Event="CS0" StructID="CSC_V01">
+      <Segment Ref="NS1_V01" Usage="R" Min="1" Max="1"/>      
+      <Segment Ref="BAL_V01" Usage="R" Min="1" Max="1"/>
+      <Segment Ref="ELE_V01" Usage="R" Min="0" Max="1"/>      
+      <Segment Ref="CCO_V01" Usage="R" Min="1" Max="*"/>      
+      <Segment Ref="DSC_V01" Usage="O" Min="0" Max="1"/>
+    </Message>
+  </Messages>
+  <Segments>
+    <Segment ID="NS1_V01" Name="NS1" Label="!" Description="NIST Segment 1 Header">
+      <Field Datatype="ST" ItemNo="00001" Max="1" MaxLength="4000" Min="1" MinLength="1" Name="Field Separator" Usage="R"/>
+      <Field Datatype="ST" ItemNo="00002" Max="1" MaxLength="4000" Min="1" MinLength="1" Name="Segment Encoding Characters" Usage="R"/>
+      <Field Datatype="ST" ItemNo="00003" Max="1" MaxLength="4000" Min="1" MinLength="1" Name="Message Type" Usage="R"/>
+      <Field Datatype="ST" ItemNo="00004" Max="1" MaxLength="4000" Min="1" MinLength="1" Name="Message Version" Usage="R"/>
+      <Field Datatype="ST" ItemNo="00005" Max="1" MaxLength="4000" Min="1" MinLength="1" Name="Packet Serial" Usage="R"/>
+      <Field Datatype="ST" ItemNo="00006" Max="1" MaxLength="4000" Min="0" MinLength="1" Name="Continuation ID" Usage="O"/>
+    </Segment>
+    <Segment ID="BAL_V01" Name="BAL" Label="!" Description="BallotStyle">
+      <Field Datatype="ST" ItemNo="00001" Max="1" MaxLength="4000" Min="1" MinLength="1" Name="BallotStyleId" Usage="R"/>
+      <Field Datatype="ID" ItemNo="00002" Max="1" MaxLength="4000" Min="0" MinLength="1" Name="Side" Usage="R" Binding="TBL_BST" BindingStrength="R"/>
+      <Field Datatype="ID" ItemNo="00003" Max="1" MaxLength="4000" Min="0" MinLength="1" Name="Sheet" Usage="O"/>
+      <Field Datatype="CDE_V01" ItemNo="00004" Max="1" MaxLength="4000" Min="1" MinLength="1" Name="BallotFormat Code" Usage="R"/>
+      <Field Datatype="ST" ItemNo="00005" Max="1" MaxLength="4000" Min="0" MinLength="1" Name="DefinitionUri" Usage="O"/>
+    </Segment>
+    <Segment ID="ELE_V01" Name="ELE" Label="!" Description="Election">
+      <Field Datatype="CDE_V01" ItemNo="00001" Max="1" MaxLength="4000" Min="1" MinLength="1" Name="Election Code" Usage="R"/>
+      <Field Datatype="CDE_V01" ItemNo="00002" Max="1" MaxLength="4000" Min="0" MinLength="1" Name="ElectionScope Code" Usage="O"/>
+    </Segment>
+    <Segment ID="CCO_V01" Name="CCO" Label="!" Description="CVRContest">
+      <Field Datatype="CDE_V01" ItemNo="00002" Max="1" MaxLength="4000" Min="0" MinLength="1" Name="Contest Code" Usage="O"/>
+      <Field Datatype="CCS_V01" ItemNo="00001" Max="*" MaxLength="4000" Min="1" MinLength="1" Name="CVRContestSelection" Usage="R"/>
+    </Segment>
+    <Segment ID="DSC_V01" Name="DSC" Label="!" Description="Continuation Pointer Segment">
+      <Field Datatype="ST" ItemNo="0000" Max="1" MaxLength="4000" Min="1" MinLength="1" Name="Continuation Pointer" Usage="R"/>
+    </Segment>
+  </Segments>
+  <Datatypes>
+    <Datatype ID="CDE_V01" Name="CDE" Label="!" Description="Code">
+      <Component Datatype="ST" MaxLength="4000" MinLength="1" Name="Value" Usage="R"/>
+      <Component Name="Type" Usage="O" Datatype="ID" MinLength="1" MaxLength="1" Binding="TBL_IDT" BindingStrength="R"/>
+      <Component Datatype="ST" MaxLength="4000" MinLength="1" Name="OtherType" Usage="O"/>
+    </Datatype>
+    <Datatype ID="CCS_V01" Name="CCS" Label="!" Description="CVRContestSelection">
+      <Component Datatype="CDE_V01" MaxLength="4000" MinLength="1" Name="Contest Selection Code" Usage="O"/>
+      <Component Datatype="ST" MaxLength="4000" MinLength="1" Name="WriteInText" Usage="O"/>
+      <Component Datatype="ID" MaxLength="4000" MinLength="1" Name="NumberVotes" Usage="O"/>
+      <Component Datatype="ID" MaxLength="4000" MinLength="1" Name="Rank" Usage="O"/>
+      <Component Datatype="ST" MaxLength="4000" MinLength="1" Name="FractionalVotes" Usage="O"/>
+      <Component Datatype="ST" MaxLength="4000" MinLength="1" Name="IsGenerated" Usage="O"/>
+      <Component Datatype="CDE_V01" MaxLength="4000" MinLength="1" Name="Selection Position Code" Usage="O"/>
+    </Datatype>
+    <Datatype ID="ID" Label="ID" Name="ID" Description="String Data"/>
+    <Datatype ID="ST" Label="ST" Name="ST" Description="String Data"/>
+  </Datatypes>
 </ConformanceProfile>
